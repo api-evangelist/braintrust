@@ -1,0 +1,174 @@
+aid: braintrust
+name: Braintrust
+description: >-
+  Braintrust is an enterprise-grade AI observability and evaluation platform
+  for teams building LLM applications. It provides experiment tracking,
+  dataset management, production tracing, prompt versioning, online and
+  offline scoring, and human review workflows. Customers include AI-native
+  startups and large enterprises that need to compare models, iterate on
+  prompts, catch regressions, and leverage real user data to continuously
+  improve their AI features. Braintrust offers a SaaS platform, plus
+  self-hosted deployments in AWS, GCP, and Azure, and monetizes through
+  usage-based pricing tied to spans and seats.
+type: Index
+position: Provider
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Artificial Intelligence
+  - LLM
+  - Observability
+  - Evaluation
+  - Experiments
+  - Datasets
+  - Prompts
+  - Tracing
+  - Monitoring
+  - Scoring
+  - AI Engineering
+  - Generative AI
+url: https://raw.githubusercontent.com/api-evangelist/braintrust/refs/heads/main/apis.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+specificationVersion: '0.20'
+apis:
+  - aid: braintrust:braintrust-api
+    name: Braintrust API
+    description: >-
+      The Braintrust REST API provides programmatic access to projects,
+      experiments, datasets, prompts, functions, logs, and organization
+      resources. It supports both US (api.braintrust.dev) and EU
+      (api-eu.braintrust.dev) data planes, and is used to log production
+      traces, run evaluations, manage prompt versions, and orchestrate
+      scoring functions.
+    humanURL: https://www.braintrust.dev/docs
+    baseURL: https://api.braintrust.dev
+    tags:
+      - LLM
+      - Evaluation
+      - Observability
+      - Experiments
+      - Datasets
+      - Prompts
+      - Tracing
+    properties:
+      - type: Documentation
+        url: https://www.braintrust.dev/docs
+      - type: GettingStarted
+        url: https://www.braintrust.dev/docs/start
+      - type: SignUp
+        url: https://www.braintrust.dev/signup
+      - type: API
+        url: https://www.braintrust.dev/docs/reference/api
+      - type: SDK
+        url: https://github.com/braintrustdata/braintrust-sdk
+      - type: SDK
+        url: https://pypi.org/project/braintrust/
+      - type: SDK
+        url: https://www.npmjs.com/package/braintrust
+      - type: GitHubRepository
+        url: https://github.com/braintrustdata/autoevals
+      - type: Pricing
+        url: https://www.braintrust.dev/pricing
+      - type: Authentication
+        url: https://www.braintrust.dev/docs/reference/api
+    features:
+      - name: Experiments
+        description: >-
+          Create, run, and compare evaluation experiments across model and
+          prompt versions to catch regressions before shipping.
+      - name: Datasets
+        description: >-
+          Manage versioned datasets of inputs, expected outputs, and metadata
+          for repeatable evaluation runs.
+      - name: Production Logging
+        description: >-
+          Capture LLM spans, tool calls, and traces from production traffic
+          via SDK or OTEL-compatible ingestion.
+      - name: Prompt Management
+        description: >-
+          Version, deploy, and A/B test prompts independent of application
+          deploys.
+      - name: Autoevals and Custom Scorers
+        description: >-
+          Use built-in LLM-as-judge scorers or define custom Python and
+          TypeScript scoring functions.
+      - name: Human Review
+        description: >-
+          Route traces and experiment runs to subject-matter experts for
+          annotation and grading.
+      - name: Online Scoring
+        description: >-
+          Run scorers continuously against production logs to monitor drift
+          and quality.
+      - name: Functions and Tools
+        description: >-
+          Register reusable tools, scorers, and workflows that can be invoked
+          from prompts or experiments.
+      - name: Self-Hosting
+        description: >-
+          Deploy Braintrust inside your own AWS, GCP, or Azure account for
+          data residency and compliance.
+    useCases:
+      - name: LLM Application Quality Gating
+        description: >-
+          Block deploys when evaluation scores regress against a golden
+          dataset.
+      - name: Prompt Iteration
+        description: >-
+          Compare prompt and model variants side-by-side with traceable
+          scores.
+      - name: Production Monitoring
+        description: >-
+          Detect hallucinations, latency spikes, and cost regressions in
+          live AI traffic.
+      - name: Agent Evaluation
+        description: >-
+          Evaluate multi-step agent runs, tool calls, and retrieval
+          performance.
+      - name: RAG Tuning
+        description: >-
+          Optimize retrieval and generation pipelines using dataset-driven
+          experiments.
+    integrations:
+      - name: OpenAI
+      - name: Anthropic
+      - name: Google Gemini
+      - name: LangChain
+      - name: LlamaIndex
+      - name: Vercel AI SDK
+      - name: AutoGen
+      - name: CrewAI
+      - name: LangGraph
+      - name: Firebase Genkit
+      - name: OpenTelemetry
+      - name: AWS Bedrock
+    authentication:
+      - type: Bearer Token
+        description: >-
+          API keys and service tokens generated in the Braintrust dashboard
+          are passed via the Authorization header as a Bearer token.
+common:
+  - type: Website
+    url: https://www.braintrust.dev
+  - type: Documentation
+    url: https://www.braintrust.dev/docs
+  - type: Blog
+    url: https://www.braintrust.dev/blog
+  - type: GitHubOrganization
+    url: https://github.com/braintrustdata
+  - type: Pricing
+    url: https://www.braintrust.dev/pricing
+  - type: TermsOfService
+    url: https://www.braintrust.dev/legal/terms
+  - type: PrivacyPolicy
+    url: https://www.braintrust.dev/legal/privacy
+  - type: X
+    url: https://x.com/braintrustdata
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/braintrustdata
+  - type: ChangeLog
+    url: https://www.braintrust.dev/changelog
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
