@@ -56,15 +56,15 @@ apis:
         url: https://www.braintrust.dev/docs
       - type: GettingStarted
         url: https://www.braintrust.dev/docs/start
-      - type: SignUp
+      - type: Signup
         url: https://www.braintrust.dev/signup
       - type: API
         url: https://www.braintrust.dev/docs/reference/api
-      - type: SDK
+      - type: SDKs
         url: https://github.com/braintrustdata/braintrust-sdk
-      - type: SDK
+      - type: SDKs
         url: https://pypi.org/project/braintrust/
-      - type: SDK
+      - type: SDKs
         url: https://www.npmjs.com/package/braintrust
       - type: GitHubRepository
         url: https://github.com/braintrustdata/autoevals
