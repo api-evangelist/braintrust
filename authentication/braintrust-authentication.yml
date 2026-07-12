@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/braintrust-openapi.json
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: API key or JWT
+  description: 'Most Braintrust endpoints are authenticated by providing your API key as a header
+    `Authorization: Bearer [api_key]` to your HTTP request. You can create an API key in the
+    Braintrust [organization settings page](https://www.braintrustdata.com/app/settings?subroute=api-keys).'
+  sources:
+  - openapi/braintrust-openapi.json
