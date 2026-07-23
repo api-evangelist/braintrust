@@ -1,0 +1,659 @@
+openapi: 3.1.1
+info:
+  version: 1.0.0
+  title: Braintrust Acls ProjectTags API
+  description: 'API specification for the backend data server. The API is hosted globally at
+
+    https://api.braintrust.dev or in your own environment.
+
+
+    You can access the OpenAPI spec for this API at https://github.com/braintrustdata/braintrust-openapi.'
+  license:
+    name: Apache 2.0
+servers:
+- url: https://api.braintrust.dev
+security:
+- bearerAuth: []
+- {}
+tags:
+- name: ProjectTags
+paths:
+  /v1/project_tag:
+    post:
+      tags:
+      - ProjectTags
+      security:
+      - bearerAuth: []
+      - {}
+      operationId: postProjectTag
+      description: Create a new project_tag. If there is an existing project_tag in the project with the same name as the one specified in the request, will return the existing project_tag unmodified
+      summary: Create project_tag
+      requestBody:
+        description: Any desired information about the new project_tag object
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectTag'
+      responses:
+        '200':
+          description: Returns the new project_tag object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectTag'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    put:
+      tags:
+      - ProjectTags
+      security:
+      - bearerAuth: []
+      - {}
+      operationId: putProjectTag
+      description: Create or replace project_tag. If there is an existing project_tag in the project with the same name as the one specified in the request, will replace the existing project_tag with the provided fields
+      summary: Create or replace project_tag
+      requestBody:
+        description: Any desired information about the new project_tag object
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectTag'
+      responses:
+        '200':
+          description: Returns the new project_tag object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectTag'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    get:
+      operationId: getProjectTag
+      tags:
+      - ProjectTags
+      description: List out all project_tags. The project_tags are sorted by creation date, with the most recently-created project_tags coming first
+      summary: List project_tags
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/AppLimitParam'
+      - $ref: '#/components/parameters/StartingAfter'
+      - $ref: '#/components/parameters/EndingBefore'
+      - $ref: '#/components/parameters/Ids'
+      - $ref: '#/components/parameters/ProjectTagName'
+      - $ref: '#/components/parameters/ProjectName'
+      - $ref: '#/components/parameters/ProjectIdQuery'
+      - $ref: '#/components/parameters/OrgName'
+      responses:
+        '200':
+          description: Returns a list of project_tag objects
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ProjectTag'
+                    description: A list of project_tag objects
+                required:
+                - objects
+                additionalProperties: false
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/project_tag/{project_tag_id}:
+    get:
+      operationId: getProjectTagId
+      tags:
+      - ProjectTags
+      description: Get a project_tag object by its id
+      summary: Get project_tag
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/ProjectTagIdParam'
+      responses:
+        '200':
+          description: Returns the project_tag object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectTag'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    patch:
+      operationId: patchProjectTagId
+      tags:
+      - ProjectTags
+      description: Partially update a project_tag object. Specify the fields to update in the payload. Any object-type fields will be deep-merged with existing content. Currently we do not support removing fields or setting them to null.
+      summary: Partially update project_tag
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/ProjectTagIdParam'
+      requestBody:
+        description: Fields to update
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchProjectTag'
+      responses:
+        '200':
+          description: Returns the project_tag object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectTag'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    delete:
+      operationId: deleteProjectTagId
+      tags:
+      - ProjectTags
+      description: Delete a project_tag object by its id
+      summary: Delete project_tag
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/ProjectTagIdParam'
+      responses:
+        '200':
+          description: Returns the deleted project_tag object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectTag'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+components:
+  parameters:
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    ProjectTagName:
+      schema:
+        $ref: '#/components/schemas/ProjectTagName'
+      required: false
+      description: Name of the project_tag to search for
+      name: project_tag_name
+      in: query
+      allowReserved: true
+    ProjectIdQuery:
+      schema:
+        $ref: '#/components/schemas/ProjectIdQuery'
+      required: false
+      description: Project id
+      name: project_id
+      in: query
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    ProjectTagIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectTagIdParam'
+      required: true
+      description: ProjectTag id
+      name: project_tag_id
+      in: path
+    ProjectName:
+      schema:
+        $ref: '#/components/schemas/ProjectName'
+      required: false
+      description: Name of the project to search for
+      name: project_name
+      in: query
+      allowReserved: true
+  schemas:
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    PatchProjectTag:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: Name of the project tag
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the project tag
+        color:
+          type: string
+          nullable: true
+          description: Color of the tag for the UI
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    ProjectTagIdParam:
+      type: string
+      format: uuid
+      description: ProjectTag id
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    ProjectTag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project tag
+        project_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project that the project tag belongs under
+        user_id:
+          type: string
+          format: uuid
+        created:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of project tag creation
+        name:
+          type: string
+          description: Name of the project tag
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the project tag
+        color:
+          type: string
+          nullable: true
+          description: Color of the tag for the UI
+        position:
+          type: string
+          nullable: true
+          description: An optional LexoRank-based string that sets the sort position for the tag in the UI
+      required:
+      - id
+      - project_id
+      - user_id
+      - name
+      description: A project tag is a user-configured tag for tracking and filtering your experiments, logs, and other data
+    CreateProjectTag:
+      type: object
+      properties:
+        project_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project that the project tag belongs under
+        name:
+          type: string
+          description: Name of the project tag
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the project tag
+        color:
+          type: string
+          nullable: true
+          description: Color of the tag for the UI
+      required:
+      - project_id
+      - name
+    ProjectName:
+      type: string
+      description: Name of the project to search for
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+    ProjectTagName:
+      type: string
+      description: Name of the project_tag to search for
+    ProjectIdQuery:
+      type: string
+      format: uuid
+      description: Project id
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Most Braintrust endpoints are authenticated by providing your API key as a header `Authorization: Bearer [api_key]` to your HTTP request. You can create an API key in the Braintrust [organization settings page](https://www.braintrustdata.com/app/settings?subroute=api-keys).'

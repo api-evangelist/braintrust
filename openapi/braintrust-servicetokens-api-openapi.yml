@@ -1,0 +1,464 @@
+openapi: 3.1.1
+info:
+  version: 1.0.0
+  title: Braintrust Acls ServiceTokens API
+  description: 'API specification for the backend data server. The API is hosted globally at
+
+    https://api.braintrust.dev or in your own environment.
+
+
+    You can access the OpenAPI spec for this API at https://github.com/braintrustdata/braintrust-openapi.'
+  license:
+    name: Apache 2.0
+servers:
+- url: https://api.braintrust.dev
+security:
+- bearerAuth: []
+- {}
+tags:
+- name: ServiceTokens
+paths:
+  /v1/service_token:
+    delete:
+      operationId: deleteServiceToken
+      tags:
+      - ServiceTokens
+      description: Delete a single service_token
+      summary: Delete single service_token
+      security:
+      - bearerAuth: []
+      - {}
+      requestBody:
+        description: Parameters which uniquely specify the service_token to delete
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteServiceToken'
+      responses:
+        '200':
+          description: Returns the deleted service_token object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceToken'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    get:
+      operationId: getServiceToken
+      tags:
+      - ServiceTokens
+      description: 'List out all service tokens. They are sorted by creation date, with the most recently-created tokens coming first.
+
+
+        To create service tokens, organization owners can go to [**Settings > Service tokens**](https://www.braintrust.dev/app/~/configuration/org/service-tokens) in the Braintrust UI.'
+      summary: List service_tokens
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/AppLimitParam'
+      - $ref: '#/components/parameters/StartingAfter'
+      - $ref: '#/components/parameters/EndingBefore'
+      - $ref: '#/components/parameters/Ids'
+      - $ref: '#/components/parameters/ServiceTokenName'
+      - $ref: '#/components/parameters/OrgName'
+      responses:
+        '200':
+          description: Returns a list of service_token objects
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ServiceToken'
+                    description: A list of service_token objects
+                required:
+                - objects
+                additionalProperties: false
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/service_token/{service_token_id}:
+    get:
+      operationId: getServiceTokenId
+      tags:
+      - ServiceTokens
+      description: Get a service_token object by its id
+      summary: Get service_token
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/ServiceTokenIdParam'
+      responses:
+        '200':
+          description: Returns the service_token object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceToken'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    delete:
+      operationId: deleteServiceTokenId
+      tags:
+      - ServiceTokens
+      description: Delete a service_token object by its id
+      summary: Delete service_token
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/ServiceTokenIdParam'
+      responses:
+        '200':
+          description: Returns the deleted service_token object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceToken'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+components:
+  parameters:
+    ServiceTokenIdParam:
+      schema:
+        $ref: '#/components/schemas/ServiceTokenIdParam'
+      required: true
+      description: ServiceToken id
+      name: service_token_id
+      in: path
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    ServiceTokenName:
+      schema:
+        $ref: '#/components/schemas/ServiceTokenName'
+      required: false
+      description: Name of the service_token to search for
+      name: service_token_name
+      in: query
+      allowReserved: true
+  schemas:
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    ServiceTokenName:
+      type: string
+      description: Name of the service_token to search for
+    ServiceToken:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the service token
+        created:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of service token creation
+        name:
+          type: string
+          description: Name of the service token
+        preview_name:
+          type: string
+        service_account_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Unique identifier for the service token
+        service_account_email:
+          type: string
+          nullable: true
+          description: The service account email (not routable)
+        service_account_name:
+          type: string
+          nullable: true
+          description: The service account name
+        org_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Unique identifier for the organization
+      required:
+      - id
+      - name
+      - preview_name
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    ServiceTokenIdParam:
+      type: string
+      format: uuid
+      description: ServiceToken id
+    DeleteServiceToken:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the service token.
+      required:
+      - id
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Most Braintrust endpoints are authenticated by providing your API key as a header `Authorization: Bearer [api_key]` to your HTTP request. You can create an API key in the Braintrust [organization settings page](https://www.braintrustdata.com/app/settings?subroute=api-keys).'

@@ -1,0 +1,2740 @@
+openapi: 3.1.1
+info:
+  version: 1.0.0
+  title: Braintrust Acls CORS API
+  description: 'API specification for the backend data server. The API is hosted globally at
+
+    https://api.braintrust.dev or in your own environment.
+
+
+    You can access the OpenAPI spec for this API at https://github.com/braintrustdata/braintrust-openapi.'
+  license:
+    name: Apache 2.0
+servers:
+- url: https://api.braintrust.dev
+security:
+- bearerAuth: []
+- {}
+tags:
+- name: CORS
+paths:
+  /v1/project:
+    options:
+      operationId: optionsProject
+      description: Enable CORS
+      summary: Enable CORS (`/v1/project`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/project/{project_id}:
+    options:
+      operationId: optionsProjectId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/project/{project_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ProjectIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/project_logs/{project_id}/insert:
+    options:
+      operationId: optionsProjectLogsIdInsert
+      description: Enable CORS
+      summary: Enable CORS (`/v1/project_logs/{project_id}/insert`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ProjectIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/project_logs/{project_id}/fetch:
+    options:
+      operationId: optionsProjectLogsIdFetch
+      description: Enable CORS
+      summary: Enable CORS (`/v1/project_logs/{project_id}/fetch`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ProjectIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/project_logs/{project_id}/feedback:
+    options:
+      operationId: optionsProjectLogsIdFeedback
+      description: Enable CORS
+      summary: Enable CORS (`/v1/project_logs/{project_id}/feedback`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ProjectIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/experiment:
+    options:
+      operationId: optionsExperiment
+      description: Enable CORS
+      summary: Enable CORS (`/v1/experiment`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/experiment/{experiment_id}:
+    options:
+      operationId: optionsExperimentId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/experiment/{experiment_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ExperimentIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/experiment/{experiment_id}/insert:
+    options:
+      operationId: optionsExperimentIdInsert
+      description: Enable CORS
+      summary: Enable CORS (`/v1/experiment/{experiment_id}/insert`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ExperimentIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/experiment/{experiment_id}/fetch:
+    options:
+      operationId: optionsExperimentIdFetch
+      description: Enable CORS
+      summary: Enable CORS (`/v1/experiment/{experiment_id}/fetch`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ExperimentIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/experiment/{experiment_id}/feedback:
+    options:
+      operationId: optionsExperimentIdFeedback
+      description: Enable CORS
+      summary: Enable CORS (`/v1/experiment/{experiment_id}/feedback`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ExperimentIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/experiment/{experiment_id}/summarize:
+    options:
+      operationId: optionsExperimentIdSummarize
+      description: Enable CORS
+      summary: Enable CORS (`/v1/experiment/{experiment_id}/summarize`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ExperimentIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/dataset:
+    options:
+      operationId: optionsDataset
+      description: Enable CORS
+      summary: Enable CORS (`/v1/dataset`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/dataset/{dataset_id}:
+    options:
+      operationId: optionsDatasetId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/dataset/{dataset_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/DatasetIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/dataset/{dataset_id}/insert:
+    options:
+      operationId: optionsDatasetIdInsert
+      description: Enable CORS
+      summary: Enable CORS (`/v1/dataset/{dataset_id}/insert`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/DatasetIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/dataset/{dataset_id}/fetch:
+    options:
+      operationId: optionsDatasetIdFetch
+      description: Enable CORS
+      summary: Enable CORS (`/v1/dataset/{dataset_id}/fetch`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/DatasetIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/dataset/{dataset_id}/feedback:
+    options:
+      operationId: optionsDatasetIdFeedback
+      description: Enable CORS
+      summary: Enable CORS (`/v1/dataset/{dataset_id}/feedback`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/DatasetIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/dataset/{dataset_id}/summarize:
+    options:
+      operationId: optionsDatasetIdSummarize
+      description: Enable CORS
+      summary: Enable CORS (`/v1/dataset/{dataset_id}/summarize`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/DatasetIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/prompt:
+    options:
+      operationId: optionsPrompt
+      description: Enable CORS
+      summary: Enable CORS (`/v1/prompt`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/prompt/{prompt_id}:
+    options:
+      operationId: optionsPromptId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/prompt/{prompt_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/PromptIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/role:
+    options:
+      operationId: optionsRole
+      description: Enable CORS
+      summary: Enable CORS (`/v1/role`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/role/{role_id}:
+    options:
+      operationId: optionsRoleId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/role/{role_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/RoleIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/group:
+    options:
+      operationId: optionsGroup
+      description: Enable CORS
+      summary: Enable CORS (`/v1/group`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/group/{group_id}:
+    options:
+      operationId: optionsGroupId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/group/{group_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/GroupIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/acl:
+    options:
+      operationId: optionsAcl
+      description: Enable CORS
+      summary: Enable CORS (`/v1/acl`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/acl/{acl_id}:
+    options:
+      operationId: optionsAclId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/acl/{acl_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/AclIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/acl/list_org:
+    options:
+      operationId: optionsAclListOrg
+      description: Enable CORS
+      summary: Enable CORS (`/v1/acl/list_org`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/acl/acl/batch_update:
+    options:
+      operationId: optionsAclBatchUpdate
+      description: Enable CORS
+      summary: Enable CORS (`/v1/acl/acl/batch_update`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/user:
+    options:
+      operationId: optionsUser
+      description: Enable CORS
+      summary: Enable CORS (`/v1/user`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/user/{user_id}:
+    options:
+      operationId: optionsUserId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/user/{user_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/UserIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/project_automation:
+    options:
+      operationId: optionsProjectAutomation
+      description: Enable CORS
+      summary: Enable CORS (`/v1/project_automation`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/project_automation/{project_automation_id}:
+    options:
+      operationId: optionsProjectAutomationId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/project_automation/{project_automation_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ProjectAutomationIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/project_score:
+    options:
+      operationId: optionsProjectScore
+      description: Enable CORS
+      summary: Enable CORS (`/v1/project_score`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/project_score/{project_score_id}:
+    options:
+      operationId: optionsProjectScoreId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/project_score/{project_score_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ProjectScoreIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/project_tag:
+    options:
+      operationId: optionsProjectTag
+      description: Enable CORS
+      summary: Enable CORS (`/v1/project_tag`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/project_tag/{project_tag_id}:
+    options:
+      operationId: optionsProjectTagId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/project_tag/{project_tag_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ProjectTagIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/span_iframe:
+    options:
+      operationId: optionsSpanIframe
+      description: Enable CORS
+      summary: Enable CORS (`/v1/span_iframe`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/span_iframe/{span_iframe_id}:
+    options:
+      operationId: optionsSpanIframeId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/span_iframe/{span_iframe_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/SpanIframeIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/function:
+    options:
+      operationId: optionsFunction
+      description: Enable CORS
+      summary: Enable CORS (`/v1/function`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/function/{function_id}:
+    options:
+      operationId: optionsFunctionId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/function/{function_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/FunctionIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/function/{function_id}/invoke:
+    options:
+      operationId: optionsFunctionIdInvoke
+      description: Enable CORS
+      summary: Enable CORS (`/v1/function/{function_id}/invoke`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/FunctionIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/view:
+    options:
+      operationId: optionsView
+      description: Enable CORS
+      summary: Enable CORS (`/v1/view`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/view/{view_id}:
+    options:
+      operationId: optionsViewId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/view/{view_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ViewIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/organization:
+    options:
+      operationId: optionsOrganization
+      description: Enable CORS
+      summary: Enable CORS (`/v1/organization`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/organization/{organization_id}:
+    options:
+      operationId: optionsOrganizationId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/organization/{organization_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/organization/members:
+    options:
+      operationId: optionsOrganizationMembers
+      description: Enable CORS
+      summary: Enable CORS (`/v1/organization/members`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/api_key:
+    options:
+      operationId: optionsApiKey
+      description: Enable CORS
+      summary: Enable CORS (`/v1/api_key`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/api_key/{api_key_id}:
+    options:
+      operationId: optionsApiKeyId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/api_key/{api_key_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/service_token:
+    options:
+      operationId: optionsServiceToken
+      description: Enable CORS
+      summary: Enable CORS (`/v1/service_token`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/service_token/{service_token_id}:
+    options:
+      operationId: optionsServiceTokenId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/service_token/{service_token_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ServiceTokenIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/ai_secret:
+    options:
+      operationId: optionsAiSecret
+      description: Enable CORS
+      summary: Enable CORS (`/v1/ai_secret`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/ai_secret/{ai_secret_id}:
+    options:
+      operationId: optionsAiSecretId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/ai_secret/{ai_secret_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/AiSecretIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/env_var:
+    options:
+      operationId: optionsEnvVar
+      description: Enable CORS
+      summary: Enable CORS (`/v1/env_var`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/env_var/{env_var_id}:
+    options:
+      operationId: optionsEnvVarId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/env_var/{env_var_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/EnvVarIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/mcp_server:
+    options:
+      operationId: optionsMcpServer
+      description: Enable CORS
+      summary: Enable CORS (`/v1/mcp_server`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/mcp_server/{mcp_server_id}:
+    options:
+      operationId: optionsMcpServerId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/mcp_server/{mcp_server_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/McpServerIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/dataset_snapshot:
+    options:
+      operationId: optionsDatasetSnapshot
+      description: Enable CORS
+      summary: Enable CORS (`/v1/dataset_snapshot`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/dataset_snapshot/{dataset_snapshot_id}:
+    options:
+      operationId: optionsDatasetSnapshotId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/dataset_snapshot/{dataset_snapshot_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/DatasetSnapshotIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1:
+    options:
+      operationId: optionsIndex
+      description: Enable CORS
+      summary: Enable CORS (`/v1`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/insert:
+    options:
+      operationId: optionsCrossObjectInsert
+      description: Enable CORS
+      summary: Enable CORS (`/v1/insert`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/proxy/chat/completions:
+    options:
+      operationId: optionsProxyproxychatCompletions
+      description: Enable CORS
+      summary: Enable CORS (`/v1/proxy/chat/completions`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/proxy/completions:
+    options:
+      operationId: optionsProxyproxycompletions
+      description: Enable CORS
+      summary: Enable CORS (`/v1/proxy/completions`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/proxy/auto:
+    options:
+      operationId: optionsProxyproxyauto
+      description: Enable CORS
+      summary: Enable CORS (`/v1/proxy/auto`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/proxy/embeddings:
+    options:
+      operationId: optionsProxyproxyembeddings
+      description: Enable CORS
+      summary: Enable CORS (`/v1/proxy/embeddings`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/proxy/credentials:
+    options:
+      operationId: optionsProxyproxycredentials
+      description: Enable CORS
+      summary: Enable CORS (`/v1/proxy/credentials`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/proxy/{path+}:
+    options:
+      operationId: optionsProxyproxy{path+}
+      description: Enable CORS
+      summary: Enable CORS (`/v1/proxy/{path+}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - name: path+
+        in: path
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        description: The path to proxy
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+components:
+  schemas:
+    AiSecretIdParam:
+      type: string
+      format: uuid
+      description: AiSecret id
+    EnvVarIdParam:
+      type: string
+      format: uuid
+      description: EnvVar id
+    ViewIdParam:
+      type: string
+      format: uuid
+      description: View id
+    ProjectScoreIdParam:
+      type: string
+      format: uuid
+      description: ProjectScore id
+    ApiKeyIdParam:
+      type: string
+      format: uuid
+      description: ApiKey id
+    UserIdParam:
+      type: string
+      format: uuid
+      description: User id
+    ProjectTagIdParam:
+      type: string
+      format: uuid
+      description: ProjectTag id
+    DatasetIdParam:
+      type: string
+      format: uuid
+      description: Dataset id
+    GroupIdParam:
+      type: string
+      format: uuid
+      description: Group id
+    ServiceTokenIdParam:
+      type: string
+      format: uuid
+      description: ServiceToken id
+    PromptIdParam:
+      type: string
+      format: uuid
+      description: Prompt id
+    FunctionIdParam:
+      type: string
+      format: uuid
+      description: Function id
+    ExperimentIdParam:
+      type: string
+      format: uuid
+      description: Experiment id
+    AclIdParam:
+      type: string
+      format: uuid
+      description: Acl id
+    SpanIframeIdParam:
+      type: string
+      format: uuid
+      description: SpanIframe id
+    OrganizationIdParam:
+      type: string
+      format: uuid
+      description: Organization id
+    RoleIdParam:
+      type: string
+      format: uuid
+      description: Role id
+    DatasetSnapshotIdParam:
+      type: string
+      format: uuid
+      description: DatasetSnapshot id
+    McpServerIdParam:
+      type: string
+      format: uuid
+      description: McpServer id
+    ProjectAutomationIdParam:
+      type: string
+      format: uuid
+      description: ProjectAutomation id
+    ProjectIdParam:
+      type: string
+      format: uuid
+      description: Project id
+  parameters:
+    DatasetIdParam:
+      schema:
+        $ref: '#/components/schemas/DatasetIdParam'
+      required: true
+      description: Dataset id
+      name: dataset_id
+      in: path
+    SpanIframeIdParam:
+      schema:
+        $ref: '#/components/schemas/SpanIframeIdParam'
+      required: true
+      description: SpanIframe id
+      name: span_iframe_id
+      in: path
+    ExperimentIdParam:
+      schema:
+        $ref: '#/components/schemas/ExperimentIdParam'
+      required: true
+      description: Experiment id
+      name: experiment_id
+      in: path
+    DatasetSnapshotIdParam:
+      schema:
+        $ref: '#/components/schemas/DatasetSnapshotIdParam'
+      required: true
+      description: DatasetSnapshot id
+      name: dataset_snapshot_id
+      in: path
+    ServiceTokenIdParam:
+      schema:
+        $ref: '#/components/schemas/ServiceTokenIdParam'
+      required: true
+      description: ServiceToken id
+      name: service_token_id
+      in: path
+    McpServerIdParam:
+      schema:
+        $ref: '#/components/schemas/McpServerIdParam'
+      required: true
+      description: McpServer id
+      name: mcp_server_id
+      in: path
+    ProjectIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectIdParam'
+      required: true
+      description: Project id
+      name: project_id
+      in: path
+    ProjectScoreIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectScoreIdParam'
+      required: true
+      description: ProjectScore id
+      name: project_score_id
+      in: path
+    AiSecretIdParam:
+      schema:
+        $ref: '#/components/schemas/AiSecretIdParam'
+      required: true
+      description: AiSecret id
+      name: ai_secret_id
+      in: path
+    PromptIdParam:
+      schema:
+        $ref: '#/components/schemas/PromptIdParam'
+      required: true
+      description: Prompt id
+      name: prompt_id
+      in: path
+    ProjectAutomationIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectAutomationIdParam'
+      required: true
+      description: ProjectAutomation id
+      name: project_automation_id
+      in: path
+    ApiKeyIdParam:
+      schema:
+        $ref: '#/components/schemas/ApiKeyIdParam'
+      required: true
+      description: ApiKey id
+      name: api_key_id
+      in: path
+    RoleIdParam:
+      schema:
+        $ref: '#/components/schemas/RoleIdParam'
+      required: true
+      description: Role id
+      name: role_id
+      in: path
+    FunctionIdParam:
+      schema:
+        $ref: '#/components/schemas/FunctionIdParam'
+      required: true
+      description: Function id
+      name: function_id
+      in: path
+    AclIdParam:
+      schema:
+        $ref: '#/components/schemas/AclIdParam'
+      required: true
+      description: Acl id
+      name: acl_id
+      in: path
+    GroupIdParam:
+      schema:
+        $ref: '#/components/schemas/GroupIdParam'
+      required: true
+      description: Group id
+      name: group_id
+      in: path
+    OrganizationIdParam:
+      schema:
+        $ref: '#/components/schemas/OrganizationIdParam'
+      required: true
+      description: Organization id
+      name: organization_id
+      in: path
+    UserIdParam:
+      schema:
+        $ref: '#/components/schemas/UserIdParam'
+      required: true
+      description: User id
+      name: user_id
+      in: path
+    EnvVarIdParam:
+      schema:
+        $ref: '#/components/schemas/EnvVarIdParam'
+      required: true
+      description: EnvVar id
+      name: env_var_id
+      in: path
+    ViewIdParam:
+      schema:
+        $ref: '#/components/schemas/ViewIdParam'
+      required: true
+      description: View id
+      name: view_id
+      in: path
+    ProjectTagIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectTagIdParam'
+      required: true
+      description: ProjectTag id
+      name: project_tag_id
+      in: path
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Most Braintrust endpoints are authenticated by providing your API key as a header `Authorization: Bearer [api_key]` to your HTTP request. You can create an API key in the Braintrust [organization settings page](https://www.braintrustdata.com/app/settings?subroute=api-keys).'

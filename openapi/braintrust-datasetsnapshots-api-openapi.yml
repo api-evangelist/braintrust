@@ -1,0 +1,625 @@
+openapi: 3.1.1
+info:
+  version: 1.0.0
+  title: Braintrust Acls DatasetSnapshots API
+  description: 'API specification for the backend data server. The API is hosted globally at
+
+    https://api.braintrust.dev or in your own environment.
+
+
+    You can access the OpenAPI spec for this API at https://github.com/braintrustdata/braintrust-openapi.'
+  license:
+    name: Apache 2.0
+servers:
+- url: https://api.braintrust.dev
+security:
+- bearerAuth: []
+- {}
+tags:
+- name: DatasetSnapshots
+paths:
+  /v1/dataset_snapshot:
+    post:
+      tags:
+      - DatasetSnapshots
+      security:
+      - bearerAuth: []
+      - {}
+      operationId: postDatasetSnapshot
+      description: Create a new dataset_snapshot. If there is an existing dataset_snapshot with the same name as the one specified in the request, will return the existing dataset_snapshot unmodified
+      summary: Create dataset_snapshot
+      requestBody:
+        description: Any desired information about the new dataset_snapshot object
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDatasetSnapshot'
+      responses:
+        '200':
+          description: Returns the new dataset_snapshot object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetSnapshot'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    put:
+      tags:
+      - DatasetSnapshots
+      security:
+      - bearerAuth: []
+      - {}
+      operationId: putDatasetSnapshot
+      description: Create or replace dataset_snapshot. If there is an existing dataset_snapshot with the same name as the one specified in the request, will replace the existing dataset_snapshot with the provided fields
+      summary: Create or replace dataset_snapshot
+      requestBody:
+        description: Any desired information about the new dataset_snapshot object
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDatasetSnapshot'
+      responses:
+        '200':
+          description: Returns the new dataset_snapshot object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetSnapshot'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    get:
+      operationId: getDatasetSnapshot
+      tags:
+      - DatasetSnapshots
+      description: List out all dataset_snapshots. The dataset_snapshots are sorted by creation date, with the most recently-created dataset_snapshots coming first
+      summary: List dataset_snapshots
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/AppLimitParam'
+      - $ref: '#/components/parameters/StartingAfter'
+      - $ref: '#/components/parameters/EndingBefore'
+      - $ref: '#/components/parameters/Ids'
+      - $ref: '#/components/parameters/DatasetSnapshotName'
+      - $ref: '#/components/parameters/OrgName'
+      responses:
+        '200':
+          description: Returns a list of dataset_snapshot objects
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DatasetSnapshot'
+                    description: A list of dataset_snapshot objects
+                required:
+                - objects
+                additionalProperties: false
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/dataset_snapshot/{dataset_snapshot_id}:
+    get:
+      operationId: getDatasetSnapshotId
+      tags:
+      - DatasetSnapshots
+      description: Get a dataset_snapshot object by its id
+      summary: Get dataset_snapshot
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/DatasetSnapshotIdParam'
+      responses:
+        '200':
+          description: Returns the dataset_snapshot object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetSnapshot'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    patch:
+      operationId: patchDatasetSnapshotId
+      tags:
+      - DatasetSnapshots
+      description: Partially update a dataset_snapshot object. Specify the fields to update in the payload. Any object-type fields will be deep-merged with existing content. Currently we do not support removing fields or setting them to null.
+      summary: Partially update dataset_snapshot
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/DatasetSnapshotIdParam'
+      requestBody:
+        description: Fields to update
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchDatasetSnapshot'
+      responses:
+        '200':
+          description: Returns the dataset_snapshot object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetSnapshot'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    delete:
+      operationId: deleteDatasetSnapshotId
+      tags:
+      - DatasetSnapshots
+      description: Delete a dataset_snapshot object by its id
+      summary: Delete dataset_snapshot
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/DatasetSnapshotIdParam'
+      responses:
+        '200':
+          description: Returns the deleted dataset_snapshot object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetSnapshot'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+components:
+  schemas:
+    DatasetSnapshotIdParam:
+      type: string
+      format: uuid
+      description: DatasetSnapshot id
+    PatchDatasetSnapshot:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: Name of the dataset snapshot
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the dataset snapshot
+    DatasetSnapshotName:
+      type: string
+      description: Name of the dataset_snapshot to search for
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    DatasetSnapshot:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the dataset snapshot
+        dataset_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the dataset that this snapshot belongs to
+        name:
+          type: string
+          description: Name of the dataset snapshot
+        description:
+          type: string
+          nullable: true
+        xact_id:
+          type: string
+          description: Transaction id of the brainstore version at the time of the snapshot
+        created:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of dataset snapshot creation
+      required:
+      - id
+      - dataset_id
+      - name
+      - description
+      - xact_id
+      - created
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    CreateDatasetSnapshot:
+      type: object
+      properties:
+        dataset_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the dataset that this snapshot belongs to
+        name:
+          type: string
+          minLength: 1
+          description: Name of the dataset snapshot
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the dataset snapshot
+        xact_id:
+          type: string
+          minLength: 1
+          description: Transaction id of the brainstore version at the time of the snapshot
+      required:
+      - dataset_id
+      - name
+      - xact_id
+  parameters:
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    DatasetSnapshotName:
+      schema:
+        $ref: '#/components/schemas/DatasetSnapshotName'
+      required: false
+      description: Name of the dataset_snapshot to search for
+      name: dataset_snapshot_name
+      in: query
+      allowReserved: true
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
+    DatasetSnapshotIdParam:
+      schema:
+        $ref: '#/components/schemas/DatasetSnapshotIdParam'
+      required: true
+      description: DatasetSnapshot id
+      name: dataset_snapshot_id
+      in: path
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Most Braintrust endpoints are authenticated by providing your API key as a header `Authorization: Bearer [api_key]` to your HTTP request. You can create an API key in the Braintrust [organization settings page](https://www.braintrustdata.com/app/settings?subroute=api-keys).'

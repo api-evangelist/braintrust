@@ -1,0 +1,610 @@
+openapi: 3.1.1
+info:
+  version: 1.0.0
+  title: Braintrust Acls Organizations API
+  description: 'API specification for the backend data server. The API is hosted globally at
+
+    https://api.braintrust.dev or in your own environment.
+
+
+    You can access the OpenAPI spec for this API at https://github.com/braintrustdata/braintrust-openapi.'
+  license:
+    name: Apache 2.0
+servers:
+- url: https://api.braintrust.dev
+security:
+- bearerAuth: []
+- {}
+tags:
+- name: Organizations
+paths:
+  /v1/organization:
+    get:
+      operationId: getOrganization
+      tags:
+      - Organizations
+      description: List out all organizations. The organizations are sorted by creation date, with the most recently-created organizations coming first
+      summary: List organizations
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/AppLimitParam'
+      - $ref: '#/components/parameters/StartingAfter'
+      - $ref: '#/components/parameters/EndingBefore'
+      - $ref: '#/components/parameters/Ids'
+      - $ref: '#/components/parameters/OrgName'
+      responses:
+        '200':
+          description: Returns a list of organization objects
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Organization'
+                    description: A list of organization objects
+                required:
+                - objects
+                additionalProperties: false
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/organization/{organization_id}:
+    get:
+      operationId: getOrganizationId
+      tags:
+      - Organizations
+      description: Get an organization object by its id
+      summary: Get organization
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdParam'
+      responses:
+        '200':
+          description: Returns the organization object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    patch:
+      operationId: patchOrganizationId
+      tags:
+      - Organizations
+      description: Partially update an organization object. Specify the fields to update in the payload. Any object-type fields will be deep-merged with existing content. Currently we do not support removing fields or setting them to null.
+      summary: Partially update organization
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/OrganizationIdParam'
+      requestBody:
+        description: Fields to update
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchOrganization'
+      responses:
+        '200':
+          description: Returns the organization object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/organization/members:
+    patch:
+      operationId: patchOrganizationMembers
+      tags:
+      - Organizations
+      description: 'Modify organization membership.
+
+
+        Organization owners can use this endpoint to create service accounts, but service tokens for those accounts must be created in the Braintrust UI, at [**Settings > Service tokens**](https://www.braintrust.dev/app/~/configuration/org/service-tokens).'
+      summary: Modify organization membership
+      security:
+      - bearerAuth: []
+      - {}
+      requestBody:
+        description: Members to add/remove
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchOrganizationMembers'
+      responses:
+        '200':
+          description: A success status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchOrganizationMembersOutput'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+components:
+  schemas:
+    PatchOrganizationMembers:
+      type: object
+      properties:
+        invite_users:
+          type: object
+          nullable: true
+          properties:
+            ids:
+              type: array
+              nullable: true
+              items:
+                type: string
+                format: uuid
+                description: Unique identifier for the user
+              description: Ids of existing users to invite
+            emails:
+              type: array
+              nullable: true
+              items:
+                type: string
+              description: Emails of users to invite
+            service_accounts:
+              type: array
+              nullable: true
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  token_name:
+                    type: string
+                    nullable: true
+                    description: Omit this field and create the token in the Braintrust UI ([**Settings > Service tokens**](https://www.braintrust.dev/app/~/configuration/org/service-tokens)). If you include this field, the API call will return a 403.
+                required:
+                - name
+              description: Service accounts to create. Users with organization-owner permissions can create service accounts via the API, but the service tokens required to authenticate those accounts must be created in the Braintrust UI.
+            send_invite_emails:
+              type: boolean
+              nullable: true
+              description: If true, send invite emails to the users who wore actually added
+            group_ids:
+              type: array
+              nullable: true
+              items:
+                type: string
+                format: uuid
+                description: Unique identifier for the group
+              description: Optional list of group ids to add newly-invited users to.
+            group_names:
+              type: array
+              nullable: true
+              items:
+                type: string
+                description: Name of the group
+              description: Optional list of group names to add newly-invited users to.
+            group_id:
+              type: string
+              nullable: true
+              format: uuid
+              description: Singular form of group_ids
+            group_name:
+              type: string
+              nullable: true
+              description: Singular form of group_names
+          description: Users to invite to the organization
+        remove_users:
+          type: object
+          nullable: true
+          properties:
+            ids:
+              type: array
+              nullable: true
+              items:
+                type: string
+                format: uuid
+                description: Unique identifier for the user
+              description: Ids of users to remove
+            emails:
+              type: array
+              nullable: true
+              items:
+                type: string
+              description: Emails of users to remove
+          description: Users to remove from the organization
+        org_name:
+          type: string
+          nullable: true
+          description: For nearly all users, this parameter should be unnecessary. But in the rare case that your API key belongs to multiple organizations, or in case you want to explicitly assert the organization you are modifying, you may specify the name of the organization.
+        org_id:
+          type: string
+          nullable: true
+          description: For nearly all users, this parameter should be unnecessary. But in the rare case that your API key belongs to multiple organizations, or in case you want to explicitly assert the organization you are modifying, you may specify the id of the organization.
+    OrganizationIdParam:
+      type: string
+      format: uuid
+      description: Organization id
+    PatchOrganization:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: Name of the organization
+        api_url:
+          type: string
+          nullable: true
+        is_universal_api:
+          type: boolean
+          nullable: true
+        is_dataplane_private:
+          type: boolean
+          nullable: true
+        proxy_url:
+          type: string
+          nullable: true
+        realtime_url:
+          type: string
+          nullable: true
+        image_rendering_mode:
+          $ref: '#/components/schemas/ImageRenderingMode'
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    PatchOrganizationMembersOutput:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+        org_id:
+          type: string
+          description: The id of the org that was modified.
+        send_email_error:
+          type: string
+          nullable: true
+          description: If invite emails failed to send for some reason, the patch operation will still complete, but we will return an error message here
+        added_users:
+          type: array
+          nullable: true
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              email:
+                type: string
+                nullable: true
+              api_key:
+                type: string
+                nullable: true
+              token_name:
+                type: string
+                nullable: true
+            required:
+            - id
+          description: If service accounts with tokens were created, this will contain the added users with their API keys
+      required:
+      - status
+      - org_id
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    ImageRenderingMode:
+      type: string
+      nullable: true
+      enum:
+      - auto
+      - click_to_load
+      - blocked
+      - null
+      description: 'Controls how images are rendered in the UI: ''auto'' loads images automatically, ''click_to_load'' shows a placeholder until clicked, ''blocked'' prevents image loading entirely'
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    Organization:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the organization
+        name:
+          type: string
+          description: Name of the organization
+        api_url:
+          type: string
+          nullable: true
+        is_universal_api:
+          type: boolean
+          nullable: true
+        is_dataplane_private:
+          type: boolean
+          nullable: true
+        proxy_url:
+          type: string
+          nullable: true
+        realtime_url:
+          type: string
+          nullable: true
+        created:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of organization creation
+        image_rendering_mode:
+          $ref: '#/components/schemas/ImageRenderingMode'
+      required:
+      - id
+      - name
+  parameters:
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
+    OrganizationIdParam:
+      schema:
+        $ref: '#/components/schemas/OrganizationIdParam'
+      required: true
+      description: Organization id
+      name: organization_id
+      in: path
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Most Braintrust endpoints are authenticated by providing your API key as a header `Authorization: Bearer [api_key]` to your HTTP request. You can create an API key in the Braintrust [organization settings page](https://www.braintrustdata.com/app/settings?subroute=api-keys).'

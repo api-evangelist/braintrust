@@ -1,0 +1,636 @@
+openapi: 3.1.1
+info:
+  version: 1.0.0
+  title: Braintrust Acls McpServers API
+  description: 'API specification for the backend data server. The API is hosted globally at
+
+    https://api.braintrust.dev or in your own environment.
+
+
+    You can access the OpenAPI spec for this API at https://github.com/braintrustdata/braintrust-openapi.'
+  license:
+    name: Apache 2.0
+servers:
+- url: https://api.braintrust.dev
+security:
+- bearerAuth: []
+- {}
+tags:
+- name: McpServers
+paths:
+  /v1/mcp_server:
+    post:
+      tags:
+      - McpServers
+      security:
+      - bearerAuth: []
+      - {}
+      operationId: postMcpServer
+      description: Create a new mcp_server. If there is an existing mcp_server with the same name as the one specified in the request, will return the existing mcp_server unmodified
+      summary: Create mcp_server
+      requestBody:
+        description: Any desired information about the new mcp_server object
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMCPServer'
+      responses:
+        '200':
+          description: Returns the new mcp_server object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MCPServer'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    put:
+      tags:
+      - McpServers
+      security:
+      - bearerAuth: []
+      - {}
+      operationId: putMcpServer
+      description: Create or replace mcp_server. If there is an existing mcp_server with the same name as the one specified in the request, will replace the existing mcp_server with the provided fields
+      summary: Create or replace mcp_server
+      requestBody:
+        description: Any desired information about the new mcp_server object
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMCPServer'
+      responses:
+        '200':
+          description: Returns the new mcp_server object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MCPServer'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    get:
+      operationId: getMcpServer
+      tags:
+      - McpServers
+      description: List out all mcp_servers. The mcp_servers are sorted by creation date, with the most recently-created mcp_servers coming first
+      summary: List mcp_servers
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/AppLimitParam'
+      - $ref: '#/components/parameters/StartingAfter'
+      - $ref: '#/components/parameters/EndingBefore'
+      - $ref: '#/components/parameters/Ids'
+      - $ref: '#/components/parameters/McpServerName'
+      - $ref: '#/components/parameters/OrgName'
+      responses:
+        '200':
+          description: Returns a list of mcp_server objects
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MCPServer'
+                    description: A list of mcp_server objects
+                required:
+                - objects
+                additionalProperties: false
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/mcp_server/{mcp_server_id}:
+    get:
+      operationId: getMcpServerId
+      tags:
+      - McpServers
+      description: Get a mcp_server object by its id
+      summary: Get mcp_server
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/McpServerIdParam'
+      responses:
+        '200':
+          description: Returns the mcp_server object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MCPServer'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    patch:
+      operationId: patchMcpServerId
+      tags:
+      - McpServers
+      description: Partially update a mcp_server object. Specify the fields to update in the payload. Any object-type fields will be deep-merged with existing content. Currently we do not support removing fields or setting them to null.
+      summary: Partially update mcp_server
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/McpServerIdParam'
+      requestBody:
+        description: Fields to update
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchMCPServer'
+      responses:
+        '200':
+          description: Returns the mcp_server object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MCPServer'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    delete:
+      operationId: deleteMcpServerId
+      tags:
+      - McpServers
+      description: Delete a mcp_server object by its id
+      summary: Delete mcp_server
+      security:
+      - bearerAuth: []
+      - {}
+      parameters:
+      - $ref: '#/components/parameters/McpServerIdParam'
+      responses:
+        '200':
+          description: Returns the deleted mcp_server object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MCPServer'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+components:
+  parameters:
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+    McpServerIdParam:
+      schema:
+        $ref: '#/components/schemas/McpServerIdParam'
+      required: true
+      description: McpServer id
+      name: mcp_server_id
+      in: path
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    McpServerName:
+      schema:
+        $ref: '#/components/schemas/McpServerName'
+      required: false
+      description: Name of the mcp_server to search for
+      name: mcp_server_name
+      in: query
+      allowReserved: true
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
+  schemas:
+    McpServerIdParam:
+      type: string
+      format: uuid
+      description: McpServer id
+    McpServerName:
+      type: string
+      description: Name of the mcp_server to search for
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    PatchMCPServer:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: Name of the MCP server. Within a project, MCP server names are unique
+        url:
+          type: string
+          nullable: true
+          description: URL of the MCP server endpoint
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the MCP server
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    CreateMCPServer:
+      type: object
+      properties:
+        project_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project that the MCP server belongs under
+        name:
+          type: string
+          description: Name of the MCP server. Within a project, MCP server names are unique
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the MCP server
+        url:
+          type: string
+          description: URL of the MCP server endpoint
+      required:
+      - project_id
+      - name
+      - url
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    MCPServer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the MCP server
+        project_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project that the MCP server belongs under
+        user_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Identifies the user who created the MCP server
+        created:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of MCP server creation
+        deleted_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of MCP server deletion, or null if the MCP server is still active
+        name:
+          type: string
+          description: Name of the MCP server. Within a project, MCP server names are unique
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the MCP server
+        url:
+          type: string
+          description: URL of the MCP server endpoint
+      required:
+      - id
+      - project_id
+      - name
+      - url
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Most Braintrust endpoints are authenticated by providing your API key as a header `Authorization: Bearer [api_key]` to your HTTP request. You can create an API key in the Braintrust [organization settings page](https://www.braintrustdata.com/app/settings?subroute=api-keys).'
