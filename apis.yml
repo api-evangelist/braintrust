@@ -419,6 +419,13 @@ apis:
   - type: OpenAPI
     url: openapi/braintrust-views-api-openapi.yml
 common:
+  - type: IssueTracker
+    url: https://github.com/braintrustdata/autoevals/issues
+  - type: Releases
+    url: https://github.com/braintrustdata/autoevals/releases
+  - type: License
+    name: MIT
+    url: https://github.com/braintrustdata/autoevals/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/braintrust-agentic-access.yml
   - type: DomainSecurity
