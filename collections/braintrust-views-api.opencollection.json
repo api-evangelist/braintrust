@@ -1,0 +1,216 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Braintrust Acls Views API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Views",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List views",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/view",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of objects to return"
+              },
+              {
+                "name": "starting_after",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor id.\n\nFor example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`"
+              },
+              {
+                "name": "ending_before",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor id.\n\nFor example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times"
+              },
+              {
+                "name": "view_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the view to search for"
+              },
+              {
+                "name": "view_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of object that the view corresponds to."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "The object type that the ACL applies to"
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "The id of the object the ACL applies to"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List out all views. The views are sorted by creation date, with the most recently-created views coming first"
+        },
+        {
+          "info": {
+            "name": "Create view",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/view",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new view. If there is an existing view with the same name as the one specified in the request, will return the existing view unmodified"
+        },
+        {
+          "info": {
+            "name": "Create or replace view",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.braintrust.dev/v1/view",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create or replace view. If there is an existing view with the same name as the one specified in the request, will replace the existing view with the provided fields"
+        },
+        {
+          "info": {
+            "name": "Get view",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/view/:view_id",
+            "params": [
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View id"
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "The object type that the ACL applies to"
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "The id of the object the ACL applies to"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a view object by its id"
+        },
+        {
+          "info": {
+            "name": "Partially update view",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.braintrust.dev/v1/view/:view_id",
+            "params": [
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a view object. Specify the fields to update in the payload. Any object-type fields will be deep-merged with existing content. Currently we do not support removing fields or setting them to null."
+        },
+        {
+          "info": {
+            "name": "Delete view",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.braintrust.dev/v1/view/:view_id",
+            "params": [
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a view object by its id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

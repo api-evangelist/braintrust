@@ -1,0 +1,1671 @@
+{
+  "item": [
+    {
+      "id": "591d5c06-f898-4084-9081-7e79fd36bacf",
+      "name": "ServiceTokens",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ad4d285d-a819-42b0-8661-40c5e66a29c9",
+          "name": "Delete single service_token",
+          "request": {
+            "name": "Delete single service_token",
+            "description": {
+              "content": "Delete a single service_token",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "service_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e8c990a-dab3-4825-ab8d-6f682d1348cf",
+              "name": "Returns the deleted service_token object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"179beb4c-bdd2-357b-b1e7-3ccbe6816110\",\n  \"name\": \"string\",\n  \"preview_name\": \"string\",\n  \"created\": \"1960-04-08T17:20:09.540Z\",\n  \"service_account_id\": \"5c8882d2-5f3d-7c7a-9e10-4cb1c596c9c4\",\n  \"service_account_email\": \"string\",\n  \"service_account_name\": \"string\",\n  \"org_id\": \"bc64b0cc-6cd2-5c40-1031-f44f52ccfe5b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "daa82996-7168-4a8c-b5e4-2cd318400efe",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afb9c4a8-33f8-4b36-8c24-b459199aecc0",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2339e68e-87f4-406d-bf58-3144f1ca4e2f",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b11dfdf5-bbe7-4bb8-ad32-565bddf2564d",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff5c6019-ad8c-4215-a973-faf9c73cd3c2",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e52b7cf1-d794-4bb6-94e3-875963099702",
+          "name": "List service_tokens",
+          "request": {
+            "name": "List service_tokens",
+            "description": {
+              "content": "List out all service tokens. They are sorted by creation date, with the most recently-created tokens coming first.\n\nTo create service tokens, organization owners can go to [**Settings > Service tokens**](https://www.braintrust.dev/app/~/configuration/org/service-tokens) in the Braintrust UI.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "service_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of objects to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "starting_after",
+                  "value": "<uuid>",
+                  "description": "Pagination cursor id.\n\nFor example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`"
+                },
+                {
+                  "disabled": false,
+                  "key": "ending_before",
+                  "value": "<uuid>",
+                  "description": "Pagination cursor id.\n\nFor example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`"
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<uuid>",
+                  "description": "Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_token_name",
+                  "value": "<string>",
+                  "description": "Name of the service_token to search for"
+                },
+                {
+                  "disabled": false,
+                  "key": "org_name",
+                  "value": "<string>",
+                  "description": "Filter search results to within a particular organization"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "19598179-9ca7-4fb0-a3b2-dfea369591fc",
+              "name": "Returns a list of service_token objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3502"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "df6c8280-23d0-e628-fed2-69ab74449502"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "60dab85e-7e3f-bc03-7558-d73ba4198196"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "19b573af-6a54-a35b-dde3-91dd12f1f80d"
+                    },
+                    {
+                      "key": "service_token_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"b6ddd9b3-ee21-903c-c77c-b3bffd9fd9fd\",\n      \"name\": \"string\",\n      \"preview_name\": \"string\",\n      \"created\": \"1955-02-06T20:21:09.749Z\",\n      \"service_account_id\": \"95a79b66-cbf1-50df-34f7-50ce20f56b07\",\n      \"service_account_email\": \"string\",\n      \"service_account_name\": \"string\",\n      \"org_id\": \"5b655591-bd60-eeab-bc90-d95118025054\"\n    },\n    {\n      \"id\": \"1cadef39-0fdd-284c-203f-aadc88accb11\",\n      \"name\": \"string\",\n      \"preview_name\": \"string\",\n      \"created\": \"2024-02-15T19:28:53.694Z\",\n      \"service_account_id\": \"54ad4205-c660-849d-731a-3a4f78b57ab3\",\n      \"service_account_email\": \"string\",\n      \"service_account_name\": \"string\",\n      \"org_id\": \"f03cdb4c-f04b-787a-d836-32b3c40a62a4\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa3f680c-e618-46d7-84f0-345e2506baeb",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3502"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "df6c8280-23d0-e628-fed2-69ab74449502"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "60dab85e-7e3f-bc03-7558-d73ba4198196"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "19b573af-6a54-a35b-dde3-91dd12f1f80d"
+                    },
+                    {
+                      "key": "service_token_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e2e11f1-b420-4389-a391-5caa410cd3ad",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3502"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "df6c8280-23d0-e628-fed2-69ab74449502"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "60dab85e-7e3f-bc03-7558-d73ba4198196"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "19b573af-6a54-a35b-dde3-91dd12f1f80d"
+                    },
+                    {
+                      "key": "service_token_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36f1cec6-32ff-4492-ba78-b7f896bba7ef",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3502"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "df6c8280-23d0-e628-fed2-69ab74449502"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "60dab85e-7e3f-bc03-7558-d73ba4198196"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "19b573af-6a54-a35b-dde3-91dd12f1f80d"
+                    },
+                    {
+                      "key": "service_token_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f6e2c83-5e0a-4aa2-ada4-9850be976e20",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3502"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "df6c8280-23d0-e628-fed2-69ab74449502"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "60dab85e-7e3f-bc03-7558-d73ba4198196"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "19b573af-6a54-a35b-dde3-91dd12f1f80d"
+                    },
+                    {
+                      "key": "service_token_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "502e1487-5f19-46a1-b0b6-35d79290081f",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3502"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "df6c8280-23d0-e628-fed2-69ab74449502"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "60dab85e-7e3f-bc03-7558-d73ba4198196"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "19b573af-6a54-a35b-dde3-91dd12f1f80d"
+                    },
+                    {
+                      "key": "service_token_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8622eace-d27f-4511-b649-762b8ba61ae8",
+          "name": "Get service_token",
+          "request": {
+            "name": "Get service_token",
+            "description": {
+              "content": "Get a service_token object by its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "service_token",
+                ":service_token_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "service_token_id",
+                  "description": "(Required) ServiceToken id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "32376f06-7d0f-46b5-999d-03d1769adc79",
+              "name": "Returns the service_token object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token",
+                    ":service_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "service_token_id",
+                      "description": "(Required) ServiceToken id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"179beb4c-bdd2-357b-b1e7-3ccbe6816110\",\n  \"name\": \"string\",\n  \"preview_name\": \"string\",\n  \"created\": \"1960-04-08T17:20:09.540Z\",\n  \"service_account_id\": \"5c8882d2-5f3d-7c7a-9e10-4cb1c596c9c4\",\n  \"service_account_email\": \"string\",\n  \"service_account_name\": \"string\",\n  \"org_id\": \"bc64b0cc-6cd2-5c40-1031-f44f52ccfe5b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd7c051d-9319-4798-a193-9505f87b246b",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token",
+                    ":service_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "service_token_id",
+                      "description": "(Required) ServiceToken id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2219bf1e-2acd-426d-a7ab-691f96b88ab2",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token",
+                    ":service_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "service_token_id",
+                      "description": "(Required) ServiceToken id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3ebe96b-1eff-4941-bf70-49b3c5227acd",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token",
+                    ":service_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "service_token_id",
+                      "description": "(Required) ServiceToken id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d70a6a96-49f0-4739-912e-13c05729b27b",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token",
+                    ":service_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "service_token_id",
+                      "description": "(Required) ServiceToken id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90131bcf-db41-49cf-8d06-8892be8dfc00",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token",
+                    ":service_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "service_token_id",
+                      "description": "(Required) ServiceToken id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6fe16816-fa2b-4596-a2b1-e6fa6a7019ad",
+          "name": "Delete service_token",
+          "request": {
+            "name": "Delete service_token",
+            "description": {
+              "content": "Delete a service_token object by its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "service_token",
+                ":service_token_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "service_token_id",
+                  "description": "(Required) ServiceToken id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "87609ad0-9c46-42ac-9604-6283498293df",
+              "name": "Returns the deleted service_token object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token",
+                    ":service_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "service_token_id",
+                      "description": "(Required) ServiceToken id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"179beb4c-bdd2-357b-b1e7-3ccbe6816110\",\n  \"name\": \"string\",\n  \"preview_name\": \"string\",\n  \"created\": \"1960-04-08T17:20:09.540Z\",\n  \"service_account_id\": \"5c8882d2-5f3d-7c7a-9e10-4cb1c596c9c4\",\n  \"service_account_email\": \"string\",\n  \"service_account_name\": \"string\",\n  \"org_id\": \"bc64b0cc-6cd2-5c40-1031-f44f52ccfe5b\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc5002c7-a90d-44ff-8f92-a9429e5136bb",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token",
+                    ":service_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "service_token_id",
+                      "description": "(Required) ServiceToken id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4917484b-ed53-4dab-bc7d-08b5e06728c1",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token",
+                    ":service_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "service_token_id",
+                      "description": "(Required) ServiceToken id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e9c9938-8465-4828-ac52-4d29b8e97dfe",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token",
+                    ":service_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "service_token_id",
+                      "description": "(Required) ServiceToken id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8b7ef00-8cba-4aca-bdec-fd15a04dd2b1",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token",
+                    ":service_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "service_token_id",
+                      "description": "(Required) ServiceToken id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "746821ec-5aad-4100-a04a-510a5d5811e6",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "service_token",
+                    ":service_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "service_token_id",
+                      "description": "(Required) ServiceToken id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.braintrust.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3e1db4b9-2c0c-4190-9d17-5a6df747a613",
+    "name": "Braintrust Acls ServiceTokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API specification for the backend data server. The API is hosted globally at\nhttps://api.braintrust.dev or in your own environment.\n\nYou can access the OpenAPI spec for this API at https://github.com/braintrustdata/braintrust-openapi.",
+      "type": "text/plain"
+    }
+  }
+}

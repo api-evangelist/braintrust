@@ -1,0 +1,2830 @@
+{
+  "item": [
+    {
+      "id": "46102e80-43ed-4564-8ac7-ed3897021d33",
+      "name": "Functions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "25c9e34f-feb3-4b46-8dd5-b280c4ef19d2",
+          "name": "Create function",
+          "request": {
+            "name": "Create function",
+            "description": {
+              "content": "Create a new function. If there is an existing function in the project with the same slug as the one specified in the request, will return the existing function unmodified",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "function"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"function_data\": {\n    \"type\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"<string>\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"<string>\"\n    },\n    \"options\": {\n      \"model\": \"<string>\",\n      \"params\": {\n        \"use_cache\": \"<boolean>\",\n        \"reasoning_enabled\": \"<boolean>\",\n        \"reasoning_budget\": \"<number>\",\n        \"temperature\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"max_tokens\": \"<number>\",\n        \"max_completion_tokens\": \"<number>\",\n        \"frequency_penalty\": \"<number>\",\n        \"presence_penalty\": \"<number>\",\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"<string>\",\n        \"function_call\": \"<string>\",\n        \"n\": \"<number>\",\n        \"stop\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"reasoning_effort\": \"<string>\",\n        \"verbosity\": \"<string>\",\n        \"key_0\": {}\n      },\n      \"position\": \"<string>\"\n    },\n    \"parser\": {\n      \"type\": \"<string>\",\n      \"use_cot\": \"<boolean>\",\n      \"choice_scores\": {\n        \"key_0\": \"<number>\",\n        \"key_1\": \"<number>\"\n      },\n      \"choice\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allow_no_match\": \"<boolean>\"\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"version\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    ],\n    \"template_format\": \"<string>\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"is_disabled\": \"<boolean>\",\n        \"enabled_tools\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"key_1\": {\n        \"type\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"is_disabled\": \"<boolean>\",\n        \"enabled_tools\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"prompt_version\": \"<string>\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"function_type\": \"<string>\",\n  \"origin\": {\n    \"object_type\": \"<string>\",\n    \"object_id\": \"<uuid>\",\n    \"internal\": \"<boolean>\"\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc471da6-0767-4fd0-b84b-b25b316958e5",
+              "name": "Returns the new function object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 421.5840513381375,\n        \"temperature\": 5089.2338576991215,\n        \"top_p\": 8396.39416367728,\n        \"max_tokens\": 7194.940971181426,\n        \"max_completion_tokens\": 3603.30201199311,\n        \"frequency_penalty\": 41.06514792211024,\n        \"presence_penalty\": 4190.906061312363,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 997.91288722346,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.14065486379613912\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"5f7389dc-b422-8159-fdb9-85d6c972a2f2\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"function_type\": \"parameters\",\n  \"origin\": {\n    \"object_type\": \"role\",\n    \"object_id\": \"<uuid>\",\n    \"internal\": \"<boolean>\"\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"47d56aee-417b-38be-21d8-1c864f53b831\",\n  \"_xact_id\": \"string\",\n  \"project_id\": \"229cb2f3-cd97-608b-ef67-822f04413899\",\n  \"log_id\": \"p\",\n  \"org_id\": \"0538d2b4-6ffc-fab2-8342-d8913d0d5f0f\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"string\",\n  \"created\": \"1956-06-20T04:49:06.289Z\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 4377.28459268359,\n        \"temperature\": 4133.156638697522,\n        \"top_p\": 5439.712646588324,\n        \"max_tokens\": 5790.702844801505,\n        \"max_completion_tokens\": 4211.0162456679745,\n        \"frequency_penalty\": 878.8954735375864,\n        \"presence_penalty\": 6625.315343009305,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 2000.8962679630338,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"high\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.04580674528141171,\n        \"key_1\": 0.08466968325754443\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": true\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"7df6a69e-382e-d857-b1ee-9a4cc69406ac\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"function_type\": \"custom_view\",\n  \"origin\": {\n    \"object_type\": \"prompt\",\n    \"object_id\": \"4a04341d-77f2-368c-b29a-a8610c49f970\",\n    \"internal\": false\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08e45d8d-a710-4899-9964-24fe7064d364",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 421.5840513381375,\n        \"temperature\": 5089.2338576991215,\n        \"top_p\": 8396.39416367728,\n        \"max_tokens\": 7194.940971181426,\n        \"max_completion_tokens\": 3603.30201199311,\n        \"frequency_penalty\": 41.06514792211024,\n        \"presence_penalty\": 4190.906061312363,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 997.91288722346,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.14065486379613912\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"5f7389dc-b422-8159-fdb9-85d6c972a2f2\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"function_type\": \"parameters\",\n  \"origin\": {\n    \"object_type\": \"role\",\n    \"object_id\": \"<uuid>\",\n    \"internal\": \"<boolean>\"\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f51a4469-8e71-4873-82da-87548a57eeb9",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 421.5840513381375,\n        \"temperature\": 5089.2338576991215,\n        \"top_p\": 8396.39416367728,\n        \"max_tokens\": 7194.940971181426,\n        \"max_completion_tokens\": 3603.30201199311,\n        \"frequency_penalty\": 41.06514792211024,\n        \"presence_penalty\": 4190.906061312363,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 997.91288722346,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.14065486379613912\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"5f7389dc-b422-8159-fdb9-85d6c972a2f2\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"function_type\": \"parameters\",\n  \"origin\": {\n    \"object_type\": \"role\",\n    \"object_id\": \"<uuid>\",\n    \"internal\": \"<boolean>\"\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76441edf-2bbe-4405-abe0-a60bbc44ac83",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 421.5840513381375,\n        \"temperature\": 5089.2338576991215,\n        \"top_p\": 8396.39416367728,\n        \"max_tokens\": 7194.940971181426,\n        \"max_completion_tokens\": 3603.30201199311,\n        \"frequency_penalty\": 41.06514792211024,\n        \"presence_penalty\": 4190.906061312363,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 997.91288722346,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.14065486379613912\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"5f7389dc-b422-8159-fdb9-85d6c972a2f2\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"function_type\": \"parameters\",\n  \"origin\": {\n    \"object_type\": \"role\",\n    \"object_id\": \"<uuid>\",\n    \"internal\": \"<boolean>\"\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "788a446b-6623-470e-9349-c64863e3a550",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 421.5840513381375,\n        \"temperature\": 5089.2338576991215,\n        \"top_p\": 8396.39416367728,\n        \"max_tokens\": 7194.940971181426,\n        \"max_completion_tokens\": 3603.30201199311,\n        \"frequency_penalty\": 41.06514792211024,\n        \"presence_penalty\": 4190.906061312363,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 997.91288722346,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.14065486379613912\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"5f7389dc-b422-8159-fdb9-85d6c972a2f2\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"function_type\": \"parameters\",\n  \"origin\": {\n    \"object_type\": \"role\",\n    \"object_id\": \"<uuid>\",\n    \"internal\": \"<boolean>\"\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7aecd913-88d5-4661-ba20-e59a53425d51",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 421.5840513381375,\n        \"temperature\": 5089.2338576991215,\n        \"top_p\": 8396.39416367728,\n        \"max_tokens\": 7194.940971181426,\n        \"max_completion_tokens\": 3603.30201199311,\n        \"frequency_penalty\": 41.06514792211024,\n        \"presence_penalty\": 4190.906061312363,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 997.91288722346,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.14065486379613912\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"5f7389dc-b422-8159-fdb9-85d6c972a2f2\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"function_type\": \"parameters\",\n  \"origin\": {\n    \"object_type\": \"role\",\n    \"object_id\": \"<uuid>\",\n    \"internal\": \"<boolean>\"\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60ca8864-43bf-4a90-867a-88abab31cc28",
+          "name": "Create or replace function",
+          "request": {
+            "name": "Create or replace function",
+            "description": {
+              "content": "Create or replace function. If there is an existing function in the project with the same slug as the one specified in the request, will replace the existing function with the provided fields",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "function"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"function_data\": {\n    \"type\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"<string>\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"<string>\"\n    },\n    \"options\": {\n      \"model\": \"<string>\",\n      \"params\": {\n        \"use_cache\": \"<boolean>\",\n        \"reasoning_enabled\": \"<boolean>\",\n        \"reasoning_budget\": \"<number>\",\n        \"temperature\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"max_tokens\": \"<number>\",\n        \"max_completion_tokens\": \"<number>\",\n        \"frequency_penalty\": \"<number>\",\n        \"presence_penalty\": \"<number>\",\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"<string>\",\n        \"function_call\": \"<string>\",\n        \"n\": \"<number>\",\n        \"stop\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"reasoning_effort\": \"<string>\",\n        \"verbosity\": \"<string>\",\n        \"key_0\": {}\n      },\n      \"position\": \"<string>\"\n    },\n    \"parser\": {\n      \"type\": \"<string>\",\n      \"use_cot\": \"<boolean>\",\n      \"choice_scores\": {\n        \"key_0\": \"<number>\",\n        \"key_1\": \"<number>\"\n      },\n      \"choice\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allow_no_match\": \"<boolean>\"\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"version\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    ],\n    \"template_format\": \"<string>\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"is_disabled\": \"<boolean>\",\n        \"enabled_tools\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"key_1\": {\n        \"type\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"is_disabled\": \"<boolean>\",\n        \"enabled_tools\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"prompt_version\": \"<string>\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"function_type\": \"<string>\",\n  \"origin\": {\n    \"object_type\": \"<string>\",\n    \"object_id\": \"<uuid>\",\n    \"internal\": \"<boolean>\"\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "63cfc270-94cc-4eba-9ac0-9189f4696b3b",
+              "name": "Returns the new function object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 421.5840513381375,\n        \"temperature\": 5089.2338576991215,\n        \"top_p\": 8396.39416367728,\n        \"max_tokens\": 7194.940971181426,\n        \"max_completion_tokens\": 3603.30201199311,\n        \"frequency_penalty\": 41.06514792211024,\n        \"presence_penalty\": 4190.906061312363,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 997.91288722346,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.14065486379613912\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"5f7389dc-b422-8159-fdb9-85d6c972a2f2\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"function_type\": \"parameters\",\n  \"origin\": {\n    \"object_type\": \"role\",\n    \"object_id\": \"<uuid>\",\n    \"internal\": \"<boolean>\"\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"47d56aee-417b-38be-21d8-1c864f53b831\",\n  \"_xact_id\": \"string\",\n  \"project_id\": \"229cb2f3-cd97-608b-ef67-822f04413899\",\n  \"log_id\": \"p\",\n  \"org_id\": \"0538d2b4-6ffc-fab2-8342-d8913d0d5f0f\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"string\",\n  \"created\": \"1956-06-20T04:49:06.289Z\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 4377.28459268359,\n        \"temperature\": 4133.156638697522,\n        \"top_p\": 5439.712646588324,\n        \"max_tokens\": 5790.702844801505,\n        \"max_completion_tokens\": 4211.0162456679745,\n        \"frequency_penalty\": 878.8954735375864,\n        \"presence_penalty\": 6625.315343009305,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 2000.8962679630338,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"high\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.04580674528141171,\n        \"key_1\": 0.08466968325754443\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": true\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"7df6a69e-382e-d857-b1ee-9a4cc69406ac\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"function_type\": \"custom_view\",\n  \"origin\": {\n    \"object_type\": \"prompt\",\n    \"object_id\": \"4a04341d-77f2-368c-b29a-a8610c49f970\",\n    \"internal\": false\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3097459d-06fb-4fc1-9307-e36f5730f141",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 421.5840513381375,\n        \"temperature\": 5089.2338576991215,\n        \"top_p\": 8396.39416367728,\n        \"max_tokens\": 7194.940971181426,\n        \"max_completion_tokens\": 3603.30201199311,\n        \"frequency_penalty\": 41.06514792211024,\n        \"presence_penalty\": 4190.906061312363,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 997.91288722346,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.14065486379613912\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"5f7389dc-b422-8159-fdb9-85d6c972a2f2\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"function_type\": \"parameters\",\n  \"origin\": {\n    \"object_type\": \"role\",\n    \"object_id\": \"<uuid>\",\n    \"internal\": \"<boolean>\"\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f233514-d742-4b65-8498-2da7424484fb",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 421.5840513381375,\n        \"temperature\": 5089.2338576991215,\n        \"top_p\": 8396.39416367728,\n        \"max_tokens\": 7194.940971181426,\n        \"max_completion_tokens\": 3603.30201199311,\n        \"frequency_penalty\": 41.06514792211024,\n        \"presence_penalty\": 4190.906061312363,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 997.91288722346,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.14065486379613912\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"5f7389dc-b422-8159-fdb9-85d6c972a2f2\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"function_type\": \"parameters\",\n  \"origin\": {\n    \"object_type\": \"role\",\n    \"object_id\": \"<uuid>\",\n    \"internal\": \"<boolean>\"\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f6882c9-b89c-4169-8bde-5c20e37118fc",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 421.5840513381375,\n        \"temperature\": 5089.2338576991215,\n        \"top_p\": 8396.39416367728,\n        \"max_tokens\": 7194.940971181426,\n        \"max_completion_tokens\": 3603.30201199311,\n        \"frequency_penalty\": 41.06514792211024,\n        \"presence_penalty\": 4190.906061312363,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 997.91288722346,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.14065486379613912\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"5f7389dc-b422-8159-fdb9-85d6c972a2f2\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"function_type\": \"parameters\",\n  \"origin\": {\n    \"object_type\": \"role\",\n    \"object_id\": \"<uuid>\",\n    \"internal\": \"<boolean>\"\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76243e0c-65b1-4393-a998-086b401b196f",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 421.5840513381375,\n        \"temperature\": 5089.2338576991215,\n        \"top_p\": 8396.39416367728,\n        \"max_tokens\": 7194.940971181426,\n        \"max_completion_tokens\": 3603.30201199311,\n        \"frequency_penalty\": 41.06514792211024,\n        \"presence_penalty\": 4190.906061312363,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 997.91288722346,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.14065486379613912\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"5f7389dc-b422-8159-fdb9-85d6c972a2f2\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"function_type\": \"parameters\",\n  \"origin\": {\n    \"object_type\": \"role\",\n    \"object_id\": \"<uuid>\",\n    \"internal\": \"<boolean>\"\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "480590d6-4959-4960-947f-6cb5c58b05f2",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 421.5840513381375,\n        \"temperature\": 5089.2338576991215,\n        \"top_p\": 8396.39416367728,\n        \"max_tokens\": 7194.940971181426,\n        \"max_completion_tokens\": 3603.30201199311,\n        \"frequency_penalty\": 41.06514792211024,\n        \"presence_penalty\": 4190.906061312363,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 997.91288722346,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.14065486379613912\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"5f7389dc-b422-8159-fdb9-85d6c972a2f2\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"function_type\": \"parameters\",\n  \"origin\": {\n    \"object_type\": \"role\",\n    \"object_id\": \"<uuid>\",\n    \"internal\": \"<boolean>\"\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69e5ccc2-ce99-4822-9334-3e1b79436958",
+          "name": "List functions",
+          "request": {
+            "name": "List functions",
+            "description": {
+              "content": "List out all functions. The functions are sorted by creation date, with the most recently-created functions coming first",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "function"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of objects to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "starting_after",
+                  "value": "<uuid>",
+                  "description": "Pagination cursor id.\n\nFor example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`"
+                },
+                {
+                  "disabled": false,
+                  "key": "ending_before",
+                  "value": "<uuid>",
+                  "description": "Pagination cursor id.\n\nFor example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`"
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<uuid>",
+                  "description": "Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times"
+                },
+                {
+                  "disabled": false,
+                  "key": "function_name",
+                  "value": "<string>",
+                  "description": "Name of the function to search for"
+                },
+                {
+                  "disabled": false,
+                  "key": "project_name",
+                  "value": "<string>",
+                  "description": "Name of the project to search for"
+                },
+                {
+                  "disabled": false,
+                  "key": "project_id",
+                  "value": "<uuid>",
+                  "description": "Project id"
+                },
+                {
+                  "disabled": false,
+                  "key": "slug",
+                  "value": "<string>",
+                  "description": "Retrieve prompt with a specific slug"
+                },
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<string>",
+                  "description": "Retrieve prompt at a specific version.\n\nThe version id can either be a transaction id (e.g. '1000192656880881099') or a version identifier (e.g. '81cd05ee665fdfb3')."
+                },
+                {
+                  "disabled": false,
+                  "key": "environment",
+                  "value": "<string>",
+                  "description": "Filter by environment slug. Cannot be used together with `version`.\n\nFor `GET /v1/prompt`, environment resolution currently requires the request to match a single prompt. If multiple prompts match, the endpoint returns `400` (for example when `limit=1` is not set). Use `limit=1` or other filters (for example `slug`, `project_id`) to narrow results."
+                },
+                {
+                  "disabled": false,
+                  "key": "org_name",
+                  "value": "<string>",
+                  "description": "Filter search results to within a particular organization"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "54108268-f650-4335-9de1-3a522965be68",
+              "name": "Returns a list of function objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2713"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "5df28679-2658-32c5-ad67-7b5606f9f17c"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "588929c9-4281-b238-1314-dacf5388acf3"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "bdfbb064-748a-4b69-9c21-25a419be0e61"
+                    },
+                    {
+                      "key": "function_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "5db17e7b-ec7d-e0d3-c9e9-f3eac5cd43b5"
+                    },
+                    {
+                      "key": "slug",
+                      "value": "string"
+                    },
+                    {
+                      "key": "version",
+                      "value": "string"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"a8718298-a29d-9dc0-5839-f2ed6419a56c\",\n      \"_xact_id\": \"string\",\n      \"project_id\": \"4640415c-b4c1-2a4d-8ff0-931e336693bb\",\n      \"log_id\": \"p\",\n      \"org_id\": \"b02796d8-36f3-9b48-d1e8-805977270d6c\",\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"function_data\": {\n        \"type\": \"prompt\"\n      },\n      \"description\": \"string\",\n      \"created\": \"1972-08-15T09:29:13.681Z\",\n      \"prompt_data\": {\n        \"prompt\": {\n          \"type\": \"chat\",\n          \"messages\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"tools\": \"string\"\n        },\n        \"options\": {\n          \"model\": \"string\",\n          \"params\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"position\": \"string\"\n        },\n        \"parser\": {\n          \"type\": \"llm_classifier\",\n          \"use_cot\": false,\n          \"choice_scores\": {\n            \"key_0\": 0.01932328912653014\n          },\n          \"choice\": [\n            \"string\",\n            \"string\"\n          ],\n          \"allow_no_match\": true\n        },\n        \"tool_functions\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"template_format\": \"mustache\",\n        \"mcp\": {\n          \"key_0\": {\n            \"type\": \"id\",\n            \"id\": \"35dfb1de-0f37-4875-df63-f2b0c9576d3d\",\n            \"is_disabled\": true,\n            \"enabled_tools\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"type\": \"id\",\n            \"id\": \"97dbe080-ebc2-1a52-aa9d-2af6f12e1a92\",\n            \"is_disabled\": true,\n            \"enabled_tools\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_2\": {\n            \"type\": \"id\",\n            \"id\": \"97f778c1-a4e1-2d05-0654-abd9a5431a93\",\n            \"is_disabled\": true,\n            \"enabled_tools\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_3\": {\n            \"type\": \"id\",\n            \"id\": \"65d4497e-4f13-0f23-4da5-05316c95757d\",\n            \"is_disabled\": true,\n            \"enabled_tools\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"origin\": {\n          \"prompt_id\": \"string\",\n          \"project_id\": \"string\",\n          \"prompt_version\": \"string\"\n        }\n      },\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"metadata\": {\n        \"key_0\": {}\n      },\n      \"function_type\": \"task\",\n      \"origin\": {\n        \"object_type\": \"prompt_session\",\n        \"object_id\": \"c04d9de9-d3eb-6e0e-f2ba-5575aa4c97b2\",\n        \"internal\": false\n      },\n      \"function_schema\": {\n        \"parameters\": {},\n        \"returns\": {}\n      }\n    },\n    {\n      \"id\": \"2804e54c-f41c-6de4-66e3-01571bd1a937\",\n      \"_xact_id\": \"string\",\n      \"project_id\": \"cc698454-a649-5bf8-cf76-755e6956da83\",\n      \"log_id\": \"p\",\n      \"org_id\": \"b471dfad-c586-ceec-ebbc-a2b8438d4e34\",\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"function_data\": {\n        \"type\": \"prompt\"\n      },\n      \"description\": \"string\",\n      \"created\": \"1989-09-19T01:10:03.452Z\",\n      \"prompt_data\": {\n        \"prompt\": {\n          \"type\": \"chat\",\n          \"messages\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"tools\": \"string\"\n        },\n        \"options\": {\n          \"model\": \"string\",\n          \"params\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"position\": \"string\"\n        },\n        \"parser\": {\n          \"type\": \"llm_classifier\",\n          \"use_cot\": true,\n          \"choice_scores\": {\n            \"key_0\": 0.3929994737986713,\n            \"key_1\": 0.9782531970476708\n          },\n          \"choice\": [\n            \"string\",\n            \"string\"\n          ],\n          \"allow_no_match\": true\n        },\n        \"tool_functions\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"template_format\": null,\n        \"mcp\": {\n          \"key_0\": {\n            \"type\": \"id\",\n            \"id\": \"c8991bb2-ad72-19f2-be3f-958feb1930b2\",\n            \"is_disabled\": false,\n            \"enabled_tools\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"type\": \"id\",\n            \"id\": \"d061bf5c-f90e-ddf2-c66b-819b0c42b849\",\n            \"is_disabled\": true,\n            \"enabled_tools\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_2\": {\n            \"type\": \"id\",\n            \"id\": \"854ad9b5-5725-7bee-b349-526762b35db3\",\n            \"is_disabled\": true,\n            \"enabled_tools\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_3\": {\n            \"type\": \"id\",\n            \"id\": \"b67af8f6-c66c-32ef-f995-4f7888a5b06d\",\n            \"is_disabled\": true,\n            \"enabled_tools\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"origin\": {\n          \"prompt_id\": \"string\",\n          \"project_id\": \"string\",\n          \"prompt_version\": \"string\"\n        }\n      },\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"function_type\": \"task\",\n      \"origin\": {\n        \"object_type\": \"prompt_session\",\n        \"object_id\": \"7a7f8fca-8846-a568-c2f8-5e26506452b2\",\n        \"internal\": true\n      },\n      \"function_schema\": {\n        \"parameters\": {},\n        \"returns\": {}\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bec478f3-a8d6-4a94-8220-a19b9b867d15",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2713"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "5df28679-2658-32c5-ad67-7b5606f9f17c"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "588929c9-4281-b238-1314-dacf5388acf3"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "bdfbb064-748a-4b69-9c21-25a419be0e61"
+                    },
+                    {
+                      "key": "function_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "5db17e7b-ec7d-e0d3-c9e9-f3eac5cd43b5"
+                    },
+                    {
+                      "key": "slug",
+                      "value": "string"
+                    },
+                    {
+                      "key": "version",
+                      "value": "string"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abf33416-ed7d-44bb-9c3b-8d6bc67e8031",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2713"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "5df28679-2658-32c5-ad67-7b5606f9f17c"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "588929c9-4281-b238-1314-dacf5388acf3"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "bdfbb064-748a-4b69-9c21-25a419be0e61"
+                    },
+                    {
+                      "key": "function_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "5db17e7b-ec7d-e0d3-c9e9-f3eac5cd43b5"
+                    },
+                    {
+                      "key": "slug",
+                      "value": "string"
+                    },
+                    {
+                      "key": "version",
+                      "value": "string"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac34b0b3-efe9-4637-86b7-8b11e9f4758e",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2713"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "5df28679-2658-32c5-ad67-7b5606f9f17c"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "588929c9-4281-b238-1314-dacf5388acf3"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "bdfbb064-748a-4b69-9c21-25a419be0e61"
+                    },
+                    {
+                      "key": "function_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "5db17e7b-ec7d-e0d3-c9e9-f3eac5cd43b5"
+                    },
+                    {
+                      "key": "slug",
+                      "value": "string"
+                    },
+                    {
+                      "key": "version",
+                      "value": "string"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "560e9458-593c-4682-9e00-dc7d44cf9709",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2713"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "5df28679-2658-32c5-ad67-7b5606f9f17c"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "588929c9-4281-b238-1314-dacf5388acf3"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "bdfbb064-748a-4b69-9c21-25a419be0e61"
+                    },
+                    {
+                      "key": "function_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "5db17e7b-ec7d-e0d3-c9e9-f3eac5cd43b5"
+                    },
+                    {
+                      "key": "slug",
+                      "value": "string"
+                    },
+                    {
+                      "key": "version",
+                      "value": "string"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c591614-0339-4eb4-8d57-284ede6bca26",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "2713"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "5df28679-2658-32c5-ad67-7b5606f9f17c"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "588929c9-4281-b238-1314-dacf5388acf3"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "bdfbb064-748a-4b69-9c21-25a419be0e61"
+                    },
+                    {
+                      "key": "function_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "5db17e7b-ec7d-e0d3-c9e9-f3eac5cd43b5"
+                    },
+                    {
+                      "key": "slug",
+                      "value": "string"
+                    },
+                    {
+                      "key": "version",
+                      "value": "string"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c98b84a-25d3-4208-bc23-4d6d46a84efa",
+          "name": "Get function",
+          "request": {
+            "name": "Get function",
+            "description": {
+              "content": "Get a function object by its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "function",
+                ":function_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<string>",
+                  "description": "Retrieve prompt at a specific version.\n\nThe version id can either be a transaction id (e.g. '1000192656880881099') or a version identifier (e.g. '81cd05ee665fdfb3')."
+                },
+                {
+                  "disabled": false,
+                  "key": "environment",
+                  "value": "<string>",
+                  "description": "Filter by environment slug. Cannot be used together with `version`.\n\nFor `GET /v1/prompt`, environment resolution currently requires the request to match a single prompt. If multiple prompts match, the endpoint returns `400` (for example when `limit=1` is not set). Use `limit=1` or other filters (for example `slug`, `project_id`) to narrow results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "function_id",
+                  "description": "(Required) Function id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ed35b904-62db-4f5d-9d79-c2c6806cf75f",
+              "name": "Returns the function object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "string"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"47d56aee-417b-38be-21d8-1c864f53b831\",\n  \"_xact_id\": \"string\",\n  \"project_id\": \"229cb2f3-cd97-608b-ef67-822f04413899\",\n  \"log_id\": \"p\",\n  \"org_id\": \"0538d2b4-6ffc-fab2-8342-d8913d0d5f0f\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"string\",\n  \"created\": \"1956-06-20T04:49:06.289Z\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 4377.28459268359,\n        \"temperature\": 4133.156638697522,\n        \"top_p\": 5439.712646588324,\n        \"max_tokens\": 5790.702844801505,\n        \"max_completion_tokens\": 4211.0162456679745,\n        \"frequency_penalty\": 878.8954735375864,\n        \"presence_penalty\": 6625.315343009305,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 2000.8962679630338,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"high\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.04580674528141171,\n        \"key_1\": 0.08466968325754443\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": true\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"7df6a69e-382e-d857-b1ee-9a4cc69406ac\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"function_type\": \"custom_view\",\n  \"origin\": {\n    \"object_type\": \"prompt\",\n    \"object_id\": \"4a04341d-77f2-368c-b29a-a8610c49f970\",\n    \"internal\": false\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f901a7d2-7537-440e-bd45-6c08d9166d82",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "string"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "406e851d-27c1-43b6-9cf2-9a5cd8cc3b51",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "string"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1e53e36-8d89-4645-b525-ca85dce90fd2",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "string"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe092ed9-2179-444a-8ab9-7f179aeaadaa",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "string"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39644857-9c0a-480f-9721-45d90f7293d2",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "string"
+                    },
+                    {
+                      "key": "environment",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f5a3cfe-629a-4b73-9d0b-3690e1bb6c75",
+          "name": "Partially update function",
+          "request": {
+            "name": "Partially update function",
+            "description": {
+              "content": "Partially update a function object. Specify the fields to update in the payload. Any object-type fields will be deep-merged with existing content. Currently we do not support removing fields or setting them to null.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "function",
+                ":function_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "function_id",
+                  "description": "(Required) Function id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"<string>\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"<string>\"\n    },\n    \"options\": {\n      \"model\": \"<string>\",\n      \"params\": {\n        \"use_cache\": \"<boolean>\",\n        \"reasoning_enabled\": \"<boolean>\",\n        \"reasoning_budget\": \"<number>\",\n        \"temperature\": \"<number>\",\n        \"top_p\": \"<number>\",\n        \"max_tokens\": \"<number>\",\n        \"max_completion_tokens\": \"<number>\",\n        \"frequency_penalty\": \"<number>\",\n        \"presence_penalty\": \"<number>\",\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"<string>\",\n        \"function_call\": \"<string>\",\n        \"n\": \"<number>\",\n        \"stop\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"reasoning_effort\": \"<string>\",\n        \"verbosity\": \"<string>\"\n      },\n      \"position\": \"<string>\"\n    },\n    \"parser\": {\n      \"type\": \"<string>\",\n      \"use_cot\": \"<boolean>\",\n      \"choice_scores\": {\n        \"key_0\": \"<number>\",\n        \"key_1\": \"<number>\",\n        \"key_2\": \"<number>\"\n      },\n      \"choice\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allow_no_match\": \"<boolean>\"\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"version\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"version\": \"<string>\"\n      }\n    ],\n    \"template_format\": \"<string>\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"is_disabled\": \"<boolean>\",\n        \"enabled_tools\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"key_1\": {\n        \"type\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"is_disabled\": \"<boolean>\",\n        \"enabled_tools\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"prompt_version\": \"<string>\"\n    }\n  },\n  \"function_data\": {\n    \"type\": \"<string>\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ad8d064-87ee-4907-8ba3-22fd2a9aad86",
+              "name": "Returns the function object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": false,\n        \"reasoning_enabled\": false,\n        \"reasoning_budget\": 7095.232343653703,\n        \"temperature\": 2257.076875882338,\n        \"top_p\": 9141.119486782743,\n        \"max_tokens\": 2052.6760696095234,\n        \"max_completion_tokens\": 2913.903085927826,\n        \"frequency_penalty\": 5438.121994033639,\n        \"presence_penalty\": 2286.292963987294,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 7849.522738746694,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"medium\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.9782416732010966,\n        \"key_1\": 0.21964674076252733\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"none\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"a91ac50d-efe6-1f31-6cd9-87b33b3e75c5\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"47d56aee-417b-38be-21d8-1c864f53b831\",\n  \"_xact_id\": \"string\",\n  \"project_id\": \"229cb2f3-cd97-608b-ef67-822f04413899\",\n  \"log_id\": \"p\",\n  \"org_id\": \"0538d2b4-6ffc-fab2-8342-d8913d0d5f0f\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"string\",\n  \"created\": \"1956-06-20T04:49:06.289Z\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 4377.28459268359,\n        \"temperature\": 4133.156638697522,\n        \"top_p\": 5439.712646588324,\n        \"max_tokens\": 5790.702844801505,\n        \"max_completion_tokens\": 4211.0162456679745,\n        \"frequency_penalty\": 878.8954735375864,\n        \"presence_penalty\": 6625.315343009305,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 2000.8962679630338,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"high\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.04580674528141171,\n        \"key_1\": 0.08466968325754443\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": true\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"7df6a69e-382e-d857-b1ee-9a4cc69406ac\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"function_type\": \"custom_view\",\n  \"origin\": {\n    \"object_type\": \"prompt\",\n    \"object_id\": \"4a04341d-77f2-368c-b29a-a8610c49f970\",\n    \"internal\": false\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3bc447e-d350-4d9a-b9a4-355b068f0f1b",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": false,\n        \"reasoning_enabled\": false,\n        \"reasoning_budget\": 7095.232343653703,\n        \"temperature\": 2257.076875882338,\n        \"top_p\": 9141.119486782743,\n        \"max_tokens\": 2052.6760696095234,\n        \"max_completion_tokens\": 2913.903085927826,\n        \"frequency_penalty\": 5438.121994033639,\n        \"presence_penalty\": 2286.292963987294,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 7849.522738746694,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"medium\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.9782416732010966,\n        \"key_1\": 0.21964674076252733\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"none\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"a91ac50d-efe6-1f31-6cd9-87b33b3e75c5\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6908c94c-5f18-4a6c-a2aa-e6372072b820",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": false,\n        \"reasoning_enabled\": false,\n        \"reasoning_budget\": 7095.232343653703,\n        \"temperature\": 2257.076875882338,\n        \"top_p\": 9141.119486782743,\n        \"max_tokens\": 2052.6760696095234,\n        \"max_completion_tokens\": 2913.903085927826,\n        \"frequency_penalty\": 5438.121994033639,\n        \"presence_penalty\": 2286.292963987294,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 7849.522738746694,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"medium\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.9782416732010966,\n        \"key_1\": 0.21964674076252733\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"none\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"a91ac50d-efe6-1f31-6cd9-87b33b3e75c5\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04ce4a28-2425-467b-9f76-d8c778d5ee3a",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": false,\n        \"reasoning_enabled\": false,\n        \"reasoning_budget\": 7095.232343653703,\n        \"temperature\": 2257.076875882338,\n        \"top_p\": 9141.119486782743,\n        \"max_tokens\": 2052.6760696095234,\n        \"max_completion_tokens\": 2913.903085927826,\n        \"frequency_penalty\": 5438.121994033639,\n        \"presence_penalty\": 2286.292963987294,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 7849.522738746694,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"medium\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.9782416732010966,\n        \"key_1\": 0.21964674076252733\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"none\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"a91ac50d-efe6-1f31-6cd9-87b33b3e75c5\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce3dcb0e-d114-4e7f-84e5-9c1db8788475",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": false,\n        \"reasoning_enabled\": false,\n        \"reasoning_budget\": 7095.232343653703,\n        \"temperature\": 2257.076875882338,\n        \"top_p\": 9141.119486782743,\n        \"max_tokens\": 2052.6760696095234,\n        \"max_completion_tokens\": 2913.903085927826,\n        \"frequency_penalty\": 5438.121994033639,\n        \"presence_penalty\": 2286.292963987294,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 7849.522738746694,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"medium\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.9782416732010966,\n        \"key_1\": 0.21964674076252733\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"none\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"a91ac50d-efe6-1f31-6cd9-87b33b3e75c5\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ad64b20-56f6-406e-be3c-b623c9d21966",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": false,\n        \"reasoning_enabled\": false,\n        \"reasoning_budget\": 7095.232343653703,\n        \"temperature\": 2257.076875882338,\n        \"top_p\": 9141.119486782743,\n        \"max_tokens\": 2052.6760696095234,\n        \"max_completion_tokens\": 2913.903085927826,\n        \"frequency_penalty\": 5438.121994033639,\n        \"presence_penalty\": 2286.292963987294,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 7849.522738746694,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"medium\",\n        \"verbosity\": \"low\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.9782416732010966,\n        \"key_1\": 0.21964674076252733\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": false\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"none\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"a91ac50d-efe6-1f31-6cd9-87b33b3e75c5\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5cbf45a-580d-40ab-956b-fde9a266f421",
+          "name": "Delete function",
+          "request": {
+            "name": "Delete function",
+            "description": {
+              "content": "Delete a function object by its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "function",
+                ":function_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "function_id",
+                  "description": "(Required) Function id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ce6a5b0a-7e8b-412b-b571-282e0b11d021",
+              "name": "Returns the deleted function object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"47d56aee-417b-38be-21d8-1c864f53b831\",\n  \"_xact_id\": \"string\",\n  \"project_id\": \"229cb2f3-cd97-608b-ef67-822f04413899\",\n  \"log_id\": \"p\",\n  \"org_id\": \"0538d2b4-6ffc-fab2-8342-d8913d0d5f0f\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"function_data\": {\n    \"type\": \"prompt\"\n  },\n  \"description\": \"string\",\n  \"created\": \"1956-06-20T04:49:06.289Z\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"type\": \"chat\",\n      \"messages\": [\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"content\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"tools\": \"string\"\n    },\n    \"options\": {\n      \"model\": \"string\",\n      \"params\": {\n        \"use_cache\": true,\n        \"reasoning_enabled\": true,\n        \"reasoning_budget\": 4377.28459268359,\n        \"temperature\": 4133.156638697522,\n        \"top_p\": 5439.712646588324,\n        \"max_tokens\": 5790.702844801505,\n        \"max_completion_tokens\": 4211.0162456679745,\n        \"frequency_penalty\": 878.8954735375864,\n        \"presence_penalty\": 6625.315343009305,\n        \"response_format\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tool_choice\": \"auto\",\n        \"function_call\": \"auto\",\n        \"n\": 2000.8962679630338,\n        \"stop\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reasoning_effort\": \"minimal\",\n        \"verbosity\": \"high\"\n      },\n      \"position\": \"string\"\n    },\n    \"parser\": {\n      \"type\": \"llm_classifier\",\n      \"use_cot\": true,\n      \"choice_scores\": {\n        \"key_0\": 0.04580674528141171,\n        \"key_1\": 0.08466968325754443\n      },\n      \"choice\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allow_no_match\": true\n    },\n    \"tool_functions\": [\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"type\": \"function\",\n        \"id\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"template_format\": \"mustache\",\n    \"mcp\": {\n      \"key_0\": {\n        \"type\": \"id\",\n        \"id\": \"7df6a69e-382e-d857-b1ee-9a4cc69406ac\",\n        \"is_disabled\": false,\n        \"enabled_tools\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"origin\": {\n      \"prompt_id\": \"string\",\n      \"project_id\": \"string\",\n      \"prompt_version\": \"string\"\n    }\n  },\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"function_type\": \"custom_view\",\n  \"origin\": {\n    \"object_type\": \"prompt\",\n    \"object_id\": \"4a04341d-77f2-368c-b29a-a8610c49f970\",\n    \"internal\": false\n  },\n  \"function_schema\": {\n    \"parameters\": {},\n    \"returns\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "feacfea7-6aa1-443a-9125-d8c63ae983b8",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a089619a-fb2b-4cd4-baf7-9e815ab77c0d",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cdae1696-a1cd-406c-93c9-b4c8783b643a",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c178211a-d473-4dc9-b483-40fc4a6f5fd8",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bfadb67-5626-4d42-9788-34294cf05ffa",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d39441df-b048-4089-80b5-6ac1561a13ea",
+          "name": "Invoke function",
+          "request": {
+            "name": "Invoke function",
+            "description": {
+              "content": "Invoke a function.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "function",
+                ":function_id",
+                "invoke"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "function_id",
+                  "description": "(Required) Function id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"input\": {},\n  \"expected\": {},\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"parent\": {\n    \"object_type\": \"<string>\",\n    \"object_id\": \"<string>\",\n    \"row_ids\": {\n      \"id\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"root_span_id\": \"<string>\"\n    },\n    \"propagated_event\": {\n      \"key_0\": {}\n    }\n  },\n  \"stream\": \"<boolean>\",\n  \"mode\": \"<string>\",\n  \"strict\": \"<boolean>\",\n  \"mcp_auth\": {\n    \"key_0\": {\n      \"oauth_token\": \"<string>\"\n    }\n  },\n  \"overrides\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"version\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9501a7ab-3b3a-4be3-8902-48872cd0cfe5",
+              "name": "Function invocation response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "function",
+                    ":function_id",
+                    "invoke"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "function_id",
+                      "description": "(Required) Function id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"input\": {},\n  \"expected\": {},\n  \"metadata\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"\",\n      \"name\": \"string\"\n    },\n    {\n      \"role\": \"system\",\n      \"content\": \"\",\n      \"name\": \"string\"\n    }\n  ],\n  \"parent\": {\n    \"object_type\": \"experiment\",\n    \"object_id\": \"string\",\n    \"row_ids\": {\n      \"id\": \"string\",\n      \"span_id\": \"string\",\n      \"root_span_id\": \"string\"\n    },\n    \"propagated_event\": {\n      \"key_0\": {}\n    }\n  },\n  \"stream\": \"<boolean>\",\n  \"mode\": \"text\",\n  \"strict\": \"<boolean>\",\n  \"mcp_auth\": {\n    \"key_0\": {\n      \"oauth_token\": \"<string>\"\n    },\n    \"key_1\": {\n      \"oauth_token\": \"<string>\"\n    },\n    \"key_2\": {\n      \"oauth_token\": \"<string>\"\n    },\n    \"key_3\": {\n      \"oauth_token\": \"<string>\"\n    }\n  },\n  \"overrides\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"version\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.braintrust.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4104406c-07c2-4d96-af91-25ba624f05fd",
+    "name": "Braintrust Acls Functions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API specification for the backend data server. The API is hosted globally at\nhttps://api.braintrust.dev or in your own environment.\n\nYou can access the OpenAPI spec for this API at https://github.com/braintrustdata/braintrust-openapi.",
+      "type": "text/plain"
+    }
+  }
+}

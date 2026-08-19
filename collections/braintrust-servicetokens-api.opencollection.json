@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Braintrust Acls ServiceTokens API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ServiceTokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List service_tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/service_token",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of objects to return"
+              },
+              {
+                "name": "starting_after",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor id.\n\nFor example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`"
+              },
+              {
+                "name": "ending_before",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor id.\n\nFor example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times"
+              },
+              {
+                "name": "service_token_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the service_token to search for"
+              },
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter search results to within a particular organization"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List out all service tokens. They are sorted by creation date, with the most recently-created tokens coming first.\n\nTo create service tokens, organization owners can go to [**Settings > Service tokens**](https://www.braintrust.dev/app/~/configuration/org/service-tokens) in the Braintrust UI."
+        },
+        {
+          "info": {
+            "name": "Delete single service_token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.braintrust.dev/v1/service_token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a single service_token"
+        },
+        {
+          "info": {
+            "name": "Get service_token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/service_token/:service_token_id",
+            "params": [
+              {
+                "name": "service_token_id",
+                "value": "",
+                "type": "path",
+                "description": "ServiceToken id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a service_token object by its id"
+        },
+        {
+          "info": {
+            "name": "Delete service_token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.braintrust.dev/v1/service_token/:service_token_id",
+            "params": [
+              {
+                "name": "service_token_id",
+                "value": "",
+                "type": "path",
+                "description": "ServiceToken id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a service_token object by its id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

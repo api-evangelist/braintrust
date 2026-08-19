@@ -1,0 +1,1296 @@
+{
+  "item": [
+    {
+      "id": "c3912827-4777-4c59-984c-4faa36d6c592",
+      "name": "ApiKeys",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3e547d73-33e3-45a7-90a6-57a6340c981b",
+          "name": "List api_keys",
+          "request": {
+            "name": "List api_keys",
+            "description": {
+              "content": "List out all API keys. They are sorted by creation date, with the most recently-created keys coming first.\n\nTo create new API keys, go to [**Settings > API keys**](https://www.braintrust.dev/app/~/configuration/org/api-keys) in the Braintrust UI.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "api_key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of objects to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "starting_after",
+                  "value": "<uuid>",
+                  "description": "Pagination cursor id.\n\nFor example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`"
+                },
+                {
+                  "disabled": false,
+                  "key": "ending_before",
+                  "value": "<uuid>",
+                  "description": "Pagination cursor id.\n\nFor example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`"
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<uuid>",
+                  "description": "Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times"
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key_name",
+                  "value": "<string>",
+                  "description": "Name of the api_key to search for"
+                },
+                {
+                  "disabled": false,
+                  "key": "org_name",
+                  "value": "<string>",
+                  "description": "Filter search results to within a particular organization"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8fe5e348-ba93-4b1f-adfe-4485a33cba30",
+              "name": "Returns a list of api_key objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "9716"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "8c007b7c-35d5-2526-3fbb-9387d7bc3010"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "b5b06020-ce5c-3648-0790-4e957c389789"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "6f61eb0a-85b3-bfe3-b4de-90a3560a9c69"
+                    },
+                    {
+                      "key": "api_key_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"734d3ce0-91cc-b8fd-63e8-eb24287950ce\",\n      \"name\": \"string\",\n      \"preview_name\": \"string\",\n      \"created\": \"1950-10-11T20:41:13.697Z\",\n      \"user_id\": \"bc99b27c-12e3-45d5-e725-78a2854b575d\",\n      \"user_email\": \"string\",\n      \"user_given_name\": \"string\",\n      \"user_family_name\": \"string\",\n      \"org_id\": \"fdb1d8f3-b90f-9e96-00d3-a606092eda31\"\n    },\n    {\n      \"id\": \"e68720c9-9f4e-27ca-16f6-37a2dfa62c9c\",\n      \"name\": \"string\",\n      \"preview_name\": \"string\",\n      \"created\": \"2013-11-22T19:37:51.732Z\",\n      \"user_id\": \"131adfce-2514-14b1-f589-f147d55e3868\",\n      \"user_email\": \"string\",\n      \"user_given_name\": \"string\",\n      \"user_family_name\": \"string\",\n      \"org_id\": \"3a2297f1-b6b9-23c5-13ca-b70815540c87\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51b074f8-b60a-4346-a575-bbb4de27f0c2",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "9716"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "8c007b7c-35d5-2526-3fbb-9387d7bc3010"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "b5b06020-ce5c-3648-0790-4e957c389789"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "6f61eb0a-85b3-bfe3-b4de-90a3560a9c69"
+                    },
+                    {
+                      "key": "api_key_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ca9a3d2-14b3-4fb1-8b24-4dce4885ec19",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "9716"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "8c007b7c-35d5-2526-3fbb-9387d7bc3010"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "b5b06020-ce5c-3648-0790-4e957c389789"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "6f61eb0a-85b3-bfe3-b4de-90a3560a9c69"
+                    },
+                    {
+                      "key": "api_key_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "415193bf-4d7d-40a0-8519-7d544d08844e",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "9716"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "8c007b7c-35d5-2526-3fbb-9387d7bc3010"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "b5b06020-ce5c-3648-0790-4e957c389789"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "6f61eb0a-85b3-bfe3-b4de-90a3560a9c69"
+                    },
+                    {
+                      "key": "api_key_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1aa657f-4840-4945-a41a-c0721e028e53",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "9716"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "8c007b7c-35d5-2526-3fbb-9387d7bc3010"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "b5b06020-ce5c-3648-0790-4e957c389789"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "6f61eb0a-85b3-bfe3-b4de-90a3560a9c69"
+                    },
+                    {
+                      "key": "api_key_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdd24edc-5561-47dc-bf12-3fe952d0fa09",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "9716"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "8c007b7c-35d5-2526-3fbb-9387d7bc3010"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "b5b06020-ce5c-3648-0790-4e957c389789"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "6f61eb0a-85b3-bfe3-b4de-90a3560a9c69"
+                    },
+                    {
+                      "key": "api_key_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05791ee6-621f-4b90-b95a-06194602a5d7",
+          "name": "Get api_key",
+          "request": {
+            "name": "Get api_key",
+            "description": {
+              "content": "Get an api_key object by its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "api_key",
+                ":api_key_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "api_key_id",
+                  "description": "(Required) ApiKey id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "596b46ff-839b-4066-81e8-74e2b7a22abc",
+              "name": "Returns the api_key object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "api_key_id",
+                      "description": "(Required) ApiKey id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"2153df61-a24f-c6ed-7094-47d66c2d72b0\",\n  \"name\": \"string\",\n  \"preview_name\": \"string\",\n  \"created\": \"1956-12-25T03:25:50.488Z\",\n  \"user_id\": \"e5c1f201-0b69-4ad0-36bd-4516e11567d8\",\n  \"user_email\": \"string\",\n  \"user_given_name\": \"string\",\n  \"user_family_name\": \"string\",\n  \"org_id\": \"5bf0ddb6-0258-d1fd-1729-a79d29ead4f4\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34d215a7-a865-48a8-aff9-aff5ff0c928d",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "api_key_id",
+                      "description": "(Required) ApiKey id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe7ea1bb-1566-4898-bc93-1d2fcc68e870",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "api_key_id",
+                      "description": "(Required) ApiKey id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b470b226-09b5-4abf-8584-ae74c80bed83",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "api_key_id",
+                      "description": "(Required) ApiKey id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcac55ba-b448-4a12-b95a-6c34d48c9f78",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "api_key_id",
+                      "description": "(Required) ApiKey id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df00a240-aecd-4951-9def-37030affff7e",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "api_key_id",
+                      "description": "(Required) ApiKey id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f43b309-273b-4b0d-b3e6-48ad418322ba",
+          "name": "Delete api_key",
+          "request": {
+            "name": "Delete api_key",
+            "description": {
+              "content": "Delete an api_key object by its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "api_key",
+                ":api_key_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "api_key_id",
+                  "description": "(Required) ApiKey id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d8acdf71-c50f-4f01-b525-b31a87d2c122",
+              "name": "Returns the deleted api_key object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "api_key_id",
+                      "description": "(Required) ApiKey id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"2153df61-a24f-c6ed-7094-47d66c2d72b0\",\n  \"name\": \"string\",\n  \"preview_name\": \"string\",\n  \"created\": \"1956-12-25T03:25:50.488Z\",\n  \"user_id\": \"e5c1f201-0b69-4ad0-36bd-4516e11567d8\",\n  \"user_email\": \"string\",\n  \"user_given_name\": \"string\",\n  \"user_family_name\": \"string\",\n  \"org_id\": \"5bf0ddb6-0258-d1fd-1729-a79d29ead4f4\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb72d4a7-200c-4125-ad85-7003eb4e48ee",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "api_key_id",
+                      "description": "(Required) ApiKey id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "572265dd-735e-490e-9006-e1db6f149432",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "api_key_id",
+                      "description": "(Required) ApiKey id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f2cbe45-a315-47e4-86c2-87231c22b41b",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "api_key_id",
+                      "description": "(Required) ApiKey id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "284e3ce7-012f-47c4-9cf3-0b477fa9ae82",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "api_key_id",
+                      "description": "(Required) ApiKey id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "babd69e0-b820-410b-8015-9d4e8c737fad",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "api_key",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "api_key_id",
+                      "description": "(Required) ApiKey id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.braintrust.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6e56f1e4-f804-4836-95cd-58259c99017f",
+    "name": "Braintrust Acls ApiKeys API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API specification for the backend data server. The API is hosted globally at\nhttps://api.braintrust.dev or in your own environment.\n\nYou can access the OpenAPI spec for this API at https://github.com/braintrustdata/braintrust-openapi.",
+      "type": "text/plain"
+    }
+  }
+}

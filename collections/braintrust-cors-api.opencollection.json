@@ -1,0 +1,1011 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Braintrust Acls CORS API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CORS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/project`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/project"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/project/{project_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/project/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Project id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/project_logs/{project_id}/insert`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/project_logs/:project_id/insert",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Project id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/project_logs/{project_id}/fetch`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/project_logs/:project_id/fetch",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Project id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/project_logs/{project_id}/feedback`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/project_logs/:project_id/feedback",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Project id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/experiment`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/experiment"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/experiment/{experiment_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/experiment/:experiment_id",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path",
+                "description": "Experiment id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/experiment/{experiment_id}/insert`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/experiment/:experiment_id/insert",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path",
+                "description": "Experiment id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/experiment/{experiment_id}/fetch`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/experiment/:experiment_id/fetch",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path",
+                "description": "Experiment id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/experiment/{experiment_id}/feedback`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/experiment/:experiment_id/feedback",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path",
+                "description": "Experiment id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/experiment/{experiment_id}/summarize`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/experiment/:experiment_id/summarize",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path",
+                "description": "Experiment id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/dataset`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/dataset"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/dataset/{dataset_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/dataset/:dataset_id",
+            "params": [
+              {
+                "name": "dataset_id",
+                "value": "",
+                "type": "path",
+                "description": "Dataset id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/dataset/{dataset_id}/insert`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/dataset/:dataset_id/insert",
+            "params": [
+              {
+                "name": "dataset_id",
+                "value": "",
+                "type": "path",
+                "description": "Dataset id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/dataset/{dataset_id}/fetch`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/dataset/:dataset_id/fetch",
+            "params": [
+              {
+                "name": "dataset_id",
+                "value": "",
+                "type": "path",
+                "description": "Dataset id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/dataset/{dataset_id}/feedback`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/dataset/:dataset_id/feedback",
+            "params": [
+              {
+                "name": "dataset_id",
+                "value": "",
+                "type": "path",
+                "description": "Dataset id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/dataset/{dataset_id}/summarize`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/dataset/:dataset_id/summarize",
+            "params": [
+              {
+                "name": "dataset_id",
+                "value": "",
+                "type": "path",
+                "description": "Dataset id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/prompt`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/prompt"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/prompt/{prompt_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/prompt/:prompt_id",
+            "params": [
+              {
+                "name": "prompt_id",
+                "value": "",
+                "type": "path",
+                "description": "Prompt id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/role`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/role"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/role/{role_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/role/:role_id",
+            "params": [
+              {
+                "name": "role_id",
+                "value": "",
+                "type": "path",
+                "description": "Role id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/group`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/group"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/group/{group_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/group/:group_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "Group id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/acl`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/acl"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/acl/{acl_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/acl/:acl_id",
+            "params": [
+              {
+                "name": "acl_id",
+                "value": "",
+                "type": "path",
+                "description": "Acl id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/acl/list_org`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/acl/list_org"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/acl/acl/batch_update`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/acl/acl/batch_update"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/user`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/user"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/user/{user_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/user/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "User id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/project_automation`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/project_automation"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/project_automation/{project_automation_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/project_automation/:project_automation_id",
+            "params": [
+              {
+                "name": "project_automation_id",
+                "value": "",
+                "type": "path",
+                "description": "ProjectAutomation id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/project_score`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/project_score"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/project_score/{project_score_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/project_score/:project_score_id",
+            "params": [
+              {
+                "name": "project_score_id",
+                "value": "",
+                "type": "path",
+                "description": "ProjectScore id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/project_tag`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/project_tag"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/project_tag/{project_tag_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/project_tag/:project_tag_id",
+            "params": [
+              {
+                "name": "project_tag_id",
+                "value": "",
+                "type": "path",
+                "description": "ProjectTag id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/span_iframe`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/span_iframe"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/span_iframe/{span_iframe_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/span_iframe/:span_iframe_id",
+            "params": [
+              {
+                "name": "span_iframe_id",
+                "value": "",
+                "type": "path",
+                "description": "SpanIframe id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/function`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/function"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/function/{function_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/function/:function_id",
+            "params": [
+              {
+                "name": "function_id",
+                "value": "",
+                "type": "path",
+                "description": "Function id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/function/{function_id}/invoke`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/function/:function_id/invoke",
+            "params": [
+              {
+                "name": "function_id",
+                "value": "",
+                "type": "path",
+                "description": "Function id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/view`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/view"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/view/{view_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/view/:view_id",
+            "params": [
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "path",
+                "description": "View id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/organization`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/organization"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/organization/{organization_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/organization/:organization_id",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "path",
+                "description": "Organization id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/organization/members`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/organization/members"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/api_key`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/api_key"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/api_key/{api_key_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/api_key/:api_key_id",
+            "params": [
+              {
+                "name": "api_key_id",
+                "value": "",
+                "type": "path",
+                "description": "ApiKey id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/service_token`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/service_token"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/service_token/{service_token_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/service_token/:service_token_id",
+            "params": [
+              {
+                "name": "service_token_id",
+                "value": "",
+                "type": "path",
+                "description": "ServiceToken id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/ai_secret`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/ai_secret"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/ai_secret/{ai_secret_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/ai_secret/:ai_secret_id",
+            "params": [
+              {
+                "name": "ai_secret_id",
+                "value": "",
+                "type": "path",
+                "description": "AiSecret id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/env_var`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/env_var"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/env_var/{env_var_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/env_var/:env_var_id",
+            "params": [
+              {
+                "name": "env_var_id",
+                "value": "",
+                "type": "path",
+                "description": "EnvVar id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/mcp_server`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/mcp_server"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/mcp_server/{mcp_server_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/mcp_server/:mcp_server_id",
+            "params": [
+              {
+                "name": "mcp_server_id",
+                "value": "",
+                "type": "path",
+                "description": "McpServer id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/dataset_snapshot`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/dataset_snapshot"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/dataset_snapshot/{dataset_snapshot_id}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/dataset_snapshot/:dataset_snapshot_id",
+            "params": [
+              {
+                "name": "dataset_snapshot_id",
+                "value": "",
+                "type": "path",
+                "description": "DatasetSnapshot id"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/insert`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/insert"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/proxy/chat/completions`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/proxy/chat/completions"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/proxy/completions`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/proxy/completions"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/proxy/auto`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/proxy/auto"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/proxy/embeddings`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/proxy/embeddings"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/proxy/credentials`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/proxy/credentials"
+          },
+          "docs": "Enable CORS"
+        },
+        {
+          "info": {
+            "name": "Enable CORS (`/v1/proxy/{path+}`)",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "https://api.braintrust.dev/v1/proxy/:path+",
+            "params": [
+              {
+                "name": "path+",
+                "value": "",
+                "type": "path",
+                "description": "The path to proxy"
+              }
+            ]
+          },
+          "docs": "Enable CORS"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

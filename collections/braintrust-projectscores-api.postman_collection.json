@@ -1,0 +1,2573 @@
+{
+  "item": [
+    {
+      "id": "a75d9eef-8359-4765-8825-04fdd7e49a33",
+      "name": "ProjectScores",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f83a92dc-2191-472a-b1f5-f6faba37bfe0",
+          "name": "Create project_score",
+          "request": {
+            "name": "Create project_score",
+            "description": {
+              "content": "Create a new project_score. If there is an existing project_score in the project with the same name as the one specified in the request, will return the existing project_score unmodified",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "project_score"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"score_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<number>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<number>\"\n    }\n  ],\n  \"config\": {\n    \"multi_select\": \"<boolean>\",\n    \"destination\": \"<string>\",\n    \"online\": {\n      \"sampling_rate\": \"<number>\",\n      \"scorers\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"btql_filter\": \"<string>\",\n      \"apply_to_root_span\": \"<boolean>\",\n      \"apply_to_span_names\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"skip_logging\": \"<boolean>\",\n      \"scope\": {\n        \"type\": \"<string>\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1409dc09-44d4-4ee8-99ec-a35cb1838087",
+              "name": "Returns the new project_score object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"score_type\": \"online\",\n  \"description\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 1985.0155521757117\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 8799.318126813441\n    }\n  ],\n  \"config\": {\n    \"multi_select\": true,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.16119767720091893,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"7320531f-42ed-b453-3ce5-268a2c8a4665\",\n  \"project_id\": \"6e3ace39-51da-194b-eafe-5a11ad088d49\",\n  \"user_id\": \"49cef188-1665-3ca4-19d6-169bd0a8fb04\",\n  \"name\": \"string\",\n  \"score_type\": \"maximum\",\n  \"created\": \"1951-01-05T02:01:06.479Z\",\n  \"description\": \"string\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 458.49618076295616\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 4921.499320879889\n    }\n  ],\n  \"config\": {\n    \"multi_select\": false,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.011749136525432635,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": false,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  },\n  \"position\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c130ad04-dbb8-4eba-8c76-0ec2c1ecba36",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"score_type\": \"online\",\n  \"description\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 1985.0155521757117\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 8799.318126813441\n    }\n  ],\n  \"config\": {\n    \"multi_select\": true,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.16119767720091893,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f63a8cde-34d9-471d-bfe9-2e39e9afb2f4",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"score_type\": \"online\",\n  \"description\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 1985.0155521757117\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 8799.318126813441\n    }\n  ],\n  \"config\": {\n    \"multi_select\": true,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.16119767720091893,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40eac658-4033-41e5-9fd0-c11b8db5fa4f",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"score_type\": \"online\",\n  \"description\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 1985.0155521757117\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 8799.318126813441\n    }\n  ],\n  \"config\": {\n    \"multi_select\": true,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.16119767720091893,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ad1952a-29a9-4a7e-ad4f-1b8a05ae421e",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"score_type\": \"online\",\n  \"description\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 1985.0155521757117\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 8799.318126813441\n    }\n  ],\n  \"config\": {\n    \"multi_select\": true,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.16119767720091893,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "141c4893-ee40-4ae8-ad9a-e22ade7a7ad7",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"score_type\": \"online\",\n  \"description\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 1985.0155521757117\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 8799.318126813441\n    }\n  ],\n  \"config\": {\n    \"multi_select\": true,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.16119767720091893,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd863e68-da69-45fc-ba13-59f5a7b9e35b",
+          "name": "Create or replace project_score",
+          "request": {
+            "name": "Create or replace project_score",
+            "description": {
+              "content": "Create or replace project_score. If there is an existing project_score in the project with the same name as the one specified in the request, will replace the existing project_score with the provided fields",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "project_score"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"score_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<number>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<number>\"\n    }\n  ],\n  \"config\": {\n    \"multi_select\": \"<boolean>\",\n    \"destination\": \"<string>\",\n    \"online\": {\n      \"sampling_rate\": \"<number>\",\n      \"scorers\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"btql_filter\": \"<string>\",\n      \"apply_to_root_span\": \"<boolean>\",\n      \"apply_to_span_names\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"skip_logging\": \"<boolean>\",\n      \"scope\": {\n        \"type\": \"<string>\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "72256fee-6081-487e-8c52-a4d96e3264b4",
+              "name": "Returns the new project_score object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"score_type\": \"online\",\n  \"description\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 1985.0155521757117\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 8799.318126813441\n    }\n  ],\n  \"config\": {\n    \"multi_select\": true,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.16119767720091893,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"7320531f-42ed-b453-3ce5-268a2c8a4665\",\n  \"project_id\": \"6e3ace39-51da-194b-eafe-5a11ad088d49\",\n  \"user_id\": \"49cef188-1665-3ca4-19d6-169bd0a8fb04\",\n  \"name\": \"string\",\n  \"score_type\": \"maximum\",\n  \"created\": \"1951-01-05T02:01:06.479Z\",\n  \"description\": \"string\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 458.49618076295616\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 4921.499320879889\n    }\n  ],\n  \"config\": {\n    \"multi_select\": false,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.011749136525432635,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": false,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  },\n  \"position\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e912f1c-653a-4fea-9a32-bc027a0ac374",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"score_type\": \"online\",\n  \"description\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 1985.0155521757117\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 8799.318126813441\n    }\n  ],\n  \"config\": {\n    \"multi_select\": true,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.16119767720091893,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0040ae02-4701-4675-8b14-ea9729f8e7af",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"score_type\": \"online\",\n  \"description\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 1985.0155521757117\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 8799.318126813441\n    }\n  ],\n  \"config\": {\n    \"multi_select\": true,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.16119767720091893,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aeae8dd9-0df0-4d83-81fd-6b4469a4f1d9",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"score_type\": \"online\",\n  \"description\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 1985.0155521757117\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 8799.318126813441\n    }\n  ],\n  \"config\": {\n    \"multi_select\": true,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.16119767720091893,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4974a7b-69be-4f1f-9802-a00818d399fc",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"score_type\": \"online\",\n  \"description\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 1985.0155521757117\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 8799.318126813441\n    }\n  ],\n  \"config\": {\n    \"multi_select\": true,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.16119767720091893,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3bbaa57-2e94-4f13-8361-3c6f84ce95ae",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"score_type\": \"online\",\n  \"description\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 1985.0155521757117\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 8799.318126813441\n    }\n  ],\n  \"config\": {\n    \"multi_select\": true,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.16119767720091893,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9bcf5be-dbe4-4fdc-ab91-09f3cd22319f",
+          "name": "List project_scores",
+          "request": {
+            "name": "List project_scores",
+            "description": {
+              "content": "List out all project_scores. The project_scores are sorted by creation date, with the most recently-created project_scores coming first",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "project_score"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of objects to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "starting_after",
+                  "value": "<uuid>",
+                  "description": "Pagination cursor id.\n\nFor example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`"
+                },
+                {
+                  "disabled": false,
+                  "key": "ending_before",
+                  "value": "<uuid>",
+                  "description": "Pagination cursor id.\n\nFor example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`"
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<uuid>",
+                  "description": "Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times"
+                },
+                {
+                  "disabled": false,
+                  "key": "project_score_name",
+                  "value": "<string>",
+                  "description": "Name of the project_score to search for"
+                },
+                {
+                  "disabled": false,
+                  "key": "project_name",
+                  "value": "<string>",
+                  "description": "Name of the project to search for"
+                },
+                {
+                  "disabled": false,
+                  "key": "project_id",
+                  "value": "<uuid>",
+                  "description": "Project id"
+                },
+                {
+                  "disabled": false,
+                  "key": "org_name",
+                  "value": "<string>",
+                  "description": "Filter search results to within a particular organization"
+                },
+                {
+                  "disabled": false,
+                  "key": "score_type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "78f4eb8e-cc86-4e72-9ea4-66b20156a946",
+              "name": "Returns a list of project_score objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "6240"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "c194e997-42ef-6bca-582b-e6a54675c2df"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "b4bea20a-1fa7-d2a4-40a4-78bc0a21836a"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "fb12b3eb-fb28-9d2f-ec99-63d38a3ef07b"
+                    },
+                    {
+                      "key": "project_score_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "b29c2697-e751-cf86-128d-36dd86d97b44"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "score_type",
+                      "value": "maximum"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"d4ae031d-68b5-8aaa-cb11-d5d42b8572bd\",\n      \"project_id\": \"09cf3b45-3941-bb6c-413f-4ec1c35c1c5b\",\n      \"user_id\": \"f7343f63-6886-ced6-7f12-ea903f95af54\",\n      \"name\": \"string\",\n      \"score_type\": \"online\",\n      \"created\": \"1983-02-04T06:32:34.088Z\",\n      \"description\": \"string\",\n      \"categories\": [\n        {\n          \"name\": \"string\",\n          \"value\": 6260.10817066308\n        },\n        {\n          \"name\": \"string\",\n          \"value\": 9110.910020350708\n        }\n      ],\n      \"config\": {\n        \"multi_select\": false,\n        \"destination\": \"string\",\n        \"online\": {\n          \"sampling_rate\": 0.4225105693974146,\n          \"scorers\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"btql_filter\": \"string\",\n          \"apply_to_root_span\": true,\n          \"apply_to_span_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"skip_logging\": false,\n          \"scope\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"position\": \"string\"\n    },\n    {\n      \"id\": \"4d5f4321-bd03-1696-eec9-a72ba446c7b3\",\n      \"project_id\": \"f9a1de91-e550-41d7-c737-03792e7c4357\",\n      \"user_id\": \"e3051180-6c61-371d-9b6c-64d4b1cf04b5\",\n      \"name\": \"string\",\n      \"score_type\": \"slider\",\n      \"created\": \"1971-07-22T20:01:43.237Z\",\n      \"description\": \"string\",\n      \"categories\": [\n        {\n          \"name\": \"string\",\n          \"value\": 2455.728605459284\n        },\n        {\n          \"name\": \"string\",\n          \"value\": 7748.107544928195\n        }\n      ],\n      \"config\": {\n        \"multi_select\": true,\n        \"destination\": \"string\",\n        \"online\": {\n          \"sampling_rate\": 0.08195711126669647,\n          \"scorers\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"btql_filter\": \"string\",\n          \"apply_to_root_span\": true,\n          \"apply_to_span_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"skip_logging\": false,\n          \"scope\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"position\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12287fbd-dd55-421d-a234-59f152244d0e",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "6240"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "c194e997-42ef-6bca-582b-e6a54675c2df"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "b4bea20a-1fa7-d2a4-40a4-78bc0a21836a"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "fb12b3eb-fb28-9d2f-ec99-63d38a3ef07b"
+                    },
+                    {
+                      "key": "project_score_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "b29c2697-e751-cf86-128d-36dd86d97b44"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "score_type",
+                      "value": "maximum"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b497eb1-6d84-4351-8ba8-f830a0df2ba7",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "6240"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "c194e997-42ef-6bca-582b-e6a54675c2df"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "b4bea20a-1fa7-d2a4-40a4-78bc0a21836a"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "fb12b3eb-fb28-9d2f-ec99-63d38a3ef07b"
+                    },
+                    {
+                      "key": "project_score_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "b29c2697-e751-cf86-128d-36dd86d97b44"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "score_type",
+                      "value": "maximum"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd190e53-cc85-4a94-8de7-5af082c03388",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "6240"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "c194e997-42ef-6bca-582b-e6a54675c2df"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "b4bea20a-1fa7-d2a4-40a4-78bc0a21836a"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "fb12b3eb-fb28-9d2f-ec99-63d38a3ef07b"
+                    },
+                    {
+                      "key": "project_score_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "b29c2697-e751-cf86-128d-36dd86d97b44"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "score_type",
+                      "value": "maximum"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fb0c4ab-a120-40ac-b705-56f20f12029a",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "6240"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "c194e997-42ef-6bca-582b-e6a54675c2df"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "b4bea20a-1fa7-d2a4-40a4-78bc0a21836a"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "fb12b3eb-fb28-9d2f-ec99-63d38a3ef07b"
+                    },
+                    {
+                      "key": "project_score_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "b29c2697-e751-cf86-128d-36dd86d97b44"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "score_type",
+                      "value": "maximum"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "582bd768-da41-44f9-93f2-7a6c034de50b",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "6240"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "c194e997-42ef-6bca-582b-e6a54675c2df"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "b4bea20a-1fa7-d2a4-40a4-78bc0a21836a"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "fb12b3eb-fb28-9d2f-ec99-63d38a3ef07b"
+                    },
+                    {
+                      "key": "project_score_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "b29c2697-e751-cf86-128d-36dd86d97b44"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "score_type",
+                      "value": "maximum"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "910fc114-9f4e-40c4-ac3f-5c511acd07e6",
+          "name": "Get project_score",
+          "request": {
+            "name": "Get project_score",
+            "description": {
+              "content": "Get a project_score object by its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "project_score",
+                ":project_score_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_score_id",
+                  "description": "(Required) ProjectScore id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ad806550-07d7-4937-b7e2-7c4dea29035b",
+              "name": "Returns the project_score object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"7320531f-42ed-b453-3ce5-268a2c8a4665\",\n  \"project_id\": \"6e3ace39-51da-194b-eafe-5a11ad088d49\",\n  \"user_id\": \"49cef188-1665-3ca4-19d6-169bd0a8fb04\",\n  \"name\": \"string\",\n  \"score_type\": \"maximum\",\n  \"created\": \"1951-01-05T02:01:06.479Z\",\n  \"description\": \"string\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 458.49618076295616\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 4921.499320879889\n    }\n  ],\n  \"config\": {\n    \"multi_select\": false,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.011749136525432635,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": false,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  },\n  \"position\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8815701-0302-4bb0-ab82-63b63d886343",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93be7f02-ff45-4e57-8c0b-78bb5fb345fc",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9182bb80-b482-4cc9-a51a-6507bffecb63",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ac28e2e-1983-4c28-9812-595737690af9",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80eb4219-de13-421d-9e6a-ef1c39cd2345",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de061978-4160-4cca-9c93-3f80916327aa",
+          "name": "Partially update project_score",
+          "request": {
+            "name": "Partially update project_score",
+            "description": {
+              "content": "Partially update a project_score object. Specify the fields to update in the payload. Any object-type fields will be deep-merged with existing content. Currently we do not support removing fields or setting them to null.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "project_score",
+                ":project_score_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_score_id",
+                  "description": "(Required) ProjectScore id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"score_type\": \"<string>\",\n  \"categories\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<number>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<number>\"\n    }\n  ],\n  \"config\": {\n    \"multi_select\": \"<boolean>\",\n    \"destination\": \"<string>\",\n    \"online\": {\n      \"sampling_rate\": \"<number>\",\n      \"scorers\": [\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"id\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"btql_filter\": \"<string>\",\n      \"apply_to_root_span\": \"<boolean>\",\n      \"apply_to_span_names\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"skip_logging\": \"<boolean>\",\n      \"scope\": {\n        \"type\": \"<string>\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7699bc9d-8023-41ec-a950-7f3b16f51aff",
+              "name": "Returns the project_score object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"score_type\": \"slider\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 4772.860069992781\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 2159.108944811141\n    }\n  ],\n  \"config\": {\n    \"multi_select\": false,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.4682506318229782,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": false,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"7320531f-42ed-b453-3ce5-268a2c8a4665\",\n  \"project_id\": \"6e3ace39-51da-194b-eafe-5a11ad088d49\",\n  \"user_id\": \"49cef188-1665-3ca4-19d6-169bd0a8fb04\",\n  \"name\": \"string\",\n  \"score_type\": \"maximum\",\n  \"created\": \"1951-01-05T02:01:06.479Z\",\n  \"description\": \"string\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 458.49618076295616\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 4921.499320879889\n    }\n  ],\n  \"config\": {\n    \"multi_select\": false,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.011749136525432635,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": false,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  },\n  \"position\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff3eb2b0-33f6-49e7-8769-76ca5b141c9a",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"score_type\": \"slider\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 4772.860069992781\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 2159.108944811141\n    }\n  ],\n  \"config\": {\n    \"multi_select\": false,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.4682506318229782,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": false,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca1753ad-628e-492c-8bf9-b3aea6927862",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"score_type\": \"slider\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 4772.860069992781\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 2159.108944811141\n    }\n  ],\n  \"config\": {\n    \"multi_select\": false,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.4682506318229782,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": false,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "394083f8-1520-4532-b61e-ba23d2536982",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"score_type\": \"slider\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 4772.860069992781\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 2159.108944811141\n    }\n  ],\n  \"config\": {\n    \"multi_select\": false,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.4682506318229782,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": false,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bc3cc18-d4fb-40b9-bbad-f2d740241b4b",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"score_type\": \"slider\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 4772.860069992781\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 2159.108944811141\n    }\n  ],\n  \"config\": {\n    \"multi_select\": false,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.4682506318229782,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": false,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e805a67-edc9-4b2f-b37d-5a0c5c33f574",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"score_type\": \"slider\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 4772.860069992781\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 2159.108944811141\n    }\n  ],\n  \"config\": {\n    \"multi_select\": false,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.4682506318229782,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": true,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": false,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "927569fa-98c6-4442-b969-ad83c9b20c9c",
+          "name": "Delete project_score",
+          "request": {
+            "name": "Delete project_score",
+            "description": {
+              "content": "Delete a project_score object by its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "project_score",
+                ":project_score_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_score_id",
+                  "description": "(Required) ProjectScore id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d6fe1d3f-f512-4e8d-acf7-23074be1990d",
+              "name": "Returns the deleted project_score object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"7320531f-42ed-b453-3ce5-268a2c8a4665\",\n  \"project_id\": \"6e3ace39-51da-194b-eafe-5a11ad088d49\",\n  \"user_id\": \"49cef188-1665-3ca4-19d6-169bd0a8fb04\",\n  \"name\": \"string\",\n  \"score_type\": \"maximum\",\n  \"created\": \"1951-01-05T02:01:06.479Z\",\n  \"description\": \"string\",\n  \"categories\": [\n    {\n      \"name\": \"string\",\n      \"value\": 458.49618076295616\n    },\n    {\n      \"name\": \"string\",\n      \"value\": 4921.499320879889\n    }\n  ],\n  \"config\": {\n    \"multi_select\": false,\n    \"destination\": \"string\",\n    \"online\": {\n      \"sampling_rate\": 0.011749136525432635,\n      \"scorers\": [\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"type\": \"function\",\n          \"id\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"btql_filter\": \"string\",\n      \"apply_to_root_span\": false,\n      \"apply_to_span_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"skip_logging\": true,\n      \"scope\": {\n        \"type\": \"span\"\n      }\n    }\n  },\n  \"position\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dee25ddb-354c-4715-812d-55278c6d3970",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b16f100d-5eb8-47fc-9c67-63094e9bbb3d",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e9aa05c-799b-4d2a-b3c5-53ffc2ab49a7",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efcd2d9b-6413-4d2f-b240-1330d8d23ef5",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d796d765-15ad-4e75-98c1-e5e108518c98",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "project_score",
+                    ":project_score_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_score_id",
+                      "description": "(Required) ProjectScore id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.braintrust.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "39053211-ef32-4f15-bfab-8e130a7c98a9",
+    "name": "Braintrust Acls ProjectScores API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API specification for the backend data server. The API is hosted globally at\nhttps://api.braintrust.dev or in your own environment.\n\nYou can access the OpenAPI spec for this API at https://github.com/braintrustdata/braintrust-openapi.",
+      "type": "text/plain"
+    }
+  }
+}

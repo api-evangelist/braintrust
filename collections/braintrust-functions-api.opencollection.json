@@ -1,0 +1,257 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Braintrust Acls Functions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Functions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List functions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/function",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of objects to return"
+              },
+              {
+                "name": "starting_after",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor id.\n\nFor example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`"
+              },
+              {
+                "name": "ending_before",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor id.\n\nFor example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times"
+              },
+              {
+                "name": "function_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the function to search for"
+              },
+              {
+                "name": "project_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the project to search for"
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Project id"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve prompt with a specific slug"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve prompt at a specific version.\n\nThe version id can either be a transaction id (e.g. '1000192656880881099') or a version identifier (e.g. '81cd05ee665fdfb3')."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "Filter by environment slug. Cannot be used together with `version`.\n\nFor `GET /v1/prompt`, environment resolution currently requires the request to match a single prompt. If multiple prompts match, the endpoint returns `400` (for example when `limit=1` is not set). Use `limit=1` or other filters (for example `slug`, `project_id`) to narrow results."
+              },
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter search results to within a particular organization"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List out all functions. The functions are sorted by creation date, with the most recently-created functions coming first"
+        },
+        {
+          "info": {
+            "name": "Create function",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/function",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new function. If there is an existing function in the project with the same slug as the one specified in the request, will return the existing function unmodified"
+        },
+        {
+          "info": {
+            "name": "Create or replace function",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.braintrust.dev/v1/function",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create or replace function. If there is an existing function in the project with the same slug as the one specified in the request, will replace the existing function with the provided fields"
+        },
+        {
+          "info": {
+            "name": "Get function",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/function/:function_id",
+            "params": [
+              {
+                "name": "function_id",
+                "value": "",
+                "type": "path",
+                "description": "Function id"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve prompt at a specific version.\n\nThe version id can either be a transaction id (e.g. '1000192656880881099') or a version identifier (e.g. '81cd05ee665fdfb3')."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "Filter by environment slug. Cannot be used together with `version`.\n\nFor `GET /v1/prompt`, environment resolution currently requires the request to match a single prompt. If multiple prompts match, the endpoint returns `400` (for example when `limit=1` is not set). Use `limit=1` or other filters (for example `slug`, `project_id`) to narrow results."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a function object by its id"
+        },
+        {
+          "info": {
+            "name": "Partially update function",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.braintrust.dev/v1/function/:function_id",
+            "params": [
+              {
+                "name": "function_id",
+                "value": "",
+                "type": "path",
+                "description": "Function id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a function object. Specify the fields to update in the payload. Any object-type fields will be deep-merged with existing content. Currently we do not support removing fields or setting them to null."
+        },
+        {
+          "info": {
+            "name": "Delete function",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.braintrust.dev/v1/function/:function_id",
+            "params": [
+              {
+                "name": "function_id",
+                "value": "",
+                "type": "path",
+                "description": "Function id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a function object by its id"
+        },
+        {
+          "info": {
+            "name": "Invoke function",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/function/:function_id/invoke",
+            "params": [
+              {
+                "name": "function_id",
+                "value": "",
+                "type": "path",
+                "description": "Function id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Invoke a function."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

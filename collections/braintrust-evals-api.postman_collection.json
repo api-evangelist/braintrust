@@ -1,0 +1,150 @@
+{
+  "item": [
+    {
+      "id": "e7e67a7e-0d1c-4cf9-8d50-107477248d68",
+      "name": "Evals",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "753bda12-e337-4795-a799-d27736a26070",
+          "name": "Launch an eval",
+          "request": {
+            "name": "Launch an eval",
+            "description": {
+              "content": "Launch an evaluation. This is the API-equivalent of the `Eval` function that is built into the Braintrust SDK. In the Eval API, you provide pointers to a dataset, task function, and scoring functions. The API will then run the evaluation, create an experiment, and return the results along with a link to the experiment. To learn more about evals, see the [Evals guide](https://www.braintrust.dev/docs/evaluate).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "eval"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_id\": \"<string>\",\n  \"data\": {\n    \"dataset_id\": \"<string>\",\n    \"dataset_version\": \"<string>\",\n    \"dataset_environment\": \"<string>\",\n    \"_internal_btql\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    }\n  },\n  \"task\": {\n    \"function_id\": \"<string>\",\n    \"version\": \"<string>\"\n  },\n  \"scores\": [\n    {\n      \"function_id\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"function_id\": \"<string>\",\n      \"version\": \"<string>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"parameters\": {\n    \"key_0\": {}\n  },\n  \"experiment_name\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"parent\": {\n    \"object_type\": \"<string>\",\n    \"object_id\": \"<string>\",\n    \"row_ids\": {\n      \"id\": \"<string>\",\n      \"span_id\": \"<string>\",\n      \"root_span_id\": \"<string>\"\n    },\n    \"propagated_event\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  },\n  \"stream\": \"<boolean>\",\n  \"trial_count\": \"<number>\",\n  \"is_public\": \"<boolean>\",\n  \"timeout\": \"<number>\",\n  \"max_concurrency\": 10,\n  \"base_experiment_name\": \"<string>\",\n  \"base_experiment_id\": \"<string>\",\n  \"git_metadata_settings\": {\n    \"collect\": \"<string>\",\n    \"fields\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"repo_info\": {\n    \"commit\": \"<string>\",\n    \"branch\": \"<string>\",\n    \"tag\": \"<string>\",\n    \"dirty\": \"<boolean>\",\n    \"author_name\": \"<string>\",\n    \"author_email\": \"<string>\",\n    \"commit_message\": \"<string>\",\n    \"commit_time\": \"<string>\",\n    \"git_diff\": \"<string>\"\n  },\n  \"strict\": \"<boolean>\",\n  \"stop_token\": \"<string>\",\n  \"extra_messages\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"mcp_auth\": {\n    \"key_0\": {\n      \"oauth_token\": \"<string>\"\n    },\n    \"key_1\": {\n      \"oauth_token\": \"<string>\"\n    },\n    \"key_2\": {\n      \"oauth_token\": \"<string>\"\n    },\n    \"key_3\": {\n      \"oauth_token\": \"<string>\"\n    },\n    \"key_4\": {\n      \"oauth_token\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9fc22cca-2408-4396-a417-135fb85e5ca5",
+              "name": "Eval launch response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "eval"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<string>\",\n  \"data\": {\n    \"dataset_id\": \"<string>\",\n    \"dataset_version\": \"<string>\",\n    \"dataset_environment\": \"<string>\",\n    \"_internal_btql\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    }\n  },\n  \"task\": {\n    \"function_id\": \"string\",\n    \"version\": \"string\"\n  },\n  \"scores\": [\n    {\n      \"function_id\": \"string\",\n      \"version\": \"string\"\n    },\n    {\n      \"function_id\": \"string\",\n      \"version\": \"string\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"parameters\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"experiment_name\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": {}\n  },\n  \"parent\": {\n    \"object_type\": \"project_logs\",\n    \"object_id\": \"string\",\n    \"row_ids\": {\n      \"id\": \"string\",\n      \"span_id\": \"string\",\n      \"root_span_id\": \"string\"\n    },\n    \"propagated_event\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    }\n  },\n  \"stream\": \"<boolean>\",\n  \"trial_count\": \"<number>\",\n  \"is_public\": \"<boolean>\",\n  \"timeout\": \"<number>\",\n  \"max_concurrency\": 10,\n  \"base_experiment_name\": \"<string>\",\n  \"base_experiment_id\": \"<string>\",\n  \"git_metadata_settings\": {\n    \"collect\": \"none\",\n    \"fields\": [\n      \"author_email\",\n      \"author_email\"\n    ]\n  },\n  \"repo_info\": {\n    \"commit\": \"string\",\n    \"branch\": \"string\",\n    \"tag\": \"string\",\n    \"dirty\": true,\n    \"author_name\": \"string\",\n    \"author_email\": \"string\",\n    \"commit_message\": \"string\",\n    \"commit_time\": \"string\",\n    \"git_diff\": \"string\"\n  },\n  \"strict\": \"<boolean>\",\n  \"stop_token\": \"<string>\",\n  \"extra_messages\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"mcp_auth\": {\n    \"key_0\": {\n      \"oauth_token\": \"<string>\"\n    },\n    \"key_1\": {\n      \"oauth_token\": \"<string>\"\n    },\n    \"key_2\": {\n      \"oauth_token\": \"<string>\"\n    },\n    \"key_3\": {\n      \"oauth_token\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"project_name\": \"string\",\n  \"experiment_name\": \"string\",\n  \"project_url\": \"http://iOtjeFlmSqStGuFzLIIWCIKXvcLXY.vgsej7VeduMVPKlx6-7D+IU,hilQFH2kZWkAMvvsV3f\",\n  \"experiment_url\": \"http://GcRKJuKdFljuqZXMEgQzLQgpmaVnph.mcLy\",\n  \"comparison_experiment_name\": \"string\",\n  \"scores\": {\n    \"key_0\": {\n      \"name\": \"string\",\n      \"score\": 0.8656677345476484,\n      \"improvements\": 1710,\n      \"regressions\": 4184,\n      \"diff\": -0.5372539204345435\n    }\n  },\n  \"metrics\": {\n    \"key_0\": {\n      \"name\": \"string\",\n      \"metric\": 4583.090166535103,\n      \"unit\": \"string\",\n      \"improvements\": 7181,\n      \"regressions\": 8111,\n      \"diff\": 9058.950986150157\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.braintrust.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "afe7a176-9976-43dd-b34f-6a6483c8b0b8",
+    "name": "Braintrust Acls Evals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API specification for the backend data server. The API is hosted globally at\nhttps://api.braintrust.dev or in your own environment.\n\nYou can access the OpenAPI spec for this API at https://github.com/braintrustdata/braintrust-openapi.",
+      "type": "text/plain"
+    }
+  }
+}

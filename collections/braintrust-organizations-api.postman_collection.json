@@ -1,0 +1,1709 @@
+{
+  "item": [
+    {
+      "id": "2397166b-a900-44de-a8d8-fe764e36651a",
+      "name": "Organizations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "17dfced9-0fe7-42ba-a242-b38e98d1c11d",
+          "name": "List organizations",
+          "request": {
+            "name": "List organizations",
+            "description": {
+              "content": "List out all organizations. The organizations are sorted by creation date, with the most recently-created organizations coming first",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organization"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of objects to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "starting_after",
+                  "value": "<uuid>",
+                  "description": "Pagination cursor id.\n\nFor example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`"
+                },
+                {
+                  "disabled": false,
+                  "key": "ending_before",
+                  "value": "<uuid>",
+                  "description": "Pagination cursor id.\n\nFor example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`"
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<uuid>",
+                  "description": "Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times"
+                },
+                {
+                  "disabled": false,
+                  "key": "org_name",
+                  "value": "<string>",
+                  "description": "Filter search results to within a particular organization"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bd929409-1eb1-4787-9747-6511b12f7eaa",
+              "name": "Returns a list of organization objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "8205"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "c48fd3de-0b48-01c3-51ae-d639542b2cc1"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "5aa8960d-2a81-28af-3e0a-464a4ba7a93c"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "bc40ae1f-8afc-7ca2-ee28-2b14457a0a49"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"beed872c-9907-ccaa-2828-fa74738a82f2\",\n      \"name\": \"string\",\n      \"api_url\": \"string\",\n      \"is_universal_api\": false,\n      \"is_dataplane_private\": false,\n      \"proxy_url\": \"string\",\n      \"realtime_url\": \"string\",\n      \"created\": \"1951-12-17T04:04:45.804Z\",\n      \"image_rendering_mode\": \"blocked\"\n    },\n    {\n      \"id\": \"ee73d09d-2884-d59f-ab81-ab7f460d2af9\",\n      \"name\": \"string\",\n      \"api_url\": \"string\",\n      \"is_universal_api\": true,\n      \"is_dataplane_private\": true,\n      \"proxy_url\": \"string\",\n      \"realtime_url\": \"string\",\n      \"created\": \"1989-07-20T00:59:39.374Z\",\n      \"image_rendering_mode\": \"auto\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38321b10-4dfd-4aeb-a7f5-97f48d45333d",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "8205"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "c48fd3de-0b48-01c3-51ae-d639542b2cc1"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "5aa8960d-2a81-28af-3e0a-464a4ba7a93c"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "bc40ae1f-8afc-7ca2-ee28-2b14457a0a49"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03bbeab8-5d19-4ffb-a3b4-fce464bd947b",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "8205"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "c48fd3de-0b48-01c3-51ae-d639542b2cc1"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "5aa8960d-2a81-28af-3e0a-464a4ba7a93c"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "bc40ae1f-8afc-7ca2-ee28-2b14457a0a49"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c347cce7-1f41-41c7-90a5-01fc337a61f6",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "8205"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "c48fd3de-0b48-01c3-51ae-d639542b2cc1"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "5aa8960d-2a81-28af-3e0a-464a4ba7a93c"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "bc40ae1f-8afc-7ca2-ee28-2b14457a0a49"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b7efa64-1d53-4756-aa80-deb2ea3a196e",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "8205"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "c48fd3de-0b48-01c3-51ae-d639542b2cc1"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "5aa8960d-2a81-28af-3e0a-464a4ba7a93c"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "bc40ae1f-8afc-7ca2-ee28-2b14457a0a49"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81e27571-0d76-46e3-b998-9869f01378b9",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "8205"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "c48fd3de-0b48-01c3-51ae-d639542b2cc1"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "5aa8960d-2a81-28af-3e0a-464a4ba7a93c"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "bc40ae1f-8afc-7ca2-ee28-2b14457a0a49"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "string"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2ec9825-d69a-4c34-82c4-6d8b8ff6add7",
+          "name": "Get organization",
+          "request": {
+            "name": "Get organization",
+            "description": {
+              "content": "Get an organization object by its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organization",
+                ":organization_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "organization_id",
+                  "description": "(Required) Organization id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b5de83d4-d415-4f66-b84c-5b51acb3ce24",
+              "name": "Returns the organization object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    ":organization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "organization_id",
+                      "description": "(Required) Organization id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"c811f020-c56d-bcdf-d06e-d620b571d096\",\n  \"name\": \"string\",\n  \"api_url\": \"string\",\n  \"is_universal_api\": false,\n  \"is_dataplane_private\": false,\n  \"proxy_url\": \"string\",\n  \"realtime_url\": \"string\",\n  \"created\": \"1961-12-08T01:30:59.598Z\",\n  \"image_rendering_mode\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9cf0150-f6fa-4232-b313-5930206716c3",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    ":organization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "organization_id",
+                      "description": "(Required) Organization id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a4e8e8d-3695-44f4-a13f-4b577759545b",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    ":organization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "organization_id",
+                      "description": "(Required) Organization id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76dad5ae-3566-4cdf-8fc3-080b5176d2c1",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    ":organization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "organization_id",
+                      "description": "(Required) Organization id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cad272e-7252-4cd3-baaf-dcea0b63ecac",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    ":organization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "organization_id",
+                      "description": "(Required) Organization id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55797037-0fe9-4ff1-a790-8d0a34047dc1",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    ":organization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "organization_id",
+                      "description": "(Required) Organization id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49daf588-c044-487e-984b-b09492d2a91d",
+          "name": "Partially update organization",
+          "request": {
+            "name": "Partially update organization",
+            "description": {
+              "content": "Partially update an organization object. Specify the fields to update in the payload. Any object-type fields will be deep-merged with existing content. Currently we do not support removing fields or setting them to null.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organization",
+                ":organization_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "organization_id",
+                  "description": "(Required) Organization id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"api_url\": \"<string>\",\n  \"is_universal_api\": \"<boolean>\",\n  \"is_dataplane_private\": \"<boolean>\",\n  \"proxy_url\": \"<string>\",\n  \"realtime_url\": \"<string>\",\n  \"image_rendering_mode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "791f5c91-3d97-4e71-8937-07f9a38e357d",
+              "name": "Returns the organization object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    ":organization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "organization_id",
+                      "description": "(Required) Organization id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"api_url\": \"<string>\",\n  \"is_universal_api\": \"<boolean>\",\n  \"is_dataplane_private\": \"<boolean>\",\n  \"proxy_url\": \"<string>\",\n  \"realtime_url\": \"<string>\",\n  \"image_rendering_mode\": \"click_to_load\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"c811f020-c56d-bcdf-d06e-d620b571d096\",\n  \"name\": \"string\",\n  \"api_url\": \"string\",\n  \"is_universal_api\": false,\n  \"is_dataplane_private\": false,\n  \"proxy_url\": \"string\",\n  \"realtime_url\": \"string\",\n  \"created\": \"1961-12-08T01:30:59.598Z\",\n  \"image_rendering_mode\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fae2d028-8cf4-486e-b99f-c4cfc867a744",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    ":organization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "organization_id",
+                      "description": "(Required) Organization id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"api_url\": \"<string>\",\n  \"is_universal_api\": \"<boolean>\",\n  \"is_dataplane_private\": \"<boolean>\",\n  \"proxy_url\": \"<string>\",\n  \"realtime_url\": \"<string>\",\n  \"image_rendering_mode\": \"click_to_load\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a130f0a-6b8b-4344-a6e5-75d106bb26a2",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    ":organization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "organization_id",
+                      "description": "(Required) Organization id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"api_url\": \"<string>\",\n  \"is_universal_api\": \"<boolean>\",\n  \"is_dataplane_private\": \"<boolean>\",\n  \"proxy_url\": \"<string>\",\n  \"realtime_url\": \"<string>\",\n  \"image_rendering_mode\": \"click_to_load\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a9b20e8-e265-4454-8d3e-bb8481a42211",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    ":organization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "organization_id",
+                      "description": "(Required) Organization id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"api_url\": \"<string>\",\n  \"is_universal_api\": \"<boolean>\",\n  \"is_dataplane_private\": \"<boolean>\",\n  \"proxy_url\": \"<string>\",\n  \"realtime_url\": \"<string>\",\n  \"image_rendering_mode\": \"click_to_load\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb768789-508e-470c-a3c3-bac924c14a28",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    ":organization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "organization_id",
+                      "description": "(Required) Organization id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"api_url\": \"<string>\",\n  \"is_universal_api\": \"<boolean>\",\n  \"is_dataplane_private\": \"<boolean>\",\n  \"proxy_url\": \"<string>\",\n  \"realtime_url\": \"<string>\",\n  \"image_rendering_mode\": \"click_to_load\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea0f5322-b0cd-4197-ab63-1dd90004791d",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    ":organization_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "organization_id",
+                      "description": "(Required) Organization id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"api_url\": \"<string>\",\n  \"is_universal_api\": \"<boolean>\",\n  \"is_dataplane_private\": \"<boolean>\",\n  \"proxy_url\": \"<string>\",\n  \"realtime_url\": \"<string>\",\n  \"image_rendering_mode\": \"click_to_load\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99599a20-cbeb-4bc7-a745-19d1f8929d6a",
+          "name": "Modify organization membership",
+          "request": {
+            "name": "Modify organization membership",
+            "description": {
+              "content": "Modify organization membership.\n\nOrganization owners can use this endpoint to create service accounts, but service tokens for those accounts must be created in the Braintrust UI, at [**Settings > Service tokens**](https://www.braintrust.dev/app/~/configuration/org/service-tokens).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "organization",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"invite_users\": {\n    \"ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_accounts\": [\n      {\n        \"name\": \"<string>\",\n        \"token_name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"token_name\": \"<string>\"\n      }\n    ],\n    \"send_invite_emails\": \"<boolean>\",\n    \"group_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"group_names\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"group_id\": \"<uuid>\",\n    \"group_name\": \"<string>\"\n  },\n  \"remove_users\": {\n    \"ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"org_name\": \"<string>\",\n  \"org_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5c735a6b-7f8c-4d1f-98c9-3b5bb8f3453c",
+              "name": "A success status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"invite_users\": {\n    \"ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_accounts\": [\n      {\n        \"name\": \"<string>\",\n        \"token_name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"token_name\": \"<string>\"\n      }\n    ],\n    \"send_invite_emails\": \"<boolean>\",\n    \"group_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"group_names\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"group_id\": \"<uuid>\",\n    \"group_name\": \"<string>\"\n  },\n  \"remove_users\": {\n    \"ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"org_name\": \"<string>\",\n  \"org_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"org_id\": \"string\",\n  \"send_email_error\": \"string\",\n  \"added_users\": [\n    {\n      \"id\": \"007d1103-9a02-6c35-bded-3dbd77c39bdb\",\n      \"email\": \"string\",\n      \"api_key\": \"string\",\n      \"token_name\": \"string\"\n    },\n    {\n      \"id\": \"cff0ae01-3978-92ee-9043-1e534c840f92\",\n      \"email\": \"string\",\n      \"api_key\": \"string\",\n      \"token_name\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9d161df-b547-442e-bb3e-e6264274a1c3",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"invite_users\": {\n    \"ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_accounts\": [\n      {\n        \"name\": \"<string>\",\n        \"token_name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"token_name\": \"<string>\"\n      }\n    ],\n    \"send_invite_emails\": \"<boolean>\",\n    \"group_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"group_names\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"group_id\": \"<uuid>\",\n    \"group_name\": \"<string>\"\n  },\n  \"remove_users\": {\n    \"ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"org_name\": \"<string>\",\n  \"org_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46e8034b-e3b9-4b44-b867-8035fa05fdd2",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"invite_users\": {\n    \"ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_accounts\": [\n      {\n        \"name\": \"<string>\",\n        \"token_name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"token_name\": \"<string>\"\n      }\n    ],\n    \"send_invite_emails\": \"<boolean>\",\n    \"group_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"group_names\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"group_id\": \"<uuid>\",\n    \"group_name\": \"<string>\"\n  },\n  \"remove_users\": {\n    \"ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"org_name\": \"<string>\",\n  \"org_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7dd6dd2e-c576-49e6-8de3-2dbe2e8edf02",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"invite_users\": {\n    \"ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_accounts\": [\n      {\n        \"name\": \"<string>\",\n        \"token_name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"token_name\": \"<string>\"\n      }\n    ],\n    \"send_invite_emails\": \"<boolean>\",\n    \"group_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"group_names\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"group_id\": \"<uuid>\",\n    \"group_name\": \"<string>\"\n  },\n  \"remove_users\": {\n    \"ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"org_name\": \"<string>\",\n  \"org_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1371eada-20db-4c78-bcd2-6c2b4b03c312",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"invite_users\": {\n    \"ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_accounts\": [\n      {\n        \"name\": \"<string>\",\n        \"token_name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"token_name\": \"<string>\"\n      }\n    ],\n    \"send_invite_emails\": \"<boolean>\",\n    \"group_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"group_names\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"group_id\": \"<uuid>\",\n    \"group_name\": \"<string>\"\n  },\n  \"remove_users\": {\n    \"ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"org_name\": \"<string>\",\n  \"org_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02601009-86d4-4161-ba37-9cae3c654984",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "organization",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"invite_users\": {\n    \"ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"service_accounts\": [\n      {\n        \"name\": \"<string>\",\n        \"token_name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"token_name\": \"<string>\"\n      }\n    ],\n    \"send_invite_emails\": \"<boolean>\",\n    \"group_ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"group_names\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"group_id\": \"<uuid>\",\n    \"group_name\": \"<string>\"\n  },\n  \"remove_users\": {\n    \"ids\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"org_name\": \"<string>\",\n  \"org_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.braintrust.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "39b68778-5e8c-4ac5-8220-4a87161f6dc2",
+    "name": "Braintrust Acls Organizations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API specification for the backend data server. The API is hosted globally at\nhttps://api.braintrust.dev or in your own environment.\n\nYou can access the OpenAPI spec for this API at https://github.com/braintrustdata/braintrust-openapi.",
+      "type": "text/plain"
+    }
+  }
+}

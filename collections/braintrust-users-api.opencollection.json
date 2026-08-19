@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Braintrust Acls Users API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/user",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of objects to return"
+              },
+              {
+                "name": "starting_after",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor id.\n\nFor example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`"
+              },
+              {
+                "name": "ending_before",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor id.\n\nFor example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times"
+              },
+              {
+                "name": "given_name",
+                "value": "",
+                "type": "query",
+                "description": "Given name of the user to search for. You may pass the param multiple times to filter for more than one given name"
+              },
+              {
+                "name": "family_name",
+                "value": "",
+                "type": "query",
+                "description": "Family name of the user to search for. You may pass the param multiple times to filter for more than one family name"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Email of the user to search for. You may pass the param multiple times to filter for more than one email"
+              },
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter search results to within a particular organization"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List out all users. The users are sorted by creation date, with the most recently-created users coming first"
+        },
+        {
+          "info": {
+            "name": "Get user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/user/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "User id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a user object by its id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2672 @@
+{
+  "item": [
+    {
+      "id": "bde274b7-dd5a-4bb9-8952-bec8b7358d1b",
+      "name": "Views",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9797593d-0a5d-4d80-b883-0adb0df438d5",
+          "name": "Create view",
+          "request": {
+            "name": "Create view",
+            "description": {
+              "content": "Create a new view. If there is an existing view with the same name as the one specified in the request, will return the existing view unmodified",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "view"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"object_type\": \"<string>\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"<string>\",\n    \"options\": {\n      \"spanType\": \"<string>\",\n      \"rangeValue\": \"<string>\",\n      \"frameStart\": \"<string>\",\n      \"frameEnd\": \"<string>\",\n      \"tzUTC\": \"<boolean>\",\n      \"chartVisibility\": {\n        \"key_0\": \"<boolean>\"\n      },\n      \"projectId\": \"<string>\",\n      \"type\": \"<string>\",\n      \"groupBy\": \"<string>\"\n    },\n    \"freezeColumns\": \"<boolean>\"\n  },\n  \"user_id\": \"<uuid>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0c1466d3-244f-4606-a052-b218afdd2c37",
+              "name": "Returns the new view object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"org_project\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": false\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"<uuid>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"fea47f7f-9b48-d5b4-29cb-5c6d3cb6c592\",\n  \"object_type\": \"project\",\n  \"object_id\": \"0d30352a-7438-6533-4e4d-ee4ae25f0892\",\n  \"view_type\": \"tools\",\n  \"name\": \"string\",\n  \"created\": \"1966-04-18T11:41:34.348Z\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": null,\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": false,\n      \"chartVisibility\": {\n        \"key_0\": false,\n        \"key_1\": true\n      },\n      \"projectId\": \"string\",\n      \"type\": \"experiment\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"56328159-9eb4-9e1c-08c6-bbe2986c8d77\",\n  \"deleted_at\": \"1967-11-17T19:41:49.857Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30b82bd9-9c19-4f07-b9af-be424bba7c43",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"org_project\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": false\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"<uuid>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ceab31b-aba7-43e5-a25b-b9c5fadd7f2d",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"org_project\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": false\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"<uuid>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8042535d-0c09-421a-a710-2849ec55ea6e",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"org_project\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": false\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"<uuid>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4ade096-5717-4d59-bf28-3a1a38fa875e",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"org_project\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": false\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"<uuid>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8715cfc-d6d8-4852-9bb4-3980ba2562d2",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"org_project\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": false\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"<uuid>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3602752-0f81-4cba-b327-5369845fb8da",
+          "name": "Create or replace view",
+          "request": {
+            "name": "Create or replace view",
+            "description": {
+              "content": "Create or replace view. If there is an existing view with the same name as the one specified in the request, will replace the existing view with the provided fields",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "view"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"object_type\": \"<string>\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"<string>\",\n    \"options\": {\n      \"spanType\": \"<string>\",\n      \"rangeValue\": \"<string>\",\n      \"frameStart\": \"<string>\",\n      \"frameEnd\": \"<string>\",\n      \"tzUTC\": \"<boolean>\",\n      \"chartVisibility\": {\n        \"key_0\": \"<boolean>\"\n      },\n      \"projectId\": \"<string>\",\n      \"type\": \"<string>\",\n      \"groupBy\": \"<string>\"\n    },\n    \"freezeColumns\": \"<boolean>\"\n  },\n  \"user_id\": \"<uuid>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fdc7e16a-62c6-412e-82e3-d96ec71d722c",
+              "name": "Returns the new view object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"org_project\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": false\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"<uuid>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"fea47f7f-9b48-d5b4-29cb-5c6d3cb6c592\",\n  \"object_type\": \"project\",\n  \"object_id\": \"0d30352a-7438-6533-4e4d-ee4ae25f0892\",\n  \"view_type\": \"tools\",\n  \"name\": \"string\",\n  \"created\": \"1966-04-18T11:41:34.348Z\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": null,\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": false,\n      \"chartVisibility\": {\n        \"key_0\": false,\n        \"key_1\": true\n      },\n      \"projectId\": \"string\",\n      \"type\": \"experiment\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"56328159-9eb4-9e1c-08c6-bbe2986c8d77\",\n  \"deleted_at\": \"1967-11-17T19:41:49.857Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9de34a76-f7cd-4ea7-9b3b-5aa8ff77f805",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"org_project\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": false\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"<uuid>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ddb3e50-4049-4999-9d26-edb62103d158",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"org_project\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": false\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"<uuid>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30e1e25c-a745-41e7-af37-b5a64811fcef",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"org_project\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": false\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"<uuid>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9cbf8db-86b1-4f4c-ad26-a7243ad90de3",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"org_project\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": false\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"<uuid>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "276f8114-e7e4-44a6-b8db-469100f0569e",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"org_project\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": false\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"<uuid>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46e47c40-902f-43b8-b80a-307e0385f8fd",
+          "name": "List views",
+          "request": {
+            "name": "List views",
+            "description": {
+              "content": "List out all views. The views are sorted by creation date, with the most recently-created views coming first",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "view"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of objects to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "starting_after",
+                  "value": "<uuid>",
+                  "description": "Pagination cursor id.\n\nFor example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`"
+                },
+                {
+                  "disabled": false,
+                  "key": "ending_before",
+                  "value": "<uuid>",
+                  "description": "Pagination cursor id.\n\nFor example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`"
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<uuid>",
+                  "description": "Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times"
+                },
+                {
+                  "disabled": false,
+                  "key": "view_name",
+                  "value": "<string>",
+                  "description": "Name of the view to search for"
+                },
+                {
+                  "disabled": false,
+                  "key": "view_type",
+                  "value": "<string>",
+                  "description": "Type of object that the view corresponds to."
+                },
+                {
+                  "disabled": false,
+                  "key": "object_type",
+                  "value": "<string>",
+                  "description": "(Required) The object type that the ACL applies to"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<uuid>",
+                  "description": "(Required) The id of the object the ACL applies to"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e1f469e0-6959-4c6b-b161-c91afee28df1",
+              "name": "Returns a list of view objects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "9582"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "91f4da22-0cae-8e55-45f1-f2961c9645d6"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "ad04e3bc-d3c0-1bac-4ce9-789b36469ab5"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "6a2628d1-b4e3-fcf1-b080-e6c529bf93b9"
+                    },
+                    {
+                      "key": "view_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "view_type",
+                      "value": "datasets"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "project_log"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "c048d2c7-05b9-bd11-3623-98ab636267eb"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"6e6bef46-7a17-56d0-0cb7-01efd809fa4a\",\n      \"object_type\": \"project\",\n      \"object_id\": \"043d857f-4bef-b176-479c-fc63bbfa144a\",\n      \"view_type\": \"experiment\",\n      \"name\": \"string\",\n      \"created\": \"2012-11-21T18:10:16.965Z\",\n      \"view_data\": {\n        \"search\": {},\n        \"custom_charts\": {}\n      },\n      \"options\": {\n        \"viewType\": \"monitor\",\n        \"options\": {\n          \"spanType\": \"range\",\n          \"rangeValue\": \"string\",\n          \"frameStart\": \"string\",\n          \"frameEnd\": \"string\",\n          \"tzUTC\": false,\n          \"chartVisibility\": {\n            \"key_0\": false,\n            \"key_1\": true,\n            \"key_2\": false\n          },\n          \"projectId\": \"string\",\n          \"type\": \"experiment\",\n          \"groupBy\": \"string\"\n        },\n        \"freezeColumns\": false\n      },\n      \"user_id\": \"3b49d6de-96e7-1d93-69ec-d47fff4083f8\",\n      \"deleted_at\": \"2016-01-26T10:25:43.336Z\"\n    },\n    {\n      \"id\": \"ed825b14-3f78-b67a-3670-966e4f4006a6\",\n      \"object_type\": \"org_project\",\n      \"object_id\": \"671acacc-acba-5a33-879f-cf83b9d03ade\",\n      \"view_type\": \"experiment\",\n      \"name\": \"string\",\n      \"created\": \"1955-10-15T18:51:04.569Z\",\n      \"view_data\": {\n        \"search\": {},\n        \"custom_charts\": {}\n      },\n      \"options\": {\n        \"viewType\": \"monitor\",\n        \"options\": {\n          \"spanType\": \"frame\",\n          \"rangeValue\": \"string\",\n          \"frameStart\": \"string\",\n          \"frameEnd\": \"string\",\n          \"tzUTC\": true,\n          \"chartVisibility\": {\n            \"key_0\": true\n          },\n          \"projectId\": \"string\",\n          \"type\": \"experiment\",\n          \"groupBy\": \"string\"\n        },\n        \"freezeColumns\": true\n      },\n      \"user_id\": \"1f44f998-2289-0727-0df7-ad7e6a44b464\",\n      \"deleted_at\": \"1973-12-30T09:24:52.567Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e836f981-4f1b-44b8-9af1-01e14024f096",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "9582"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "91f4da22-0cae-8e55-45f1-f2961c9645d6"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "ad04e3bc-d3c0-1bac-4ce9-789b36469ab5"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "6a2628d1-b4e3-fcf1-b080-e6c529bf93b9"
+                    },
+                    {
+                      "key": "view_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "view_type",
+                      "value": "datasets"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "project_log"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "c048d2c7-05b9-bd11-3623-98ab636267eb"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b122fdcc-b974-4faf-b083-17d0c5bb8b4c",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "9582"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "91f4da22-0cae-8e55-45f1-f2961c9645d6"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "ad04e3bc-d3c0-1bac-4ce9-789b36469ab5"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "6a2628d1-b4e3-fcf1-b080-e6c529bf93b9"
+                    },
+                    {
+                      "key": "view_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "view_type",
+                      "value": "datasets"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "project_log"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "c048d2c7-05b9-bd11-3623-98ab636267eb"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "feef2378-273d-4753-aba9-c069755ea4e4",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "9582"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "91f4da22-0cae-8e55-45f1-f2961c9645d6"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "ad04e3bc-d3c0-1bac-4ce9-789b36469ab5"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "6a2628d1-b4e3-fcf1-b080-e6c529bf93b9"
+                    },
+                    {
+                      "key": "view_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "view_type",
+                      "value": "datasets"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "project_log"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "c048d2c7-05b9-bd11-3623-98ab636267eb"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50086fc6-aa65-41ac-b8c6-1c6ad44c8573",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "9582"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "91f4da22-0cae-8e55-45f1-f2961c9645d6"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "ad04e3bc-d3c0-1bac-4ce9-789b36469ab5"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "6a2628d1-b4e3-fcf1-b080-e6c529bf93b9"
+                    },
+                    {
+                      "key": "view_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "view_type",
+                      "value": "datasets"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "project_log"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "c048d2c7-05b9-bd11-3623-98ab636267eb"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4320291-2ace-462a-9aaa-86e26e362b4d",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "9582"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "91f4da22-0cae-8e55-45f1-f2961c9645d6"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "ad04e3bc-d3c0-1bac-4ce9-789b36469ab5"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "6a2628d1-b4e3-fcf1-b080-e6c529bf93b9"
+                    },
+                    {
+                      "key": "view_name",
+                      "value": "string"
+                    },
+                    {
+                      "key": "view_type",
+                      "value": "datasets"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "project_log"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "c048d2c7-05b9-bd11-3623-98ab636267eb"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84f3e226-499f-40eb-bdb9-c4b767597b61",
+          "name": "Get view",
+          "request": {
+            "name": "Get view",
+            "description": {
+              "content": "Get a view object by its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "view",
+                ":view_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "object_type",
+                  "value": "<string>",
+                  "description": "(Required) The object type that the ACL applies to"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<uuid>",
+                  "description": "(Required) The id of the object the ACL applies to"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "view_id",
+                  "description": "(Required) View id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8b6785f4-4c4e-495e-9186-a384f88b63c6",
+              "name": "Returns the view object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "object_type",
+                      "value": "project_log"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "c048d2c7-05b9-bd11-3623-98ab636267eb"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"fea47f7f-9b48-d5b4-29cb-5c6d3cb6c592\",\n  \"object_type\": \"project\",\n  \"object_id\": \"0d30352a-7438-6533-4e4d-ee4ae25f0892\",\n  \"view_type\": \"tools\",\n  \"name\": \"string\",\n  \"created\": \"1966-04-18T11:41:34.348Z\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": null,\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": false,\n      \"chartVisibility\": {\n        \"key_0\": false,\n        \"key_1\": true\n      },\n      \"projectId\": \"string\",\n      \"type\": \"experiment\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"56328159-9eb4-9e1c-08c6-bbe2986c8d77\",\n  \"deleted_at\": \"1967-11-17T19:41:49.857Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "887eead4-ec80-4ca3-99e2-106179a41e6c",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "object_type",
+                      "value": "project_log"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "c048d2c7-05b9-bd11-3623-98ab636267eb"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52075899-e08c-460f-b493-39a871ae7bc1",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "object_type",
+                      "value": "project_log"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "c048d2c7-05b9-bd11-3623-98ab636267eb"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44689712-6634-4f9c-b52d-74ca6e43d134",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "object_type",
+                      "value": "project_log"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "c048d2c7-05b9-bd11-3623-98ab636267eb"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b787795c-8104-4179-8e46-426c9c995a16",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "object_type",
+                      "value": "project_log"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "c048d2c7-05b9-bd11-3623-98ab636267eb"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfb61766-e823-4de4-933d-cf2c7c3cbb42",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "object_type",
+                      "value": "project_log"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "c048d2c7-05b9-bd11-3623-98ab636267eb"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b483fc1c-0007-454a-accb-d2454b98c5e4",
+          "name": "Partially update view",
+          "request": {
+            "name": "Partially update view",
+            "description": {
+              "content": "Partially update a view object. Specify the fields to update in the payload. Any object-type fields will be deep-merged with existing content. Currently we do not support removing fields or setting them to null.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "view",
+                ":view_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "view_id",
+                  "description": "(Required) View id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"object_type\": \"<string>\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"<string>\",\n    \"options\": {\n      \"spanType\": \"<string>\",\n      \"rangeValue\": \"<string>\",\n      \"frameStart\": \"<string>\",\n      \"frameEnd\": \"<string>\",\n      \"tzUTC\": \"<boolean>\",\n      \"chartVisibility\": {\n        \"key_0\": \"<boolean>\",\n        \"key_1\": \"<boolean>\"\n      },\n      \"projectId\": \"<string>\",\n      \"type\": \"<string>\",\n      \"groupBy\": \"<string>\"\n    },\n    \"freezeColumns\": \"<boolean>\"\n  },\n  \"user_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "de43ed9e-872c-4087-a054-c966398d33f1",
+              "name": "Returns the view object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"organization\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": true\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": true\n  },\n  \"user_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"fea47f7f-9b48-d5b4-29cb-5c6d3cb6c592\",\n  \"object_type\": \"project\",\n  \"object_id\": \"0d30352a-7438-6533-4e4d-ee4ae25f0892\",\n  \"view_type\": \"tools\",\n  \"name\": \"string\",\n  \"created\": \"1966-04-18T11:41:34.348Z\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": null,\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": false,\n      \"chartVisibility\": {\n        \"key_0\": false,\n        \"key_1\": true\n      },\n      \"projectId\": \"string\",\n      \"type\": \"experiment\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"56328159-9eb4-9e1c-08c6-bbe2986c8d77\",\n  \"deleted_at\": \"1967-11-17T19:41:49.857Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1c94dbc-8f23-462d-8149-f6051e49dd86",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"organization\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": true\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": true\n  },\n  \"user_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a445a6ad-e791-46b9-9a9d-10a542b82b2d",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"organization\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": true\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": true\n  },\n  \"user_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "584bcae8-11a5-4d29-a6f8-cf8caf4fa30a",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"organization\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": true\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": true\n  },\n  \"user_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c84518b6-f7ab-4155-b35c-40b4ae628e17",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"organization\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": true\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": true\n  },\n  \"user_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf513c19-7b84-4e87-b0f1-70250205f581",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"organization\",\n  \"object_id\": \"<uuid>\",\n  \"view_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": \"range\",\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": true,\n      \"chartVisibility\": {\n        \"key_0\": true,\n        \"key_1\": true\n      },\n      \"projectId\": \"string\",\n      \"type\": \"project\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": true\n  },\n  \"user_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8615d773-571c-4b71-a440-47de0166f666",
+          "name": "Delete view",
+          "request": {
+            "name": "Delete view",
+            "description": {
+              "content": "Delete a view object by its id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "view",
+                ":view_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "view_id",
+                  "description": "(Required) View id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"object_type\": \"<string>\",\n  \"object_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7206e40-be28-48a3-a6a7-fc8d95b51446",
+              "name": "Returns the deleted view object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"prompt_session\",\n  \"object_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"fea47f7f-9b48-d5b4-29cb-5c6d3cb6c592\",\n  \"object_type\": \"project\",\n  \"object_id\": \"0d30352a-7438-6533-4e4d-ee4ae25f0892\",\n  \"view_type\": \"tools\",\n  \"name\": \"string\",\n  \"created\": \"1966-04-18T11:41:34.348Z\",\n  \"view_data\": {\n    \"search\": {},\n    \"custom_charts\": {}\n  },\n  \"options\": {\n    \"viewType\": \"monitor\",\n    \"options\": {\n      \"spanType\": null,\n      \"rangeValue\": \"string\",\n      \"frameStart\": \"string\",\n      \"frameEnd\": \"string\",\n      \"tzUTC\": false,\n      \"chartVisibility\": {\n        \"key_0\": false,\n        \"key_1\": true\n      },\n      \"projectId\": \"string\",\n      \"type\": \"experiment\",\n      \"groupBy\": \"string\"\n    },\n    \"freezeColumns\": false\n  },\n  \"user_id\": \"56328159-9eb4-9e1c-08c6-bbe2986c8d77\",\n  \"deleted_at\": \"1967-11-17T19:41:49.857Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3b1845b-6287-4ea8-add7-5cea5b6b0055",
+              "name": "The request was unacceptable, often due to missing a required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"prompt_session\",\n  \"object_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "921acdf2-0ba5-48da-8cb2-6021c77021f4",
+              "name": "No valid API key provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"prompt_session\",\n  \"object_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94a1b4be-18cb-4908-961f-1143eda93c7f",
+              "name": "The API key doesn’t have permissions to perform the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"prompt_session\",\n  \"object_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "173c3c4d-04bb-4539-806d-4c4c9b83cf01",
+              "name": "Too many requests hit the API too quickly. We recommend an exponential backoff of your requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"prompt_session\",\n  \"object_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Retry-After",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff372053-4379-40f4-8f95-e0e29e539387",
+              "name": "Something went wrong on Braintrust's end. (These are rare.)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "view",
+                    ":view_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "view_id",
+                      "description": "(Required) View id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"prompt_session\",\n  \"object_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.braintrust.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "155b1302-0230-4187-a130-a591459ae6d2",
+    "name": "Braintrust Acls Views API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API specification for the backend data server. The API is hosted globally at\nhttps://api.braintrust.dev or in your own environment.\n\nYou can access the OpenAPI spec for this API at https://github.com/braintrustdata/braintrust-openapi.",
+      "type": "text/plain"
+    }
+  }
+}

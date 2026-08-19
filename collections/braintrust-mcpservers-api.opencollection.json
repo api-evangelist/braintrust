@@ -1,0 +1,188 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Braintrust Acls McpServers API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "McpServers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List mcp_servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/mcp_server",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of objects to return"
+              },
+              {
+                "name": "starting_after",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor id.\n\nFor example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`"
+              },
+              {
+                "name": "ending_before",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor id.\n\nFor example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times"
+              },
+              {
+                "name": "mcp_server_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the mcp_server to search for"
+              },
+              {
+                "name": "org_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter search results to within a particular organization"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List out all mcp_servers. The mcp_servers are sorted by creation date, with the most recently-created mcp_servers coming first"
+        },
+        {
+          "info": {
+            "name": "Create mcp_server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/mcp_server",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new mcp_server. If there is an existing mcp_server with the same name as the one specified in the request, will return the existing mcp_server unmodified"
+        },
+        {
+          "info": {
+            "name": "Create or replace mcp_server",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.braintrust.dev/v1/mcp_server",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create or replace mcp_server. If there is an existing mcp_server with the same name as the one specified in the request, will replace the existing mcp_server with the provided fields"
+        },
+        {
+          "info": {
+            "name": "Get mcp_server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/mcp_server/:mcp_server_id",
+            "params": [
+              {
+                "name": "mcp_server_id",
+                "value": "",
+                "type": "path",
+                "description": "McpServer id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a mcp_server object by its id"
+        },
+        {
+          "info": {
+            "name": "Partially update mcp_server",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.braintrust.dev/v1/mcp_server/:mcp_server_id",
+            "params": [
+              {
+                "name": "mcp_server_id",
+                "value": "",
+                "type": "path",
+                "description": "McpServer id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update a mcp_server object. Specify the fields to update in the payload. Any object-type fields will be deep-merged with existing content. Currently we do not support removing fields or setting them to null."
+        },
+        {
+          "info": {
+            "name": "Delete mcp_server",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.braintrust.dev/v1/mcp_server/:mcp_server_id",
+            "params": [
+              {
+                "name": "mcp_server_id",
+                "value": "",
+                "type": "path",
+                "description": "McpServer id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a mcp_server object by its id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

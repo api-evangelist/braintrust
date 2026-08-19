@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Braintrust Acls EnvVars API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EnvVars",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List env_vars",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/env_var",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of objects to return"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times"
+              },
+              {
+                "name": "env_var_name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the env_var to search for"
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the object the environment variable is scoped for"
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "query",
+                "description": "The id of the object the environment variable is scoped for"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List out all env_vars. The env_vars are sorted by creation date, with the most recently-created env_vars coming first"
+        },
+        {
+          "info": {
+            "name": "Create env_var",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/env_var",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new env_var. If there is an existing env_var with the same name as the one specified in the request, will return the existing env_var unmodified"
+        },
+        {
+          "info": {
+            "name": "Create or replace env_var",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.braintrust.dev/v1/env_var",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create or replace env_var. If there is an existing env_var with the same name as the one specified in the request, will replace the existing env_var with the provided fields"
+        },
+        {
+          "info": {
+            "name": "Get env_var",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/env_var/:env_var_id",
+            "params": [
+              {
+                "name": "env_var_id",
+                "value": "",
+                "type": "path",
+                "description": "EnvVar id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get an env_var object by its id"
+        },
+        {
+          "info": {
+            "name": "Partially update env_var",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.braintrust.dev/v1/env_var/:env_var_id",
+            "params": [
+              {
+                "name": "env_var_id",
+                "value": "",
+                "type": "path",
+                "description": "EnvVar id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Partially update an env_var object. Specify the fields to update in the payload. Any object-type fields will be deep-merged with existing content. Currently we do not support removing fields or setting them to null."
+        },
+        {
+          "info": {
+            "name": "Delete env_var",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.braintrust.dev/v1/env_var/:env_var_id",
+            "params": [
+              {
+                "name": "env_var_id",
+                "value": "",
+                "type": "path",
+                "description": "EnvVar id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an env_var object by its id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
