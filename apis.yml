@@ -144,6 +144,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
+  - ACL
+  tags_raw:
   - Acls
   properties:
   - type: OpenAPI
@@ -164,6 +166,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
+  - APIKeys
+  tags_raw:
   - ApiKeys
   properties:
   - type: OpenAPI
@@ -264,6 +268,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -284,6 +290,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
+  - MCP Servers
+  tags_raw:
   - McpServers
   properties:
   - type: OpenAPI
@@ -294,6 +302,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
@@ -303,7 +313,8 @@ apis:
   description: The Other API from Braintrust — 1 operation(s) for other.
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
-  tags:
+  tags: []
+  tags_raw:
   - Other
   properties:
   - type: OpenAPI
@@ -324,6 +335,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -384,6 +397,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
+  - Service Tokens
+  tags_raw:
   - ServiceTokens
   properties:
   - type: OpenAPI
@@ -404,6 +419,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
