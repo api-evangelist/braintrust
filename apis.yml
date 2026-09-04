@@ -1,14 +1,10 @@
 aid: braintrust
 name: Braintrust
-description: >-
-  Braintrust is an enterprise-grade AI observability and evaluation platform
-  for teams building LLM applications. It provides experiment tracking,
-  dataset management, production tracing, prompt versioning, online and
-  offline scoring, and human review workflows. Customers include AI-native
-  startups and large enterprises that need to compare models, iterate on
-  prompts, catch regressions, and leverage real user data to continuously
-  improve their AI features. Braintrust offers a SaaS platform, plus
-  self-hosted deployments in AWS, GCP, and Azure, and monetizes through
+description: Braintrust is an enterprise-grade AI observability and evaluation platform for teams building LLM applications.
+  It provides experiment tracking, dataset management, production tracing, prompt versioning, online and offline
+  scoring, and human review workflows. Customers include AI-native startups and large enterprises that need to compare
+  models, iterate on prompts, catch regressions, and leverage real user data to continuously improve their AI features.
+  Braintrust offers a SaaS platform, plus self-hosted deployments in AWS, GCP, and Azure, and monetizes through
   usage-based pricing tied to spans and seats.
 type: Index
 deliveryModel:
@@ -32,28 +28,29 @@ accessModel:
   try_now: true
   public: false
   label: Free · Self-serve signup
-  confidence: high
+  confidence: medium
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - security
+  generated: '2026-09-03'
   method: derived
-position: Provider
+position: Producing
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/braintrust.png
 tags:
-  - Artificial Intelligence
-  - LLM
-  - Observability
-  - Evaluation
-  - Experiments
-  - Datasets
-  - Prompts
-  - Tracing
-  - Monitoring
-  - Scoring
-  - AI Engineering
-  - Generative AI
+- Artificial Intelligence
+- LLM
+- Observability
+- Evaluation
+- Experiments
+- Datasets
+- Prompts
+- Tracing
+- Monitoring
+- Scoring
+- AI Engineering
+- Generative AI
 url: https://raw.githubusercontent.com/api-evangelist/braintrust/refs/heads/main/apis.yml
 created: '2026-05-23'
 modified: '2026-05-23'
@@ -61,8 +58,7 @@ specificationVersion: '0.23'
 apis:
 - aid: braintrust:braintrust-api
   name: Braintrust API
-  description: >-
-    The Braintrust REST API provides programmatic access to projects, experiments, datasets, prompts,
+  description: The Braintrust REST API provides programmatic access to projects, experiments, datasets, prompts,
     functions, logs, and organization resources. It supports both US (api.braintrust.dev) and EU (api-eu.braintrust.dev)
     data planes, and is used to log production traces, run evaluations, manage prompt versions, and orchestrate
     scoring functions.
@@ -99,30 +95,24 @@ apis:
     url: https://www.braintrust.dev/docs/reference/api
   features:
   - name: Experiments
-    description: >-
-      Create, run, and compare evaluation experiments across model and prompt versions to catch regressions
+    description: Create, run, and compare evaluation experiments across model and prompt versions to catch regressions
       before shipping.
   - name: Datasets
-    description: >-
-      Manage versioned datasets of inputs, expected outputs, and metadata for repeatable evaluation runs.
+    description: Manage versioned datasets of inputs, expected outputs, and metadata for repeatable evaluation runs.
   - name: Production Logging
-    description: >-
-      Capture LLM spans, tool calls, and traces from production traffic via SDK or OTEL-compatible ingestion.
+    description: Capture LLM spans, tool calls, and traces from production traffic via SDK or OTEL-compatible ingestion.
   - name: Prompt Management
     description: Version, deploy, and A/B test prompts independent of application deploys.
   - name: Autoevals and Custom Scorers
-    description: >-
-      Use built-in LLM-as-judge scorers or define custom Python and TypeScript scoring functions.
+    description: Use built-in LLM-as-judge scorers or define custom Python and TypeScript scoring functions.
   - name: Human Review
     description: Route traces and experiment runs to subject-matter experts for annotation and grading.
   - name: Online Scoring
     description: Run scorers continuously against production logs to monitor drift and quality.
   - name: Functions and Tools
-    description: >-
-      Register reusable tools, scorers, and workflows that can be invoked from prompts or experiments.
+    description: Register reusable tools, scorers, and workflows that can be invoked from prompts or experiments.
   - name: Self-Hosting
-    description: >-
-      Deploy Braintrust inside your own AWS, GCP, or Azure account for data residency and compliance.
+    description: Deploy Braintrust inside your own AWS, GCP, or Azure account for data residency and compliance.
   useCases:
   - name: LLM Application Quality Gating
     description: Block deploys when evaluation scores regress against a golden dataset.
@@ -149,8 +139,7 @@ apis:
   - name: AWS Bedrock
   authentication:
   - type: Bearer Token
-    description: >-
-      API keys and service tokens generated in the Braintrust dashboard are passed via the Authorization
+    description: API keys and service tokens generated in the Braintrust dashboard are passed via the Authorization
       header as a Bearer token.
 - aid: braintrust:braintrust-acls-api
   name: Braintrust Acls API
@@ -449,40 +438,453 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/braintrust-views-api-openapi.yml
-common:
-  - type: IssueTracker
-    url: https://github.com/braintrustdata/autoevals/issues
-  - type: Releases
-    url: https://github.com/braintrustdata/autoevals/releases
-  - type: License
-    name: MIT
-    url: https://github.com/braintrustdata/autoevals/blob/main/LICENSE
-  - type: AgenticAccess
-    url: agentic-access/braintrust-agentic-access.yml
-  - type: DomainSecurity
-    url: security/braintrust-domain-security.yml
-  - type: Authentication
-    url: authentication/braintrust-authentication.yml
-  - type: Website
-    url: https://www.braintrust.dev
+- aid: braintrust:braintrust-data-acl-api
+  name: Braintrust ACL API
+  description: The ACL API from Braintrust — 4 operation(s) for acl.
+  humanURL: https://www.braintrust.dev/docs/api-reference
+  baseURL: https://api.braintrust.dev/v1
+  tags:
+  - ACL
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-data-acl-api-openapi.yml
   - type: Documentation
-    url: https://www.braintrust.dev/docs
-  - type: Blog
-    url: https://www.braintrust.dev/blog
-  - type: GitHubOrganization
-    url: https://github.com/braintrustdata
-  - type: Pricing
-    url: https://www.braintrust.dev/pricing
-  - type: TermsOfService
-    url: https://www.braintrust.dev/legal/terms
-  - type: PrivacyPolicy
-    url: https://www.braintrust.dev/legal/privacy
-  - type: X
-    url: https://x.com/braintrustdata
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/braintrustdata
-  - type: ChangeLog
-    url: https://www.braintrust.dev/changelog
+    url: https://www.braintrust.dev/docs/reference/api
+  - type: APIReference
+    url: https://www.braintrust.dev/docs/api-reference
+  - type: PostmanCollection
+    url: collections/braintrust-data.postman_collection.json
+  - type: OpenCollection
+    url: collections/braintrust-data.opencollection.json
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/evals
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/datasets
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/logging
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/prompts
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/functions
+  - type: AsyncAPI
+    url: asyncapi/braintrust-data-asyncapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/access-control
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/proxy
+- aid: braintrust:braintrust-data-ai-proxy-api
+  name: Braintrust AI Proxy API
+  description: The AI Proxy API from Braintrust — 3 operation(s) for ai proxy.
+  humanURL: https://www.braintrust.dev/docs/api-reference
+  baseURL: https://api.braintrust.dev/v1
+  tags:
+  - AI Proxy
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-data-ai-proxy-api-openapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/reference/api
+  - type: APIReference
+    url: https://www.braintrust.dev/docs/api-reference
+  - type: PostmanCollection
+    url: collections/braintrust-data.postman_collection.json
+  - type: OpenCollection
+    url: collections/braintrust-data.opencollection.json
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/evals
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/datasets
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/logging
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/prompts
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/functions
+  - type: AsyncAPI
+    url: asyncapi/braintrust-data-asyncapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/access-control
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/proxy
+- aid: braintrust:braintrust-data-credentials-api
+  name: Braintrust Credentials API
+  description: The Credentials API from Braintrust — 3 operation(s) for credentials.
+  humanURL: https://www.braintrust.dev/docs/api-reference
+  baseURL: https://api.braintrust.dev/v1
+  tags:
+  - Credentials
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-data-credentials-api-openapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/reference/api
+  - type: APIReference
+    url: https://www.braintrust.dev/docs/api-reference
+  - type: PostmanCollection
+    url: collections/braintrust-data.postman_collection.json
+  - type: OpenCollection
+    url: collections/braintrust-data.opencollection.json
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/evals
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/datasets
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/logging
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/prompts
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/functions
+  - type: AsyncAPI
+    url: asyncapi/braintrust-data-asyncapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/access-control
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/proxy
+- aid: braintrust:braintrust-data-datasets-api
+  name: Braintrust Datasets API
+  description: The Datasets API from Braintrust — 6 operation(s) for datasets.
+  humanURL: https://www.braintrust.dev/docs/api-reference
+  baseURL: https://api.braintrust.dev/v1
+  tags:
+  - Datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-data-datasets-api-openapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/reference/api
+  - type: APIReference
+    url: https://www.braintrust.dev/docs/api-reference
+  - type: PostmanCollection
+    url: collections/braintrust-data.postman_collection.json
+  - type: OpenCollection
+    url: collections/braintrust-data.opencollection.json
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/evals
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/datasets
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/logging
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/prompts
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/functions
+  - type: AsyncAPI
+    url: asyncapi/braintrust-data-asyncapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/access-control
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/proxy
+- aid: braintrust:braintrust-data-evals-api
+  name: Braintrust Evals API
+  description: The Evals API from Braintrust — 1 operation(s) for evals.
+  humanURL: https://www.braintrust.dev/docs/api-reference
+  baseURL: https://api.braintrust.dev/v1
+  tags:
+  - Evals
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-data-evals-api-openapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/reference/api
+  - type: APIReference
+    url: https://www.braintrust.dev/docs/api-reference
+  - type: PostmanCollection
+    url: collections/braintrust-data.postman_collection.json
+  - type: OpenCollection
+    url: collections/braintrust-data.opencollection.json
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/evals
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/datasets
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/logging
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/prompts
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/functions
+  - type: AsyncAPI
+    url: asyncapi/braintrust-data-asyncapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/access-control
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/proxy
+- aid: braintrust:braintrust-data-experiments-api
+  name: Braintrust Experiments API
+  description: The Experiments API from Braintrust — 6 operation(s) for experiments.
+  humanURL: https://www.braintrust.dev/docs/api-reference
+  baseURL: https://api.braintrust.dev/v1
+  tags:
+  - Experiments
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-data-experiments-api-openapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/reference/api
+  - type: APIReference
+    url: https://www.braintrust.dev/docs/api-reference
+  - type: PostmanCollection
+    url: collections/braintrust-data.postman_collection.json
+  - type: OpenCollection
+    url: collections/braintrust-data.opencollection.json
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/evals
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/datasets
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/logging
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/prompts
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/functions
+  - type: AsyncAPI
+    url: asyncapi/braintrust-data-asyncapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/access-control
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/proxy
+- aid: braintrust:braintrust-data-functions-api
+  name: Braintrust Functions API
+  description: The Functions API from Braintrust — 3 operation(s) for functions.
+  humanURL: https://www.braintrust.dev/docs/api-reference
+  baseURL: https://api.braintrust.dev/v1
+  tags:
+  - Functions
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-data-functions-api-openapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/reference/api
+  - type: APIReference
+    url: https://www.braintrust.dev/docs/api-reference
+  - type: PostmanCollection
+    url: collections/braintrust-data.postman_collection.json
+  - type: OpenCollection
+    url: collections/braintrust-data.opencollection.json
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/evals
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/datasets
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/logging
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/prompts
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/functions
+  - type: AsyncAPI
+    url: asyncapi/braintrust-data-asyncapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/access-control
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/proxy
+- aid: braintrust:braintrust-data-logs-api
+  name: Braintrust Logs API
+  description: The Logs API from Braintrust — 3 operation(s) for logs.
+  humanURL: https://www.braintrust.dev/docs/api-reference
+  baseURL: https://api.braintrust.dev/v1
+  tags:
+  - Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-data-logs-api-openapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/reference/api
+  - type: APIReference
+    url: https://www.braintrust.dev/docs/api-reference
+  - type: PostmanCollection
+    url: collections/braintrust-data.postman_collection.json
+  - type: OpenCollection
+    url: collections/braintrust-data.opencollection.json
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/evals
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/datasets
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/logging
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/prompts
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/functions
+  - type: AsyncAPI
+    url: asyncapi/braintrust-data-asyncapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/access-control
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/proxy
+- aid: braintrust:braintrust-data-organization-api
+  name: Braintrust Organization API
+  description: The Organization API from Braintrust — 3 operation(s) for organization.
+  humanURL: https://www.braintrust.dev/docs/api-reference
+  baseURL: https://api.braintrust.dev/v1
+  tags:
+  - Organization
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-data-organization-api-openapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/reference/api
+  - type: APIReference
+    url: https://www.braintrust.dev/docs/api-reference
+  - type: PostmanCollection
+    url: collections/braintrust-data.postman_collection.json
+  - type: OpenCollection
+    url: collections/braintrust-data.opencollection.json
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/evals
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/datasets
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/logging
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/prompts
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/functions
+  - type: AsyncAPI
+    url: asyncapi/braintrust-data-asyncapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/access-control
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/proxy
+- aid: braintrust:braintrust-data-project-configuration-api
+  name: Braintrust Project Configuration API
+  description: The Project Configuration API from Braintrust — 4 operation(s) for project configuration.
+  humanURL: https://www.braintrust.dev/docs/api-reference
+  baseURL: https://api.braintrust.dev/v1
+  tags:
+  - Project Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-data-project-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/reference/api
+  - type: APIReference
+    url: https://www.braintrust.dev/docs/api-reference
+  - type: PostmanCollection
+    url: collections/braintrust-data.postman_collection.json
+  - type: OpenCollection
+    url: collections/braintrust-data.opencollection.json
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/evals
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/datasets
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/logging
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/prompts
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/functions
+  - type: AsyncAPI
+    url: asyncapi/braintrust-data-asyncapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/access-control
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/proxy
+- aid: braintrust:braintrust-data-projects-api
+  name: Braintrust Projects API
+  description: The Projects API from Braintrust — 2 operation(s) for projects.
+  humanURL: https://www.braintrust.dev/docs/api-reference
+  baseURL: https://api.braintrust.dev/v1
+  tags:
+  - Project
+  tags_raw:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-data-projects-api-openapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/reference/api
+  - type: APIReference
+    url: https://www.braintrust.dev/docs/api-reference
+  - type: PostmanCollection
+    url: collections/braintrust-data.postman_collection.json
+  - type: OpenCollection
+    url: collections/braintrust-data.opencollection.json
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/evals
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/datasets
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/logging
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/prompts
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/functions
+  - type: AsyncAPI
+    url: asyncapi/braintrust-data-asyncapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/access-control
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/proxy
+- aid: braintrust:braintrust-data-prompts-api
+  name: Braintrust Prompts API
+  description: The Prompts API from Braintrust — 2 operation(s) for prompts.
+  humanURL: https://www.braintrust.dev/docs/api-reference
+  baseURL: https://api.braintrust.dev/v1
+  tags:
+  - Prompts
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-data-prompts-api-openapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/reference/api
+  - type: APIReference
+    url: https://www.braintrust.dev/docs/api-reference
+  - type: PostmanCollection
+    url: collections/braintrust-data.postman_collection.json
+  - type: OpenCollection
+    url: collections/braintrust-data.opencollection.json
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/evals
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/datasets
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/logging
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/prompts
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/functions
+  - type: AsyncAPI
+    url: asyncapi/braintrust-data-asyncapi.yml
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/access-control
+  - type: Documentation
+    url: https://www.braintrust.dev/docs/guides/proxy
+common:
+- type: CapabilityMap
+  url: capabilities/braintrust-capability-edges.yml
+  name: Braintrust Business Capability Map
+- type: IssueTracker
+  url: https://github.com/braintrustdata/autoevals/issues
+- type: Releases
+  url: https://github.com/braintrustdata/autoevals/releases
+- type: License
+  name: MIT
+  url: https://github.com/braintrustdata/autoevals/blob/main/LICENSE
+- type: AgenticAccess
+  url: agentic-access/braintrust-agentic-access.yml
+- type: DomainSecurity
+  url: security/braintrust-domain-security.yml
+- type: Authentication
+  url: authentication/braintrust-authentication.yml
+- type: Website
+  url: https://www.braintrust.dev
+- type: Documentation
+  url: https://www.braintrust.dev/docs
+- type: Blog
+  url: https://www.braintrust.dev/blog
+- type: GitHubOrganization
+  url: https://github.com/braintrustdata
+- type: Pricing
+  url: https://www.braintrust.dev/pricing
+- type: TermsOfService
+  url: https://www.braintrust.dev/legal/terms
+- type: PrivacyPolicy
+  url: https://www.braintrust.dev/legal/privacy
+- type: X
+  url: https://x.com/braintrustdata
+- type: LinkedIn
+  url: https://www.linkedin.com/company/braintrustdata
+- type: ChangeLog
+  url: https://www.braintrust.dev/changelog
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
