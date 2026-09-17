@@ -149,18 +149,6 @@ apis:
     description: >-
       API keys and service tokens generated in the Braintrust dashboard are passed via the Authorization
       header as a Bearer token.
-- aid: braintrust:braintrust-acls-api
-  name: Braintrust Acls API
-  description: The Acls API from Braintrust — 4 operation(s) for acls.
-  humanURL: https://www.braintrust.dev/docs
-  baseURL: https://api.braintrust.dev
-  tags:
-  - ACL
-  tags_raw:
-  - Acls
-  properties:
-  - type: OpenAPI
-    url: openapi/braintrust-acls-api-openapi.yml
 - aid: braintrust:braintrust-aisecrets-api
   name: Braintrust AiSecrets API
   description: The AiSecrets API from Braintrust — 2 operation(s) for aisecrets.
@@ -171,18 +159,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/braintrust-aisecrets-api-openapi.yml
-- aid: braintrust:braintrust-apikeys-api
-  name: Braintrust ApiKeys API
-  description: The ApiKeys API from Braintrust — 2 operation(s) for apikeys.
-  humanURL: https://www.braintrust.dev/docs
-  baseURL: https://api.braintrust.dev
-  tags:
-  - APIKeys
-  tags_raw:
-  - ApiKeys
-  properties:
-  - type: OpenAPI
-    url: openapi/braintrust-apikeys-api-openapi.yml
 - aid: braintrust:braintrust-cors-api
   name: Braintrust CORS API
   description: The CORS API from Braintrust — 65 operation(s) for cors.
@@ -233,16 +209,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/braintrust-environments-api-openapi.yml
-- aid: braintrust:braintrust-envvars-api
-  name: Braintrust EnvVars API
-  description: The EnvVars API from Braintrust — 2 operation(s) for envvars.
-  humanURL: https://www.braintrust.dev/docs
-  baseURL: https://api.braintrust.dev
-  tags:
-  - EnvVars
-  properties:
-  - type: OpenAPI
-    url: openapi/braintrust-envvars-api-openapi.yml
 - aid: braintrust:braintrust-evals-api
   name: Braintrust Evals API
   description: The Evals API from Braintrust — 1 operation(s) for evals.
@@ -295,18 +261,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/braintrust-logs-api-openapi.yml
-- aid: braintrust:braintrust-mcpservers-api
-  name: Braintrust McpServers API
-  description: The McpServers API from Braintrust — 2 operation(s) for mcpservers.
-  humanURL: https://www.braintrust.dev/docs
-  baseURL: https://api.braintrust.dev
-  tags:
-  - MCP Servers
-  tags_raw:
-  - McpServers
-  properties:
-  - type: OpenAPI
-    url: openapi/braintrust-mcpservers-api-openapi.yml
 - aid: braintrust:braintrust-organizations-api
   name: Braintrust Organizations API
   description: The Organizations API from Braintrust — 3 operation(s) for organizations.
@@ -362,16 +316,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/braintrust-projectscores-api-openapi.yml
-- aid: braintrust:braintrust-projecttags-api
-  name: Braintrust ProjectTags API
-  description: The ProjectTags API from Braintrust — 2 operation(s) for projecttags.
-  humanURL: https://www.braintrust.dev/docs
-  baseURL: https://api.braintrust.dev
-  tags:
-  - ProjectTags
-  properties:
-  - type: OpenAPI
-    url: openapi/braintrust-projecttags-api-openapi.yml
 - aid: braintrust:braintrust-prompts-api
   name: Braintrust Prompts API
   description: The Prompts API from Braintrust — 2 operation(s) for prompts.
@@ -402,18 +346,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/braintrust-roles-api-openapi.yml
-- aid: braintrust:braintrust-servicetokens-api
-  name: Braintrust ServiceTokens API
-  description: The ServiceTokens API from Braintrust — 2 operation(s) for servicetokens.
-  humanURL: https://www.braintrust.dev/docs
-  baseURL: https://api.braintrust.dev
-  tags:
-  - Service Tokens
-  tags_raw:
-  - ServiceTokens
-  properties:
-  - type: OpenAPI
-    url: openapi/braintrust-servicetokens-api-openapi.yml
 - aid: braintrust:braintrust-spaniframes-api
   name: Braintrust SpanIframes API
   description: The SpanIframes API from Braintrust — 2 operation(s) for spaniframes.
@@ -446,6 +378,66 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/braintrust-views-api-openapi.yml
+- aid: braintrust:braintrust-acls-api
+  name: Braintrust Acls API
+  description: The Acls API from Braintrust — 4 operation(s) for acls.
+  humanURL: https://www.braintrust.dev/docs
+  baseURL: https://api.braintrust.dev
+  tags:
+  - Acls
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-acls-api-openapi.yml
+- aid: braintrust:braintrust-api-keys-api
+  name: Braintrust API Keys API
+  description: The API Keys API from Braintrust — 2 operation(s) for api keys.
+  humanURL: https://www.braintrust.dev/docs
+  baseURL: https://api.braintrust.dev
+  tags:
+  - API Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-api-keys-api-openapi.yml
+- aid: braintrust:braintrust-env-vars-api
+  name: Braintrust Env Vars API
+  description: The Env Vars API from Braintrust — 2 operation(s) for env vars.
+  humanURL: https://www.braintrust.dev/docs
+  baseURL: https://api.braintrust.dev
+  tags:
+  - Env Vars
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-env-vars-api-openapi.yml
+- aid: braintrust:braintrust-mcp-servers-api
+  name: Braintrust MCP Servers API
+  description: The MCP Servers API from Braintrust — 2 operation(s) for mcp servers.
+  humanURL: https://www.braintrust.dev/docs
+  baseURL: https://api.braintrust.dev
+  tags:
+  - MCP Servers
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-mcp-servers-api-openapi.yml
+- aid: braintrust:braintrust-project-tags-api
+  name: Braintrust Project Tags API
+  description: The Project Tags API from Braintrust — 2 operation(s) for project tags.
+  humanURL: https://www.braintrust.dev/docs
+  baseURL: https://api.braintrust.dev
+  tags:
+  - Project Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-project-tags-api-openapi.yml
+- aid: braintrust:braintrust-service-tokens-api
+  name: Braintrust Service Tokens API
+  description: The Service Tokens API from Braintrust — 2 operation(s) for service tokens.
+  humanURL: https://www.braintrust.dev/docs
+  baseURL: https://api.braintrust.dev
+  tags:
+  - Service Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-service-tokens-api-openapi.yml
 common:
 - type: CapabilityMap
   url: capabilities/braintrust-capability-edges.yml
