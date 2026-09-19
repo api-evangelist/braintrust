@@ -205,6 +205,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
+  - Environment
+  tags_raw:
   - Environments
   properties:
   - type: OpenAPI
@@ -384,6 +386,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
+  - ACL
+  tags_raw:
   - Acls
   properties:
   - type: OpenAPI
@@ -394,6 +398,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
+  - APIKeys
+  tags_raw:
   - API Keys
   properties:
   - type: OpenAPI
@@ -404,6 +410,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
+  - EnvVars
+  tags_raw:
   - Env Vars
   properties:
   - type: OpenAPI
@@ -414,6 +422,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
+  - MCP Server
+  tags_raw:
   - MCP Servers
   properties:
   - type: OpenAPI
@@ -424,6 +434,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
+  - ProjectTags
+  tags_raw:
   - Project Tags
   properties:
   - type: OpenAPI
