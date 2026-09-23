@@ -1,7 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Braintrust Acls Users API
+  title: Braintrust Users API
   description: 'API specification for the backend data server. The API is hosted globally at
 
     https://api.braintrust.dev or in your own environment.
@@ -171,84 +171,37 @@ paths:
               schema:
                 nullable: true
 components:
-  parameters:
-    EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
-    UserGivenName:
-      schema:
-        $ref: '#/components/schemas/UserGivenName'
-      required: false
-      description: Given name of the user to search for. You may pass the param multiple times to filter for more than one given name
-      name: given_name
-      in: query
-      allowReserved: true
+  schemas:
+    UserIdParam:
+      type: string
+      format: uuid
+      description: User id
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
     StartingAfter:
-      schema:
-        $ref: '#/components/schemas/StartingAfter'
-      required: false
+      type: string
+      format: uuid
       description: 'Pagination cursor id.
 
 
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
-      in: query
-    AppLimitParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
     Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
-    UserIdParam:
-      schema:
-        $ref: '#/components/schemas/UserIdParam'
-      required: true
-      description: User id
-      name: user_id
-      in: path
-    UserFamilyName:
-      schema:
-        $ref: '#/components/schemas/UserFamilyName'
-      required: false
-      description: Family name of the user to search for. You may pass the param multiple times to filter for more than one family name
-      name: family_name
-      in: query
-      allowReserved: true
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
-    UserEmail:
-      schema:
-        $ref: '#/components/schemas/UserEmail'
-      required: false
-      description: Email of the user to search for. You may pass the param multiple times to filter for more than one email
-      name: email
-      in: query
-      allowReserved: true
-  schemas:
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
+    UserGivenName:
+      anyOf:
+      - type: string
+      - type: array
+        items:
+          type: string
+      description: Given name of the user to search for. You may pass the param multiple times to filter for more than one given name
     User:
       type: object
       properties:
@@ -279,15 +232,6 @@ components:
           description: Date of user creation
       required:
       - id
-    UserIdParam:
-      type: string
-      format: uuid
-      description: User id
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
     UserFamilyName:
       anyOf:
       - type: string
@@ -295,36 +239,6 @@ components:
         items:
           type: string
       description: Family name of the user to search for. You may pass the param multiple times to filter for more than one family name
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    UserGivenName:
-      anyOf:
-      - type: string
-      - type: array
-        items:
-          type: string
-      description: Given name of the user to search for. You may pass the param multiple times to filter for more than one given name
-    StartingAfter:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    UserEmail:
-      anyOf:
-      - type: string
-      - type: array
-        items:
-          type: string
-      description: Email of the user to search for. You may pass the param multiple times to filter for more than one email
     EndingBefore:
       type: string
       format: uuid
@@ -332,6 +246,92 @@ components:
 
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    UserEmail:
+      anyOf:
+      - type: string
+      - type: array
+        items:
+          type: string
+      description: Email of the user to search for. You may pass the param multiple times to filter for more than one email
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+  parameters:
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
+    UserGivenName:
+      schema:
+        $ref: '#/components/schemas/UserGivenName'
+      required: false
+      description: Given name of the user to search for. You may pass the param multiple times to filter for more than one given name
+      name: given_name
+      in: query
+      allowReserved: true
+    UserEmail:
+      schema:
+        $ref: '#/components/schemas/UserEmail'
+      required: false
+      description: Email of the user to search for. You may pass the param multiple times to filter for more than one email
+      name: email
+      in: query
+      allowReserved: true
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    UserFamilyName:
+      schema:
+        $ref: '#/components/schemas/UserFamilyName'
+      required: false
+      description: Family name of the user to search for. You may pass the param multiple times to filter for more than one family name
+      name: family_name
+      in: query
+      allowReserved: true
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+    UserIdParam:
+      schema:
+        $ref: '#/components/schemas/UserIdParam'
+      required: true
+      description: User id
+      name: user_id
+      in: path
   securitySchemes:
     bearerAuth:
       type: http

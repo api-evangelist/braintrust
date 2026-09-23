@@ -1,7 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Braintrust Acls Environments API
+  title: Braintrust Environments API
   description: 'API specification for the backend data server. The API is hosted globally at
 
     https://api.braintrust.dev or in your own environment.
@@ -422,9 +422,6 @@ components:
       required:
       - name
       - slug
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
     Environment:
       type: object
       properties:
@@ -461,6 +458,9 @@ components:
       - org_id
       - name
       - slug
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
     PatchEnvironment:
       type: object
       properties:

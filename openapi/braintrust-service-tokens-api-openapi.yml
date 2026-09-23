@@ -1,7 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Braintrust Acls ApiKeys API
+  title: Braintrust Service Tokens API
   description: 'API specification for the backend data server. The API is hosted globally at
 
     https://api.braintrust.dev or in your own environment.
@@ -16,18 +16,90 @@ security:
 - bearerAuth: []
 - {}
 tags:
-- name: ApiKeys
+- name: Service Tokens
 paths:
-  /v1/api_key:
-    get:
-      operationId: getApiKey
+  /v1/service_token:
+    delete:
+      operationId: deleteServiceToken
       tags:
-      - ApiKeys
-      description: 'List out all API keys. They are sorted by creation date, with the most recently-created keys coming first.
+      - Service Tokens
+      description: Delete a single service_token
+      summary: Delete single service_token
+      security:
+      - bearerAuth: []
+      - {}
+      requestBody:
+        description: Parameters which uniquely specify the service_token to delete
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteServiceToken'
+      responses:
+        '200':
+          description: Returns the deleted service_token object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceToken'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    get:
+      operationId: getServiceToken
+      tags:
+      - Service Tokens
+      description: 'List out all service tokens. They are sorted by creation date, with the most recently-created tokens coming first.
 
 
-        To create new API keys, go to [**Settings > API keys**](https://www.braintrust.dev/app/~/configuration/org/api-keys) in the Braintrust UI.'
-      summary: List api_keys
+        To create service tokens, organization owners can go to **Settings > Service tokens** in the Braintrust UI.'
+      summary: List service_tokens
       security:
       - bearerAuth: []
       - {}
@@ -36,11 +108,11 @@ paths:
       - $ref: '#/components/parameters/StartingAfter'
       - $ref: '#/components/parameters/EndingBefore'
       - $ref: '#/components/parameters/Ids'
-      - $ref: '#/components/parameters/ApiKeyName'
+      - $ref: '#/components/parameters/ServiceTokenName'
       - $ref: '#/components/parameters/OrgName'
       responses:
         '200':
-          description: Returns a list of api_key objects
+          description: Returns a list of service_token objects
           content:
             application/json:
               schema:
@@ -49,8 +121,8 @@ paths:
                   objects:
                     type: array
                     items:
-                      $ref: '#/components/schemas/ApiKey'
-                    description: A list of api_key objects
+                      $ref: '#/components/schemas/ServiceToken'
+                    description: A list of service_token objects
                 required:
                 - objects
                 additionalProperties: false
@@ -103,25 +175,25 @@ paths:
             application/json:
               schema:
                 nullable: true
-  /v1/api_key/{api_key_id}:
+  /v1/service_token/{service_token_id}:
     get:
-      operationId: getApiKeyId
+      operationId: getServiceTokenId
       tags:
-      - ApiKeys
-      description: Get an api_key object by its id
-      summary: Get api_key
+      - Service Tokens
+      description: Get a service_token object by its id
+      summary: Get service_token
       security:
       - bearerAuth: []
       - {}
       parameters:
-      - $ref: '#/components/parameters/ApiKeyIdParam'
+      - $ref: '#/components/parameters/ServiceTokenIdParam'
       responses:
         '200':
-          description: Returns the api_key object
+          description: Returns the service_token object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiKey'
+                $ref: '#/components/schemas/ServiceToken'
         '400':
           description: The request was unacceptable, often due to missing a required parameter
           content:
@@ -172,23 +244,23 @@ paths:
               schema:
                 nullable: true
     delete:
-      operationId: deleteApiKeyId
+      operationId: deleteServiceTokenId
       tags:
-      - ApiKeys
-      description: Delete an api_key object by its id
-      summary: Delete api_key
+      - Service Tokens
+      description: Delete a service_token object by its id
+      summary: Delete service_token
       security:
       - bearerAuth: []
       - {}
       parameters:
-      - $ref: '#/components/parameters/ApiKeyIdParam'
+      - $ref: '#/components/parameters/ServiceTokenIdParam'
       responses:
         '200':
-          description: Returns the deleted api_key object
+          description: Returns the deleted service_token object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiKey'
+                $ref: '#/components/schemas/ServiceToken'
         '400':
           description: The request was unacceptable, often due to missing a required parameter
           content:
@@ -240,71 +312,6 @@ paths:
                 nullable: true
 components:
   schemas:
-    ApiKeyIdParam:
-      type: string
-      format: uuid
-      description: ApiKey id
-    ApiKeyName:
-      type: string
-      description: Name of the api_key to search for
-    StartingAfter:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    ApiKey:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the api key
-        created:
-          type: string
-          nullable: true
-          format: date-time
-          description: Date of api key creation
-        name:
-          type: string
-          description: Name of the api key
-        preview_name:
-          type: string
-        user_id:
-          type: string
-          nullable: true
-          format: uuid
-          description: Unique identifier for the user
-        user_email:
-          type: string
-          nullable: true
-          description: The user's email
-        user_given_name:
-          type: string
-          nullable: true
-          description: Given name of the user
-        user_family_name:
-          type: string
-          nullable: true
-          description: Family name of the user
-        org_id:
-          type: string
-          nullable: true
-          format: uuid
-          description: Unique identifier for the organization
-      required:
-      - id
-      - name
-      - preview_name
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
     Ids:
       anyOf:
       - type: string
@@ -314,6 +321,22 @@ components:
           type: string
           format: uuid
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    DeleteServiceToken:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the service token.
+      required:
+      - id
+    ServiceTokenIdParam:
+      type: string
+      format: uuid
+      description: ServiceToken id
     EndingBefore:
       type: string
       format: uuid
@@ -321,7 +344,69 @@ components:
 
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    ServiceToken:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the service token
+        created:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of service token creation
+        name:
+          type: string
+          description: Name of the service token
+        preview_name:
+          type: string
+        service_account_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Unique identifier for the service token
+        service_account_email:
+          type: string
+          nullable: true
+          description: The service account email (not routable)
+        service_account_name:
+          type: string
+          nullable: true
+          description: The service account name
+        org_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Unique identifier for the organization
+      required:
+      - id
+      - name
+      - preview_name
+    ServiceTokenName:
+      type: string
+      description: Name of the service_token to search for
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
   parameters:
+    ServiceTokenName:
+      schema:
+        $ref: '#/components/schemas/ServiceTokenName'
+      required: false
+      description: Name of the service_token to search for
+      name: service_token_name
+      in: query
+      allowReserved: true
     EndingBefore:
       schema:
         $ref: '#/components/schemas/EndingBefore'
@@ -339,35 +424,12 @@ components:
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
       name: ids
       in: query
-    AppLimitParam:
+    ServiceTokenIdParam:
       schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
-    ApiKeyName:
-      schema:
-        $ref: '#/components/schemas/ApiKeyName'
-      required: false
-      description: Name of the api_key to search for
-      name: api_key_name
-      in: query
-      allowReserved: true
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
-    ApiKeyIdParam:
-      schema:
-        $ref: '#/components/schemas/ApiKeyIdParam'
+        $ref: '#/components/schemas/ServiceTokenIdParam'
       required: true
-      description: ApiKey id
-      name: api_key_id
+      description: ServiceToken id
+      name: service_token_id
       in: path
     StartingAfter:
       schema:
@@ -379,6 +441,21 @@ components:
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: starting_after
       in: query
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
   securitySchemes:
     bearerAuth:
       type: http

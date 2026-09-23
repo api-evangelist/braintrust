@@ -1,7 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Braintrust Acls DatasetSnapshots API
+  title: Braintrust Dataset Snapshots API
   description: 'API specification for the backend data server. The API is hosted globally at
 
     https://api.braintrust.dev or in your own environment.
@@ -455,46 +455,6 @@ paths:
                 nullable: true
 components:
   schemas:
-    DatasetSnapshotIdParam:
-      type: string
-      format: uuid
-      description: DatasetSnapshot id
-    PatchDatasetSnapshot:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the dataset snapshot
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the dataset snapshot
-    DatasetSnapshotName:
-      type: string
-      description: Name of the dataset_snapshot to search for
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
-    StartingAfter:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
     DatasetSnapshot:
       type: object
       properties:
@@ -536,6 +496,46 @@ components:
           type: string
           format: uuid
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    PatchDatasetSnapshot:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: Name of the dataset snapshot
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the dataset snapshot
+    DatasetSnapshotIdParam:
+      type: string
+      format: uuid
+      description: DatasetSnapshot id
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    DatasetSnapshotName:
+      type: string
+      description: Name of the dataset_snapshot to search for
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
     CreateDatasetSnapshot:
       type: object
       properties:
@@ -560,20 +560,6 @@ components:
       - name
       - xact_id
   parameters:
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
-    AppLimitParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
     EndingBefore:
       schema:
         $ref: '#/components/schemas/EndingBefore'
@@ -584,22 +570,20 @@ components:
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: ending_before
       in: query
-    OrgName:
+    Ids:
       schema:
-        $ref: '#/components/schemas/OrgName'
+        $ref: '#/components/schemas/Ids'
       required: false
-      description: Filter search results to within a particular organization
-      name: org_name
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
       in: query
-      allowReserved: true
-    DatasetSnapshotName:
+    DatasetSnapshotIdParam:
       schema:
-        $ref: '#/components/schemas/DatasetSnapshotName'
-      required: false
-      description: Name of the dataset_snapshot to search for
-      name: dataset_snapshot_name
-      in: query
-      allowReserved: true
+        $ref: '#/components/schemas/DatasetSnapshotIdParam'
+      required: true
+      description: DatasetSnapshot id
+      name: dataset_snapshot_id
+      in: path
     StartingAfter:
       schema:
         $ref: '#/components/schemas/StartingAfter'
@@ -610,13 +594,29 @@ components:
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: starting_after
       in: query
-    DatasetSnapshotIdParam:
+    DatasetSnapshotName:
       schema:
-        $ref: '#/components/schemas/DatasetSnapshotIdParam'
-      required: true
-      description: DatasetSnapshot id
-      name: dataset_snapshot_id
-      in: path
+        $ref: '#/components/schemas/DatasetSnapshotName'
+      required: false
+      description: Name of the dataset_snapshot to search for
+      name: dataset_snapshot_name
+      in: query
+      allowReserved: true
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
   securitySchemes:
     bearerAuth:
       type: http

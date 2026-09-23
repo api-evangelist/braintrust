@@ -1,7 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Braintrust Acls Experiments API
+  title: Braintrust Experiments API
   description: 'API specification for the backend data server. The API is hosted globally at
 
     https://api.braintrust.dev or in your own environment.
@@ -684,7 +684,6 @@ paths:
       operationId: getExperimentIdSummarize
       tags:
       - Experiments
-      description: Summarize experiment
       summary: Summarize experiment
       security:
       - bearerAuth: []
@@ -749,401 +748,17 @@ paths:
               schema:
                 nullable: true
 components:
-  parameters:
-    EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
-    ExperimentIdParam:
-      schema:
-        $ref: '#/components/schemas/ExperimentIdParam'
-      required: true
-      description: Experiment id
-      name: experiment_id
-      in: path
-    StartingAfter:
-      schema:
-        $ref: '#/components/schemas/StartingAfter'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
-      in: query
-    FetchLimitParam:
-      schema:
-        $ref: '#/components/schemas/FetchLimitParam'
-      required: false
-      description: 'limit the number of traces fetched
-
-
-        Fetch queries may be paginated if the total result size is expected to be large (e.g. project_logs which accumulate over a long time). Note that fetch queries only support pagination in descending time order (from latest to earliest `_xact_id`. Furthermore, later pages may return rows which showed up in earlier pages, except with an earlier `_xact_id`. This happens because pagination occurs over the whole version history of the event log. You will most likely want to exclude any such duplicate, outdated rows (by `id`) from your combined result set.
-
-
-        The `limit` parameter controls the number of full traces to return. So you may end up with more individual rows than the specified limit if you are fetching events containing traces.'
-      name: limit
-      in: query
-    ExperimentName:
-      schema:
-        $ref: '#/components/schemas/ExperimentName'
-      required: false
-      description: Name of the experiment to search for
-      name: experiment_name
-      in: query
-      allowReserved: true
-    Version:
-      schema:
-        $ref: '#/components/schemas/Version'
-      required: false
-      description: 'Retrieve a snapshot of events from a past time
-
-
-        The version id is essentially a filter on the latest event transaction id. You can use the `max_xact_id` returned by a past fetch as the version to reproduce that exact fetch.'
-      name: version
-      in: query
-    AppLimitWithDefaultParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitWithDefaultParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
-    ComparisonExperimentId:
-      schema:
-        $ref: '#/components/schemas/ComparisonExperimentId'
-      required: false
-      description: The experiment to compare against, if summarizing scores and metrics. If omitted, will fall back to the `base_exp_id` stored in the experiment metadata, and then to the most recent experiment run in the same project. Must pass `summarize_scores=true` for this id to be used
-      name: comparison_experiment_id
-      in: query
-    SummarizeScores:
-      schema:
-        $ref: '#/components/schemas/SummarizeScores'
-      required: false
-      description: Whether to summarize the scores and metrics. If false (or omitted), only the metadata will be returned.
-      name: summarize_scores
-      in: query
-    MaxXactId:
-      schema:
-        $ref: '#/components/schemas/MaxXactId'
-      required: false
-      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
-
-
-        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
-
-
-        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
-      name: max_xact_id
-      in: query
-    ProjectIdQuery:
-      schema:
-        $ref: '#/components/schemas/ProjectIdQuery'
-      required: false
-      description: Project id
-      name: project_id
-      in: query
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
-    ProjectName:
-      schema:
-        $ref: '#/components/schemas/ProjectName'
-      required: false
-      description: Name of the project to search for
-      name: project_name
-      in: query
-      allowReserved: true
-    MaxRootSpanId:
-      schema:
-        $ref: '#/components/schemas/MaxRootSpanId'
-      required: false
-      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
-
-
-        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
-
-
-        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
-      name: max_root_span_id
-      in: query
   schemas:
-    MetricSummary:
+    FeedbackExperimentEventRequest:
       type: object
       properties:
-        name:
-          type: string
-          description: Name of the metric
-        metric:
-          type: number
-          description: Average metric across all examples
-        unit:
-          type: string
-          description: Unit label for the metric
-        diff:
-          type: number
-          description: Difference in metric between the current and comparison experiment
-        improvements:
-          type: integer
-          minimum: 0
-          description: Number of improvements in the metric
-        regressions:
-          type: integer
-          minimum: 0
-          description: Number of regressions in the metric
-      required:
-      - name
-      - metric
-      - unit
-      - improvements
-      - regressions
-      description: Summary of a metric's performance
-    InsertExperimentEventRequest:
-      type: object
-      properties:
-        events:
+        feedback:
           type: array
           items:
-            $ref: '#/components/schemas/InsertExperimentEvent'
-          description: A list of experiment events to insert
+            $ref: '#/components/schemas/FeedbackExperimentItem'
+          description: A list of experiment feedback items
       required:
-      - events
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    Experiment:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the experiment
-        project_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the project that the experiment belongs under
-        name:
-          type: string
-          description: Name of the experiment. Within a project, experiment names are unique
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the experiment
-        created:
-          type: string
-          nullable: true
-          format: date-time
-          description: Date of experiment creation
-        repo_info:
-          $ref: '#/components/schemas/RepoInfo'
-        commit:
-          type: string
-          nullable: true
-          description: Commit, taken directly from `repo_info.commit`
-        base_exp_id:
-          type: string
-          nullable: true
-          format: uuid
-          description: Id of default base experiment to compare against when viewing this experiment
-        deleted_at:
-          type: string
-          nullable: true
-          format: date-time
-          description: Date of experiment deletion, or null if the experiment is still active
-        dataset_id:
-          type: string
-          nullable: true
-          format: uuid
-          description: Identifier of the linked dataset, or null if the experiment is not linked to a dataset
-        dataset_version:
-          type: string
-          nullable: true
-          description: Version number of the linked dataset the experiment was run against. This can be used to reproduce the experiment after the dataset has been modified.
-        internal_metadata:
-          type: object
-          nullable: true
-          properties:
-            dataset_filter:
-              type: object
-              nullable: true
-              additionalProperties:
-                nullable: true
-              description: BTQL filter payload used to evaluate a subset of a linked dataset.
-          additionalProperties:
-            nullable: true
-          description: Braintrust-controlled metadata about the experiment.
-        parameters_id:
-          type: string
-          nullable: true
-          format: uuid
-          description: Identifier of the linked saved parameters object, or null if the experiment is not linked to saved parameters
-        parameters_version:
-          type: string
-          nullable: true
-          description: Version number of the linked saved parameters object the experiment was run against.
-        public:
-          type: boolean
-          description: Whether or not the experiment is public. Public experiments can be viewed by anybody inside or outside the organization
-        user_id:
-          type: string
-          nullable: true
-          format: uuid
-          description: Identifies the user who created the experiment
-        metadata:
-          type: object
-          nullable: true
-          additionalProperties:
-            nullable: true
-          description: User-controlled metadata about the experiment
-        tags:
-          type: array
-          nullable: true
-          items:
-            type: string
-          description: A list of tags for the experiment
-      required:
-      - id
-      - project_id
-      - name
-      - public
-    PatchExperiment:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the experiment. Within a project, experiment names are unique
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the experiment
-        repo_info:
-          $ref: '#/components/schemas/RepoInfo'
-        base_exp_id:
-          type: string
-          nullable: true
-          format: uuid
-          description: Id of default base experiment to compare against when viewing this experiment
-        dataset_id:
-          type: string
-          nullable: true
-          format: uuid
-          description: Identifier of the linked dataset, or null if the experiment is not linked to a dataset
-        dataset_version:
-          type: string
-          nullable: true
-          description: Version number of the linked dataset the experiment was run against. This can be used to reproduce the experiment after the dataset has been modified.
-        internal_metadata:
-          type: object
-          nullable: true
-          properties:
-            dataset_filter:
-              type: object
-              nullable: true
-              additionalProperties:
-                nullable: true
-              description: BTQL filter payload used to evaluate a subset of a linked dataset.
-          additionalProperties:
-            nullable: true
-          description: Braintrust-controlled metadata about the experiment.
-        parameters_id:
-          type: string
-          nullable: true
-          format: uuid
-          description: Identifier of the linked saved parameters object, or null if the experiment is not linked to saved parameters
-        parameters_version:
-          type: string
-          nullable: true
-          description: Version number of the linked saved parameters object the experiment was run against.
-        public:
-          type: boolean
-          nullable: true
-          description: Whether or not the experiment is public. Public experiments can be viewed by anybody inside or outside the organization
-        metadata:
-          type: object
-          nullable: true
-          additionalProperties:
-            nullable: true
-          description: User-controlled metadata about the experiment
-        tags:
-          type: array
-          nullable: true
-          items:
-            type: string
-          description: A list of tags for the experiment
-    SummarizeExperimentResponse:
-      type: object
-      properties:
-        project_name:
-          type: string
-          description: Name of the project that the experiment belongs to
-        experiment_name:
-          type: string
-          description: Name of the experiment
-        project_url:
-          type: string
-          format: uri
-          description: URL to the project's page in the Braintrust app
-        experiment_url:
-          type: string
-          format: uri
-          description: URL to the experiment's page in the Braintrust app
-        comparison_experiment_name:
-          type: string
-          nullable: true
-          description: The experiment which scores are baselined against
-        scores:
-          type: object
-          nullable: true
-          additionalProperties:
-            $ref: '#/components/schemas/ScoreSummary'
-          description: Summary of the experiment's scores
-        metrics:
-          type: object
-          nullable: true
-          additionalProperties:
-            $ref: '#/components/schemas/MetricSummary'
-          description: Summary of the experiment's metrics
-      required:
-      - project_name
-      - experiment_name
-      - project_url
-      - experiment_url
-      description: Summary of an experiment
-    FetchEventsRequest:
-      type: object
-      properties:
-        limit:
-          $ref: '#/components/schemas/FetchLimit'
-        cursor:
-          $ref: '#/components/schemas/FetchPaginationCursor'
-        max_xact_id:
-          $ref: '#/components/schemas/MaxXactId'
-          nullable: true
-        max_root_span_id:
-          $ref: '#/components/schemas/MaxRootSpanId'
-          nullable: true
-        version:
-          $ref: '#/components/schemas/Version'
-          nullable: true
+      - feedback
     FetchPaginationCursor:
       type: string
       nullable: true
@@ -1151,46 +766,9 @@ components:
 
 
         The string can be obtained directly from the `cursor` property of the previous fetch query'
-    FeedbackResponseSchema:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-      required:
-      - status
-    FetchLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: 'limit the number of traces fetched
-
-
-        Fetch queries may be paginated if the total result size is expected to be large (e.g. project_logs which accumulate over a long time). Note that fetch queries only support pagination in descending time order (from latest to earliest `_xact_id`. Furthermore, later pages may return rows which showed up in earlier pages, except with an earlier `_xact_id`. This happens because pagination occurs over the whole version history of the event log. You will most likely want to exclude any such duplicate, outdated rows (by `id`) from your combined result set.
-
-
-        The `limit` parameter controls the number of full traces to return. So you may end up with more individual rows than the specified limit if you are fetching events containing traces.'
-    MaxRootSpanId:
+    ExperimentName:
       type: string
-      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
-
-
-        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
-
-
-        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
-    FetchLimit:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: 'limit the number of traces fetched
-
-
-        Fetch queries may be paginated if the total result size is expected to be large (e.g. project_logs which accumulate over a long time). Note that fetch queries only support pagination in descending time order (from latest to earliest `_xact_id`. Furthermore, later pages may return rows which showed up in earlier pages, except with an earlier `_xact_id`. This happens because pagination occurs over the whole version history of the event log. You will most likely want to exclude any such duplicate, outdated rows (by `id`) from your combined result set.
-
-
-        The `limit` parameter controls the number of full traces to return. So you may end up with more individual rows than the specified limit if you are fetching events containing traces.'
+      description: Name of the experiment to search for
     RepoInfo:
       type: object
       nullable: true
@@ -1232,162 +810,17 @@ components:
           nullable: true
           description: If the repo was dirty when run, this includes the diff between the current state of the repo and the most recent commit.
       description: Metadata about the state of the repo when the experiment was created
-    FeedbackExperimentItem:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The id of the experiment event to log feedback for. This is the row `id` returned by `POST /v1/experiment/{experiment_id}/insert`
-        scores:
-          type: object
-          nullable: true
-          additionalProperties:
-            type: number
-            nullable: true
-            minimum: 0
-            maximum: 1
-          description: A dictionary of numeric values (between 0 and 1) to log. These scores will be merged into the existing scores for the experiment event
-        expected:
-          nullable: true
-          description: The ground truth value (an arbitrary, JSON serializable object) that you'd compare to `output` to determine if your `output` value is correct or not
-        comment:
-          type: string
-          nullable: true
-          description: An optional comment string to log about the experiment event
-        metadata:
-          type: object
-          nullable: true
-          additionalProperties:
-            nullable: true
-          description: A dictionary with additional data about the feedback. If you have a `user_id`, you can log it here and access it in the Braintrust UI. Note, this metadata does not correspond to the main event itself, but rather the audit log attached to the event.
-        source:
-          type: string
-          nullable: true
-          enum:
-          - app
-          - api
-          - external
-          - null
-          description: The source of the feedback. Must be one of "external" (default), "app", or "api"
-        tags:
-          type: array
-          nullable: true
-          items:
-            type: string
-          description: A list of tags to log
-      required:
-      - id
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    ProjectName:
-      type: string
-      description: Name of the project to search for
-    FunctionTypeEnum:
-      type: string
-      enum:
-      - llm
-      - scorer
-      - task
-      - tool
-      - custom_view
-      - preprocessor
-      - facet
-      - classifier
-      - tag
-      - parameters
-      - sandbox
-      - null
-      default: scorer
-      description: The type of global function. Defaults to 'scorer'.
-    SpanAttributes:
-      type: object
+    FetchLimit:
+      type: integer
       nullable: true
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the span, for display purposes only
-        type:
-          $ref: '#/components/schemas/SpanType'
-        purpose:
-          type: string
-          nullable: true
-          enum:
-          - scorer
-          - null
-          description: A special value that indicates the span was generated by a scoring automation
-      additionalProperties:
-        nullable: true
-      description: Human-identifying attributes of the span, such as name, type, etc.
-    Version:
-      type: string
-      description: 'Retrieve a snapshot of events from a past time
+      minimum: 0
+      description: 'limit the number of traces fetched
 
 
-        The version id is essentially a filter on the latest event transaction id. You can use the `max_xact_id` returned by a past fetch as the version to reproduce that exact fetch.'
-    StartingAfter:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
+        Fetch queries may be paginated if the total result size is expected to be large (e.g. project_logs which accumulate over a long time). Note that fetch queries only support pagination in descending time order (from latest to earliest `_xact_id`. Furthermore, later pages may return rows which showed up in earlier pages, except with an earlier `_xact_id`. This happens because pagination occurs over the whole version history of the event log. You will most likely want to exclude any such duplicate, outdated rows (by `id`) from your combined result set.
 
 
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    ComparisonExperimentId:
-      type: string
-      format: uuid
-      description: The experiment to compare against, if summarizing scores and metrics. If omitted, will fall back to the `base_exp_id` stored in the experiment metadata, and then to the most recent experiment run in the same project. Must pass `summarize_scores=true` for this id to be used
-    ObjectReferenceNullish:
-      type: object
-      nullable: true
-      properties:
-        object_type:
-          type: string
-          enum:
-          - project_logs
-          - experiment
-          - dataset
-          - prompt
-          - function
-          - prompt_session
-          description: Type of the object the event is originating from.
-        object_id:
-          type: string
-          format: uuid
-          description: ID of the object the event is originating from.
-        id:
-          type: string
-          description: ID of the original event.
-        _xact_id:
-          type: string
-          nullable: true
-          description: Transaction ID of the original event.
-        created:
-          type: string
-          nullable: true
-          description: Created timestamp of the original event. Used to help sort in the UI
-      required:
-      - object_type
-      - object_id
-      - id
-      description: Indicates the event was copied from another object.
-    ProjectIdQuery:
-      type: string
-      format: uuid
-      description: Project id
-    ExperimentIdParam:
-      type: string
-      format: uuid
-      description: Experiment id
-    ExperimentName:
-      type: string
-      description: Name of the experiment to search for
+        The `limit` parameter controls the number of full traces to return. So you may end up with more individual rows than the specified limit if you are fetching events containing traces.'
     ExperimentEvent:
       type: object
       properties:
@@ -1581,45 +1014,196 @@ components:
       - experiment_id
       - span_id
       - root_span_id
-    MaxXactId:
-      type: string
-      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
-
-
-        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
-
-
-        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
-    ScoreSummary:
+    FeedbackResponseSchema:
       type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+      required:
+      - status
+    SummarizeScores:
+      type: boolean
+      nullable: true
+      description: Whether to summarize the scores and metrics. If false (or omitted), only the metadata will be returned.
+    FeedbackExperimentItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the experiment event to log feedback for. This is the row `id` returned by `POST /v1/experiment/{experiment_id}/insert`
+        scores:
+          type: object
+          nullable: true
+          additionalProperties:
+            type: number
+            nullable: true
+            minimum: 0
+            maximum: 1
+          description: A dictionary of numeric values (between 0 and 1) to log. These scores will be merged into the existing scores for the experiment event
+        expected:
+          nullable: true
+          description: The ground truth value (an arbitrary, JSON serializable object) that you'd compare to `output` to determine if your `output` value is correct or not
+        comment:
+          type: string
+          nullable: true
+          description: An optional comment string to log about the experiment event
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties:
+            nullable: true
+          description: A dictionary with additional data about the feedback. If you have a `user_id`, you can log it here and access it in the Braintrust UI. Note, this metadata does not correspond to the main event itself, but rather the audit log attached to the event.
+        source:
+          type: string
+          nullable: true
+          enum:
+          - app
+          - api
+          - external
+          - null
+          description: The source of the feedback. Must be one of "external" (default), "app", or "api"
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: A list of tags to log
+      required:
+      - id
+    SpanType:
+      type: string
+      nullable: true
+      enum:
+      - llm
+      - score
+      - function
+      - eval
+      - task
+      - tool
+      - automation
+      - facet
+      - preprocessor
+      - classifier
+      - review
+      - null
+      description: Type of the span, for display purposes only
+    Experiment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the experiment
+        project_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project that the experiment belongs under
+        name:
+          type: string
+          description: Name of the experiment. Within a project, experiment names are unique
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the experiment
+        created:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of experiment creation
+        repo_info:
+          $ref: '#/components/schemas/RepoInfo'
+        commit:
+          type: string
+          nullable: true
+          description: Commit, taken directly from `repo_info.commit`
+        base_exp_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Id of default base experiment to compare against when viewing this experiment
+        deleted_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of experiment deletion, or null if the experiment is still active
+        dataset_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Identifier of the linked dataset, or null if the experiment is not linked to a dataset
+        dataset_version:
+          type: string
+          nullable: true
+          description: Version number of the linked dataset the experiment was run against. This can be used to reproduce the experiment after the dataset has been modified.
+        internal_metadata:
+          type: object
+          nullable: true
+          properties:
+            dataset_filter:
+              type: object
+              nullable: true
+              additionalProperties:
+                nullable: true
+              description: BTQL filter payload used to evaluate a subset of a linked dataset.
+          additionalProperties:
+            nullable: true
+          description: Braintrust-controlled metadata about the experiment.
+        parameters_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Identifier of the linked saved parameters object, or null if the experiment is not linked to saved parameters
+        parameters_version:
+          type: string
+          nullable: true
+          description: Version number of the linked saved parameters object the experiment was run against.
+        public:
+          type: boolean
+          description: Whether or not the experiment is public. Public experiments can be viewed by anybody inside or outside the organization
+        user_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Identifies the user who created the experiment
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties:
+            nullable: true
+          description: User-controlled metadata about the experiment
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: A list of tags for the experiment
+      required:
+      - id
+      - project_id
+      - name
+      - public
+    SpanAttributes:
+      type: object
+      nullable: true
       properties:
         name:
           type: string
-          description: Name of the score
-        score:
-          type: number
-          minimum: 0
-          maximum: 1
-          description: Average score across all examples
-        diff:
-          type: number
-          minimum: -1
-          maximum: 1
-          description: Difference in score between the current and comparison experiment
-        improvements:
-          type: integer
-          minimum: 0
-          description: Number of improvements in the score
-        regressions:
-          type: integer
-          minimum: 0
-          description: Number of regressions in the score
-      required:
-      - name
-      - score
-      - improvements
-      - regressions
-      description: Summary of a score's performance
+          nullable: true
+          description: Name of the span, for display purposes only
+        type:
+          $ref: '#/components/schemas/SpanType'
+        purpose:
+          type: string
+          nullable: true
+          enum:
+          - scorer
+          - null
+          description: A special value that indicates the span was generated by a scoring automation
+      additionalProperties:
+        nullable: true
+      description: Human-identifying attributes of the span, such as name, type, etc.
     CreateExperiment:
       type: object
       properties:
@@ -1696,26 +1280,204 @@ components:
           description: Normally, creating an experiment with the same name as an existing experiment will return the existing one un-modified. But if `ensure_new` is true, registration will generate a new experiment with a unique name in case of a conflict.
       required:
       - project_id
-    FeedbackExperimentEventRequest:
-      type: object
-      properties:
-        feedback:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeedbackExperimentItem'
-          description: A list of experiment feedback items
-      required:
-      - feedback
-    AppLimitWithDefaultParam:
+    FetchLimitParam:
       type: integer
       nullable: true
       minimum: 0
-      default: 1000
-      description: Limit the number of objects to return
-    SummarizeScores:
-      type: boolean
+      description: 'limit the number of traces fetched
+
+
+        Fetch queries may be paginated if the total result size is expected to be large (e.g. project_logs which accumulate over a long time). Note that fetch queries only support pagination in descending time order (from latest to earliest `_xact_id`. Furthermore, later pages may return rows which showed up in earlier pages, except with an earlier `_xact_id`. This happens because pagination occurs over the whole version history of the event log. You will most likely want to exclude any such duplicate, outdated rows (by `id`) from your combined result set.
+
+
+        The `limit` parameter controls the number of full traces to return. So you may end up with more individual rows than the specified limit if you are fetching events containing traces.'
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    ComparisonExperimentId:
+      type: string
+      format: uuid
+      description: The experiment to compare against, if summarizing scores and metrics. If omitted, will fall back to the `base_exp_id` stored in the experiment metadata, and then to the most recent experiment run in the same project. Must pass `summarize_scores=true` for this id to be used
+    MaxXactId:
+      type: string
+      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
+
+
+        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
+
+
+        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
+    FunctionTypeEnum:
+      type: string
+      enum:
+      - llm
+      - scorer
+      - task
+      - tool
+      - custom_view
+      - preprocessor
+      - facet
+      - classifier
+      - tag
+      - parameters
+      - sandbox
+      - null
+      default: scorer
+      description: The type of global function. Defaults to 'scorer'.
+    InsertExperimentEventRequest:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/InsertExperimentEvent'
+          description: A list of experiment events to insert
+      required:
+      - events
+    FetchExperimentEventsResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExperimentEvent'
+          description: A list of fetched events
+        cursor:
+          type: string
+          nullable: true
+          description: 'Pagination cursor
+
+
+            Pass this string directly as the `cursor` param to your next fetch request to get the next page of results. Not provided if the returned result set is empty.'
+      required:
+      - events
+    InsertEventsResponse:
+      type: object
+      properties:
+        row_ids:
+          type: array
+          items:
+            type: string
+          description: The ids of all rows that were inserted, aligning one-to-one with the rows provided as input
+      required:
+      - row_ids
+    SavedFunctionId:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - function
+          id:
+            type: string
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - type
+        - id
+        title: function
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - global
+          name:
+            type: string
+          function_type:
+            $ref: '#/components/schemas/FunctionTypeEnum'
+        required:
+        - type
+        - name
+        title: global
+      - type: 'null'
+      description: Optional function identifier that produced the classification
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+    MetricSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the metric
+        metric:
+          type: number
+          description: Average metric across all examples
+        unit:
+          type: string
+          description: Unit label for the metric
+        diff:
+          type: number
+          description: Difference in metric between the current and comparison experiment
+        improvements:
+          type: integer
+          minimum: 0
+          description: Number of improvements in the metric
+        regressions:
+          type: integer
+          minimum: 0
+          description: Number of regressions in the metric
+      required:
+      - name
+      - metric
+      - unit
+      - improvements
+      - regressions
+      description: Summary of a metric's performance
+    ObjectReferenceNullish:
+      type: object
       nullable: true
-      description: Whether to summarize the scores and metrics. If false (or omitted), only the metadata will be returned.
+      properties:
+        object_type:
+          type: string
+          enum:
+          - project_logs
+          - experiment
+          - dataset
+          - prompt
+          - function
+          - prompt_session
+          description: Type of the object the event is originating from.
+        object_id:
+          type: string
+          format: uuid
+          description: ID of the object the event is originating from.
+        id:
+          type: string
+          description: ID of the original event.
+        _xact_id:
+          type: string
+          nullable: true
+          description: Transaction ID of the original event.
+        created:
+          type: string
+          nullable: true
+          description: Created timestamp of the original event. Used to help sort in the UI
+      required:
+      - object_type
+      - object_id
+      - id
+      description: Indicates the event was copied from another object.
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    ExperimentIdParam:
+      type: string
+      format: uuid
+      description: Experiment id
     InsertExperimentEvent:
       type: object
       properties:
@@ -1920,73 +1682,127 @@ components:
 
             If the row is being merged into an existing row, this field will be ignored.'
       description: An experiment event
-    FetchExperimentEventsResponse:
+    AppLimitWithDefaultParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      default: 1000
+      description: Limit the number of objects to return
+    ProjectIdQuery:
+      type: string
+      format: uuid
+      description: Project id
+    FetchEventsRequest:
       type: object
       properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExperimentEvent'
-          description: A list of fetched events
+        limit:
+          $ref: '#/components/schemas/FetchLimit'
         cursor:
+          $ref: '#/components/schemas/FetchPaginationCursor'
+        max_xact_id:
+          $ref: '#/components/schemas/MaxXactId'
+          nullable: true
+        max_root_span_id:
+          $ref: '#/components/schemas/MaxRootSpanId'
+          nullable: true
+        version:
+          $ref: '#/components/schemas/Version'
+          nullable: true
+    ScoreSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the score
+        score:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Average score across all examples
+        diff:
+          type: number
+          minimum: -1
+          maximum: 1
+          description: Difference in score between the current and comparison experiment
+        improvements:
+          type: integer
+          minimum: 0
+          description: Number of improvements in the score
+        regressions:
+          type: integer
+          minimum: 0
+          description: Number of regressions in the score
+      required:
+      - name
+      - score
+      - improvements
+      - regressions
+      description: Summary of a score's performance
+    PatchExperiment:
+      type: object
+      properties:
+        name:
           type: string
           nullable: true
-          description: 'Pagination cursor
-
-
-            Pass this string directly as the `cursor` param to your next fetch request to get the next page of results. Not provided if the returned result set is empty.'
-      required:
-      - events
-    SavedFunctionId:
-      anyOf:
-      - type: object
-        properties:
-          type:
+          description: Name of the experiment. Within a project, experiment names are unique
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the experiment
+        repo_info:
+          $ref: '#/components/schemas/RepoInfo'
+        base_exp_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Id of default base experiment to compare against when viewing this experiment
+        dataset_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Identifier of the linked dataset, or null if the experiment is not linked to a dataset
+        dataset_version:
+          type: string
+          nullable: true
+          description: Version number of the linked dataset the experiment was run against. This can be used to reproduce the experiment after the dataset has been modified.
+        internal_metadata:
+          type: object
+          nullable: true
+          properties:
+            dataset_filter:
+              type: object
+              nullable: true
+              additionalProperties:
+                nullable: true
+              description: BTQL filter payload used to evaluate a subset of a linked dataset.
+          additionalProperties:
+            nullable: true
+          description: Braintrust-controlled metadata about the experiment.
+        parameters_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Identifier of the linked saved parameters object, or null if the experiment is not linked to saved parameters
+        parameters_version:
+          type: string
+          nullable: true
+          description: Version number of the linked saved parameters object the experiment was run against.
+        public:
+          type: boolean
+          nullable: true
+          description: Whether or not the experiment is public. Public experiments can be viewed by anybody inside or outside the organization
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties:
+            nullable: true
+          description: User-controlled metadata about the experiment
+        tags:
+          type: array
+          nullable: true
+          items:
             type: string
-            enum:
-            - function
-          id:
-            type: string
-          version:
-            type: string
-            description: The version of the function
-        required:
-        - type
-        - id
-        title: function
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - global
-          name:
-            type: string
-          function_type:
-            $ref: '#/components/schemas/FunctionTypeEnum'
-        required:
-        - type
-        - name
-        title: global
-      - type: 'null'
-      description: Optional function identifier that produced the classification
-    SpanType:
-      type: string
-      nullable: true
-      enum:
-      - llm
-      - score
-      - function
-      - eval
-      - task
-      - tool
-      - automation
-      - facet
-      - preprocessor
-      - classifier
-      - review
-      - null
-      description: Type of the span, for display purposes only
+          description: A list of tags for the experiment
     EndingBefore:
       type: string
       format: uuid
@@ -1994,16 +1810,199 @@ components:
 
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-    InsertEventsResponse:
+    ProjectName:
+      type: string
+      description: Name of the project to search for
+    Version:
+      type: string
+      description: 'Retrieve a snapshot of events from a past time
+
+
+        The version id is essentially a filter on the latest event transaction id. You can use the `max_xact_id` returned by a past fetch as the version to reproduce that exact fetch.'
+    SummarizeExperimentResponse:
       type: object
       properties:
-        row_ids:
-          type: array
-          items:
-            type: string
-          description: The ids of all rows that were inserted, aligning one-to-one with the rows provided as input
+        project_name:
+          type: string
+          description: Name of the project that the experiment belongs to
+        experiment_name:
+          type: string
+          description: Name of the experiment
+        project_url:
+          type: string
+          format: uri
+          description: URL to the project's page in the Braintrust app
+        experiment_url:
+          type: string
+          format: uri
+          description: URL to the experiment's page in the Braintrust app
+        comparison_experiment_name:
+          type: string
+          nullable: true
+          description: The experiment which scores are baselined against
+        scores:
+          type: object
+          nullable: true
+          additionalProperties:
+            $ref: '#/components/schemas/ScoreSummary'
+          description: Summary of the experiment's scores
+        metrics:
+          type: object
+          nullable: true
+          additionalProperties:
+            $ref: '#/components/schemas/MetricSummary'
+          description: Summary of the experiment's metrics
       required:
-      - row_ids
+      - project_name
+      - experiment_name
+      - project_url
+      - experiment_url
+      description: Summary of an experiment
+    MaxRootSpanId:
+      type: string
+      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
+
+
+        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
+
+
+        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
+  parameters:
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    MaxRootSpanId:
+      schema:
+        $ref: '#/components/schemas/MaxRootSpanId'
+      required: false
+      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
+
+
+        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
+
+
+        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
+      name: max_root_span_id
+      in: query
+    FetchLimitParam:
+      schema:
+        $ref: '#/components/schemas/FetchLimitParam'
+      required: false
+      description: 'limit the number of traces fetched
+
+
+        Fetch queries may be paginated if the total result size is expected to be large (e.g. project_logs which accumulate over a long time). Note that fetch queries only support pagination in descending time order (from latest to earliest `_xact_id`. Furthermore, later pages may return rows which showed up in earlier pages, except with an earlier `_xact_id`. This happens because pagination occurs over the whole version history of the event log. You will most likely want to exclude any such duplicate, outdated rows (by `id`) from your combined result set.
+
+
+        The `limit` parameter controls the number of full traces to return. So you may end up with more individual rows than the specified limit if you are fetching events containing traces.'
+      name: limit
+      in: query
+    ExperimentName:
+      schema:
+        $ref: '#/components/schemas/ExperimentName'
+      required: false
+      description: Name of the experiment to search for
+      name: experiment_name
+      in: query
+      allowReserved: true
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
+    MaxXactId:
+      schema:
+        $ref: '#/components/schemas/MaxXactId'
+      required: false
+      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
+
+
+        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
+
+
+        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
+      name: max_xact_id
+      in: query
+    ProjectIdQuery:
+      schema:
+        $ref: '#/components/schemas/ProjectIdQuery'
+      required: false
+      description: Project id
+      name: project_id
+      in: query
+    ExperimentIdParam:
+      schema:
+        $ref: '#/components/schemas/ExperimentIdParam'
+      required: true
+      description: Experiment id
+      name: experiment_id
+      in: path
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    ProjectName:
+      schema:
+        $ref: '#/components/schemas/ProjectName'
+      required: false
+      description: Name of the project to search for
+      name: project_name
+      in: query
+      allowReserved: true
+    SummarizeScores:
+      schema:
+        $ref: '#/components/schemas/SummarizeScores'
+      required: false
+      description: Whether to summarize the scores and metrics. If false (or omitted), only the metadata will be returned.
+      name: summarize_scores
+      in: query
+    ComparisonExperimentId:
+      schema:
+        $ref: '#/components/schemas/ComparisonExperimentId'
+      required: false
+      description: The experiment to compare against, if summarizing scores and metrics. If omitted, will fall back to the `base_exp_id` stored in the experiment metadata, and then to the most recent experiment run in the same project. Must pass `summarize_scores=true` for this id to be used
+      name: comparison_experiment_id
+      in: query
+    AppLimitWithDefaultParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitWithDefaultParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+    Version:
+      schema:
+        $ref: '#/components/schemas/Version'
+      required: false
+      description: 'Retrieve a snapshot of events from a past time
+
+
+        The version id is essentially a filter on the latest event transaction id. You can use the `max_xact_id` returned by a past fetch as the version to reproduce that exact fetch.'
+      name: version
+      in: query
   securitySchemes:
     bearerAuth:
       type: http

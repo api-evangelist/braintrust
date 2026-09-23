@@ -1,7 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Braintrust Acls CORS API
+  title: Braintrust CORS API
   description: 'API specification for the backend data server. The API is hosted globally at
 
     https://api.braintrust.dev or in your own environment.
@@ -2499,99 +2499,7 @@ paths:
               schema:
                 nullable: true
 components:
-  schemas:
-    AiSecretIdParam:
-      type: string
-      format: uuid
-      description: AiSecret id
-    EnvVarIdParam:
-      type: string
-      format: uuid
-      description: EnvVar id
-    ViewIdParam:
-      type: string
-      format: uuid
-      description: View id
-    ProjectScoreIdParam:
-      type: string
-      format: uuid
-      description: ProjectScore id
-    ApiKeyIdParam:
-      type: string
-      format: uuid
-      description: ApiKey id
-    UserIdParam:
-      type: string
-      format: uuid
-      description: User id
-    ProjectTagIdParam:
-      type: string
-      format: uuid
-      description: ProjectTag id
-    DatasetIdParam:
-      type: string
-      format: uuid
-      description: Dataset id
-    GroupIdParam:
-      type: string
-      format: uuid
-      description: Group id
-    ServiceTokenIdParam:
-      type: string
-      format: uuid
-      description: ServiceToken id
-    PromptIdParam:
-      type: string
-      format: uuid
-      description: Prompt id
-    FunctionIdParam:
-      type: string
-      format: uuid
-      description: Function id
-    ExperimentIdParam:
-      type: string
-      format: uuid
-      description: Experiment id
-    AclIdParam:
-      type: string
-      format: uuid
-      description: Acl id
-    SpanIframeIdParam:
-      type: string
-      format: uuid
-      description: SpanIframe id
-    OrganizationIdParam:
-      type: string
-      format: uuid
-      description: Organization id
-    RoleIdParam:
-      type: string
-      format: uuid
-      description: Role id
-    DatasetSnapshotIdParam:
-      type: string
-      format: uuid
-      description: DatasetSnapshot id
-    McpServerIdParam:
-      type: string
-      format: uuid
-      description: McpServer id
-    ProjectAutomationIdParam:
-      type: string
-      format: uuid
-      description: ProjectAutomation id
-    ProjectIdParam:
-      type: string
-      format: uuid
-      description: Project id
   parameters:
-    DatasetIdParam:
-      schema:
-        $ref: '#/components/schemas/DatasetIdParam'
-      required: true
-      description: Dataset id
-      name: dataset_id
-      in: path
     SpanIframeIdParam:
       schema:
         $ref: '#/components/schemas/SpanIframeIdParam'
@@ -2599,12 +2507,82 @@ components:
       description: SpanIframe id
       name: span_iframe_id
       in: path
+    AclIdParam:
+      schema:
+        $ref: '#/components/schemas/AclIdParam'
+      required: true
+      description: Acl id
+      name: acl_id
+      in: path
+    PromptIdParam:
+      schema:
+        $ref: '#/components/schemas/PromptIdParam'
+      required: true
+      description: Prompt id
+      name: prompt_id
+      in: path
+    AiSecretIdParam:
+      schema:
+        $ref: '#/components/schemas/AiSecretIdParam'
+      required: true
+      description: AiSecret id
+      name: ai_secret_id
+      in: path
+    DatasetIdParam:
+      schema:
+        $ref: '#/components/schemas/DatasetIdParam'
+      required: true
+      description: Dataset id
+      name: dataset_id
+      in: path
+    EnvVarIdParam:
+      schema:
+        $ref: '#/components/schemas/EnvVarIdParam'
+      required: true
+      description: EnvVar id
+      name: env_var_id
+      in: path
+    RoleIdParam:
+      schema:
+        $ref: '#/components/schemas/RoleIdParam'
+      required: true
+      description: Role id
+      name: role_id
+      in: path
+    ProjectIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectIdParam'
+      required: true
+      description: Project id
+      name: project_id
+      in: path
+    ProjectAutomationIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectAutomationIdParam'
+      required: true
+      description: ProjectAutomation id
+      name: project_automation_id
+      in: path
     ExperimentIdParam:
       schema:
         $ref: '#/components/schemas/ExperimentIdParam'
       required: true
       description: Experiment id
       name: experiment_id
+      in: path
+    FunctionIdParam:
+      schema:
+        $ref: '#/components/schemas/FunctionIdParam'
+      required: true
+      description: Function id
+      name: function_id
+      in: path
+    OrganizationIdParam:
+      schema:
+        $ref: '#/components/schemas/OrganizationIdParam'
+      required: true
+      description: Organization id
+      name: organization_id
       in: path
     DatasetSnapshotIdParam:
       schema:
@@ -2627,103 +2605,12 @@ components:
       description: McpServer id
       name: mcp_server_id
       in: path
-    ProjectIdParam:
-      schema:
-        $ref: '#/components/schemas/ProjectIdParam'
-      required: true
-      description: Project id
-      name: project_id
-      in: path
-    ProjectScoreIdParam:
-      schema:
-        $ref: '#/components/schemas/ProjectScoreIdParam'
-      required: true
-      description: ProjectScore id
-      name: project_score_id
-      in: path
-    AiSecretIdParam:
-      schema:
-        $ref: '#/components/schemas/AiSecretIdParam'
-      required: true
-      description: AiSecret id
-      name: ai_secret_id
-      in: path
-    PromptIdParam:
-      schema:
-        $ref: '#/components/schemas/PromptIdParam'
-      required: true
-      description: Prompt id
-      name: prompt_id
-      in: path
-    ProjectAutomationIdParam:
-      schema:
-        $ref: '#/components/schemas/ProjectAutomationIdParam'
-      required: true
-      description: ProjectAutomation id
-      name: project_automation_id
-      in: path
-    ApiKeyIdParam:
-      schema:
-        $ref: '#/components/schemas/ApiKeyIdParam'
-      required: true
-      description: ApiKey id
-      name: api_key_id
-      in: path
-    RoleIdParam:
-      schema:
-        $ref: '#/components/schemas/RoleIdParam'
-      required: true
-      description: Role id
-      name: role_id
-      in: path
-    FunctionIdParam:
-      schema:
-        $ref: '#/components/schemas/FunctionIdParam'
-      required: true
-      description: Function id
-      name: function_id
-      in: path
-    AclIdParam:
-      schema:
-        $ref: '#/components/schemas/AclIdParam'
-      required: true
-      description: Acl id
-      name: acl_id
-      in: path
     GroupIdParam:
       schema:
         $ref: '#/components/schemas/GroupIdParam'
       required: true
       description: Group id
       name: group_id
-      in: path
-    OrganizationIdParam:
-      schema:
-        $ref: '#/components/schemas/OrganizationIdParam'
-      required: true
-      description: Organization id
-      name: organization_id
-      in: path
-    UserIdParam:
-      schema:
-        $ref: '#/components/schemas/UserIdParam'
-      required: true
-      description: User id
-      name: user_id
-      in: path
-    EnvVarIdParam:
-      schema:
-        $ref: '#/components/schemas/EnvVarIdParam'
-      required: true
-      description: EnvVar id
-      name: env_var_id
-      in: path
-    ViewIdParam:
-      schema:
-        $ref: '#/components/schemas/ViewIdParam'
-      required: true
-      description: View id
-      name: view_id
       in: path
     ProjectTagIdParam:
       schema:
@@ -2732,6 +2619,119 @@ components:
       description: ProjectTag id
       name: project_tag_id
       in: path
+    ViewIdParam:
+      schema:
+        $ref: '#/components/schemas/ViewIdParam'
+      required: true
+      description: View id
+      name: view_id
+      in: path
+    ApiKeyIdParam:
+      schema:
+        $ref: '#/components/schemas/ApiKeyIdParam'
+      required: true
+      description: ApiKey id
+      name: api_key_id
+      in: path
+    UserIdParam:
+      schema:
+        $ref: '#/components/schemas/UserIdParam'
+      required: true
+      description: User id
+      name: user_id
+      in: path
+    ProjectScoreIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectScoreIdParam'
+      required: true
+      description: ProjectScore id
+      name: project_score_id
+      in: path
+  schemas:
+    UserIdParam:
+      type: string
+      format: uuid
+      description: User id
+    EnvVarIdParam:
+      type: string
+      format: uuid
+      description: EnvVar id
+    ApiKeyIdParam:
+      type: string
+      format: uuid
+      description: ApiKey id
+    DatasetSnapshotIdParam:
+      type: string
+      format: uuid
+      description: DatasetSnapshot id
+    AclIdParam:
+      type: string
+      format: uuid
+      description: Acl id
+    ProjectAutomationIdParam:
+      type: string
+      format: uuid
+      description: ProjectAutomation id
+    DatasetIdParam:
+      type: string
+      format: uuid
+      description: Dataset id
+    OrganizationIdParam:
+      type: string
+      format: uuid
+      description: Organization id
+    ServiceTokenIdParam:
+      type: string
+      format: uuid
+      description: ServiceToken id
+    AiSecretIdParam:
+      type: string
+      format: uuid
+      description: AiSecret id
+    FunctionIdParam:
+      type: string
+      format: uuid
+      description: Function id
+    RoleIdParam:
+      type: string
+      format: uuid
+      description: Role id
+    ExperimentIdParam:
+      type: string
+      format: uuid
+      description: Experiment id
+    McpServerIdParam:
+      type: string
+      format: uuid
+      description: McpServer id
+    SpanIframeIdParam:
+      type: string
+      format: uuid
+      description: SpanIframe id
+    ViewIdParam:
+      type: string
+      format: uuid
+      description: View id
+    ProjectTagIdParam:
+      type: string
+      format: uuid
+      description: ProjectTag id
+    PromptIdParam:
+      type: string
+      format: uuid
+      description: Prompt id
+    ProjectScoreIdParam:
+      type: string
+      format: uuid
+      description: ProjectScore id
+    GroupIdParam:
+      type: string
+      format: uuid
+      description: Group id
+    ProjectIdParam:
+      type: string
+      format: uuid
+      description: Project id
   securitySchemes:
     bearerAuth:
       type: http

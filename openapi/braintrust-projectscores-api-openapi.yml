@@ -1,7 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Braintrust Acls ProjectScores API
+  title: Braintrust Project Scores API
   description: 'API specification for the backend data server. The API is hosted globally at
 
     https://api.braintrust.dev or in your own environment.
@@ -457,213 +457,92 @@ paths:
               schema:
                 nullable: true
 components:
-  schemas:
-    SpanScope:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - span
-      required:
-      - type
-      description: Process individual spans
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    ProjectScore:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the project score
-        project_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the project that the project score belongs under
-        user_id:
-          type: string
-          format: uuid
-        created:
-          type: string
-          nullable: true
-          format: date-time
-          description: Date of project score creation
-        name:
-          type: string
-          description: Name of the project score
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the project score
-        score_type:
-          $ref: '#/components/schemas/ProjectScoreType'
-        categories:
-          $ref: '#/components/schemas/ProjectScoreCategories'
-        config:
-          $ref: '#/components/schemas/ProjectScoreConfig'
-        position:
-          type: string
-          nullable: true
-          description: An optional LexoRank-based string that sets the sort position for the score in the UI
-      required:
-      - id
-      - project_id
-      - user_id
-      - name
-      - score_type
-      description: A project score is a user-configured score, which can be manually-labeled through the UI
-    ProjectScoreType:
-      type: string
-      enum:
-      - slider
-      - categorical
-      - weighted
-      - minimum
-      - maximum
-      - online
-      - free-form
-      description: The type of the configured score
-      title: project_score_type_single
-    ProjectScoreIdParam:
-      type: string
-      format: uuid
-      description: ProjectScore id
-    GroupScope:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - group
-        group_by:
-          type: string
-          description: Field path to group by, e.g. metadata.session_id
-        idle_seconds:
-          type: number
-          description: 'Optional: trigger after this many seconds of inactivity'
-      required:
-      - type
-      - group_by
-      description: Process spans/traces grouped by a field (e.g., session_id)
-    TraceScope:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - trace
-        idle_seconds:
-          type: number
-          description: 'Consider trace complete after this many seconds of inactivity (default: 30)'
-      required:
-      - type
-      description: Process entire traces (all spans sharing the same root_span_id)
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
-    PatchProjectScore:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the project score
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the project score
-        score_type:
-          $ref: '#/components/schemas/ProjectScoreType'
-          nullable: true
-        categories:
-          $ref: '#/components/schemas/ProjectScoreCategories'
-        config:
-          $ref: '#/components/schemas/ProjectScoreConfig'
-      description: A project score is a user-configured score, which can be manually-labeled through the UI
-    CreateProjectScore:
-      type: object
-      properties:
-        project_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the project that the project score belongs under
-        name:
-          type: string
-          description: Name of the project score
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the project score
-        score_type:
-          $ref: '#/components/schemas/ProjectScoreType'
-        categories:
-          $ref: '#/components/schemas/ProjectScoreCategories'
-        config:
-          $ref: '#/components/schemas/ProjectScoreConfig'
-      required:
-      - project_id
-      - name
-      - score_type
-      description: A project score is a user-configured score, which can be manually-labeled through the UI
+  parameters:
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
     Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
     ProjectScoreName:
-      type: string
+      schema:
+        $ref: '#/components/schemas/ProjectScoreName'
+      required: false
       description: Name of the project_score to search for
-    ProjectScoreConfig:
-      type: object
-      nullable: true
-      properties:
-        multi_select:
-          type: boolean
-          nullable: true
-        destination:
-          type: string
-          nullable: true
-        online:
-          $ref: '#/components/schemas/OnlineScoreConfig'
-    ProjectName:
-      type: string
-      description: Name of the project to search for
-    FunctionTypeEnum:
-      type: string
-      enum:
-      - llm
-      - scorer
-      - task
-      - tool
-      - custom_view
-      - preprocessor
-      - facet
-      - classifier
-      - tag
-      - parameters
-      - sandbox
-      - null
-      default: scorer
-      description: The type of global function. Defaults to 'scorer'.
+      name: project_score_name
+      in: query
+      allowReserved: true
     StartingAfter:
-      type: string
-      format: uuid
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
       description: 'Pagination cursor id.
 
 
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
     ProjectIdQuery:
-      type: string
-      format: uuid
+      schema:
+        $ref: '#/components/schemas/ProjectIdQuery'
+      required: false
       description: Project id
+      name: project_id
+      in: query
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    ProjectName:
+      schema:
+        $ref: '#/components/schemas/ProjectName'
+      required: false
+      description: Name of the project to search for
+      name: project_name
+      in: query
+      allowReserved: true
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+    ProjectScoreIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectScoreIdParam'
+      required: true
+      description: ProjectScore id
+      name: project_score_id
+      in: path
+    ProjectScoreType:
+      schema:
+        anyOf:
+        - $ref: '#/components/schemas/ProjectScoreType'
+        - type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ProjectScoreType'
+            - title: project_score_type
+      required: false
+      name: score_type
+      in: query
+  schemas:
     ProjectScoreCategories:
       anyOf:
       - type: array
@@ -684,6 +563,36 @@ components:
         description: For minimum-type project scores, the list of included scores
         title: minimum
       - type: 'null'
+    TraceScope:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - trace
+        idle_seconds:
+          type: number
+          description: 'Consider trace complete after this many seconds of inactivity (default: 30)'
+      required:
+      - type
+      description: Process entire traces (all spans sharing the same root_span_id)
+    GroupScope:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - group
+        group_by:
+          type: string
+          description: Field path to group by, e.g. metadata.session_id
+        idle_seconds:
+          type: number
+          description: 'Optional: trigger after this many seconds of inactivity'
+      required:
+      - type
+      - group_by
+      description: Process spans/traces grouped by a field (e.g., session_id)
     OnlineScoreConfig:
       type: object
       nullable: true
@@ -757,19 +666,41 @@ components:
       required:
       - sampling_rate
       - scorers
-    ProjectScoreCategory:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the category
-        value:
-          type: number
-          description: Numerical value of the category. Must be between 0 and 1, inclusive
-      required:
-      - name
-      - value
-      description: For categorical-type project scores, defines a single category
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    FunctionTypeEnum:
+      type: string
+      enum:
+      - llm
+      - scorer
+      - task
+      - tool
+      - custom_view
+      - preprocessor
+      - facet
+      - classifier
+      - tag
+      - parameters
+      - sandbox
+      - null
+      default: scorer
+      description: The type of global function. Defaults to 'scorer'.
+    ProjectScoreName:
+      type: string
+      description: Name of the project_score to search for
+    ProjectScoreType:
+      type: string
+      enum:
+      - slider
+      - categorical
+      - weighted
+      - minimum
+      - maximum
+      - online
+      - free-form
+      description: The type of the configured score
+      title: project_score_type_single
     SavedFunctionId:
       anyOf:
       - type: object
@@ -803,6 +734,113 @@ components:
         title: global
       - type: 'null'
       description: Optional function identifier that produced the classification
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+    CreateProjectScore:
+      type: object
+      properties:
+        project_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project that the project score belongs under
+        name:
+          type: string
+          description: Name of the project score
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the project score
+        score_type:
+          $ref: '#/components/schemas/ProjectScoreType'
+        categories:
+          $ref: '#/components/schemas/ProjectScoreCategories'
+        config:
+          $ref: '#/components/schemas/ProjectScoreConfig'
+      required:
+      - project_id
+      - name
+      - score_type
+      description: A project score is a user-configured score, which can be manually-labeled through the UI
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    ProjectScore:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project score
+        project_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project that the project score belongs under
+        user_id:
+          type: string
+          format: uuid
+        created:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of project score creation
+        name:
+          type: string
+          description: Name of the project score
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the project score
+        score_type:
+          $ref: '#/components/schemas/ProjectScoreType'
+        categories:
+          $ref: '#/components/schemas/ProjectScoreCategories'
+        config:
+          $ref: '#/components/schemas/ProjectScoreConfig'
+        position:
+          type: string
+          nullable: true
+          description: An optional LexoRank-based string that sets the sort position for the score in the UI
+      required:
+      - id
+      - project_id
+      - user_id
+      - name
+      - score_type
+      description: A project score is a user-configured score, which can be manually-labeled through the UI
+    ProjectIdQuery:
+      type: string
+      format: uuid
+      description: Project id
+    PatchProjectScore:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: Name of the project score
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the project score
+        score_type:
+          $ref: '#/components/schemas/ProjectScoreType'
+          nullable: true
+        categories:
+          $ref: '#/components/schemas/ProjectScoreCategories'
+        config:
+          $ref: '#/components/schemas/ProjectScoreConfig'
+      description: A project score is a user-configured score, which can be manually-labeled through the UI
     EndingBefore:
       type: string
       format: uuid
@@ -810,91 +848,53 @@ components:
 
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-  parameters:
-    EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
-    StartingAfter:
-      schema:
-        $ref: '#/components/schemas/StartingAfter'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
-      in: query
-    AppLimitParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
-    ProjectScoreIdParam:
-      schema:
-        $ref: '#/components/schemas/ProjectScoreIdParam'
-      required: true
-      description: ProjectScore id
-      name: project_score_id
-      in: path
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
-    ProjectScoreName:
-      schema:
-        $ref: '#/components/schemas/ProjectScoreName'
-      required: false
-      description: Name of the project_score to search for
-      name: project_score_name
-      in: query
-      allowReserved: true
-    ProjectIdQuery:
-      schema:
-        $ref: '#/components/schemas/ProjectIdQuery'
-      required: false
-      description: Project id
-      name: project_id
-      in: query
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
-    ProjectScoreType:
-      schema:
-        anyOf:
-        - $ref: '#/components/schemas/ProjectScoreType'
-        - type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/ProjectScoreType'
-            - title: project_score_type
-      required: false
-      name: score_type
-      in: query
     ProjectName:
-      schema:
-        $ref: '#/components/schemas/ProjectName'
-      required: false
+      type: string
       description: Name of the project to search for
-      name: project_name
-      in: query
-      allowReserved: true
+    ProjectScoreIdParam:
+      type: string
+      format: uuid
+      description: ProjectScore id
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    SpanScope:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - span
+      required:
+      - type
+      description: Process individual spans
+    ProjectScoreConfig:
+      type: object
+      nullable: true
+      properties:
+        multi_select:
+          type: boolean
+          nullable: true
+        destination:
+          type: string
+          nullable: true
+        online:
+          $ref: '#/components/schemas/OnlineScoreConfig'
+    ProjectScoreCategory:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the category
+        value:
+          type: number
+          description: Numerical value of the category. Must be between 0 and 1, inclusive
+      required:
+      - name
+      - value
+      description: For categorical-type project scores, defines a single category
   securitySchemes:
     bearerAuth:
       type: http

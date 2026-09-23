@@ -1,7 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Braintrust Acls ProjectTags API
+  title: Braintrust Env Vars API
   description: 'API specification for the backend data server. The API is hosted globally at
 
     https://api.braintrust.dev or in your own environment.
@@ -16,32 +16,65 @@ security:
 - bearerAuth: []
 - {}
 tags:
-- name: ProjectTags
+- name: Env Vars
 paths:
-  /v1/project_tag:
+  /v1/env_var:
     post:
       tags:
-      - ProjectTags
+      - Env Vars
       security:
       - bearerAuth: []
       - {}
-      operationId: postProjectTag
-      description: Create a new project_tag. If there is an existing project_tag in the project with the same name as the one specified in the request, will return the existing project_tag unmodified
-      summary: Create project_tag
+      operationId: postEnvVar
+      description: Create a new env_var. If there is an existing env_var with the same name as the one specified in the request, will return the existing env_var unmodified
+      summary: Create env_var
       requestBody:
-        description: Any desired information about the new project_tag object
+        description: Any desired information about the new env_var object
         required: false
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateProjectTag'
+              type: object
+              properties:
+                object_type:
+                  type: string
+                  enum:
+                  - organization
+                  - project
+                  - function
+                  description: The type of the object the environment variable is scoped for
+                object_id:
+                  type: string
+                  format: uuid
+                  description: The id of the object the environment variable is scoped for
+                name:
+                  type: string
+                  description: The name of the environment variable
+                value:
+                  type: string
+                  nullable: true
+                  description: The value of the environment variable. Will be encrypted at rest.
+                metadata:
+                  type: object
+                  nullable: true
+                  additionalProperties:
+                    nullable: true
+                  description: Optional metadata associated with the environment variable when managed via the function secrets API
+                secret_type:
+                  type: string
+                  nullable: true
+                  description: Optional classification for the secret (for example, the AI provider name)
+              required:
+              - object_type
+              - object_id
+              - name
       responses:
         '200':
-          description: Returns the new project_tag object
+          description: Returns the new env_var object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectTag'
+                $ref: '#/components/schemas/EnvVar'
         '400':
           description: The request was unacceptable, often due to missing a required parameter
           content:
@@ -93,27 +126,60 @@ paths:
                 nullable: true
     put:
       tags:
-      - ProjectTags
+      - Env Vars
       security:
       - bearerAuth: []
       - {}
-      operationId: putProjectTag
-      description: Create or replace project_tag. If there is an existing project_tag in the project with the same name as the one specified in the request, will replace the existing project_tag with the provided fields
-      summary: Create or replace project_tag
+      operationId: putEnvVar
+      description: Create or replace env_var. If there is an existing env_var with the same name as the one specified in the request, will replace the existing env_var with the provided fields
+      summary: Create or replace env_var
       requestBody:
-        description: Any desired information about the new project_tag object
+        description: Any desired information about the new env_var object
         required: false
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateProjectTag'
+              type: object
+              properties:
+                object_type:
+                  type: string
+                  enum:
+                  - organization
+                  - project
+                  - function
+                  description: The type of the object the environment variable is scoped for
+                object_id:
+                  type: string
+                  format: uuid
+                  description: The id of the object the environment variable is scoped for
+                name:
+                  type: string
+                  description: The name of the environment variable
+                value:
+                  type: string
+                  nullable: true
+                  description: The value of the environment variable. Will be encrypted at rest.
+                metadata:
+                  type: object
+                  nullable: true
+                  additionalProperties:
+                    nullable: true
+                  description: Optional metadata associated with the environment variable when managed via the function secrets API
+                secret_type:
+                  type: string
+                  nullable: true
+                  description: Optional classification for the secret (for example, the AI provider name)
+              required:
+              - object_type
+              - object_id
+              - name
       responses:
         '200':
-          description: Returns the new project_tag object
+          description: Returns the new env_var object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectTag'
+                $ref: '#/components/schemas/EnvVar'
         '400':
           description: The request was unacceptable, often due to missing a required parameter
           content:
@@ -164,26 +230,23 @@ paths:
               schema:
                 nullable: true
     get:
-      operationId: getProjectTag
+      operationId: getEnvVar
       tags:
-      - ProjectTags
-      description: List out all project_tags. The project_tags are sorted by creation date, with the most recently-created project_tags coming first
-      summary: List project_tags
+      - Env Vars
+      description: List out all env_vars. The env_vars are sorted by creation date, with the most recently-created env_vars coming first
+      summary: List env_vars
       security:
       - bearerAuth: []
       - {}
       parameters:
       - $ref: '#/components/parameters/AppLimitParam'
-      - $ref: '#/components/parameters/StartingAfter'
-      - $ref: '#/components/parameters/EndingBefore'
       - $ref: '#/components/parameters/Ids'
-      - $ref: '#/components/parameters/ProjectTagName'
-      - $ref: '#/components/parameters/ProjectName'
-      - $ref: '#/components/parameters/ProjectIdQuery'
-      - $ref: '#/components/parameters/OrgName'
+      - $ref: '#/components/parameters/EnvVarName'
+      - $ref: '#/components/parameters/EnvVarObjectType'
+      - $ref: '#/components/parameters/EnvVarObjectId'
       responses:
         '200':
-          description: Returns a list of project_tag objects
+          description: Returns a list of env_var objects
           content:
             application/json:
               schema:
@@ -192,8 +255,8 @@ paths:
                   objects:
                     type: array
                     items:
-                      $ref: '#/components/schemas/ProjectTag'
-                    description: A list of project_tag objects
+                      $ref: '#/components/schemas/EnvVar'
+                    description: A list of env_var objects
                 required:
                 - objects
                 additionalProperties: false
@@ -246,25 +309,25 @@ paths:
             application/json:
               schema:
                 nullable: true
-  /v1/project_tag/{project_tag_id}:
+  /v1/env_var/{env_var_id}:
     get:
-      operationId: getProjectTagId
+      operationId: getEnvVarId
       tags:
-      - ProjectTags
-      description: Get a project_tag object by its id
-      summary: Get project_tag
+      - Env Vars
+      description: Get an env_var object by its id
+      summary: Get env_var
       security:
       - bearerAuth: []
       - {}
       parameters:
-      - $ref: '#/components/parameters/ProjectTagIdParam'
+      - $ref: '#/components/parameters/EnvVarIdParam'
       responses:
         '200':
-          description: Returns the project_tag object
+          description: Returns the env_var object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectTag'
+                $ref: '#/components/schemas/EnvVar'
         '400':
           description: The request was unacceptable, often due to missing a required parameter
           content:
@@ -315,30 +378,50 @@ paths:
               schema:
                 nullable: true
     patch:
-      operationId: patchProjectTagId
+      operationId: patchEnvVarId
       tags:
-      - ProjectTags
-      description: Partially update a project_tag object. Specify the fields to update in the payload. Any object-type fields will be deep-merged with existing content. Currently we do not support removing fields or setting them to null.
-      summary: Partially update project_tag
+      - Env Vars
+      description: Partially update an env_var object. Specify the fields to update in the payload. Any object-type fields will be deep-merged with existing content. Currently we do not support removing fields or setting them to null.
+      summary: Partially update env_var
       security:
       - bearerAuth: []
       - {}
       parameters:
-      - $ref: '#/components/parameters/ProjectTagIdParam'
+      - $ref: '#/components/parameters/EnvVarIdParam'
       requestBody:
         description: Fields to update
         required: false
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchProjectTag'
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the environment variable
+                value:
+                  type: string
+                  nullable: true
+                  description: The value of the environment variable. Will be encrypted at rest.
+                metadata:
+                  type: object
+                  nullable: true
+                  additionalProperties:
+                    nullable: true
+                  description: Optional metadata associated with the environment variable when managed via the function secrets API
+                secret_type:
+                  type: string
+                  nullable: true
+                  description: Optional classification for the secret (for example, the AI provider name)
+              required:
+              - name
       responses:
         '200':
-          description: Returns the project_tag object
+          description: Returns the env_var object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectTag'
+                $ref: '#/components/schemas/EnvVar'
         '400':
           description: The request was unacceptable, often due to missing a required parameter
           content:
@@ -389,23 +472,23 @@ paths:
               schema:
                 nullable: true
     delete:
-      operationId: deleteProjectTagId
+      operationId: deleteEnvVarId
       tags:
-      - ProjectTags
-      description: Delete a project_tag object by its id
-      summary: Delete project_tag
+      - Env Vars
+      description: Delete an env_var object by its id
+      summary: Delete env_var
       security:
       - bearerAuth: []
       - {}
       parameters:
-      - $ref: '#/components/parameters/ProjectTagIdParam'
+      - $ref: '#/components/parameters/EnvVarIdParam'
       responses:
         '200':
-          description: Returns the deleted project_tag object
+          description: Returns the deleted env_var object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectTag'
+                $ref: '#/components/schemas/EnvVar'
         '400':
           description: The request was unacceptable, often due to missing a required parameter
           content:
@@ -456,107 +539,7 @@ paths:
               schema:
                 nullable: true
 components:
-  parameters:
-    EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
-    StartingAfter:
-      schema:
-        $ref: '#/components/schemas/StartingAfter'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
-      in: query
-    AppLimitParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
-    ProjectTagName:
-      schema:
-        $ref: '#/components/schemas/ProjectTagName'
-      required: false
-      description: Name of the project_tag to search for
-      name: project_tag_name
-      in: query
-      allowReserved: true
-    ProjectIdQuery:
-      schema:
-        $ref: '#/components/schemas/ProjectIdQuery'
-      required: false
-      description: Project id
-      name: project_id
-      in: query
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
-    ProjectTagIdParam:
-      schema:
-        $ref: '#/components/schemas/ProjectTagIdParam'
-      required: true
-      description: ProjectTag id
-      name: project_tag_id
-      in: path
-    ProjectName:
-      schema:
-        $ref: '#/components/schemas/ProjectName'
-      required: false
-      description: Name of the project to search for
-      name: project_name
-      in: query
-      allowReserved: true
   schemas:
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    PatchProjectTag:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the project tag
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the project tag
-        color:
-          type: string
-          nullable: true
-          description: Color of the tag for the UI
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
-    ProjectTagIdParam:
-      type: string
-      format: uuid
-      description: ProjectTag id
     Ids:
       anyOf:
       - type: string
@@ -566,91 +549,141 @@ components:
           type: string
           format: uuid
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    ProjectTag:
+    EnvVarIdParam:
+      type: string
+      format: uuid
+      description: EnvVar id
+    EnvVarObjectId:
+      type: string
+      format: uuid
+      description: The id of the object the environment variable is scoped for
+    EnvVarName:
+      type: string
+      description: Name of the env_var to search for
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    EnvVarObjectType:
+      type: string
+      enum:
+      - organization
+      - project
+      - function
+      description: The type of the object the environment variable is scoped for
+    EnvVar:
       type: object
       properties:
         id:
           type: string
           format: uuid
-          description: Unique identifier for the project tag
-        project_id:
+          description: Unique identifier for the environment variable
+        object_type:
+          type: string
+          enum:
+          - organization
+          - project
+          - function
+          description: The type of the object the environment variable is scoped for
+        object_id:
           type: string
           format: uuid
-          description: Unique identifier for the project that the project tag belongs under
-        user_id:
+          description: The id of the object the environment variable is scoped for
+        name:
           type: string
-          format: uuid
+          description: The name of the environment variable
         created:
           type: string
           nullable: true
           format: date-time
-          description: Date of project tag creation
-        name:
-          type: string
-          description: Name of the project tag
-        description:
+          description: Date of environment variable creation
+        secret_updated_at:
           type: string
           nullable: true
-          description: Textual description of the project tag
-        color:
+          format: date-time
+          description: Date of last update to the encrypted secret value itself
+        secret_updated_by_user_id:
           type: string
           nullable: true
-          description: Color of the tag for the UI
-        position:
+          format: uuid
+          description: User id of the last update to the encrypted secret value
+        used:
           type: string
           nullable: true
-          description: An optional LexoRank-based string that sets the sort position for the tag in the UI
+          format: date-time
+          description: Date the environment variable was last used
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties:
+            nullable: true
+          description: Optional metadata associated with the environment variable when managed via the function secrets API
+        preview_secret:
+          type: string
+          nullable: true
+          description: Redacted preview of the stored secret value
+        secret_type:
+          type: string
+          nullable: true
+          description: Optional classification for the secret (for example, the AI provider name)
+        secret_category:
+          type: string
+          enum:
+          - env_var
+          - ai_provider
+          - sandbox_provider
+          default: env_var
+          description: 'The category of the secret: env_var for regular environment variables, ai_provider for AI provider API keys'
       required:
       - id
-      - project_id
-      - user_id
+      - object_type
+      - object_id
       - name
-      description: A project tag is a user-configured tag for tracking and filtering your experiments, logs, and other data
-    CreateProjectTag:
-      type: object
-      properties:
-        project_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the project that the project tag belongs under
-        name:
-          type: string
-          description: Name of the project tag
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the project tag
-        color:
-          type: string
-          nullable: true
-          description: Color of the tag for the UI
-      required:
-      - project_id
-      - name
-    ProjectName:
-      type: string
-      description: Name of the project to search for
-    StartingAfter:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    ProjectTagName:
-      type: string
-      description: Name of the project_tag to search for
-    ProjectIdQuery:
-      type: string
-      format: uuid
-      description: Project id
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+  parameters:
+    EnvVarIdParam:
+      schema:
+        $ref: '#/components/schemas/EnvVarIdParam'
+      required: true
+      description: EnvVar id
+      name: env_var_id
+      in: path
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    EnvVarObjectType:
+      schema:
+        $ref: '#/components/schemas/EnvVarObjectType'
+      required: false
+      description: The type of the object the environment variable is scoped for
+      name: object_type
+      in: query
+    EnvVarName:
+      schema:
+        $ref: '#/components/schemas/EnvVarName'
+      required: false
+      description: Name of the env_var to search for
+      name: env_var_name
+      in: query
+      allowReserved: true
+    EnvVarObjectId:
+      schema:
+        $ref: '#/components/schemas/EnvVarObjectId'
+      required: false
+      description: The id of the object the environment variable is scoped for
+      name: object_id
+      in: query
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
   securitySchemes:
     bearerAuth:
       type: http

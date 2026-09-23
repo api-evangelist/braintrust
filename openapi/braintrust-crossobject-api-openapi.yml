@@ -1,7 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Braintrust Acls CrossObject API
+  title: Braintrust Cross Object API
   description: 'API specification for the backend data server. The API is hosted globally at
 
     https://api.braintrust.dev or in your own environment.
@@ -244,6 +244,105 @@ components:
 
             If the row is being merged into an existing row, this field will be ignored.'
       description: A dataset event
+    FeedbackDatasetItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the dataset event to log feedback for. This is the row `id` returned by `POST /v1/dataset/{dataset_id}/insert`
+        comment:
+          type: string
+          nullable: true
+          description: An optional comment string to log about the dataset event
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties:
+            nullable: true
+          description: A dictionary with additional data about the feedback. If you have a `user_id`, you can log it here and access it in the Braintrust UI. Note, this metadata does not correspond to the main event itself, but rather the audit log attached to the event.
+        source:
+          type: string
+          nullable: true
+          enum:
+          - app
+          - api
+          - external
+          - null
+          description: The source of the feedback. Must be one of "external" (default), "app", or "api"
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: A list of tags to log
+      required:
+      - id
+    FeedbackProjectLogsItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the project logs event to log feedback for. This is the row `id` returned by `POST /v1/project_logs/{project_id}/insert`
+        scores:
+          type: object
+          nullable: true
+          additionalProperties:
+            type: number
+            nullable: true
+            minimum: 0
+            maximum: 1
+          description: A dictionary of numeric values (between 0 and 1) to log. These scores will be merged into the existing scores for the project logs event
+        expected:
+          nullable: true
+          description: The ground truth value (an arbitrary, JSON serializable object) that you'd compare to `output` to determine if your `output` value is correct or not
+        comment:
+          type: string
+          nullable: true
+          description: An optional comment string to log about the project logs event
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties:
+            nullable: true
+          description: A dictionary with additional data about the feedback. If you have a `user_id`, you can log it here and access it in the Braintrust UI. Note, this metadata does not correspond to the main event itself, but rather the audit log attached to the event.
+        source:
+          type: string
+          nullable: true
+          enum:
+          - app
+          - api
+          - external
+          - null
+          description: The source of the feedback. Must be one of "external" (default), "app", or "api"
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: A list of tags to log
+      required:
+      - id
+    CrossObjectInsertResponse:
+      type: object
+      properties:
+        experiment:
+          type: object
+          nullable: true
+          additionalProperties:
+            $ref: '#/components/schemas/InsertEventsResponse'
+          description: A mapping from experiment id to row ids for inserted `events`
+        dataset:
+          type: object
+          nullable: true
+          additionalProperties:
+            $ref: '#/components/schemas/InsertEventsResponse'
+          description: A mapping from dataset id to row ids for inserted `events`
+        project_logs:
+          type: object
+          nullable: true
+          additionalProperties:
+            $ref: '#/components/schemas/InsertEventsResponse'
+          description: A mapping from project id to row ids for inserted `events`
     InsertProjectLogsEvent:
       type: object
       properties:
@@ -448,6 +547,16 @@ components:
 
             If the row is being merged into an existing row, this field will be ignored.'
       description: A project logs event
+    InsertEventsResponse:
+      type: object
+      properties:
+        row_ids:
+          type: array
+          items:
+            type: string
+          description: The ids of all rows that were inserted, aligning one-to-one with the rows provided as input
+      required:
+      - row_ids
     FeedbackExperimentItem:
       type: object
       properties:
@@ -493,6 +602,117 @@ components:
           description: A list of tags to log
       required:
       - id
+    ObjectReferenceNullish:
+      type: object
+      nullable: true
+      properties:
+        object_type:
+          type: string
+          enum:
+          - project_logs
+          - experiment
+          - dataset
+          - prompt
+          - function
+          - prompt_session
+          description: Type of the object the event is originating from.
+        object_id:
+          type: string
+          format: uuid
+          description: ID of the object the event is originating from.
+        id:
+          type: string
+          description: ID of the original event.
+        _xact_id:
+          type: string
+          nullable: true
+          description: Transaction ID of the original event.
+        created:
+          type: string
+          nullable: true
+          description: Created timestamp of the original event. Used to help sort in the UI
+      required:
+      - object_type
+      - object_id
+      - id
+      description: Indicates the event was copied from another object.
+    SpanType:
+      type: string
+      nullable: true
+      enum:
+      - llm
+      - score
+      - function
+      - eval
+      - task
+      - tool
+      - automation
+      - facet
+      - preprocessor
+      - classifier
+      - review
+      - null
+      description: Type of the span, for display purposes only
+    CrossObjectInsertRequest:
+      type: object
+      properties:
+        experiment:
+          type: object
+          nullable: true
+          additionalProperties:
+            type: object
+            properties:
+              events:
+                type: array
+                nullable: true
+                items:
+                  $ref: '#/components/schemas/InsertExperimentEvent'
+                description: A list of experiment events to insert
+              feedback:
+                type: array
+                nullable: true
+                items:
+                  $ref: '#/components/schemas/FeedbackExperimentItem'
+                description: A list of experiment feedback items
+          description: A mapping from experiment id to a set of log events and feedback items to insert
+        dataset:
+          type: object
+          nullable: true
+          additionalProperties:
+            type: object
+            properties:
+              events:
+                type: array
+                nullable: true
+                items:
+                  $ref: '#/components/schemas/InsertDatasetEvent'
+                description: A list of dataset events to insert
+              feedback:
+                type: array
+                nullable: true
+                items:
+                  $ref: '#/components/schemas/FeedbackDatasetItem'
+                description: A list of dataset feedback items
+          description: A mapping from dataset id to a set of log events and feedback items to insert
+        project_logs:
+          type: object
+          nullable: true
+          additionalProperties:
+            type: object
+            properties:
+              events:
+                type: array
+                nullable: true
+                items:
+                  $ref: '#/components/schemas/InsertProjectLogsEvent'
+                description: A list of project logs events to insert
+              feedback:
+                type: array
+                nullable: true
+                items:
+                  $ref: '#/components/schemas/FeedbackProjectLogsItem'
+                description: A list of project logs feedback items
+          description: A mapping from project id to a set of log events and feedback items to insert
     InsertExperimentEvent:
       type: object
       properties:
@@ -697,226 +917,6 @@ components:
 
             If the row is being merged into an existing row, this field will be ignored.'
       description: An experiment event
-    FeedbackProjectLogsItem:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The id of the project logs event to log feedback for. This is the row `id` returned by `POST /v1/project_logs/{project_id}/insert`
-        scores:
-          type: object
-          nullable: true
-          additionalProperties:
-            type: number
-            nullable: true
-            minimum: 0
-            maximum: 1
-          description: A dictionary of numeric values (between 0 and 1) to log. These scores will be merged into the existing scores for the project logs event
-        expected:
-          nullable: true
-          description: The ground truth value (an arbitrary, JSON serializable object) that you'd compare to `output` to determine if your `output` value is correct or not
-        comment:
-          type: string
-          nullable: true
-          description: An optional comment string to log about the project logs event
-        metadata:
-          type: object
-          nullable: true
-          additionalProperties:
-            nullable: true
-          description: A dictionary with additional data about the feedback. If you have a `user_id`, you can log it here and access it in the Braintrust UI. Note, this metadata does not correspond to the main event itself, but rather the audit log attached to the event.
-        source:
-          type: string
-          nullable: true
-          enum:
-          - app
-          - api
-          - external
-          - null
-          description: The source of the feedback. Must be one of "external" (default), "app", or "api"
-        tags:
-          type: array
-          nullable: true
-          items:
-            type: string
-          description: A list of tags to log
-      required:
-      - id
-    ObjectReferenceNullish:
-      type: object
-      nullable: true
-      properties:
-        object_type:
-          type: string
-          enum:
-          - project_logs
-          - experiment
-          - dataset
-          - prompt
-          - function
-          - prompt_session
-          description: Type of the object the event is originating from.
-        object_id:
-          type: string
-          format: uuid
-          description: ID of the object the event is originating from.
-        id:
-          type: string
-          description: ID of the original event.
-        _xact_id:
-          type: string
-          nullable: true
-          description: Transaction ID of the original event.
-        created:
-          type: string
-          nullable: true
-          description: Created timestamp of the original event. Used to help sort in the UI
-      required:
-      - object_type
-      - object_id
-      - id
-      description: Indicates the event was copied from another object.
-    CrossObjectInsertRequest:
-      type: object
-      properties:
-        experiment:
-          type: object
-          nullable: true
-          additionalProperties:
-            type: object
-            properties:
-              events:
-                type: array
-                nullable: true
-                items:
-                  $ref: '#/components/schemas/InsertExperimentEvent'
-                description: A list of experiment events to insert
-              feedback:
-                type: array
-                nullable: true
-                items:
-                  $ref: '#/components/schemas/FeedbackExperimentItem'
-                description: A list of experiment feedback items
-          description: A mapping from experiment id to a set of log events and feedback items to insert
-        dataset:
-          type: object
-          nullable: true
-          additionalProperties:
-            type: object
-            properties:
-              events:
-                type: array
-                nullable: true
-                items:
-                  $ref: '#/components/schemas/InsertDatasetEvent'
-                description: A list of dataset events to insert
-              feedback:
-                type: array
-                nullable: true
-                items:
-                  $ref: '#/components/schemas/FeedbackDatasetItem'
-                description: A list of dataset feedback items
-          description: A mapping from dataset id to a set of log events and feedback items to insert
-        project_logs:
-          type: object
-          nullable: true
-          additionalProperties:
-            type: object
-            properties:
-              events:
-                type: array
-                nullable: true
-                items:
-                  $ref: '#/components/schemas/InsertProjectLogsEvent'
-                description: A list of project logs events to insert
-              feedback:
-                type: array
-                nullable: true
-                items:
-                  $ref: '#/components/schemas/FeedbackProjectLogsItem'
-                description: A list of project logs feedback items
-          description: A mapping from project id to a set of log events and feedback items to insert
-    SpanType:
-      type: string
-      nullable: true
-      enum:
-      - llm
-      - score
-      - function
-      - eval
-      - task
-      - tool
-      - automation
-      - facet
-      - preprocessor
-      - classifier
-      - review
-      - null
-      description: Type of the span, for display purposes only
-    CrossObjectInsertResponse:
-      type: object
-      properties:
-        experiment:
-          type: object
-          nullable: true
-          additionalProperties:
-            $ref: '#/components/schemas/InsertEventsResponse'
-          description: A mapping from experiment id to row ids for inserted `events`
-        dataset:
-          type: object
-          nullable: true
-          additionalProperties:
-            $ref: '#/components/schemas/InsertEventsResponse'
-          description: A mapping from dataset id to row ids for inserted `events`
-        project_logs:
-          type: object
-          nullable: true
-          additionalProperties:
-            $ref: '#/components/schemas/InsertEventsResponse'
-          description: A mapping from project id to row ids for inserted `events`
-    FeedbackDatasetItem:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The id of the dataset event to log feedback for. This is the row `id` returned by `POST /v1/dataset/{dataset_id}/insert`
-        comment:
-          type: string
-          nullable: true
-          description: An optional comment string to log about the dataset event
-        metadata:
-          type: object
-          nullable: true
-          additionalProperties:
-            nullable: true
-          description: A dictionary with additional data about the feedback. If you have a `user_id`, you can log it here and access it in the Braintrust UI. Note, this metadata does not correspond to the main event itself, but rather the audit log attached to the event.
-        source:
-          type: string
-          nullable: true
-          enum:
-          - app
-          - api
-          - external
-          - null
-          description: The source of the feedback. Must be one of "external" (default), "app", or "api"
-        tags:
-          type: array
-          nullable: true
-          items:
-            type: string
-          description: A list of tags to log
-      required:
-      - id
-    InsertEventsResponse:
-      type: object
-      properties:
-        row_ids:
-          type: array
-          items:
-            type: string
-          description: The ids of all rows that were inserted, aligning one-to-one with the rows provided as input
-      required:
-      - row_ids
   securitySchemes:
     bearerAuth:
       type: http

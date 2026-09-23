@@ -1,0 +1,32 @@
+# Front Door AI Index — braintrust — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: braintrust
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.braintrust.dev
+  final_host: www.braintrust.dev
+  ownership: own
+  owner: braintrust
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 25
+  host_score: 25
+  density: 28.06
+  words: 891
+  tiers:
+    agentic: 6
+    core: 19
+    model: 0
+  ambiguous: 20
+  top_terms:
+    agent: 18
+    AI: 15
+    prompts: 5
+    LLMs: 3
+    MCP: 1
+    ML: 1
+    automation: 1
+    intelligence: 1

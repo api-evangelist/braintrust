@@ -1,7 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Braintrust Acls Logs API
+  title: Braintrust Logs API
   description: 'API specification for the backend data server. The API is hosted globally at
 
     https://api.braintrust.dev or in your own environment.
@@ -316,6 +316,67 @@ paths:
                 nullable: true
 components:
   schemas:
+    FetchPaginationCursor:
+      type: string
+      nullable: true
+      description: 'An opaque string to be used as a cursor for the next page of results, in order from latest to earliest.
+
+
+        The string can be obtained directly from the `cursor` property of the previous fetch query'
+    FetchProjectLogsEventsResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectLogsEvent'
+          description: A list of fetched events
+        cursor:
+          type: string
+          nullable: true
+          description: 'Pagination cursor
+
+
+            Pass this string directly as the `cursor` param to your next fetch request to get the next page of results. Not provided if the returned result set is empty.'
+      required:
+      - events
+    FetchLimit:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: 'limit the number of traces fetched
+
+
+        Fetch queries may be paginated if the total result size is expected to be large (e.g. project_logs which accumulate over a long time). Note that fetch queries only support pagination in descending time order (from latest to earliest `_xact_id`. Furthermore, later pages may return rows which showed up in earlier pages, except with an earlier `_xact_id`. This happens because pagination occurs over the whole version history of the event log. You will most likely want to exclude any such duplicate, outdated rows (by `id`) from your combined result set.
+
+
+        The `limit` parameter controls the number of full traces to return. So you may end up with more individual rows than the specified limit if you are fetching events containing traces.'
+    FeedbackResponseSchema:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+      required:
+      - status
+    SpanType:
+      type: string
+      nullable: true
+      enum:
+      - llm
+      - score
+      - function
+      - eval
+      - task
+      - tool
+      - automation
+      - facet
+      - preprocessor
+      - classifier
+      - review
+      - null
+      description: Type of the span, for display purposes only
     InsertProjectLogsEvent:
       type: object
       properties:
@@ -520,59 +581,26 @@ components:
 
             If the row is being merged into an existing row, this field will be ignored.'
       description: A project logs event
-    FetchEventsRequest:
+    SpanAttributes:
       type: object
-      properties:
-        limit:
-          $ref: '#/components/schemas/FetchLimit'
-        cursor:
-          $ref: '#/components/schemas/FetchPaginationCursor'
-        max_xact_id:
-          $ref: '#/components/schemas/MaxXactId'
-          nullable: true
-        max_root_span_id:
-          $ref: '#/components/schemas/MaxRootSpanId'
-          nullable: true
-        version:
-          $ref: '#/components/schemas/Version'
-          nullable: true
-    InsertProjectLogsEventRequest:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/InsertProjectLogsEvent'
-          description: A list of project logs events to insert
-      required:
-      - events
-    FetchPaginationCursor:
-      type: string
       nullable: true
-      description: 'An opaque string to be used as a cursor for the next page of results, in order from latest to earliest.
-
-
-        The string can be obtained directly from the `cursor` property of the previous fetch query'
-    FeedbackResponseSchema:
-      type: object
       properties:
-        status:
+        name:
           type: string
+          nullable: true
+          description: Name of the span, for display purposes only
+        type:
+          $ref: '#/components/schemas/SpanType'
+        purpose:
+          type: string
+          nullable: true
           enum:
-          - success
-      required:
-      - status
-    FetchLimit:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: 'limit the number of traces fetched
-
-
-        Fetch queries may be paginated if the total result size is expected to be large (e.g. project_logs which accumulate over a long time). Note that fetch queries only support pagination in descending time order (from latest to earliest `_xact_id`. Furthermore, later pages may return rows which showed up in earlier pages, except with an earlier `_xact_id`. This happens because pagination occurs over the whole version history of the event log. You will most likely want to exclude any such duplicate, outdated rows (by `id`) from your combined result set.
-
-
-        The `limit` parameter controls the number of full traces to return. So you may end up with more individual rows than the specified limit if you are fetching events containing traces.'
+          - scorer
+          - null
+          description: A special value that indicates the span was generated by a scoring automation
+      additionalProperties:
+        nullable: true
+      description: Human-identifying attributes of the span, such as name, type, etc.
     FetchLimitParam:
       type: integer
       nullable: true
@@ -584,7 +612,7 @@ components:
 
 
         The `limit` parameter controls the number of full traces to return. So you may end up with more individual rows than the specified limit if you are fetching events containing traces.'
-    MaxRootSpanId:
+    MaxXactId:
       type: string
       description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
 
@@ -593,6 +621,110 @@ components:
 
 
         Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
+    FunctionTypeEnum:
+      type: string
+      enum:
+      - llm
+      - scorer
+      - task
+      - tool
+      - custom_view
+      - preprocessor
+      - facet
+      - classifier
+      - tag
+      - parameters
+      - sandbox
+      - null
+      default: scorer
+      description: The type of global function. Defaults to 'scorer'.
+    SavedFunctionId:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - function
+          id:
+            type: string
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - type
+        - id
+        title: function
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - global
+          name:
+            type: string
+          function_type:
+            $ref: '#/components/schemas/FunctionTypeEnum'
+        required:
+        - type
+        - name
+        title: global
+      - type: 'null'
+      description: Optional function identifier that produced the classification
+    InsertEventsResponse:
+      type: object
+      properties:
+        row_ids:
+          type: array
+          items:
+            type: string
+          description: The ids of all rows that were inserted, aligning one-to-one with the rows provided as input
+      required:
+      - row_ids
+    InsertProjectLogsEventRequest:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/InsertProjectLogsEvent'
+          description: A list of project logs events to insert
+      required:
+      - events
+    ObjectReferenceNullish:
+      type: object
+      nullable: true
+      properties:
+        object_type:
+          type: string
+          enum:
+          - project_logs
+          - experiment
+          - dataset
+          - prompt
+          - function
+          - prompt_session
+          description: Type of the object the event is originating from.
+        object_id:
+          type: string
+          format: uuid
+          description: ID of the object the event is originating from.
+        id:
+          type: string
+          description: ID of the original event.
+        _xact_id:
+          type: string
+          nullable: true
+          description: Transaction ID of the original event.
+        created:
+          type: string
+          nullable: true
+          description: Created timestamp of the original event. Used to help sort in the UI
+      required:
+      - object_type
+      - object_id
+      - id
+      description: Indicates the event was copied from another object.
     ProjectLogsEvent:
       type: object
       properties:
@@ -795,66 +927,6 @@ components:
       - log_id
       - span_id
       - root_span_id
-    FetchProjectLogsEventsResponse:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectLogsEvent'
-          description: A list of fetched events
-        cursor:
-          type: string
-          nullable: true
-          description: 'Pagination cursor
-
-
-            Pass this string directly as the `cursor` param to your next fetch request to get the next page of results. Not provided if the returned result set is empty.'
-      required:
-      - events
-    SpanAttributes:
-      type: object
-      nullable: true
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the span, for display purposes only
-        type:
-          $ref: '#/components/schemas/SpanType'
-        purpose:
-          type: string
-          nullable: true
-          enum:
-          - scorer
-          - null
-          description: A special value that indicates the span was generated by a scoring automation
-      additionalProperties:
-        nullable: true
-      description: Human-identifying attributes of the span, such as name, type, etc.
-    FunctionTypeEnum:
-      type: string
-      enum:
-      - llm
-      - scorer
-      - task
-      - tool
-      - custom_view
-      - preprocessor
-      - facet
-      - classifier
-      - tag
-      - parameters
-      - sandbox
-      - null
-      default: scorer
-      description: The type of global function. Defaults to 'scorer'.
-    Version:
-      type: string
-      description: 'Retrieve a snapshot of events from a past time
-
-
-        The version id is essentially a filter on the latest event transaction id. You can use the `max_xact_id` returned by a past fetch as the version to reproduce that exact fetch.'
     FeedbackProjectLogsItem:
       type: object
       properties:
@@ -900,40 +972,6 @@ components:
           description: A list of tags to log
       required:
       - id
-    ObjectReferenceNullish:
-      type: object
-      nullable: true
-      properties:
-        object_type:
-          type: string
-          enum:
-          - project_logs
-          - experiment
-          - dataset
-          - prompt
-          - function
-          - prompt_session
-          description: Type of the object the event is originating from.
-        object_id:
-          type: string
-          format: uuid
-          description: ID of the object the event is originating from.
-        id:
-          type: string
-          description: ID of the original event.
-        _xact_id:
-          type: string
-          nullable: true
-          description: Transaction ID of the original event.
-        created:
-          type: string
-          nullable: true
-          description: Created timestamp of the original event. Used to help sort in the UI
-      required:
-      - object_type
-      - object_id
-      - id
-      description: Indicates the event was copied from another object.
     FeedbackProjectLogsEventRequest:
       type: object
       properties:
@@ -944,7 +982,29 @@ components:
           description: A list of project logs feedback items
       required:
       - feedback
-    MaxXactId:
+    FetchEventsRequest:
+      type: object
+      properties:
+        limit:
+          $ref: '#/components/schemas/FetchLimit'
+        cursor:
+          $ref: '#/components/schemas/FetchPaginationCursor'
+        max_xact_id:
+          $ref: '#/components/schemas/MaxXactId'
+          nullable: true
+        max_root_span_id:
+          $ref: '#/components/schemas/MaxRootSpanId'
+          nullable: true
+        version:
+          $ref: '#/components/schemas/Version'
+          nullable: true
+    Version:
+      type: string
+      description: 'Retrieve a snapshot of events from a past time
+
+
+        The version id is essentially a filter on the latest event transaction id. You can use the `max_xact_id` returned by a past fetch as the version to reproduce that exact fetch.'
+    MaxRootSpanId:
       type: string
       description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
 
@@ -957,67 +1017,20 @@ components:
       type: string
       format: uuid
       description: Project id
-    SavedFunctionId:
-      anyOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - function
-          id:
-            type: string
-          version:
-            type: string
-            description: The version of the function
-        required:
-        - type
-        - id
-        title: function
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - global
-          name:
-            type: string
-          function_type:
-            $ref: '#/components/schemas/FunctionTypeEnum'
-        required:
-        - type
-        - name
-        title: global
-      - type: 'null'
-      description: Optional function identifier that produced the classification
-    SpanType:
-      type: string
-      nullable: true
-      enum:
-      - llm
-      - score
-      - function
-      - eval
-      - task
-      - tool
-      - automation
-      - facet
-      - preprocessor
-      - classifier
-      - review
-      - null
-      description: Type of the span, for display purposes only
-    InsertEventsResponse:
-      type: object
-      properties:
-        row_ids:
-          type: array
-          items:
-            type: string
-          description: The ids of all rows that were inserted, aligning one-to-one with the rows provided as input
-      required:
-      - row_ids
   parameters:
+    MaxRootSpanId:
+      schema:
+        $ref: '#/components/schemas/MaxRootSpanId'
+      required: false
+      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
+
+
+        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
+
+
+        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
+      name: max_root_span_id
+      in: query
     FetchLimitParam:
       schema:
         $ref: '#/components/schemas/FetchLimitParam'
@@ -1030,6 +1043,19 @@ components:
 
         The `limit` parameter controls the number of full traces to return. So you may end up with more individual rows than the specified limit if you are fetching events containing traces.'
       name: limit
+      in: query
+    MaxXactId:
+      schema:
+        $ref: '#/components/schemas/MaxXactId'
+      required: false
+      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
+
+
+        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
+
+
+        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
+      name: max_xact_id
       in: query
     ProjectIdParam:
       schema:
@@ -1047,32 +1073,6 @@ components:
 
         The version id is essentially a filter on the latest event transaction id. You can use the `max_xact_id` returned by a past fetch as the version to reproduce that exact fetch.'
       name: version
-      in: query
-    MaxXactId:
-      schema:
-        $ref: '#/components/schemas/MaxXactId'
-      required: false
-      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
-
-
-        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
-
-
-        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
-      name: max_xact_id
-      in: query
-    MaxRootSpanId:
-      schema:
-        $ref: '#/components/schemas/MaxRootSpanId'
-      required: false
-      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
-
-
-        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
-
-
-        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
-      name: max_root_span_id
       in: query
   securitySchemes:
     bearerAuth:

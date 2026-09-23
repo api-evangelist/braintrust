@@ -1,0 +1,1 @@
+{"resource":"https://api.braintrust.dev/mcp","authorization_servers":["https://api.braintrust.dev"],"bearer_methods_supported":["header"],"scopes_supported":["mcp"],"authorization_endpoint":"https://api.braintrust.dev/oauth/authorize","token_endpoint":"https://api.braintrust.dev/oauth/token","client_id":"braintrust-mcp"}

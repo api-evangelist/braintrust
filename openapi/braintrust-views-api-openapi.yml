@@ -1,7 +1,7 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Braintrust Acls Views API
+  title: Braintrust Views API
   description: 'API specification for the backend data server. The API is hosted globally at
 
     https://api.braintrust.dev or in your own environment.
@@ -476,6 +476,13 @@ components:
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: ending_before
       in: query
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
     StartingAfter:
       schema:
         $ref: '#/components/schemas/StartingAfter'
@@ -486,12 +493,12 @@ components:
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: starting_after
       in: query
-    AppLimitParam:
+    ViewType:
       schema:
-        $ref: '#/components/schemas/AppLimitParam'
+        $ref: '#/components/schemas/ViewType'
       required: false
-      description: Limit the number of objects to return
-      name: limit
+      description: Type of object that the view corresponds to.
+      name: view_type
       in: query
     AclObjectType:
       schema:
@@ -500,34 +507,6 @@ components:
       description: The object type that the ACL applies to
       name: object_type
       in: query
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
-    ViewType:
-      schema:
-        $ref: '#/components/schemas/ViewType'
-      required: false
-      description: Type of object that the view corresponds to.
-      name: view_type
-      in: query
-    AclObjectId:
-      schema:
-        $ref: '#/components/schemas/AclObjectId'
-      required: true
-      description: The id of the object the ACL applies to
-      name: object_id
-      in: query
-    ViewIdParam:
-      schema:
-        $ref: '#/components/schemas/ViewIdParam'
-      required: true
-      description: View id
-      name: view_id
-      in: path
     ViewName:
       schema:
         $ref: '#/components/schemas/ViewName'
@@ -536,18 +515,81 @@ components:
       name: view_name
       in: query
       allowReserved: true
-  schemas:
     AclObjectId:
-      type: string
-      format: uuid
+      schema:
+        $ref: '#/components/schemas/AclObjectId'
+      required: true
       description: The id of the object the ACL applies to
-    ViewName:
-      type: string
-      description: Name of the view to search for
+      name: object_id
+      in: query
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
     ViewIdParam:
-      type: string
-      format: uuid
+      schema:
+        $ref: '#/components/schemas/ViewIdParam'
+      required: true
       description: View id
+      name: view_id
+      in: path
+  schemas:
+    CreateView:
+      type: object
+      properties:
+        object_type:
+          $ref: '#/components/schemas/AclObjectType'
+        object_id:
+          type: string
+          format: uuid
+          description: The id of the object the view applies to
+        view_type:
+          type: string
+          enum:
+          - projects
+          - experiments
+          - experiment
+          - playgrounds
+          - playground
+          - datasets
+          - dataset
+          - prompts
+          - parameters
+          - tools
+          - scorers
+          - classifiers
+          - logs
+          - monitor
+          - for_review_project_log
+          - for_review_experiments
+          - for_review_datasets
+          - null
+          description: Type of object that the view corresponds to.
+        name:
+          type: string
+          description: Name of the view
+        view_data:
+          $ref: '#/components/schemas/ViewData'
+        options:
+          $ref: '#/components/schemas/ViewOptions'
+        user_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Identifies the user who created the view
+        deleted_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of role deletion, or null if the role is still active
+      required:
+      - object_type
+      - object_id
+      - view_type
+      - name
     AclObjectType:
       type: string
       enum:
@@ -563,20 +605,6 @@ components:
       - project_log
       - org_project
       description: The object type that the ACL applies to
-    ViewData:
-      type: object
-      nullable: true
-      properties:
-        search:
-          $ref: '#/components/schemas/ViewDataSearch'
-        custom_charts:
-          nullable: true
-      description: The view definition
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
     View:
       type: object
       properties:
@@ -640,6 +668,46 @@ components:
       - object_id
       - view_type
       - name
+    ViewData:
+      type: object
+      nullable: true
+      properties:
+        search:
+          $ref: '#/components/schemas/ViewDataSearch'
+        custom_charts:
+          nullable: true
+      description: The view definition
+    ViewDataSearch:
+      type: object
+      nullable: true
+      properties:
+        filter:
+          type: array
+          nullable: true
+          items:
+            nullable: true
+        tag:
+          type: array
+          nullable: true
+          items:
+            nullable: true
+        match:
+          type: array
+          nullable: true
+          items:
+            nullable: true
+        sort:
+          type: array
+          nullable: true
+          items:
+            nullable: true
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
     Ids:
       anyOf:
       - type: string
@@ -649,13 +717,60 @@ components:
           type: string
           format: uuid
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    StartingAfter:
+    ViewIdParam:
+      type: string
+      format: uuid
+      description: View id
+    EndingBefore:
       type: string
       format: uuid
       description: 'Pagination cursor id.
 
 
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    ViewType:
+      type: string
+      enum:
+      - projects
+      - experiments
+      - experiment
+      - playgrounds
+      - playground
+      - datasets
+      - dataset
+      - prompts
+      - parameters
+      - tools
+      - scorers
+      - classifiers
+      - logs
+      - monitor
+      - for_review_project_log
+      - for_review_experiments
+      - for_review_datasets
+      - null
+      description: Type of object that the view corresponds to.
+    AclObjectId:
+      type: string
+      format: uuid
+      description: The id of the object the ACL applies to
+    DeleteView:
+      type: object
+      properties:
+        object_type:
+          $ref: '#/components/schemas/AclObjectType'
+        object_id:
+          type: string
+          format: uuid
+          description: The id of the object the view applies to
+      required:
+      - object_type
+      - object_id
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
     PatchView:
       type: object
       properties:
@@ -704,6 +819,9 @@ components:
       required:
       - object_type
       - object_id
+    ViewName:
+      type: string
+      description: Name of the view to search for
     ViewOptions:
       anyOf:
       - type: object
@@ -907,124 +1025,6 @@ components:
         title: TableViewOptions
       - type: 'null'
       description: Options for the view in the app
-    DeleteView:
-      type: object
-      properties:
-        object_type:
-          $ref: '#/components/schemas/AclObjectType'
-        object_id:
-          type: string
-          format: uuid
-          description: The id of the object the view applies to
-      required:
-      - object_type
-      - object_id
-    ViewDataSearch:
-      type: object
-      nullable: true
-      properties:
-        filter:
-          type: array
-          nullable: true
-          items:
-            nullable: true
-        tag:
-          type: array
-          nullable: true
-          items:
-            nullable: true
-        match:
-          type: array
-          nullable: true
-          items:
-            nullable: true
-        sort:
-          type: array
-          nullable: true
-          items:
-            nullable: true
-    ViewType:
-      type: string
-      enum:
-      - projects
-      - experiments
-      - experiment
-      - playgrounds
-      - playground
-      - datasets
-      - dataset
-      - prompts
-      - parameters
-      - tools
-      - scorers
-      - classifiers
-      - logs
-      - monitor
-      - for_review_project_log
-      - for_review_experiments
-      - for_review_datasets
-      - null
-      description: Type of object that the view corresponds to.
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-    CreateView:
-      type: object
-      properties:
-        object_type:
-          $ref: '#/components/schemas/AclObjectType'
-        object_id:
-          type: string
-          format: uuid
-          description: The id of the object the view applies to
-        view_type:
-          type: string
-          enum:
-          - projects
-          - experiments
-          - experiment
-          - playgrounds
-          - playground
-          - datasets
-          - dataset
-          - prompts
-          - parameters
-          - tools
-          - scorers
-          - classifiers
-          - logs
-          - monitor
-          - for_review_project_log
-          - for_review_experiments
-          - for_review_datasets
-          - null
-          description: Type of object that the view corresponds to.
-        name:
-          type: string
-          description: Name of the view
-        view_data:
-          $ref: '#/components/schemas/ViewData'
-        options:
-          $ref: '#/components/schemas/ViewOptions'
-        user_id:
-          type: string
-          nullable: true
-          format: uuid
-          description: Identifies the user who created the view
-        deleted_at:
-          type: string
-          nullable: true
-          format: date-time
-          description: Date of role deletion, or null if the role is still active
-      required:
-      - object_type
-      - object_id
-      - view_type
-      - name
   securitySchemes:
     bearerAuth:
       type: http
