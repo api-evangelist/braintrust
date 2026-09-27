@@ -454,10 +454,65 @@ paths:
               schema:
                 nullable: true
 components:
-  schemas:
+  parameters:
     McpServerName:
-      type: string
+      schema:
+        $ref: '#/components/schemas/McpServerName'
+      required: false
       description: Name of the mcp_server to search for
+      name: mcp_server_name
+      in: query
+      allowReserved: true
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    McpServerIdParam:
+      schema:
+        $ref: '#/components/schemas/McpServerIdParam'
+      required: true
+      description: McpServer id
+      name: mcp_server_id
+      in: path
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+  schemas:
     Ids:
       anyOf:
       - type: string
@@ -467,28 +522,9 @@ components:
           type: string
           format: uuid
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    McpServerIdParam:
+    McpServerName:
       type: string
-      format: uuid
-      description: McpServer id
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    PatchMCPServer:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the MCP server. Within a project, MCP server names are unique
-        url:
-          type: string
-          nullable: true
-          description: URL of the MCP server endpoint
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the MCP server
+      description: Name of the mcp_server to search for
     MCPServer:
       type: object
       properties:
@@ -537,11 +573,36 @@ components:
 
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    PatchMCPServer:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: Name of the MCP server. Within a project, MCP server names are unique
+        url:
+          type: string
+          nullable: true
+          description: URL of the MCP server endpoint
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the MCP server
     AppLimitParam:
       type: integer
       nullable: true
       minimum: 0
       description: Limit the number of objects to return
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
     CreateMCPServer:
       type: object
       properties:
@@ -563,71 +624,10 @@ components:
       - project_id
       - name
       - url
-    StartingAfter:
+    McpServerIdParam:
       type: string
       format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-  parameters:
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
-    EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
-    McpServerName:
-      schema:
-        $ref: '#/components/schemas/McpServerName'
-      required: false
-      description: Name of the mcp_server to search for
-      name: mcp_server_name
-      in: query
-      allowReserved: true
-    StartingAfter:
-      schema:
-        $ref: '#/components/schemas/StartingAfter'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
-      in: query
-    McpServerIdParam:
-      schema:
-        $ref: '#/components/schemas/McpServerIdParam'
-      required: true
       description: McpServer id
-      name: mcp_server_id
-      in: path
-    AppLimitParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
   securitySchemes:
     bearerAuth:
       type: http

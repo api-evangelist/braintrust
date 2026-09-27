@@ -34,7 +34,7 @@
     "braintrust-views-api-openapi.yml"
   ],
   "archived": [
-    "deleted 6 superseded output(s) from the previous generation"
+    "deleted 5 superseded output(s) from the previous generation"
   ],
   "errors": [],
   "warnings": [],
@@ -69,11 +69,11 @@
     "braintrust-openapi.json: declared missing tag: SpanIframes",
     "braintrust-openapi.json: declared missing tag: Users",
     "braintrust-openapi.json: declared missing tag: Views",
-    "superseded outputs removed: braintrust-ac-ls-api-openapi.yml, braintrust-api-keys-api-openapi.yml, braintrust-env-vars-api-openapi.yml, braintrust-mcp-servers-api-openapi.yml, braintrust-project-tags-api-openapi.yml \u2026",
-    "apis.yml register: written (+6 apis, 29 total)"
+    "superseded outputs removed: braintrust-api-keys-api-openapi.yml, braintrust-env-vars-api-openapi.yml, braintrust-mcp-servers-api-openapi.yml, braintrust-project-tags-api-openapi.yml, braintrust-service-tokens-api-openapi.yml",
+    "apis.yml register: written (+5 apis, 29 total)"
   ],
   "skipped": [
-    "braintrust-ac-ls-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "braintrust-acls-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "braintrust-aisecrets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "braintrust-api-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "braintrust-cors-api-openapi.yml: previously refined output, superseded by openapi/_original/",

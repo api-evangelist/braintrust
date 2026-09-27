@@ -44,279 +44,83 @@ paths:
                 $ref: '#/components/schemas/SummarizeExperimentResponse'
 components:
   schemas:
-    ResponseFormatNullish:
-      anyOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - json_object
-        required:
-        - type
-        title: json_object
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - json_schema
-          json_schema:
-            $ref: '#/components/schemas/ResponseFormatJsonSchema'
-        required:
-        - type
-        - json_schema
-        title: json_schema
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - text
-        required:
-        - type
-        title: text
-      - type: 'null'
-    InvokeParent:
-      anyOf:
-      - type: object
-        properties:
-          object_type:
-            type: string
-            enum:
-            - project_logs
-            - experiment
-            - playground_logs
-          object_id:
-            type: string
-            description: The id of the container object you are logging to
-          row_ids:
-            type: object
-            nullable: true
-            properties:
-              id:
-                type: string
-                description: The id of the row
-              span_id:
-                type: string
-                description: The span_id of the row
-              root_span_id:
-                type: string
-                description: The root_span_id of the row
-            required:
-            - id
-            - span_id
-            - root_span_id
-            description: Identifiers for the row to to log a subspan under
-          propagated_event:
-            type: object
-            nullable: true
-            additionalProperties:
-              nullable: true
-            description: Include these properties in every span created under this parent
-        required:
-        - object_type
-        - object_id
-        description: Span parent properties
-        title: span_parent_struct
-      - type: string
-        description: The parent's span identifier, created by calling `.export()` on a span
-      description: Options for tracing the function call
-    RepoInfo:
+    PromptOptionsNullish:
       type: object
       nullable: true
       properties:
-        commit:
+        model:
           type: string
-          nullable: true
-          description: SHA of most recent commit
-        branch:
+        params:
+          $ref: '#/components/schemas/ModelParams'
+        position:
           type: string
-          nullable: true
-          description: Name of the branch the most recent commit belongs to
-        tag:
-          type: string
-          nullable: true
-          description: Name of the tag on the most recent commit
-        dirty:
-          type: boolean
-          nullable: true
-          description: Whether or not the repo had uncommitted changes when snapshotted
-        author_name:
-          type: string
-          nullable: true
-          description: Name of the author of the most recent commit
-        author_email:
-          type: string
-          nullable: true
-          description: Email of the author of the most recent commit
-        commit_message:
-          type: string
-          nullable: true
-          description: Most recent commit message
-        commit_time:
-          type: string
-          nullable: true
-          description: Time of the most recent commit
-        git_diff:
-          type: string
-          nullable: true
-          description: If the repo was dirty when run, this includes the diff between the current state of the repo and the most recent commit.
-      description: Metadata about the state of the repo when the experiment was created
-    FunctionId:
-      anyOf:
-      - type: object
-        properties:
-          function_id:
-            type: string
-            description: The ID of the function
-          version:
-            type: string
-            description: The version of the function
-        required:
-        - function_id
-        description: Function id
-        title: function_id
-      - type: object
-        properties:
-          project_name:
-            type: string
-            description: The name of the project containing the function
-          slug:
-            type: string
-            description: The slug of the function
-          version:
-            type: string
-            description: The version of the function
-        required:
-        - project_name
-        - slug
-        description: Project name and slug
-        title: project_slug
-      - type: object
-        properties:
-          global_function:
-            type: string
-            description: The name of the global function. Currently, the global namespace includes the functions in autoevals
-          function_type:
-            $ref: '#/components/schemas/FunctionTypeEnum'
-        required:
-        - global_function
-        description: Global function name
-        title: global_function
-      - type: object
-        properties:
-          prompt_session_id:
-            type: string
-            description: The ID of the prompt session
-          prompt_session_function_id:
-            type: string
-            description: The ID of the function in the prompt session
-          version:
-            type: string
-            description: The version of the function
-        required:
-        - prompt_session_id
-        - prompt_session_function_id
-        description: Prompt session id
-        title: prompt_session_id
-      - type: object
-        properties:
-          inline_context:
-            type: object
-            properties:
-              runtime:
-                type: string
-                enum:
-                - node
-                - python
-                - browser
-                - quickjs
-              version:
-                type: string
-            required:
-            - runtime
-            - version
-          code:
-            type: string
-            description: The inline code to execute
-          function_type:
-            allOf:
-            - $ref: '#/components/schemas/FunctionTypeEnum'
-            - description: The function type for inline code. Required when invoking inline preprocessors.
-          name:
-            type: string
-            nullable: true
-            description: The name of the inline code function
-        required:
-        - inline_context
-        - code
-        description: Inline code function
-        title: inline_code
-      - type: object
-        properties:
-          inline_prompt:
-            $ref: '#/components/schemas/PromptData'
-          inline_function:
-            type: object
-            additionalProperties:
-              nullable: true
-          function_type:
-            $ref: '#/components/schemas/FunctionTypeEnum'
-          name:
-            type: string
-            nullable: true
-            description: The name of the inline function
-        required:
-        - inline_function
-        description: Inline function definition
-        title: inline_function
-      - type: object
-        properties:
-          inline_prompt:
-            $ref: '#/components/schemas/PromptData'
-          function_type:
-            $ref: '#/components/schemas/FunctionTypeEnum'
-          name:
-            type: string
-            nullable: true
-            description: The name of the inline prompt
-        required:
-        - inline_prompt
-        description: Inline prompt definition
-        title: inline_prompt
-      description: The function to evaluate
-    ChatCompletionContentPartText:
+    SummarizeExperimentResponse:
       type: object
       properties:
-        text:
+        project_name:
           type: string
-          default: ''
-        type:
+          description: Name of the project that the experiment belongs to
+        experiment_name:
+          type: string
+          description: Name of the experiment
+        project_url:
+          type: string
+          format: uri
+          description: URL to the project's page in the Braintrust app
+        experiment_url:
+          type: string
+          format: uri
+          description: URL to the experiment's page in the Braintrust app
+        comparison_experiment_name:
+          type: string
+          nullable: true
+          description: The experiment which scores are baselined against
+        scores:
+          type: object
+          nullable: true
+          additionalProperties:
+            $ref: '#/components/schemas/ScoreSummary'
+          description: Summary of the experiment's scores
+        metrics:
+          type: object
+          nullable: true
+          additionalProperties:
+            $ref: '#/components/schemas/MetricSummary'
+          description: Summary of the experiment's metrics
+      required:
+      - project_name
+      - experiment_name
+      - project_url
+      - experiment_url
+      description: Summary of an experiment
+    GitMetadataSettings:
+      type: object
+      nullable: true
+      properties:
+        collect:
           type: string
           enum:
-          - text
-        cache_control:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - ephemeral
-          required:
-          - type
+          - all
+          - none
+          - some
+        fields:
+          type: array
+          items:
+            type: string
+            enum:
+            - commit
+            - branch
+            - tag
+            - dirty
+            - author_name
+            - author_email
+            - commit_message
+            - commit_time
+            - git_diff
       required:
-      - type
-    ChatCompletionContentPartFileFile:
-      type: object
-      properties:
-        file_data:
-          type: string
-        filename:
-          type: string
-        file_id:
-          type: string
-          title: The ID of an uploaded file to use as input.
+      - collect
+      additionalProperties: false
+      description: Optional settings for collecting git metadata. By default, will collect all git metadata fields allowed in org-level settings.
     PromptBlockDataNullish:
       anyOf:
       - type: object
@@ -348,320 +152,6 @@ components:
         - content
         title: completion
       - type: 'null'
-    ChatCompletionContentPartTextWithTitle:
-      type: object
-      properties:
-        text:
-          type: string
-          default: ''
-        type:
-          type: string
-          enum:
-          - text
-        cache_control:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - ephemeral
-          required:
-          - type
-      required:
-      - type
-      title: text
-    PromptData:
-      type: object
-      properties:
-        prompt:
-          $ref: '#/components/schemas/PromptBlockDataNullish'
-        options:
-          $ref: '#/components/schemas/PromptOptionsNullish'
-        parser:
-          $ref: '#/components/schemas/PromptParserNullish'
-        tool_functions:
-          type: array
-          nullable: true
-          items:
-            allOf:
-            - $ref: '#/components/schemas/SavedFunctionId'
-            - anyOf:
-              - type: object
-                properties:
-                  type:
-                    type: string
-                    enum:
-                    - function
-                  id:
-                    type: string
-                  version:
-                    type: string
-                    description: The version of the function
-                required:
-                - type
-                - id
-                title: function
-              - type: object
-                properties:
-                  type:
-                    type: string
-                    enum:
-                    - global
-                  name:
-                    type: string
-                  function_type:
-                    $ref: '#/components/schemas/FunctionTypeEnum'
-                required:
-                - type
-                - name
-                title: global
-        template_format:
-          type: string
-          nullable: true
-          enum:
-          - mustache
-          - nunjucks
-          - none
-          - null
-        mcp:
-          type: object
-          nullable: true
-          additionalProperties:
-            oneOf:
-            - type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                  - id
-                id:
-                  type: string
-                  format: uuid
-                is_disabled:
-                  type: boolean
-                enabled_tools:
-                  type: array
-                  nullable: true
-                  items:
-                    type: string
-                  description: If omitted, all tools are enabled
-              required:
-              - type
-              - id
-              title: MCP server id. This is used for project-level MCP server definitions.
-            - type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                  - url
-                url:
-                  type: string
-                is_disabled:
-                  type: boolean
-                enabled_tools:
-                  type: array
-                  nullable: true
-                  items:
-                    type: string
-                  description: If omitted, all tools are enabled
-              required:
-              - type
-              - url
-              title: MCP server url. This is used for inline definitions of MCP servers.
-        origin:
-          type: object
-          nullable: true
-          properties:
-            prompt_id:
-              type: string
-            project_id:
-              type: string
-            prompt_version:
-              type: string
-    FunctionTypeEnum:
-      type: string
-      enum:
-      - llm
-      - scorer
-      - task
-      - tool
-      - custom_view
-      - preprocessor
-      - facet
-      - classifier
-      - tag
-      - parameters
-      - sandbox
-      - null
-      default: scorer
-      description: The type of global function. Defaults to 'scorer'.
-    ChatCompletionContentPartImageWithTitle:
-      type: object
-      properties:
-        image_url:
-          type: object
-          properties:
-            url:
-              type: string
-            detail:
-              anyOf:
-              - type: string
-                enum:
-                - auto
-                title: auto
-              - type: string
-                enum:
-                - low
-                title: low
-              - type: string
-                enum:
-                - high
-                title: high
-          required:
-          - url
-        type:
-          type: string
-          enum:
-          - image_url
-      required:
-      - image_url
-      - type
-      title: image_url
-    PromptOptionsNullish:
-      type: object
-      nullable: true
-      properties:
-        model:
-          type: string
-        params:
-          $ref: '#/components/schemas/ModelParams'
-        position:
-          type: string
-    SavedFunctionId:
-      anyOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - function
-          id:
-            type: string
-          version:
-            type: string
-            description: The version of the function
-        required:
-        - type
-        - id
-        title: function
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - global
-          name:
-            type: string
-          function_type:
-            $ref: '#/components/schemas/FunctionTypeEnum'
-        required:
-        - type
-        - name
-        title: global
-      - type: 'null'
-      description: Optional function identifier that produced the classification
-    ChatCompletionContentPartFileWithTitle:
-      type: object
-      properties:
-        file:
-          $ref: '#/components/schemas/ChatCompletionContentPartFileFile'
-        type:
-          type: string
-          enum:
-          - file
-      required:
-      - file
-      - type
-      title: file
-    ResponseFormatJsonSchema:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        schema:
-          anyOf:
-          - type: object
-            additionalProperties:
-              nullable: true
-            title: object
-            x-stainless-skip:
-            - go
-          - type: string
-            title: string
-        strict:
-          type: boolean
-          nullable: true
-      required:
-      - name
-    GitMetadataSettings:
-      type: object
-      nullable: true
-      properties:
-        collect:
-          type: string
-          enum:
-          - all
-          - none
-          - some
-        fields:
-          type: array
-          items:
-            type: string
-            enum:
-            - commit
-            - branch
-            - tag
-            - dirty
-            - author_name
-            - author_email
-            - commit_message
-            - commit_time
-            - git_diff
-      required:
-      - collect
-      additionalProperties: false
-      description: Optional settings for collecting git metadata. By default, will collect all git metadata fields allowed in org-level settings.
-    PromptParserNullish:
-      type: object
-      nullable: true
-      properties:
-        type:
-          type: string
-          enum:
-          - llm_classifier
-        use_cot:
-          type: boolean
-        choice_scores:
-          type: object
-          additionalProperties:
-            type: number
-            minimum: 0
-            maximum: 1
-          description: Map of choices to scores (0-1). Used by scorers.
-        choice:
-          type: array
-          items:
-            type: string
-          description: List of valid choices without score mapping. Used by classifiers that deposit output to tags.
-        allow_no_match:
-          type: boolean
-          description: If true, adds a 'No match' option. When selected, no tag is deposited.
-      required:
-      - type
-      - use_cot
     RunEval:
       type: object
       properties:
@@ -818,36 +308,223 @@ components:
       - data
       - task
       - scores
-    MetricSummary:
+    ChatCompletionContentPart:
+      anyOf:
+      - $ref: '#/components/schemas/ChatCompletionContentPartTextWithTitle'
+      - $ref: '#/components/schemas/ChatCompletionContentPartImageWithTitle'
+      - $ref: '#/components/schemas/ChatCompletionContentPartFileWithTitle'
+      title: chat_completion_content_part
+    ChatCompletionMessageToolCall:
       type: object
       properties:
-        name:
+        id:
           type: string
-          description: Name of the metric
-        metric:
-          type: number
-          description: Average metric across all examples
-        unit:
+        function:
+          type: object
+          properties:
+            arguments:
+              type: string
+            name:
+              type: string
+          required:
+          - arguments
+          - name
+        type:
           type: string
-          description: Unit label for the metric
-        diff:
-          type: number
-          description: Difference in metric between the current and comparison experiment
-        improvements:
-          type: integer
-          minimum: 0
-          description: Number of improvements in the metric
-        regressions:
-          type: integer
-          minimum: 0
-          description: Number of regressions in the metric
+          enum:
+          - function
       required:
-      - name
-      - metric
-      - unit
-      - improvements
-      - regressions
-      description: Summary of a metric's performance
+      - id
+      - function
+      - type
+    SavedFunctionId:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - function
+          id:
+            type: string
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - type
+        - id
+        title: function
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - global
+          name:
+            type: string
+          function_type:
+            $ref: '#/components/schemas/FunctionTypeEnum'
+        required:
+        - type
+        - name
+        title: global
+      - type: 'null'
+      description: Optional function identifier that produced the classification
+    FunctionId:
+      anyOf:
+      - type: object
+        properties:
+          function_id:
+            type: string
+            description: The ID of the function
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - function_id
+        description: Function id
+        title: function_id
+      - type: object
+        properties:
+          project_name:
+            type: string
+            description: The name of the project containing the function
+          slug:
+            type: string
+            description: The slug of the function
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - project_name
+        - slug
+        description: Project name and slug
+        title: project_slug
+      - type: object
+        properties:
+          global_function:
+            type: string
+            description: The name of the global function. Currently, the global namespace includes the functions in autoevals
+          function_type:
+            $ref: '#/components/schemas/FunctionTypeEnum'
+        required:
+        - global_function
+        description: Global function name
+        title: global_function
+      - type: object
+        properties:
+          prompt_session_id:
+            type: string
+            description: The ID of the prompt session
+          prompt_session_function_id:
+            type: string
+            description: The ID of the function in the prompt session
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - prompt_session_id
+        - prompt_session_function_id
+        description: Prompt session id
+        title: prompt_session_id
+      - type: object
+        properties:
+          inline_context:
+            type: object
+            properties:
+              runtime:
+                type: string
+                enum:
+                - node
+                - python
+                - browser
+                - quickjs
+              version:
+                type: string
+            required:
+            - runtime
+            - version
+          code:
+            type: string
+            description: The inline code to execute
+          function_type:
+            allOf:
+            - $ref: '#/components/schemas/FunctionTypeEnum'
+            - description: The function type for inline code. Required when invoking inline preprocessors.
+          name:
+            type: string
+            nullable: true
+            description: The name of the inline code function
+        required:
+        - inline_context
+        - code
+        description: Inline code function
+        title: inline_code
+      - type: object
+        properties:
+          inline_prompt:
+            $ref: '#/components/schemas/PromptData'
+          inline_function:
+            type: object
+            additionalProperties:
+              nullable: true
+          function_type:
+            $ref: '#/components/schemas/FunctionTypeEnum'
+          name:
+            type: string
+            nullable: true
+            description: The name of the inline function
+        required:
+        - inline_function
+        description: Inline function definition
+        title: inline_function
+      - type: object
+        properties:
+          inline_prompt:
+            $ref: '#/components/schemas/PromptData'
+          function_type:
+            $ref: '#/components/schemas/FunctionTypeEnum'
+          name:
+            type: string
+            nullable: true
+            description: The name of the inline prompt
+        required:
+        - inline_prompt
+        description: Inline prompt definition
+        title: inline_prompt
+      description: The function to evaluate
+    ChatCompletionContentPartImageWithTitle:
+      type: object
+      properties:
+        image_url:
+          type: object
+          properties:
+            url:
+              type: string
+            detail:
+              anyOf:
+              - type: string
+                enum:
+                - auto
+                title: auto
+              - type: string
+                enum:
+                - low
+                title: low
+              - type: string
+                enum:
+                - high
+                title: high
+          required:
+          - url
+        type:
+          type: string
+          enum:
+          - image_url
+      required:
+      - image_url
+      - type
+      title: image_url
     ModelParams:
       anyOf:
       - type: object
@@ -1182,6 +859,141 @@ components:
         required:
         - role
         title: fallback
+    ChatCompletionContentPartTextWithTitle:
+      type: object
+      properties:
+        text:
+          type: string
+          default: ''
+        type:
+          type: string
+          enum:
+          - text
+        cache_control:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - ephemeral
+          required:
+          - type
+      required:
+      - type
+      title: text
+    ResponseFormatNullish:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - json_object
+        required:
+        - type
+        title: json_object
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - json_schema
+          json_schema:
+            $ref: '#/components/schemas/ResponseFormatJsonSchema'
+        required:
+        - type
+        - json_schema
+        title: json_schema
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - text
+        required:
+        - type
+        title: text
+      - type: 'null'
+    ResponseFormatJsonSchema:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        schema:
+          anyOf:
+          - type: object
+            additionalProperties:
+              nullable: true
+            title: object
+            x-stainless-skip:
+            - go
+          - type: string
+            title: string
+        strict:
+          type: boolean
+          nullable: true
+      required:
+      - name
+    MetricSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the metric
+        metric:
+          type: number
+          description: Average metric across all examples
+        unit:
+          type: string
+          description: Unit label for the metric
+        diff:
+          type: number
+          description: Difference in metric between the current and comparison experiment
+        improvements:
+          type: integer
+          minimum: 0
+          description: Number of improvements in the metric
+        regressions:
+          type: integer
+          minimum: 0
+          description: Number of regressions in the metric
+      required:
+      - name
+      - metric
+      - unit
+      - improvements
+      - regressions
+      description: Summary of a metric's performance
+    PromptParserNullish:
+      type: object
+      nullable: true
+      properties:
+        type:
+          type: string
+          enum:
+          - llm_classifier
+        use_cot:
+          type: boolean
+        choice_scores:
+          type: object
+          additionalProperties:
+            type: number
+            minimum: 0
+            maximum: 1
+          description: Map of choices to scores (0-1). Used by scorers.
+        choice:
+          type: array
+          items:
+            type: string
+          description: List of valid choices without score mapping. Used by classifiers that deposit output to tags.
+        allow_no_match:
+          type: boolean
+          description: If true, adds a 'No match' option. When selected, no tag is deposited.
+      required:
+      - type
+      - use_cot
     ScoreSummary:
       type: object
       properties:
@@ -1212,12 +1024,57 @@ components:
       - improvements
       - regressions
       description: Summary of a score's performance
-    ChatCompletionContentPart:
-      anyOf:
-      - $ref: '#/components/schemas/ChatCompletionContentPartTextWithTitle'
-      - $ref: '#/components/schemas/ChatCompletionContentPartImageWithTitle'
-      - $ref: '#/components/schemas/ChatCompletionContentPartFileWithTitle'
-      title: chat_completion_content_part
+    RepoInfo:
+      type: object
+      nullable: true
+      properties:
+        commit:
+          type: string
+          nullable: true
+          description: SHA of most recent commit
+        branch:
+          type: string
+          nullable: true
+          description: Name of the branch the most recent commit belongs to
+        tag:
+          type: string
+          nullable: true
+          description: Name of the tag on the most recent commit
+        dirty:
+          type: boolean
+          nullable: true
+          description: Whether or not the repo had uncommitted changes when snapshotted
+        author_name:
+          type: string
+          nullable: true
+          description: Name of the author of the most recent commit
+        author_email:
+          type: string
+          nullable: true
+          description: Email of the author of the most recent commit
+        commit_message:
+          type: string
+          nullable: true
+          description: Most recent commit message
+        commit_time:
+          type: string
+          nullable: true
+          description: Time of the most recent commit
+        git_diff:
+          type: string
+          nullable: true
+          description: If the repo was dirty when run, this includes the diff between the current state of the repo and the most recent commit.
+      description: Metadata about the state of the repo when the experiment was created
+    ChatCompletionContentPartFileFile:
+      type: object
+      properties:
+        file_data:
+          type: string
+        filename:
+          type: string
+        file_id:
+          type: string
+          title: The ID of an uploaded file to use as input.
     ChatCompletionMessageReasoning:
       type: object
       properties:
@@ -1228,68 +1085,211 @@ components:
           type: string
           nullable: true
       description: 'Note: This is not part of the OpenAI API spec, but we added it for interoperability with multiple reasoning models.'
-    ChatCompletionMessageToolCall:
+    ChatCompletionContentPartFileWithTitle:
       type: object
       properties:
-        id:
-          type: string
-        function:
-          type: object
-          properties:
-            arguments:
-              type: string
-            name:
-              type: string
-          required:
-          - arguments
-          - name
+        file:
+          $ref: '#/components/schemas/ChatCompletionContentPartFileFile'
         type:
           type: string
           enum:
-          - function
+          - file
       required:
-      - id
-      - function
+      - file
       - type
-    SummarizeExperimentResponse:
+      title: file
+    PromptData:
       type: object
       properties:
-        project_name:
-          type: string
-          description: Name of the project that the experiment belongs to
-        experiment_name:
-          type: string
-          description: Name of the experiment
-        project_url:
-          type: string
-          format: uri
-          description: URL to the project's page in the Braintrust app
-        experiment_url:
-          type: string
-          format: uri
-          description: URL to the experiment's page in the Braintrust app
-        comparison_experiment_name:
+        prompt:
+          $ref: '#/components/schemas/PromptBlockDataNullish'
+        options:
+          $ref: '#/components/schemas/PromptOptionsNullish'
+        parser:
+          $ref: '#/components/schemas/PromptParserNullish'
+        tool_functions:
+          type: array
+          nullable: true
+          items:
+            allOf:
+            - $ref: '#/components/schemas/SavedFunctionId'
+            - anyOf:
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - function
+                  id:
+                    type: string
+                  version:
+                    type: string
+                    description: The version of the function
+                required:
+                - type
+                - id
+                title: function
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - global
+                  name:
+                    type: string
+                  function_type:
+                    $ref: '#/components/schemas/FunctionTypeEnum'
+                required:
+                - type
+                - name
+                title: global
+        template_format:
           type: string
           nullable: true
-          description: The experiment which scores are baselined against
-        scores:
+          enum:
+          - mustache
+          - nunjucks
+          - none
+          - null
+        mcp:
           type: object
           nullable: true
           additionalProperties:
-            $ref: '#/components/schemas/ScoreSummary'
-          description: Summary of the experiment's scores
-        metrics:
+            oneOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - id
+                id:
+                  type: string
+                  format: uuid
+                is_disabled:
+                  type: boolean
+                enabled_tools:
+                  type: array
+                  nullable: true
+                  items:
+                    type: string
+                  description: If omitted, all tools are enabled
+              required:
+              - type
+              - id
+              title: MCP server id. This is used for project-level MCP server definitions.
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - url
+                url:
+                  type: string
+                is_disabled:
+                  type: boolean
+                enabled_tools:
+                  type: array
+                  nullable: true
+                  items:
+                    type: string
+                  description: If omitted, all tools are enabled
+              required:
+              - type
+              - url
+              title: MCP server url. This is used for inline definitions of MCP servers.
+        origin:
           type: object
           nullable: true
-          additionalProperties:
-            $ref: '#/components/schemas/MetricSummary'
-          description: Summary of the experiment's metrics
+          properties:
+            prompt_id:
+              type: string
+            project_id:
+              type: string
+            prompt_version:
+              type: string
+    FunctionTypeEnum:
+      type: string
+      enum:
+      - llm
+      - scorer
+      - task
+      - tool
+      - custom_view
+      - preprocessor
+      - facet
+      - classifier
+      - tag
+      - parameters
+      - sandbox
+      - null
+      default: scorer
+      description: The type of global function. Defaults to 'scorer'.
+    InvokeParent:
+      anyOf:
+      - type: object
+        properties:
+          object_type:
+            type: string
+            enum:
+            - project_logs
+            - experiment
+            - playground_logs
+          object_id:
+            type: string
+            description: The id of the container object you are logging to
+          row_ids:
+            type: object
+            nullable: true
+            properties:
+              id:
+                type: string
+                description: The id of the row
+              span_id:
+                type: string
+                description: The span_id of the row
+              root_span_id:
+                type: string
+                description: The root_span_id of the row
+            required:
+            - id
+            - span_id
+            - root_span_id
+            description: Identifiers for the row to to log a subspan under
+          propagated_event:
+            type: object
+            nullable: true
+            additionalProperties:
+              nullable: true
+            description: Include these properties in every span created under this parent
+        required:
+        - object_type
+        - object_id
+        description: Span parent properties
+        title: span_parent_struct
+      - type: string
+        description: The parent's span identifier, created by calling `.export()` on a span
+      description: Options for tracing the function call
+    ChatCompletionContentPartText:
+      type: object
+      properties:
+        text:
+          type: string
+          default: ''
+        type:
+          type: string
+          enum:
+          - text
+        cache_control:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - ephemeral
+          required:
+          - type
       required:
-      - project_name
-      - experiment_name
-      - project_url
-      - experiment_url
-      description: Summary of an experiment
+      - type
   securitySchemes:
     bearerAuth:
       type: http

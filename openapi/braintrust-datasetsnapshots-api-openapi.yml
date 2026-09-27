@@ -455,6 +455,33 @@ paths:
                 nullable: true
 components:
   schemas:
+    PatchDatasetSnapshot:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: Name of the dataset snapshot
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the dataset snapshot
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
     DatasetSnapshot:
       type: object
       properties:
@@ -487,55 +514,9 @@ components:
       - description
       - xact_id
       - created
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
     OrgName:
       type: string
       description: Filter search results to within a particular organization
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-    PatchDatasetSnapshot:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the dataset snapshot
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the dataset snapshot
-    DatasetSnapshotIdParam:
-      type: string
-      format: uuid
-      description: DatasetSnapshot id
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
-    DatasetSnapshotName:
-      type: string
-      description: Name of the dataset_snapshot to search for
-    StartingAfter:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
     CreateDatasetSnapshot:
       type: object
       properties:
@@ -559,31 +540,26 @@ components:
       - dataset_id
       - name
       - xact_id
-  parameters:
-    EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    StartingAfter:
+      type: string
+      format: uuid
       description: 'Pagination cursor id.
 
 
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
     DatasetSnapshotIdParam:
-      schema:
-        $ref: '#/components/schemas/DatasetSnapshotIdParam'
-      required: true
+      type: string
+      format: uuid
       description: DatasetSnapshot id
-      name: dataset_snapshot_id
-      in: path
+    DatasetSnapshotName:
+      type: string
+      description: Name of the dataset_snapshot to search for
+  parameters:
     StartingAfter:
       schema:
         $ref: '#/components/schemas/StartingAfter'
@@ -594,12 +570,44 @@ components:
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: starting_after
       in: query
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    DatasetSnapshotIdParam:
+      schema:
+        $ref: '#/components/schemas/DatasetSnapshotIdParam'
+      required: true
+      description: DatasetSnapshot id
+      name: dataset_snapshot_id
+      in: path
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
     DatasetSnapshotName:
       schema:
         $ref: '#/components/schemas/DatasetSnapshotName'
       required: false
       description: Name of the dataset_snapshot to search for
       name: dataset_snapshot_name
+      in: query
+      allowReserved: true
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
       in: query
       allowReserved: true
     AppLimitParam:
@@ -609,14 +617,6 @@ components:
       description: Limit the number of objects to return
       name: limit
       in: query
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
   securitySchemes:
     bearerAuth:
       type: http

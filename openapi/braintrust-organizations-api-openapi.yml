@@ -319,6 +319,96 @@ paths:
                 nullable: true
 components:
   schemas:
+    PatchOrganizationMembersOutput:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+        org_id:
+          type: string
+          description: The id of the org that was modified.
+        send_email_error:
+          type: string
+          nullable: true
+          description: If invite emails failed to send for some reason, the patch operation will still complete, but we will return an error message here
+        added_users:
+          type: array
+          nullable: true
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              email:
+                type: string
+                nullable: true
+              api_key:
+                type: string
+                nullable: true
+              token_name:
+                type: string
+                nullable: true
+            required:
+            - id
+          description: If service accounts with tokens were created, this will contain the added users with their API keys
+      required:
+      - status
+      - org_id
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    PatchOrganization:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: Name of the organization
+        api_url:
+          type: string
+          nullable: true
+        is_universal_api:
+          type: boolean
+          nullable: true
+        is_dataplane_private:
+          type: boolean
+          nullable: true
+        proxy_url:
+          type: string
+          nullable: true
+        realtime_url:
+          type: string
+          nullable: true
+        image_rendering_mode:
+          $ref: '#/components/schemas/ImageRenderingMode'
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    ImageRenderingMode:
+      type: string
+      nullable: true
+      enum:
+      - auto
+      - click_to_load
+      - blocked
+      - null
+      description: 'Controls how images are rendered in the UI: ''auto'' loads images automatically, ''click_to_load'' shows a placeholder until clicked, ''blocked'' prevents image loading entirely'
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
     PatchOrganizationMembers:
       type: object
       properties:
@@ -411,43 +501,22 @@ components:
           type: string
           nullable: true
           description: For nearly all users, this parameter should be unnecessary. But in the rare case that your API key belongs to multiple organizations, or in case you want to explicitly assert the organization you are modifying, you may specify the id of the organization.
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
     OrganizationIdParam:
       type: string
       format: uuid
       description: Organization id
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
     AppLimitParam:
       type: integer
       nullable: true
       minimum: 0
       description: Limit the number of objects to return
-    ImageRenderingMode:
+    StartingAfter:
       type: string
-      nullable: true
-      enum:
-      - auto
-      - click_to_load
-      - blocked
-      - null
-      description: 'Controls how images are rendered in the UI: ''auto'' loads images automatically, ''click_to_load'' shows a placeholder until clicked, ''blocked'' prevents image loading entirely'
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
     Organization:
       type: object
       properties:
@@ -483,76 +552,27 @@ components:
       required:
       - id
       - name
+  parameters:
     StartingAfter:
-      type: string
-      format: uuid
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
       description: 'Pagination cursor id.
 
 
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    PatchOrganizationMembersOutput:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-        org_id:
-          type: string
-          description: The id of the org that was modified.
-        send_email_error:
-          type: string
-          nullable: true
-          description: If invite emails failed to send for some reason, the patch operation will still complete, but we will return an error message here
-        added_users:
-          type: array
-          nullable: true
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                format: uuid
-              email:
-                type: string
-                nullable: true
-              api_key:
-                type: string
-                nullable: true
-              token_name:
-                type: string
-                nullable: true
-            required:
-            - id
-          description: If service accounts with tokens were created, this will contain the added users with their API keys
-      required:
-      - status
-      - org_id
-    PatchOrganization:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the organization
-        api_url:
-          type: string
-          nullable: true
-        is_universal_api:
-          type: boolean
-          nullable: true
-        is_dataplane_private:
-          type: boolean
-          nullable: true
-        proxy_url:
-          type: string
-          nullable: true
-        realtime_url:
-          type: string
-          nullable: true
-        image_rendering_mode:
-          $ref: '#/components/schemas/ImageRenderingMode'
-  parameters:
+      name: starting_after
+      in: query
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
     OrganizationIdParam:
       schema:
         $ref: '#/components/schemas/OrganizationIdParam'
@@ -567,33 +587,6 @@ components:
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
       name: ids
       in: query
-    EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
-    StartingAfter:
-      schema:
-        $ref: '#/components/schemas/StartingAfter'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
-      in: query
-    AppLimitParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
     OrgName:
       schema:
         $ref: '#/components/schemas/OrgName'
@@ -602,6 +595,13 @@ components:
       name: org_name
       in: query
       allowReserved: true
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
   securitySchemes:
     bearerAuth:
       type: http

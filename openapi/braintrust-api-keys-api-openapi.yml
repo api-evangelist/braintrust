@@ -240,15 +240,6 @@ paths:
                 nullable: true
 components:
   schemas:
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
     ApiKey:
       type: object
       properties:
@@ -292,16 +283,19 @@ components:
       - id
       - name
       - preview_name
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
     ApiKeyIdParam:
       type: string
       format: uuid
       description: ApiKey id
-    ApiKeyName:
-      type: string
-      description: Name of the api_key to search for
     EndingBefore:
       type: string
       format: uuid
@@ -309,6 +303,9 @@ components:
 
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
     AppLimitParam:
       type: integer
       nullable: true
@@ -321,25 +318,10 @@ components:
 
 
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-  parameters:
-    EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
     ApiKeyName:
-      schema:
-        $ref: '#/components/schemas/ApiKeyName'
-      required: false
+      type: string
       description: Name of the api_key to search for
-      name: api_key_name
-      in: query
-      allowReserved: true
+  parameters:
     ApiKeyIdParam:
       schema:
         $ref: '#/components/schemas/ApiKeyIdParam'
@@ -347,13 +329,6 @@ components:
       description: ApiKey id
       name: api_key_id
       in: path
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
     StartingAfter:
       schema:
         $ref: '#/components/schemas/StartingAfter'
@@ -364,12 +339,22 @@ components:
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: starting_after
       in: query
-    AppLimitParam:
+    EndingBefore:
       schema:
-        $ref: '#/components/schemas/AppLimitParam'
+        $ref: '#/components/schemas/EndingBefore'
       required: false
-      description: Limit the number of objects to return
-      name: limit
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
       in: query
     OrgName:
       schema:
@@ -379,6 +364,21 @@ components:
       name: org_name
       in: query
       allowReserved: true
+    ApiKeyName:
+      schema:
+        $ref: '#/components/schemas/ApiKeyName'
+      required: false
+      description: Name of the api_key to search for
+      name: api_key_name
+      in: query
+      allowReserved: true
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
   securitySchemes:
     bearerAuth:
       type: http

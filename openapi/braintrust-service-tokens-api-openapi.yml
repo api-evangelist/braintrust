@@ -312,18 +312,6 @@ paths:
                 nullable: true
 components:
   schemas:
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
     DeleteServiceToken:
       type: object
       properties:
@@ -333,17 +321,6 @@ components:
           description: Unique identifier for the service token.
       required:
       - id
-    ServiceTokenIdParam:
-      type: string
-      format: uuid
-      description: ServiceToken id
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
     ServiceToken:
       type: object
       properties:
@@ -383,14 +360,37 @@ components:
       - id
       - name
       - preview_name
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
     ServiceTokenName:
       type: string
       description: Name of the service_token to search for
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
     AppLimitParam:
       type: integer
       nullable: true
       minimum: 0
       description: Limit the number of objects to return
+    ServiceTokenIdParam:
+      type: string
+      format: uuid
+      description: ServiceToken id
     StartingAfter:
       type: string
       format: uuid
@@ -399,14 +399,6 @@ components:
 
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
   parameters:
-    ServiceTokenName:
-      schema:
-        $ref: '#/components/schemas/ServiceTokenName'
-      required: false
-      description: Name of the service_token to search for
-      name: service_token_name
-      in: query
-      allowReserved: true
     EndingBefore:
       schema:
         $ref: '#/components/schemas/EndingBefore'
@@ -416,6 +408,16 @@ components:
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: ending_before
+      in: query
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
       in: query
     Ids:
       schema:
@@ -431,23 +433,14 @@ components:
       description: ServiceToken id
       name: service_token_id
       in: path
-    StartingAfter:
+    ServiceTokenName:
       schema:
-        $ref: '#/components/schemas/StartingAfter'
+        $ref: '#/components/schemas/ServiceTokenName'
       required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
+      description: Name of the service_token to search for
+      name: service_token_name
       in: query
-    AppLimitParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
+      allowReserved: true
     OrgName:
       schema:
         $ref: '#/components/schemas/OrgName'
@@ -456,6 +449,13 @@ components:
       name: org_name
       in: query
       allowReserved: true
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
   securitySchemes:
     bearerAuth:
       type: http
