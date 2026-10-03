@@ -455,85 +455,6 @@ paths:
                 nullable: true
 components:
   schemas:
-    PatchSpanIFrame:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the span iframe
-        url:
-          type: string
-          nullable: true
-          description: URL to embed the project viewer in an iframe
-        post_message:
-          type: boolean
-          nullable: true
-          description: Whether to post messages to the iframe containing the span's data. This is useful when you want to render more data than fits in the URL.
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the span iframe
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    CreateSpanIFrame:
-      type: object
-      properties:
-        project_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the project that the span iframe belongs under
-        name:
-          type: string
-          description: Name of the span iframe
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the span iframe
-        url:
-          type: string
-          description: URL to embed the project viewer in an iframe
-        post_message:
-          type: boolean
-          nullable: true
-          description: Whether to post messages to the iframe containing the span's data. This is useful when you want to render more data than fits in the URL.
-      required:
-      - project_id
-      - name
-      - url
-    SpanIframeIdParam:
-      type: string
-      format: uuid
-      description: SpanIframe id
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
-    StartingAfter:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
     SpanIframeName:
       type: string
       description: Name of the span_iframe to search for
@@ -582,24 +503,86 @@ components:
       - project_id
       - name
       - url
-  parameters:
-    SpanIframeIdParam:
-      schema:
-        $ref: '#/components/schemas/SpanIframeIdParam'
-      required: true
-      description: SpanIframe id
-      name: span_iframe_id
-      in: path
+    CreateSpanIFrame:
+      type: object
+      properties:
+        project_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project that the span iframe belongs under
+        name:
+          type: string
+          description: Name of the span iframe
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the span iframe
+        url:
+          type: string
+          description: URL to embed the project viewer in an iframe
+        post_message:
+          type: boolean
+          nullable: true
+          description: Whether to post messages to the iframe containing the span's data. This is useful when you want to render more data than fits in the URL.
+      required:
+      - project_id
+      - name
+      - url
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
     EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
+      type: string
+      format: uuid
       description: 'Pagination cursor id.
 
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    PatchSpanIFrame:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: Name of the span iframe
+        url:
+          type: string
+          nullable: true
+          description: URL to embed the project viewer in an iframe
+        post_message:
+          type: boolean
+          nullable: true
+          description: Whether to post messages to the iframe containing the span's data. This is useful when you want to render more data than fits in the URL.
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the span iframe
+    SpanIframeIdParam:
+      type: string
+      format: uuid
+      description: SpanIframe id
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+  parameters:
     StartingAfter:
       schema:
         $ref: '#/components/schemas/StartingAfter'
@@ -610,6 +593,20 @@ components:
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: starting_after
       in: query
+    SpanIframeIdParam:
+      schema:
+        $ref: '#/components/schemas/SpanIframeIdParam'
+      required: true
+      description: SpanIframe id
+      name: span_iframe_id
+      in: path
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
     SpanIframeName:
       schema:
         $ref: '#/components/schemas/SpanIframeName'
@@ -618,13 +615,6 @@ components:
       name: span_iframe_name
       in: query
       allowReserved: true
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
     OrgName:
       schema:
         $ref: '#/components/schemas/OrgName'
@@ -633,6 +623,16 @@ components:
       name: org_name
       in: query
       allowReserved: true
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
     AppLimitParam:
       schema:
         $ref: '#/components/schemas/AppLimitParam'

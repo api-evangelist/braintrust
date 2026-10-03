@@ -311,16 +311,80 @@ paths:
               schema:
                 nullable: true
 components:
+  parameters:
+    ServiceTokenName:
+      schema:
+        $ref: '#/components/schemas/ServiceTokenName'
+      required: false
+      description: Name of the service_token to search for
+      name: service_token_name
+      in: query
+      allowReserved: true
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    ServiceTokenIdParam:
+      schema:
+        $ref: '#/components/schemas/ServiceTokenIdParam'
+      required: true
+      description: ServiceToken id
+      name: service_token_id
+      in: path
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
   schemas:
-    DeleteServiceToken:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the service token.
-      required:
-      - id
+    ServiceTokenName:
+      type: string
+      description: Name of the service_token to search for
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
     ServiceToken:
       type: object
       properties:
@@ -360,6 +424,17 @@ components:
       - id
       - name
       - preview_name
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    ServiceTokenIdParam:
+      type: string
+      format: uuid
+      description: ServiceToken id
     Ids:
       anyOf:
       - type: string
@@ -369,93 +444,18 @@ components:
           type: string
           format: uuid
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    ServiceTokenName:
-      type: string
-      description: Name of the service_token to search for
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    DeleteServiceToken:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the service token.
+      required:
+      - id
     OrgName:
       type: string
       description: Filter search results to within a particular organization
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
-    ServiceTokenIdParam:
-      type: string
-      format: uuid
-      description: ServiceToken id
-    StartingAfter:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-  parameters:
-    EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
-    StartingAfter:
-      schema:
-        $ref: '#/components/schemas/StartingAfter'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
-      in: query
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
-    ServiceTokenIdParam:
-      schema:
-        $ref: '#/components/schemas/ServiceTokenIdParam'
-      required: true
-      description: ServiceToken id
-      name: service_token_id
-      in: path
-    ServiceTokenName:
-      schema:
-        $ref: '#/components/schemas/ServiceTokenName'
-      required: false
-      description: Name of the service_token to search for
-      name: service_token_name
-      in: query
-      allowReserved: true
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
-    AppLimitParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
   securitySchemes:
     bearerAuth:
       type: http

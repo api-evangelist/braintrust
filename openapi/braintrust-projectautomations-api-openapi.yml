@@ -454,22 +454,114 @@ paths:
               schema:
                 nullable: true
 components:
-  schemas:
-    SpanScope:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - span
-      required:
-      - type
-      description: Process individual spans
+  parameters:
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
+    ProjectAutomationName:
+      schema:
+        $ref: '#/components/schemas/ProjectAutomationName'
+      required: false
+      description: Name of the project_automation to search for
+      name: project_automation_name
+      in: query
+      allowReserved: true
+    ProjectAutomationIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectAutomationIdParam'
+      required: true
+      description: ProjectAutomation id
+      name: project_automation_id
+      in: path
     AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
       description: Limit the number of objects to return
+      name: limit
+      in: query
+  schemas:
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    TopicAutomationFacetModel:
+      type: string
+      nullable: true
+      enum:
+      - brain-facet-latest
+      - brain-facet-1
+      - brain-facet-2
+      - null
+      description: Optional facet model override for topic automation
+    SavedFunctionId:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - function
+          id:
+            type: string
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - type
+        - id
+        title: function
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - global
+          name:
+            type: string
+          function_type:
+            $ref: '#/components/schemas/FunctionTypeEnum'
+        required:
+        - type
+        - name
+        title: global
+      - type: 'null'
+      description: Optional function identifier that produced the classification
     TopicAutomationConfig:
       type: object
       properties:
@@ -568,39 +660,126 @@ components:
       - sampling_rate
       - facet_functions
       - topic_map_functions
-    SavedFunctionId:
-      anyOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - function
-          id:
-            type: string
-          version:
-            type: string
-            description: The version of the function
-        required:
-        - type
-        - id
-        title: function
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - global
-          name:
-            type: string
-          function_type:
-            $ref: '#/components/schemas/FunctionTypeEnum'
-        required:
-        - type
-        - name
-        title: global
-      - type: 'null'
-      description: Optional function identifier that produced the classification
+    RetentionObjectType:
+      type: string
+      enum:
+      - project_logs
+      - experiment
+      - dataset
+      description: The object type that the retention policy applies to
+    TopicMapFunctionAutomation:
+      type: object
+      properties:
+        function:
+          allOf:
+          - $ref: '#/components/schemas/SavedFunctionId'
+          - anyOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - function
+                id:
+                  type: string
+                version:
+                  type: string
+                  description: The version of the function
+              required:
+              - type
+              - id
+              title: function
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - global
+                name:
+                  type: string
+                function_type:
+                  $ref: '#/components/schemas/FunctionTypeEnum'
+              required:
+              - type
+              - name
+              title: global
+            description: Topic map function
+        btql_filter:
+          type: string
+          nullable: true
+          description: Per-topic-map BTQL filter. For trace scope, a topic map runs when max(filter) over the trace is truthy. For span scope, it runs when the current span matches.
+      required:
+      - function
+    FunctionTypeEnum:
+      type: string
+      enum:
+      - llm
+      - scorer
+      - task
+      - tool
+      - custom_view
+      - preprocessor
+      - facet
+      - classifier
+      - tag
+      - parameters
+      - sandbox
+      - null
+      default: scorer
+      description: The type of global function. Defaults to 'scorer'.
+    SpanScope:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - span
+      required:
+      - type
+      description: Process individual spans
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+    GroupScope:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - group
+        group_by:
+          type: string
+          description: Field path to group by, e.g. metadata.session_id
+        idle_seconds:
+          type: number
+          description: 'Optional: trigger after this many seconds of inactivity'
+      required:
+      - type
+      - group_by
+      description: Process spans/traces grouped by a field (e.g., session_id)
+    TraceScope:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - trace
+        idle_seconds:
+          type: number
+          description: 'Consider trace complete after this many seconds of inactivity (default: 30)'
+      required:
+      - type
+      description: Process entire traces (all spans sharing the same root_span_id)
+    ProjectAutomationName:
+      type: string
+      description: Name of the project_automation to search for
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
     CreateProjectAutomation:
       type: object
       properties:
@@ -847,149 +1026,15 @@ components:
       - project_id
       - name
       - config
-    TraceScope:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - trace
-        idle_seconds:
-          type: number
-          description: 'Consider trace complete after this many seconds of inactivity (default: 30)'
-      required:
-      - type
-      description: Process entire traces (all spans sharing the same root_span_id)
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-    TopicMapFunctionAutomation:
-      type: object
-      properties:
-        function:
-          allOf:
-          - $ref: '#/components/schemas/SavedFunctionId'
-          - anyOf:
-            - type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                  - function
-                id:
-                  type: string
-                version:
-                  type: string
-                  description: The version of the function
-              required:
-              - type
-              - id
-              title: function
-            - type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                  - global
-                name:
-                  type: string
-                function_type:
-                  $ref: '#/components/schemas/FunctionTypeEnum'
-              required:
-              - type
-              - name
-              title: global
-            description: Topic map function
-        btql_filter:
-          type: string
-          nullable: true
-          description: Per-topic-map BTQL filter. For trace scope, a topic map runs when max(filter) over the trace is truthy. For span scope, it runs when the current span matches.
-      required:
-      - function
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
     ProjectAutomationIdParam:
       type: string
       format: uuid
       description: ProjectAutomation id
-    TopicAutomationDataScope:
-      anyOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - project_logs
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - project_experiments
-        required:
-        - type
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - experiment
-          experiment_id:
-            type: string
-        required:
-        - type
-        - experiment_id
-      - type: 'null'
-      description: Optional data scope for topic automation.
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    GroupScope:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - group
-        group_by:
-          type: string
-          description: Field path to group by, e.g. metadata.session_id
-        idle_seconds:
-          type: number
-          description: 'Optional: trigger after this many seconds of inactivity'
-      required:
-      - type
-      - group_by
-      description: Process spans/traces grouped by a field (e.g., session_id)
-    StartingAfter:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    TopicAutomationFacetModel:
-      type: string
-      nullable: true
-      enum:
-      - brain-facet-latest
-      - brain-facet-1
-      - brain-facet-2
-      - null
-      description: Optional facet model override for topic automation
-    ProjectAutomationName:
-      type: string
-      description: Name of the project_automation to search for
     PatchProjectAutomation:
       type: object
       properties:
@@ -1230,33 +1275,6 @@ components:
           - $ref: '#/components/schemas/TopicAutomationConfig'
           - nullable: true
           description: The configuration for the automation rule
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    FunctionTypeEnum:
-      type: string
-      enum:
-      - llm
-      - scorer
-      - task
-      - tool
-      - custom_view
-      - preprocessor
-      - facet
-      - classifier
-      - tag
-      - parameters
-      - sandbox
-      - null
-      default: scorer
-      description: The type of global function. Defaults to 'scorer'.
-    RetentionObjectType:
-      type: string
-      enum:
-      - project_logs
-      - experiment
-      - dataset
-      description: The object type that the retention policy applies to
     ProjectAutomation:
       type: object
       properties:
@@ -1518,64 +1536,46 @@ components:
       - project_id
       - name
       - config
-  parameters:
-    ProjectAutomationName:
-      schema:
-        $ref: '#/components/schemas/ProjectAutomationName'
-      required: false
-      description: Name of the project_automation to search for
-      name: project_automation_name
-      in: query
-      allowReserved: true
-    EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
-    StartingAfter:
-      schema:
-        $ref: '#/components/schemas/StartingAfter'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
-      in: query
+    TopicAutomationDataScope:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - project_logs
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - project_experiments
+        required:
+        - type
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - experiment
+          experiment_id:
+            type: string
+        required:
+        - type
+        - experiment_id
+      - type: 'null'
+      description: Optional data scope for topic automation.
     Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
-    AppLimitParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
-    ProjectAutomationIdParam:
-      schema:
-        $ref: '#/components/schemas/ProjectAutomationIdParam'
-      required: true
-      description: ProjectAutomation id
-      name: project_automation_id
-      in: path
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
   securitySchemes:
     bearerAuth:
       type: http

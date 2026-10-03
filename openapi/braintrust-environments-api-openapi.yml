@@ -402,26 +402,6 @@ paths:
                 nullable: true
 components:
   schemas:
-    CreateEnvironment:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the environment
-        slug:
-          type: string
-          description: A url-friendly, unique identifier for the environment within an organization
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the environment
-        org_name:
-          type: string
-          nullable: true
-          description: For nearly all users, this parameter should be unnecessary. But in the rare case that your API key belongs to multiple organizations, you may specify the name of the organization the environment belongs in.
-      required:
-      - name
-      - slug
     PatchEnvironment:
       type: object
       properties:
@@ -437,9 +417,6 @@ components:
           type: string
           nullable: true
           description: Textual description of the environment
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
     Environment:
       type: object
       properties:
@@ -476,6 +453,29 @@ components:
       - org_id
       - name
       - slug
+    CreateEnvironment:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the environment
+        slug:
+          type: string
+          description: A url-friendly, unique identifier for the environment within an organization
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the environment
+        org_name:
+          type: string
+          nullable: true
+          description: For nearly all users, this parameter should be unnecessary. But in the rare case that your API key belongs to multiple organizations, you may specify the name of the organization the environment belongs in.
+      required:
+      - name
+      - slug
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
   parameters:
     OrgName:
       schema:

@@ -755,178 +755,63 @@ components:
 
 
         The string can be obtained directly from the `cursor` property of the previous fetch query'
-    InsertDatasetEventRequest:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/InsertDatasetEvent'
-          description: A list of dataset events to insert
-      required:
-      - events
-    FetchLimitParam:
-      type: integer
+    SummarizeData:
+      type: boolean
       nullable: true
-      minimum: 0
-      description: 'limit the number of traces fetched
-
-
-        Fetch queries may be paginated if the total result size is expected to be large (e.g. project_logs which accumulate over a long time). Note that fetch queries only support pagination in descending time order (from latest to earliest `_xact_id`. Furthermore, later pages may return rows which showed up in earlier pages, except with an earlier `_xact_id`. This happens because pagination occurs over the whole version history of the event log. You will most likely want to exclude any such duplicate, outdated rows (by `id`) from your combined result set.
-
-
-        The `limit` parameter controls the number of full traces to return. So you may end up with more individual rows than the specified limit if you are fetching events containing traces.'
-    FeedbackDatasetEventRequest:
-      type: object
-      properties:
-        feedback:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeedbackDatasetItem'
-          description: A list of dataset feedback items
-      required:
-      - feedback
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
-    SummarizeDatasetResponse:
-      type: object
-      properties:
-        project_name:
-          type: string
-          description: Name of the project that the dataset belongs to
-        dataset_name:
-          type: string
-          description: Name of the dataset
-        project_url:
-          type: string
-          format: uri
-          description: URL to the project's page in the Braintrust app
-        dataset_url:
-          type: string
-          format: uri
-          description: URL to the dataset's page in the Braintrust app
-        data_summary:
-          $ref: '#/components/schemas/DataSummary'
-      required:
-      - project_name
-      - dataset_name
-      - project_url
-      - dataset_url
-      description: Summary of a dataset
-    SavedFunctionId:
-      anyOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - function
-          id:
-            type: string
-          version:
-            type: string
-            description: The version of the function
-        required:
-        - type
-        - id
-        title: function
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - global
-          name:
-            type: string
-          function_type:
-            $ref: '#/components/schemas/FunctionTypeEnum'
-        required:
-        - type
-        - name
-        title: global
-      - type: 'null'
-      description: Optional function identifier that produced the classification
-    Version:
-      type: string
-      description: 'Retrieve a snapshot of events from a past time
-
-
-        The version id is essentially a filter on the latest event transaction id. You can use the `max_xact_id` returned by a past fetch as the version to reproduce that exact fetch.'
-    FeedbackDatasetItem:
+      description: Whether to summarize the data. If false (or omitted), only the metadata will be returned.
+    Dataset:
       type: object
       properties:
         id:
           type: string
-          description: The id of the dataset event to log feedback for. This is the row `id` returned by `POST /v1/dataset/{dataset_id}/insert`
-        comment:
+          format: uuid
+          description: Unique identifier for the dataset
+        project_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project that the dataset belongs under
+        name:
+          type: string
+          description: Name of the dataset. Within a project, dataset names are unique
+        description:
           type: string
           nullable: true
-          description: An optional comment string to log about the dataset event
-        metadata:
-          type: object
-          nullable: true
-          additionalProperties:
-            nullable: true
-          description: A dictionary with additional data about the feedback. If you have a `user_id`, you can log it here and access it in the Braintrust UI. Note, this metadata does not correspond to the main event itself, but rather the audit log attached to the event.
-        source:
+          description: Textual description of the dataset
+        created:
           type: string
           nullable: true
-          enum:
-          - app
-          - api
-          - external
-          - null
-          description: The source of the feedback. Must be one of "external" (default), "app", or "api"
+          format: date-time
+          description: Date of dataset creation
+        deleted_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of dataset deletion, or null if the dataset is still active
+        user_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Identifies the user who created the dataset
         tags:
           type: array
           nullable: true
           items:
             type: string
-          description: A list of tags to log
+          description: A list of tags for the dataset
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties:
+            nullable: true
+          description: User-controlled metadata about the dataset
+        url_slug:
+          type: string
+          description: URL slug for the dataset. used to construct dataset URLs
       required:
       - id
-    ProjectIdQuery:
-      type: string
-      format: uuid
-      description: Project id
-    FeedbackResponseSchema:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-      required:
-      - status
-    MaxRootSpanId:
-      type: string
-      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
-
-
-        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
-
-
-        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
-    FetchDatasetEventsResponse:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/DatasetEvent'
-          description: A list of fetched events
-        cursor:
-          type: string
-          nullable: true
-          description: 'Pagination cursor
-
-
-            Pass this string directly as the `cursor` param to your next fetch request to get the next page of results. Not provided if the returned result set is empty.'
-      required:
-      - events
+      - project_id
+      - name
+      - url_slug
     MaxXactId:
       type: string
       description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
@@ -936,40 +821,15 @@ components:
 
 
         Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
-    ObjectReferenceNullish:
+    FeedbackResponseSchema:
       type: object
-      nullable: true
       properties:
-        object_type:
+        status:
           type: string
           enum:
-          - project_logs
-          - experiment
-          - dataset
-          - prompt
-          - function
-          - prompt_session
-          description: Type of the object the event is originating from.
-        object_id:
-          type: string
-          format: uuid
-          description: ID of the object the event is originating from.
-        id:
-          type: string
-          description: ID of the original event.
-        _xact_id:
-          type: string
-          nullable: true
-          description: Transaction ID of the original event.
-        created:
-          type: string
-          nullable: true
-          description: Created timestamp of the original event. Used to help sort in the UI
+          - success
       required:
-      - object_type
-      - object_id
-      - id
-      description: Indicates the event was copied from another object.
+      - status
     EndingBefore:
       type: string
       format: uuid
@@ -977,181 +837,6 @@ components:
 
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-    DatasetName:
-      type: string
-      description: Name of the dataset to search for
-    CreateDataset:
-      type: object
-      properties:
-        project_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the project that the dataset belongs under
-        name:
-          type: string
-          minLength: 1
-          description: Name of the dataset. Within a project, dataset names are unique
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the dataset
-        tags:
-          type: array
-          nullable: true
-          items:
-            type: string
-          description: A list of tags for the dataset
-        metadata:
-          type: object
-          nullable: true
-          additionalProperties:
-            nullable: true
-          description: User-controlled metadata about the dataset
-      required:
-      - project_id
-      - name
-    PatchDataset:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the dataset. Within a project, dataset names are unique
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the dataset
-        tags:
-          type: array
-          nullable: true
-          items:
-            type: string
-          description: A list of tags for the dataset
-        metadata:
-          type: object
-          nullable: true
-          additionalProperties:
-            nullable: true
-          description: User-controlled metadata about the dataset
-    DatasetIdParam:
-      type: string
-      format: uuid
-      description: Dataset id
-    DatasetEvent:
-      type: object
-      properties:
-        id:
-          type: string
-          description: A unique identifier for the dataset event. If you don't provide one, Braintrust will generate one for you
-        _xact_id:
-          type: string
-          description: The transaction id of an event is unique to the network operation that processed the event insertion. Transaction ids are monotonically increasing over time and can be used to retrieve a versioned snapshot of the dataset (see the `version` parameter)
-        created:
-          type: string
-          format: date-time
-          description: The timestamp the dataset event was created
-        _pagination_key:
-          type: string
-          nullable: true
-          description: A stable, time-ordered key that can be used to paginate over dataset events. This field is auto-generated by Braintrust and only exists in Brainstore.
-        project_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the project that the dataset belongs under
-        dataset_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the dataset
-        input:
-          nullable: true
-          description: The argument that uniquely define an input case (an arbitrary, JSON serializable object)
-        expected:
-          nullable: true
-          description: The output of your application, including post-processing (an arbitrary, JSON serializable object)
-        metadata:
-          type: object
-          nullable: true
-          properties:
-            model:
-              type: string
-              nullable: true
-              description: The model used for this example
-          additionalProperties:
-            nullable: true
-          description: A dictionary with additional data about the test example, model outputs, or just about anything else that's relevant, that you can use to help find and analyze examples later. For example, you could log the `prompt`, example's `id`, or anything else that would be useful to slice/dice later. The values in `metadata` can be any JSON-serializable type, but its keys must be strings
-        tags:
-          type: array
-          nullable: true
-          items:
-            type: string
-          description: A list of tags to log
-        span_id:
-          type: string
-          description: A unique identifier used to link different dataset events together as part of a full trace. See the [tracing guide](https://www.braintrust.dev/docs/instrument) for full details on tracing
-        root_span_id:
-          type: string
-          description: A unique identifier for the trace this dataset event belongs to
-        is_root:
-          type: boolean
-          nullable: true
-          description: Whether this span is a root span
-        origin:
-          $ref: '#/components/schemas/ObjectReferenceNullish'
-        comments:
-          type: array
-          nullable: true
-          items:
-            nullable: true
-          description: Optional list of comments attached to this event
-        audit_data:
-          type: array
-          nullable: true
-          items:
-            nullable: true
-          description: Optional list of audit entries attached to this event
-        facets:
-          type: object
-          nullable: true
-          additionalProperties:
-            nullable: true
-          description: Facets for categorization (dictionary from facet id to value)
-        classifications:
-          type: object
-          nullable: true
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: Stable classification identifier
-                label:
-                  type: string
-                  description: Original label of the classification item, which is useful for search and indexing purposes
-                confidence:
-                  type: number
-                  nullable: true
-                  description: Optional confidence score for the classification
-                metadata:
-                  type: object
-                  nullable: true
-                  additionalProperties:
-                    nullable: true
-                  description: Optional metadata associated with the classification
-                source:
-                  $ref: '#/components/schemas/SavedFunctionId'
-              required:
-              - id
-          description: Classifications for this event (dictionary from classification name to items)
-      required:
-      - id
-      - _xact_id
-      - created
-      - project_id
-      - dataset_id
-      - span_id
-      - root_span_id
     InsertDatasetEvent:
       type: object
       properties:
@@ -1284,111 +969,39 @@ components:
 
             If the row is being merged into an existing row, this field will be ignored.'
       description: A dataset event
-    Ids:
+    SavedFunctionId:
       anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    InsertEventsResponse:
-      type: object
-      properties:
-        row_ids:
-          type: array
-          items:
+      - type: object
+        properties:
+          type:
             type: string
-          description: The ids of all rows that were inserted, aligning one-to-one with the rows provided as input
-      required:
-      - row_ids
-    Dataset:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the dataset
-        project_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the project that the dataset belongs under
-        name:
-          type: string
-          description: Name of the dataset. Within a project, dataset names are unique
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the dataset
-        created:
-          type: string
-          nullable: true
-          format: date-time
-          description: Date of dataset creation
-        deleted_at:
-          type: string
-          nullable: true
-          format: date-time
-          description: Date of dataset deletion, or null if the dataset is still active
-        user_id:
-          type: string
-          nullable: true
-          format: uuid
-          description: Identifies the user who created the dataset
-        tags:
-          type: array
-          nullable: true
-          items:
+            enum:
+            - function
+          id:
             type: string
-          description: A list of tags for the dataset
-        metadata:
-          type: object
-          nullable: true
-          additionalProperties:
-            nullable: true
-          description: User-controlled metadata about the dataset
-        url_slug:
-          type: string
-          description: URL slug for the dataset. used to construct dataset URLs
-      required:
-      - id
-      - project_id
-      - name
-      - url_slug
-    StartingAfter:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    SummarizeData:
-      type: boolean
-      nullable: true
-      description: Whether to summarize the data. If false (or omitted), only the metadata will be returned.
-    FetchLimit:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: 'limit the number of traces fetched
-
-
-        Fetch queries may be paginated if the total result size is expected to be large (e.g. project_logs which accumulate over a long time). Note that fetch queries only support pagination in descending time order (from latest to earliest `_xact_id`. Furthermore, later pages may return rows which showed up in earlier pages, except with an earlier `_xact_id`. This happens because pagination occurs over the whole version history of the event log. You will most likely want to exclude any such duplicate, outdated rows (by `id`) from your combined result set.
-
-
-        The `limit` parameter controls the number of full traces to return. So you may end up with more individual rows than the specified limit if you are fetching events containing traces.'
-    DataSummary:
-      type: object
-      nullable: true
-      properties:
-        total_records:
-          type: integer
-          minimum: 0
-          description: Total number of records in the dataset
-      required:
-      - total_records
-      description: Summary of a dataset's data
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - type
+        - id
+        title: function
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - global
+          name:
+            type: string
+          function_type:
+            $ref: '#/components/schemas/FunctionTypeEnum'
+        required:
+        - type
+        - name
+        title: global
+      - type: 'null'
+      description: Optional function identifier that produced the classification
     FetchEventsRequest:
       type: object
       properties:
@@ -1405,12 +1018,65 @@ components:
         version:
           $ref: '#/components/schemas/Version'
           nullable: true
-    OrgName:
+    InsertDatasetEventRequest:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/InsertDatasetEvent'
+          description: A list of dataset events to insert
+      required:
+      - events
+    FetchLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: 'limit the number of traces fetched
+
+
+        Fetch queries may be paginated if the total result size is expected to be large (e.g. project_logs which accumulate over a long time). Note that fetch queries only support pagination in descending time order (from latest to earliest `_xact_id`. Furthermore, later pages may return rows which showed up in earlier pages, except with an earlier `_xact_id`. This happens because pagination occurs over the whole version history of the event log. You will most likely want to exclude any such duplicate, outdated rows (by `id`) from your combined result set.
+
+
+        The `limit` parameter controls the number of full traces to return. So you may end up with more individual rows than the specified limit if you are fetching events containing traces.'
+    ObjectReferenceNullish:
+      type: object
+      nullable: true
+      properties:
+        object_type:
+          type: string
+          enum:
+          - project_logs
+          - experiment
+          - dataset
+          - prompt
+          - function
+          - prompt_session
+          description: Type of the object the event is originating from.
+        object_id:
+          type: string
+          format: uuid
+          description: ID of the object the event is originating from.
+        id:
+          type: string
+          description: ID of the original event.
+        _xact_id:
+          type: string
+          nullable: true
+          description: Transaction ID of the original event.
+        created:
+          type: string
+          nullable: true
+          description: Created timestamp of the original event. Used to help sort in the UI
+      required:
+      - object_type
+      - object_id
+      - id
+      description: Indicates the event was copied from another object.
+    ProjectIdQuery:
       type: string
-      description: Filter search results to within a particular organization
-    ProjectName:
-      type: string
-      description: Name of the project to search for
+      format: uuid
+      description: Project id
     FunctionTypeEnum:
       type: string
       enum:
@@ -1428,84 +1094,341 @@ components:
       - null
       default: scorer
       description: The type of global function. Defaults to 'scorer'.
-  parameters:
-    DatasetIdParam:
-      schema:
-        $ref: '#/components/schemas/DatasetIdParam'
-      required: true
-      description: Dataset id
-      name: dataset_id
-      in: path
-    EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
-    Version:
-      schema:
-        $ref: '#/components/schemas/Version'
-      required: false
-      description: 'Retrieve a snapshot of events from a past time
-
-
-        The version id is essentially a filter on the latest event transaction id. You can use the `max_xact_id` returned by a past fetch as the version to reproduce that exact fetch.'
-      name: version
-      in: query
-    MaxXactId:
-      schema:
-        $ref: '#/components/schemas/MaxXactId'
-      required: false
-      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
-
-
-        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
-
-
-        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
-      name: max_xact_id
-      in: query
-    MaxRootSpanId:
-      schema:
-        $ref: '#/components/schemas/MaxRootSpanId'
-      required: false
-      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
-
-
-        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
-
-
-        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
-      name: max_root_span_id
-      in: query
-    SummarizeData:
-      schema:
-        $ref: '#/components/schemas/SummarizeData'
-      required: false
-      description: Whether to summarize the data. If false (or omitted), only the metadata will be returned.
-      name: summarize_data
-      in: query
     StartingAfter:
-      schema:
-        $ref: '#/components/schemas/StartingAfter'
-      required: false
+      type: string
+      format: uuid
       description: 'Pagination cursor id.
 
 
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
-      in: query
-    ProjectIdQuery:
-      schema:
-        $ref: '#/components/schemas/ProjectIdQuery'
-      required: false
-      description: Project id
-      name: project_id
-      in: query
+    DatasetIdParam:
+      type: string
+      format: uuid
+      description: Dataset id
+    FetchDatasetEventsResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/DatasetEvent'
+          description: A list of fetched events
+        cursor:
+          type: string
+          nullable: true
+          description: 'Pagination cursor
+
+
+            Pass this string directly as the `cursor` param to your next fetch request to get the next page of results. Not provided if the returned result set is empty.'
+      required:
+      - events
+    FetchLimit:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: 'limit the number of traces fetched
+
+
+        Fetch queries may be paginated if the total result size is expected to be large (e.g. project_logs which accumulate over a long time). Note that fetch queries only support pagination in descending time order (from latest to earliest `_xact_id`. Furthermore, later pages may return rows which showed up in earlier pages, except with an earlier `_xact_id`. This happens because pagination occurs over the whole version history of the event log. You will most likely want to exclude any such duplicate, outdated rows (by `id`) from your combined result set.
+
+
+        The `limit` parameter controls the number of full traces to return. So you may end up with more individual rows than the specified limit if you are fetching events containing traces.'
+    DatasetName:
+      type: string
+      description: Name of the dataset to search for
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    FeedbackDatasetItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the dataset event to log feedback for. This is the row `id` returned by `POST /v1/dataset/{dataset_id}/insert`
+        comment:
+          type: string
+          nullable: true
+          description: An optional comment string to log about the dataset event
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties:
+            nullable: true
+          description: A dictionary with additional data about the feedback. If you have a `user_id`, you can log it here and access it in the Braintrust UI. Note, this metadata does not correspond to the main event itself, but rather the audit log attached to the event.
+        source:
+          type: string
+          nullable: true
+          enum:
+          - app
+          - api
+          - external
+          - null
+          description: The source of the feedback. Must be one of "external" (default), "app", or "api"
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: A list of tags to log
+      required:
+      - id
+    SummarizeDatasetResponse:
+      type: object
+      properties:
+        project_name:
+          type: string
+          description: Name of the project that the dataset belongs to
+        dataset_name:
+          type: string
+          description: Name of the dataset
+        project_url:
+          type: string
+          format: uri
+          description: URL to the project's page in the Braintrust app
+        dataset_url:
+          type: string
+          format: uri
+          description: URL to the dataset's page in the Braintrust app
+        data_summary:
+          $ref: '#/components/schemas/DataSummary'
+      required:
+      - project_name
+      - dataset_name
+      - project_url
+      - dataset_url
+      description: Summary of a dataset
+    FeedbackDatasetEventRequest:
+      type: object
+      properties:
+        feedback:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeedbackDatasetItem'
+          description: A list of dataset feedback items
+      required:
+      - feedback
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    Version:
+      type: string
+      description: 'Retrieve a snapshot of events from a past time
+
+
+        The version id is essentially a filter on the latest event transaction id. You can use the `max_xact_id` returned by a past fetch as the version to reproduce that exact fetch.'
+    DataSummary:
+      type: object
+      nullable: true
+      properties:
+        total_records:
+          type: integer
+          minimum: 0
+          description: Total number of records in the dataset
+      required:
+      - total_records
+      description: Summary of a dataset's data
+    PatchDataset:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: Name of the dataset. Within a project, dataset names are unique
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the dataset
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: A list of tags for the dataset
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties:
+            nullable: true
+          description: User-controlled metadata about the dataset
+    DatasetEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the dataset event. If you don't provide one, Braintrust will generate one for you
+        _xact_id:
+          type: string
+          description: The transaction id of an event is unique to the network operation that processed the event insertion. Transaction ids are monotonically increasing over time and can be used to retrieve a versioned snapshot of the dataset (see the `version` parameter)
+        created:
+          type: string
+          format: date-time
+          description: The timestamp the dataset event was created
+        _pagination_key:
+          type: string
+          nullable: true
+          description: A stable, time-ordered key that can be used to paginate over dataset events. This field is auto-generated by Braintrust and only exists in Brainstore.
+        project_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project that the dataset belongs under
+        dataset_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the dataset
+        input:
+          nullable: true
+          description: The argument that uniquely define an input case (an arbitrary, JSON serializable object)
+        expected:
+          nullable: true
+          description: The output of your application, including post-processing (an arbitrary, JSON serializable object)
+        metadata:
+          type: object
+          nullable: true
+          properties:
+            model:
+              type: string
+              nullable: true
+              description: The model used for this example
+          additionalProperties:
+            nullable: true
+          description: A dictionary with additional data about the test example, model outputs, or just about anything else that's relevant, that you can use to help find and analyze examples later. For example, you could log the `prompt`, example's `id`, or anything else that would be useful to slice/dice later. The values in `metadata` can be any JSON-serializable type, but its keys must be strings
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: A list of tags to log
+        span_id:
+          type: string
+          description: A unique identifier used to link different dataset events together as part of a full trace. See the [tracing guide](https://www.braintrust.dev/docs/instrument) for full details on tracing
+        root_span_id:
+          type: string
+          description: A unique identifier for the trace this dataset event belongs to
+        is_root:
+          type: boolean
+          nullable: true
+          description: Whether this span is a root span
+        origin:
+          $ref: '#/components/schemas/ObjectReferenceNullish'
+        comments:
+          type: array
+          nullable: true
+          items:
+            nullable: true
+          description: Optional list of comments attached to this event
+        audit_data:
+          type: array
+          nullable: true
+          items:
+            nullable: true
+          description: Optional list of audit entries attached to this event
+        facets:
+          type: object
+          nullable: true
+          additionalProperties:
+            nullable: true
+          description: Facets for categorization (dictionary from facet id to value)
+        classifications:
+          type: object
+          nullable: true
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: Stable classification identifier
+                label:
+                  type: string
+                  description: Original label of the classification item, which is useful for search and indexing purposes
+                confidence:
+                  type: number
+                  nullable: true
+                  description: Optional confidence score for the classification
+                metadata:
+                  type: object
+                  nullable: true
+                  additionalProperties:
+                    nullable: true
+                  description: Optional metadata associated with the classification
+                source:
+                  $ref: '#/components/schemas/SavedFunctionId'
+              required:
+              - id
+          description: Classifications for this event (dictionary from classification name to items)
+      required:
+      - id
+      - _xact_id
+      - created
+      - project_id
+      - dataset_id
+      - span_id
+      - root_span_id
+    MaxRootSpanId:
+      type: string
+      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
+
+
+        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
+
+
+        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    CreateDataset:
+      type: object
+      properties:
+        project_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project that the dataset belongs under
+        name:
+          type: string
+          minLength: 1
+          description: Name of the dataset. Within a project, dataset names are unique
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the dataset
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: A list of tags for the dataset
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties:
+            nullable: true
+          description: User-controlled metadata about the dataset
+      required:
+      - project_id
+      - name
+    InsertEventsResponse:
+      type: object
+      properties:
+        row_ids:
+          type: array
+          items:
+            type: string
+          description: The ids of all rows that were inserted, aligning one-to-one with the rows provided as input
+      required:
+      - row_ids
+    ProjectName:
+      type: string
+      description: Name of the project to search for
+  parameters:
     Ids:
       schema:
         $ref: '#/components/schemas/Ids'
@@ -1513,29 +1436,6 @@ components:
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
       name: ids
       in: query
-    AppLimitParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
-    ProjectName:
-      schema:
-        $ref: '#/components/schemas/ProjectName'
-      required: false
-      description: Name of the project to search for
-      name: project_name
-      in: query
-      allowReserved: true
-    DatasetName:
-      schema:
-        $ref: '#/components/schemas/DatasetName'
-      required: false
-      description: Name of the dataset to search for
-      name: dataset_name
-      in: query
-      allowReserved: true
     FetchLimitParam:
       schema:
         $ref: '#/components/schemas/FetchLimitParam'
@@ -1557,6 +1457,106 @@ components:
       name: org_name
       in: query
       allowReserved: true
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    MaxRootSpanId:
+      schema:
+        $ref: '#/components/schemas/MaxRootSpanId'
+      required: false
+      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
+
+
+        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
+
+
+        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
+      name: max_root_span_id
+      in: query
+    DatasetName:
+      schema:
+        $ref: '#/components/schemas/DatasetName'
+      required: false
+      description: Name of the dataset to search for
+      name: dataset_name
+      in: query
+      allowReserved: true
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
+    DatasetIdParam:
+      schema:
+        $ref: '#/components/schemas/DatasetIdParam'
+      required: true
+      description: Dataset id
+      name: dataset_id
+      in: path
+    Version:
+      schema:
+        $ref: '#/components/schemas/Version'
+      required: false
+      description: 'Retrieve a snapshot of events from a past time
+
+
+        The version id is essentially a filter on the latest event transaction id. You can use the `max_xact_id` returned by a past fetch as the version to reproduce that exact fetch.'
+      name: version
+      in: query
+    ProjectName:
+      schema:
+        $ref: '#/components/schemas/ProjectName'
+      required: false
+      description: Name of the project to search for
+      name: project_name
+      in: query
+      allowReserved: true
+    SummarizeData:
+      schema:
+        $ref: '#/components/schemas/SummarizeData'
+      required: false
+      description: Whether to summarize the data. If false (or omitted), only the metadata will be returned.
+      name: summarize_data
+      in: query
+    ProjectIdQuery:
+      schema:
+        $ref: '#/components/schemas/ProjectIdQuery'
+      required: false
+      description: Project id
+      name: project_id
+      in: query
+    MaxXactId:
+      schema:
+        $ref: '#/components/schemas/MaxXactId'
+      required: false
+      description: 'DEPRECATION NOTICE: The manually-constructed pagination cursor is deprecated in favor of the explicit ''cursor'' returned by object fetch requests. Please prefer the ''cursor'' argument going forwards.
+
+
+        Together, `max_xact_id` and `max_root_span_id` form a pagination cursor
+
+
+        Since a paginated fetch query returns results in order from latest to earliest, the cursor for the next page can be found as the row with the minimum (earliest) value of the tuple `(_xact_id, root_span_id)`. See the documentation of `limit` for an overview of paginating fetch queries.'
+      name: max_xact_id
+      in: query
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
   securitySchemes:
     bearerAuth:
       type: http

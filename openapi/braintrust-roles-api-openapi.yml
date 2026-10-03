@@ -455,13 +455,21 @@ paths:
                 nullable: true
 components:
   parameters:
-    RoleIdParam:
+    Ids:
       schema:
-        $ref: '#/components/schemas/RoleIdParam'
-      required: true
-      description: Role id
-      name: role_id
-      in: path
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
     EndingBefore:
       schema:
         $ref: '#/components/schemas/EndingBefore'
@@ -472,14 +480,6 @@ components:
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: ending_before
       in: query
-    RoleName:
-      schema:
-        $ref: '#/components/schemas/RoleName'
-      required: false
-      description: Name of the role to search for
-      name: role_name
-      in: query
-      allowReserved: true
     StartingAfter:
       schema:
         $ref: '#/components/schemas/StartingAfter'
@@ -490,13 +490,21 @@ components:
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: starting_after
       in: query
-    Ids:
+    RoleName:
       schema:
-        $ref: '#/components/schemas/Ids'
+        $ref: '#/components/schemas/RoleName'
       required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
+      description: Name of the role to search for
+      name: role_name
       in: query
+      allowReserved: true
+    RoleIdParam:
+      schema:
+        $ref: '#/components/schemas/RoleIdParam'
+      required: true
+      description: Role id
+      name: role_id
+      in: path
     AppLimitParam:
       schema:
         $ref: '#/components/schemas/AppLimitParam'
@@ -504,15 +512,90 @@ components:
       description: Limit the number of objects to return
       name: limit
       in: query
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
   schemas:
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    PatchRole:
+      type: object
+      properties:
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the role
+        name:
+          type: string
+          nullable: true
+          minLength: 1
+          description: Name of the role
+        add_member_permissions:
+          type: array
+          nullable: true
+          items:
+            type: object
+            properties:
+              permission:
+                $ref: '#/components/schemas/Permission'
+              restrict_object_type:
+                $ref: '#/components/schemas/AclObjectType'
+                nullable: true
+            required:
+            - permission
+          description: A list of permissions to add to the role
+        remove_member_permissions:
+          type: array
+          nullable: true
+          items:
+            type: object
+            properties:
+              permission:
+                $ref: '#/components/schemas/Permission'
+              restrict_object_type:
+                $ref: '#/components/schemas/AclObjectType'
+                nullable: true
+            required:
+            - permission
+          description: A list of permissions to remove from the role
+        add_member_roles:
+          type: array
+          nullable: true
+          items:
+            type: string
+            format: uuid
+          description: A list of role IDs to add to the role's inheriting-from set
+        remove_member_roles:
+          type: array
+          nullable: true
+          items:
+            type: string
+            format: uuid
+          description: A list of role IDs to remove from the role's inheriting-from set
+    Permission:
+      type: string
+      enum:
+      - create
+      - read
+      - update
+      - delete
+      - create_acls
+      - read_acls
+      - update_acls
+      - delete_acls
+      description: 'Each permission permits a certain type of operation on an object in the system
+
+
+        Permissions can be assigned to to objects on an individual basis, or grouped into roles'
+    RoleName:
+      type: string
+      description: Name of the role to search for
+    RoleIdParam:
+      type: string
+      format: uuid
+      description: Role id
     Role:
       type: object
       properties:
@@ -584,6 +667,16 @@ components:
 
 
         Roles can consist of individual permissions, as well as a set of roles they inherit from'
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
     AppLimitParam:
       type: integer
       nullable: true
@@ -604,6 +697,15 @@ components:
       - project_log
       - org_project
       description: The object type that the ACL applies to
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
     CreateRole:
       type: object
       properties:
@@ -645,108 +747,6 @@ components:
           description: For nearly all users, this parameter should be unnecessary. But in the rare case that your API key belongs to multiple organizations, you may specify the name of the organization the role belongs in.
       required:
       - name
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    StartingAfter:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    RoleName:
-      type: string
-      description: Name of the role to search for
-    RoleIdParam:
-      type: string
-      format: uuid
-      description: Role id
-    Permission:
-      type: string
-      enum:
-      - create
-      - read
-      - update
-      - delete
-      - create_acls
-      - read_acls
-      - update_acls
-      - delete_acls
-      description: 'Each permission permits a certain type of operation on an object in the system
-
-
-        Permissions can be assigned to to objects on an individual basis, or grouped into roles'
-    PatchRole:
-      type: object
-      properties:
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the role
-        name:
-          type: string
-          nullable: true
-          minLength: 1
-          description: Name of the role
-        add_member_permissions:
-          type: array
-          nullable: true
-          items:
-            type: object
-            properties:
-              permission:
-                $ref: '#/components/schemas/Permission'
-              restrict_object_type:
-                $ref: '#/components/schemas/AclObjectType'
-                nullable: true
-            required:
-            - permission
-          description: A list of permissions to add to the role
-        remove_member_permissions:
-          type: array
-          nullable: true
-          items:
-            type: object
-            properties:
-              permission:
-                $ref: '#/components/schemas/Permission'
-              restrict_object_type:
-                $ref: '#/components/schemas/AclObjectType'
-                nullable: true
-            required:
-            - permission
-          description: A list of permissions to remove from the role
-        add_member_roles:
-          type: array
-          nullable: true
-          items:
-            type: string
-            format: uuid
-          description: A list of role IDs to add to the role's inheriting-from set
-        remove_member_roles:
-          type: array
-          nullable: true
-          items:
-            type: string
-            format: uuid
-          description: A list of role IDs to remove from the role's inheriting-from set
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
   securitySchemes:
     bearerAuth:
       type: http
