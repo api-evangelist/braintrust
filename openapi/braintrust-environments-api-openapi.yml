@@ -402,21 +402,6 @@ paths:
                 nullable: true
 components:
   schemas:
-    PatchEnvironment:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the environment
-        slug:
-          type: string
-          nullable: true
-          description: A url-friendly, unique identifier for the environment within an organization
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the environment
     Environment:
       type: object
       properties:
@@ -453,6 +438,9 @@ components:
       - org_id
       - name
       - slug
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
     CreateEnvironment:
       type: object
       properties:
@@ -473,9 +461,21 @@ components:
       required:
       - name
       - slug
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
+    PatchEnvironment:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: Name of the environment
+        slug:
+          type: string
+          nullable: true
+          description: A url-friendly, unique identifier for the environment within an organization
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the environment
   parameters:
     OrgName:
       schema:

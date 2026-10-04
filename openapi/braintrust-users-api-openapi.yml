@@ -172,6 +172,14 @@ paths:
                 nullable: true
 components:
   parameters:
+    UserFamilyName:
+      schema:
+        $ref: '#/components/schemas/UserFamilyName'
+      required: false
+      description: Family name of the user to search for. You may pass the param multiple times to filter for more than one family name
+      name: family_name
+      in: query
+      allowReserved: true
     Ids:
       schema:
         $ref: '#/components/schemas/Ids'
@@ -179,14 +187,6 @@ components:
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
       name: ids
       in: query
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
     EndingBefore:
       schema:
         $ref: '#/components/schemas/EndingBefore'
@@ -197,6 +197,21 @@ components:
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: ending_before
       in: query
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    UserIdParam:
+      schema:
+        $ref: '#/components/schemas/UserIdParam'
+      required: true
+      description: User id
+      name: user_id
+      in: path
     StartingAfter:
       schema:
         $ref: '#/components/schemas/StartingAfter'
@@ -207,29 +222,6 @@ components:
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: starting_after
       in: query
-    UserIdParam:
-      schema:
-        $ref: '#/components/schemas/UserIdParam'
-      required: true
-      description: User id
-      name: user_id
-      in: path
-    UserEmail:
-      schema:
-        $ref: '#/components/schemas/UserEmail'
-      required: false
-      description: Email of the user to search for. You may pass the param multiple times to filter for more than one email
-      name: email
-      in: query
-      allowReserved: true
-    UserFamilyName:
-      schema:
-        $ref: '#/components/schemas/UserFamilyName'
-      required: false
-      description: Family name of the user to search for. You may pass the param multiple times to filter for more than one family name
-      name: family_name
-      in: query
-      allowReserved: true
     UserGivenName:
       schema:
         $ref: '#/components/schemas/UserGivenName'
@@ -245,6 +237,14 @@ components:
       description: Limit the number of objects to return
       name: limit
       in: query
+    UserEmail:
+      schema:
+        $ref: '#/components/schemas/UserEmail'
+      required: false
+      description: Email of the user to search for. You may pass the param multiple times to filter for more than one email
+      name: email
+      in: query
+      allowReserved: true
   schemas:
     EndingBefore:
       type: string
@@ -253,17 +253,34 @@ components:
 
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-    UserEmail:
+    UserFamilyName:
       anyOf:
       - type: string
       - type: array
         items:
           type: string
-      description: Email of the user to search for. You may pass the param multiple times to filter for more than one email
+      description: Family name of the user to search for. You may pass the param multiple times to filter for more than one family name
     UserIdParam:
       type: string
       format: uuid
       description: User id
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
     UserGivenName:
       anyOf:
       - type: string
@@ -271,6 +288,13 @@ components:
         items:
           type: string
       description: Given name of the user to search for. You may pass the param multiple times to filter for more than one given name
+    UserEmail:
+      anyOf:
+      - type: string
+      - type: array
+        items:
+          type: string
+      description: Email of the user to search for. You may pass the param multiple times to filter for more than one email
     User:
       type: object
       properties:
@@ -308,30 +332,6 @@ components:
 
 
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    UserFamilyName:
-      anyOf:
-      - type: string
-      - type: array
-        items:
-          type: string
-      description: Family name of the user to search for. You may pass the param multiple times to filter for more than one family name
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
   securitySchemes:
     bearerAuth:
       type: http

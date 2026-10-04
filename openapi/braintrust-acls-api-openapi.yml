@@ -540,13 +540,20 @@ paths:
                 nullable: true
 components:
   parameters:
-    AclListRoleId:
+    AclListRestrictObjectType:
       schema:
-        $ref: '#/components/schemas/AclListRoleId'
+        $ref: '#/components/schemas/AclListRestrictObjectType'
       required: false
-      description: Id of the role the ACL grants. Exactly one of `permission` and `role_id` will be provided
-      name: role_id
+      description: The object type that the ACL applies to
+      name: restrict_object_type
       in: query
+    AclIdParam:
+      schema:
+        $ref: '#/components/schemas/AclIdParam'
+      required: true
+      description: Acl id
+      name: acl_id
+      in: path
     Ids:
       schema:
         $ref: '#/components/schemas/Ids'
@@ -554,14 +561,6 @@ components:
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
       name: ids
       in: query
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
     EndingBefore:
       schema:
         $ref: '#/components/schemas/EndingBefore'
@@ -572,10 +571,32 @@ components:
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: ending_before
       in: query
-    AclObjectId:
+    OrgName:
       schema:
-        $ref: '#/components/schemas/AclObjectId'
-      required: true
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    AclListUserId:
+      schema:
+        $ref: '#/components/schemas/AclListUserId'
+      required: false
+      description: Id of the user the ACL applies to. Exactly one of `user_id` and `group_id` will be provided
+      name: user_id
+      in: query
+    AclListRoleId:
+      schema:
+        $ref: '#/components/schemas/AclListRoleId'
+      required: false
+      description: Id of the role the ACL grants. Exactly one of `permission` and `role_id` will be provided
+      name: role_id
+      in: query
+    AclListOrgObjectId:
+      schema:
+        $ref: '#/components/schemas/AclListOrgObjectId'
+      required: false
       description: The id of the object the ACL applies to
       name: object_id
       in: query
@@ -589,20 +610,6 @@ components:
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: starting_after
       in: query
-    AclListGroupId:
-      schema:
-        $ref: '#/components/schemas/AclListGroupId'
-      required: false
-      description: Id of the group the ACL applies to. Exactly one of `user_id` and `group_id` will be provided
-      name: group_id
-      in: query
-    AclListUserId:
-      schema:
-        $ref: '#/components/schemas/AclListUserId'
-      required: false
-      description: Id of the user the ACL applies to. Exactly one of `user_id` and `group_id` will be provided
-      name: user_id
-      in: query
     AclListPermission:
       schema:
         $ref: '#/components/schemas/AclListPermission'
@@ -613,40 +620,12 @@ components:
         Permissions can be assigned to to objects on an individual basis, or grouped into roles'
       name: permission
       in: query
-    AclListOrgObjectType:
+    AclObjectId:
       schema:
-        $ref: '#/components/schemas/AclListOrgObjectType'
-      required: false
-      description: The object type that the ACL applies to
-      name: object_type
-      in: query
-    AclIdParam:
-      schema:
-        $ref: '#/components/schemas/AclIdParam'
+        $ref: '#/components/schemas/AclObjectId'
       required: true
-      description: Acl id
-      name: acl_id
-      in: path
-    AclListRestrictObjectType:
-      schema:
-        $ref: '#/components/schemas/AclListRestrictObjectType'
-      required: false
-      description: The object type that the ACL applies to
-      name: restrict_object_type
-      in: query
-    AclListOrgObjectId:
-      schema:
-        $ref: '#/components/schemas/AclListOrgObjectId'
-      required: false
       description: The id of the object the ACL applies to
       name: object_id
-      in: query
-    AclObjectType:
-      schema:
-        $ref: '#/components/schemas/AclObjectType'
-      required: true
-      description: The object type that the ACL applies to
-      name: object_type
       in: query
     AppLimitParam:
       schema:
@@ -655,15 +634,47 @@ components:
       description: Limit the number of objects to return
       name: limit
       in: query
+    AclObjectType:
+      schema:
+        $ref: '#/components/schemas/AclObjectType'
+      required: true
+      description: The object type that the ACL applies to
+      name: object_type
+      in: query
+    AclListGroupId:
+      schema:
+        $ref: '#/components/schemas/AclListGroupId'
+      required: false
+      description: Id of the group the ACL applies to. Exactly one of `user_id` and `group_id` will be provided
+      name: group_id
+      in: query
+    AclListOrgObjectType:
+      schema:
+        $ref: '#/components/schemas/AclListOrgObjectType'
+      required: false
+      description: The object type that the ACL applies to
+      name: object_type
+      in: query
   schemas:
-    AclIdParam:
+    AclListUserId:
       type: string
       format: uuid
-      description: Acl id
-    AclObjectId:
+      description: Id of the user the ACL applies to. Exactly one of `user_id` and `group_id` will be provided
+    AclObjectType:
       type: string
-      format: uuid
-      description: The id of the object the ACL applies to
+      enum:
+      - organization
+      - project
+      - experiment
+      - dataset
+      - prompt
+      - prompt_session
+      - group
+      - role
+      - org_member
+      - project_log
+      - org_project
+      description: The object type that the ACL applies to
     EndingBefore:
       type: string
       format: uuid
@@ -671,46 +682,32 @@ components:
 
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-    AclListOrgObjectId:
-      type: string
-      format: uuid
-      description: The id of the object the ACL applies to
-    AclListGroupId:
-      type: string
-      format: uuid
-      description: Id of the group the ACL applies to. Exactly one of `user_id` and `group_id` will be provided
-    Permission:
-      type: string
-      enum:
-      - create
-      - read
-      - update
-      - delete
-      - create_acls
-      - read_acls
-      - update_acls
-      - delete_acls
-      description: 'Each permission permits a certain type of operation on an object in the system
-
-
-        Permissions can be assigned to to objects on an individual basis, or grouped into roles'
     AclListRoleId:
       type: string
       format: uuid
       description: Id of the role the ACL grants. Exactly one of `permission` and `role_id` will be provided
-    AclBatchUpdateRequest:
-      type: object
-      properties:
-        add_acls:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/AclItem'
-        remove_acls:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/AclItem'
+    AclListOrgObjectType:
+      type: string
+      enum:
+      - organization
+      - project
+      - experiment
+      - dataset
+      - prompt
+      - prompt_session
+      - group
+      - role
+      - org_member
+      - project_log
+      - org_project
+      description: The object type that the ACL applies to
+    AclObjectId:
+      type: string
+      format: uuid
+      description: The id of the object the ACL applies to
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
     Acl:
       type: object
       properties:
@@ -768,6 +765,100 @@ components:
 
 
         To restrict a grant to a particular sub-object, you may specify `restrict_object_type` in the ACL, as part of a direct permission grant or as part of a role.'
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    AclListGroupId:
+      type: string
+      format: uuid
+      description: Id of the group the ACL applies to. Exactly one of `user_id` and `group_id` will be provided
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    AclListRestrictObjectType:
+      type: string
+      enum:
+      - organization
+      - project
+      - experiment
+      - dataset
+      - prompt
+      - prompt_session
+      - group
+      - role
+      - org_member
+      - project_log
+      - org_project
+      description: The object type that the ACL applies to
+    AclBatchUpdateRequest:
+      type: object
+      properties:
+        add_acls:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AclItem'
+        remove_acls:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/AclItem'
+    AclBatchUpdateResponse:
+      type: object
+      properties:
+        added_acls:
+          type: array
+          items:
+            $ref: '#/components/schemas/Acl'
+        removed_acls:
+          type: array
+          items:
+            $ref: '#/components/schemas/Acl'
+      required:
+      - added_acls
+      - removed_acls
+    AclIdParam:
+      type: string
+      format: uuid
+      description: Acl id
+    AclListPermission:
+      type: string
+      enum:
+      - create
+      - read
+      - update
+      - delete
+      - create_acls
+      - read_acls
+      - update_acls
+      - delete_acls
+      description: 'Each permission permits a certain type of operation on an object in the system
+
+
+        Permissions can be assigned to to objects on an individual basis, or grouped into roles'
+    Permission:
+      type: string
+      enum:
+      - create
+      - read
+      - update
+      - delete
+      - create_acls
+      - read_acls
+      - update_acls
+      - delete_acls
+      description: 'Each permission permits a certain type of operation on an object in the system
+
+
+        Permissions can be assigned to to objects on an individual basis, or grouped into roles'
     AclItem:
       type: object
       properties:
@@ -810,6 +901,10 @@ components:
 
 
         To restrict a grant to a particular sub-object, you may specify `restrict_object_type` in the ACL, as part of a direct permission grant or as part of a role.'
+    AclListOrgObjectId:
+      type: string
+      format: uuid
+      description: The id of the object the ACL applies to
     StartingAfter:
       type: string
       format: uuid
@@ -817,101 +912,6 @@ components:
 
 
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    AclListUserId:
-      type: string
-      format: uuid
-      description: Id of the user the ACL applies to. Exactly one of `user_id` and `group_id` will be provided
-    AclListOrgObjectType:
-      type: string
-      enum:
-      - organization
-      - project
-      - experiment
-      - dataset
-      - prompt
-      - prompt_session
-      - group
-      - role
-      - org_member
-      - project_log
-      - org_project
-      description: The object type that the ACL applies to
-    AclListPermission:
-      type: string
-      enum:
-      - create
-      - read
-      - update
-      - delete
-      - create_acls
-      - read_acls
-      - update_acls
-      - delete_acls
-      description: 'Each permission permits a certain type of operation on an object in the system
-
-
-        Permissions can be assigned to to objects on an individual basis, or grouped into roles'
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    AclBatchUpdateResponse:
-      type: object
-      properties:
-        added_acls:
-          type: array
-          items:
-            $ref: '#/components/schemas/Acl'
-        removed_acls:
-          type: array
-          items:
-            $ref: '#/components/schemas/Acl'
-      required:
-      - added_acls
-      - removed_acls
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
-    AclObjectType:
-      type: string
-      enum:
-      - organization
-      - project
-      - experiment
-      - dataset
-      - prompt
-      - prompt_session
-      - group
-      - role
-      - org_member
-      - project_log
-      - org_project
-      description: The object type that the ACL applies to
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    AclListRestrictObjectType:
-      type: string
-      enum:
-      - organization
-      - project
-      - experiment
-      - dataset
-      - prompt
-      - prompt_session
-      - group
-      - role
-      - org_member
-      - project_log
-      - org_project
-      description: The object type that the ACL applies to
   securitySchemes:
     bearerAuth:
       type: http

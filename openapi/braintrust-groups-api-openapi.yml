@@ -454,56 +454,77 @@ paths:
               schema:
                 nullable: true
 components:
-  schemas:
-    GroupName:
-      type: string
-      description: Name of the group to search for
-    CreateGroup:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Name of the group
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the group
-        member_users:
-          type: array
-          nullable: true
-          items:
-            type: string
-            format: uuid
-          description: Ids of users which belong to this group
-        member_groups:
-          type: array
-          nullable: true
-          items:
-            type: string
-            format: uuid
-          description: 'Ids of the groups this group inherits from
+  parameters:
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
 
 
-            An inheriting group has all the users contained in its member groups, as well as all of their inherited users'
-        org_name:
-          type: string
-          nullable: true
-          description: For nearly all users, this parameter should be unnecessary. But in the rare case that your API key belongs to multiple organizations, you may specify the name of the organization the group belongs in.
-      required:
-      - name
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
     StartingAfter:
-      type: string
-      format: uuid
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
       description: 'Pagination cursor id.
 
 
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+    GroupIdParam:
+      schema:
+        $ref: '#/components/schemas/GroupIdParam'
+      required: true
+      description: Group id
+      name: group_id
+      in: path
+    GroupName:
+      schema:
+        $ref: '#/components/schemas/GroupName'
+      required: false
+      description: Name of the group to search for
+      name: group_name
+      in: query
+      allowReserved: true
+  schemas:
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    GroupName:
+      type: string
+      description: Name of the group to search for
     PatchGroup:
       type: object
       properties:
@@ -544,17 +565,52 @@ components:
             type: string
             format: uuid
           description: A list of group IDs to remove from the group's inheriting-from set
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
     GroupIdParam:
       type: string
       format: uuid
       description: Group id
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
+    CreateGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Name of the group
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the group
+        member_users:
+          type: array
+          nullable: true
+          items:
+            type: string
+            format: uuid
+          description: Ids of users which belong to this group
+        member_groups:
+          type: array
+          nullable: true
+          items:
+            type: string
+            format: uuid
+          description: 'Ids of the groups this group inherits from
 
 
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+            An inheriting group has all the users contained in its member groups, as well as all of their inherited users'
+        org_name:
+          type: string
+          nullable: true
+          description: For nearly all users, this parameter should be unnecessary. But in the rare case that your API key belongs to multiple organizations, you may specify the name of the organization the group belongs in.
+      required:
+      - name
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
     Group:
       type: object
       properties:
@@ -616,76 +672,20 @@ components:
 
 
         Groups can consist of individual users, as well as a set of groups they inherit from'
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-  parameters:
     StartingAfter:
-      schema:
-        $ref: '#/components/schemas/StartingAfter'
-      required: false
+      type: string
+      format: uuid
       description: 'Pagination cursor id.
 
 
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
-      in: query
-    GroupIdParam:
-      schema:
-        $ref: '#/components/schemas/GroupIdParam'
-      required: true
-      description: Group id
-      name: group_id
-      in: path
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
-    GroupName:
-      schema:
-        $ref: '#/components/schemas/GroupName'
-      required: false
-      description: Name of the group to search for
-      name: group_name
-      in: query
-      allowReserved: true
     EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
+      type: string
+      format: uuid
       description: 'Pagination cursor id.
 
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
-    AppLimitParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
   securitySchemes:
     bearerAuth:
       type: http

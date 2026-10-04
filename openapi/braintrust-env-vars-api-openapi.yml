@@ -540,26 +540,10 @@ paths:
                 nullable: true
 components:
   schemas:
-    EnvVarIdParam:
-      type: string
-      format: uuid
-      description: EnvVar id
     EnvVarObjectId:
       type: string
       format: uuid
       description: The id of the object the environment variable is scoped for
-    EnvVarObjectType:
-      type: string
-      enum:
-      - organization
-      - project
-      - function
-      description: The type of the object the environment variable is scoped for
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
     EnvVar:
       type: object
       properties:
@@ -628,6 +612,25 @@ components:
       - object_type
       - object_id
       - name
+    EnvVarObjectType:
+      type: string
+      enum:
+      - organization
+      - project
+      - function
+      description: The type of the object the environment variable is scoped for
+    EnvVarIdParam:
+      type: string
+      format: uuid
+      description: EnvVar id
+    EnvVarName:
+      type: string
+      description: Name of the env_var to search for
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
     Ids:
       anyOf:
       - type: string
@@ -637,38 +640,13 @@ components:
           type: string
           format: uuid
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    EnvVarName:
-      type: string
-      description: Name of the env_var to search for
   parameters:
-    EnvVarName:
-      schema:
-        $ref: '#/components/schemas/EnvVarName'
-      required: false
-      description: Name of the env_var to search for
-      name: env_var_name
-      in: query
-      allowReserved: true
     Ids:
       schema:
         $ref: '#/components/schemas/Ids'
       required: false
       description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
       name: ids
-      in: query
-    EnvVarObjectType:
-      schema:
-        $ref: '#/components/schemas/EnvVarObjectType'
-      required: false
-      description: The type of the object the environment variable is scoped for
-      name: object_type
-      in: query
-    EnvVarObjectId:
-      schema:
-        $ref: '#/components/schemas/EnvVarObjectId'
-      required: false
-      description: The id of the object the environment variable is scoped for
-      name: object_id
       in: query
     EnvVarIdParam:
       schema:
@@ -677,12 +655,34 @@ components:
       description: EnvVar id
       name: env_var_id
       in: path
+    EnvVarObjectId:
+      schema:
+        $ref: '#/components/schemas/EnvVarObjectId'
+      required: false
+      description: The id of the object the environment variable is scoped for
+      name: object_id
+      in: query
+    EnvVarName:
+      schema:
+        $ref: '#/components/schemas/EnvVarName'
+      required: false
+      description: Name of the env_var to search for
+      name: env_var_name
+      in: query
+      allowReserved: true
     AppLimitParam:
       schema:
         $ref: '#/components/schemas/AppLimitParam'
       required: false
       description: Limit the number of objects to return
       name: limit
+      in: query
+    EnvVarObjectType:
+      schema:
+        $ref: '#/components/schemas/EnvVarObjectType'
+      required: false
+      description: The type of the object the environment variable is scoped for
+      name: object_type
       in: query
   securitySchemes:
     bearerAuth:

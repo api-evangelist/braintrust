@@ -2499,112 +2499,13 @@ paths:
               schema:
                 nullable: true
 components:
-  schemas:
-    EnvVarIdParam:
-      type: string
-      format: uuid
-      description: EnvVar id
-    AclIdParam:
-      type: string
-      format: uuid
-      description: Acl id
-    ServiceTokenIdParam:
-      type: string
-      format: uuid
-      description: ServiceToken id
-    OrganizationIdParam:
-      type: string
-      format: uuid
-      description: Organization id
-    AiSecretIdParam:
-      type: string
-      format: uuid
-      description: AiSecret id
-    UserIdParam:
-      type: string
-      format: uuid
-      description: User id
-    ProjectIdParam:
-      type: string
-      format: uuid
-      description: Project id
-    RoleIdParam:
-      type: string
-      format: uuid
-      description: Role id
-    DatasetSnapshotIdParam:
-      type: string
-      format: uuid
-      description: DatasetSnapshot id
-    ProjectTagIdParam:
-      type: string
-      format: uuid
-      description: ProjectTag id
-    DatasetIdParam:
-      type: string
-      format: uuid
-      description: Dataset id
-    FunctionIdParam:
-      type: string
-      format: uuid
-      description: Function id
-    McpServerIdParam:
-      type: string
-      format: uuid
-      description: McpServer id
-    ApiKeyIdParam:
-      type: string
-      format: uuid
-      description: ApiKey id
-    ProjectAutomationIdParam:
-      type: string
-      format: uuid
-      description: ProjectAutomation id
-    ExperimentIdParam:
-      type: string
-      format: uuid
-      description: Experiment id
-    GroupIdParam:
-      type: string
-      format: uuid
-      description: Group id
-    SpanIframeIdParam:
-      type: string
-      format: uuid
-      description: SpanIframe id
-    ProjectScoreIdParam:
-      type: string
-      format: uuid
-      description: ProjectScore id
-    ViewIdParam:
-      type: string
-      format: uuid
-      description: View id
-    PromptIdParam:
-      type: string
-      format: uuid
-      description: Prompt id
   parameters:
-    AiSecretIdParam:
+    EnvVarIdParam:
       schema:
-        $ref: '#/components/schemas/AiSecretIdParam'
+        $ref: '#/components/schemas/EnvVarIdParam'
       required: true
-      description: AiSecret id
-      name: ai_secret_id
-      in: path
-    ServiceTokenIdParam:
-      schema:
-        $ref: '#/components/schemas/ServiceTokenIdParam'
-      required: true
-      description: ServiceToken id
-      name: service_token_id
-      in: path
-    ExperimentIdParam:
-      schema:
-        $ref: '#/components/schemas/ExperimentIdParam'
-      required: true
-      description: Experiment id
-      name: experiment_id
+      description: EnvVar id
+      name: env_var_id
       in: path
     ViewIdParam:
       schema:
@@ -2613,13 +2514,6 @@ components:
       description: View id
       name: view_id
       in: path
-    DatasetSnapshotIdParam:
-      schema:
-        $ref: '#/components/schemas/DatasetSnapshotIdParam'
-      required: true
-      description: DatasetSnapshot id
-      name: dataset_snapshot_id
-      in: path
     ProjectIdParam:
       schema:
         $ref: '#/components/schemas/ProjectIdParam'
@@ -2627,19 +2521,33 @@ components:
       description: Project id
       name: project_id
       in: path
-    SpanIframeIdParam:
+    OrganizationIdParam:
       schema:
-        $ref: '#/components/schemas/SpanIframeIdParam'
+        $ref: '#/components/schemas/OrganizationIdParam'
       required: true
-      description: SpanIframe id
-      name: span_iframe_id
+      description: Organization id
+      name: organization_id
       in: path
-    ProjectScoreIdParam:
+    AclIdParam:
       schema:
-        $ref: '#/components/schemas/ProjectScoreIdParam'
+        $ref: '#/components/schemas/AclIdParam'
       required: true
-      description: ProjectScore id
-      name: project_score_id
+      description: Acl id
+      name: acl_id
+      in: path
+    GroupIdParam:
+      schema:
+        $ref: '#/components/schemas/GroupIdParam'
+      required: true
+      description: Group id
+      name: group_id
+      in: path
+    ProjectAutomationIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectAutomationIdParam'
+      required: true
+      description: ProjectAutomation id
+      name: project_automation_id
       in: path
     ApiKeyIdParam:
       schema:
@@ -2648,19 +2556,26 @@ components:
       description: ApiKey id
       name: api_key_id
       in: path
-    DatasetIdParam:
+    ExperimentIdParam:
       schema:
-        $ref: '#/components/schemas/DatasetIdParam'
+        $ref: '#/components/schemas/ExperimentIdParam'
       required: true
-      description: Dataset id
-      name: dataset_id
+      description: Experiment id
+      name: experiment_id
       in: path
-    OrganizationIdParam:
+    ProjectScoreIdParam:
       schema:
-        $ref: '#/components/schemas/OrganizationIdParam'
+        $ref: '#/components/schemas/ProjectScoreIdParam'
       required: true
-      description: Organization id
-      name: organization_id
+      description: ProjectScore id
+      name: project_score_id
+      in: path
+    FunctionIdParam:
+      schema:
+        $ref: '#/components/schemas/FunctionIdParam'
+      required: true
+      description: Function id
+      name: function_id
       in: path
     PromptIdParam:
       schema:
@@ -2676,40 +2591,26 @@ components:
       description: ProjectTag id
       name: project_tag_id
       in: path
+    DatasetSnapshotIdParam:
+      schema:
+        $ref: '#/components/schemas/DatasetSnapshotIdParam'
+      required: true
+      description: DatasetSnapshot id
+      name: dataset_snapshot_id
+      in: path
+    SpanIframeIdParam:
+      schema:
+        $ref: '#/components/schemas/SpanIframeIdParam'
+      required: true
+      description: SpanIframe id
+      name: span_iframe_id
+      in: path
     UserIdParam:
       schema:
         $ref: '#/components/schemas/UserIdParam'
       required: true
       description: User id
       name: user_id
-      in: path
-    FunctionIdParam:
-      schema:
-        $ref: '#/components/schemas/FunctionIdParam'
-      required: true
-      description: Function id
-      name: function_id
-      in: path
-    AclIdParam:
-      schema:
-        $ref: '#/components/schemas/AclIdParam'
-      required: true
-      description: Acl id
-      name: acl_id
-      in: path
-    ProjectAutomationIdParam:
-      schema:
-        $ref: '#/components/schemas/ProjectAutomationIdParam'
-      required: true
-      description: ProjectAutomation id
-      name: project_automation_id
-      in: path
-    GroupIdParam:
-      schema:
-        $ref: '#/components/schemas/GroupIdParam'
-      required: true
-      description: Group id
-      name: group_id
       in: path
     McpServerIdParam:
       schema:
@@ -2718,12 +2619,12 @@ components:
       description: McpServer id
       name: mcp_server_id
       in: path
-    EnvVarIdParam:
+    DatasetIdParam:
       schema:
-        $ref: '#/components/schemas/EnvVarIdParam'
+        $ref: '#/components/schemas/DatasetIdParam'
       required: true
-      description: EnvVar id
-      name: env_var_id
+      description: Dataset id
+      name: dataset_id
       in: path
     RoleIdParam:
       schema:
@@ -2732,6 +2633,105 @@ components:
       description: Role id
       name: role_id
       in: path
+    AiSecretIdParam:
+      schema:
+        $ref: '#/components/schemas/AiSecretIdParam'
+      required: true
+      description: AiSecret id
+      name: ai_secret_id
+      in: path
+    ServiceTokenIdParam:
+      schema:
+        $ref: '#/components/schemas/ServiceTokenIdParam'
+      required: true
+      description: ServiceToken id
+      name: service_token_id
+      in: path
+  schemas:
+    ProjectAutomationIdParam:
+      type: string
+      format: uuid
+      description: ProjectAutomation id
+    RoleIdParam:
+      type: string
+      format: uuid
+      description: Role id
+    PromptIdParam:
+      type: string
+      format: uuid
+      description: Prompt id
+    ServiceTokenIdParam:
+      type: string
+      format: uuid
+      description: ServiceToken id
+    UserIdParam:
+      type: string
+      format: uuid
+      description: User id
+    GroupIdParam:
+      type: string
+      format: uuid
+      description: Group id
+    DatasetIdParam:
+      type: string
+      format: uuid
+      description: Dataset id
+    McpServerIdParam:
+      type: string
+      format: uuid
+      description: McpServer id
+    EnvVarIdParam:
+      type: string
+      format: uuid
+      description: EnvVar id
+    ExperimentIdParam:
+      type: string
+      format: uuid
+      description: Experiment id
+    ApiKeyIdParam:
+      type: string
+      format: uuid
+      description: ApiKey id
+    ProjectScoreIdParam:
+      type: string
+      format: uuid
+      description: ProjectScore id
+    AclIdParam:
+      type: string
+      format: uuid
+      description: Acl id
+    DatasetSnapshotIdParam:
+      type: string
+      format: uuid
+      description: DatasetSnapshot id
+    OrganizationIdParam:
+      type: string
+      format: uuid
+      description: Organization id
+    ProjectIdParam:
+      type: string
+      format: uuid
+      description: Project id
+    ProjectTagIdParam:
+      type: string
+      format: uuid
+      description: ProjectTag id
+    SpanIframeIdParam:
+      type: string
+      format: uuid
+      description: SpanIframe id
+    ViewIdParam:
+      type: string
+      format: uuid
+      description: View id
+    FunctionIdParam:
+      type: string
+      format: uuid
+      description: Function id
+    AiSecretIdParam:
+      type: string
+      format: uuid
+      description: AiSecret id
   securitySchemes:
     bearerAuth:
       type: http
