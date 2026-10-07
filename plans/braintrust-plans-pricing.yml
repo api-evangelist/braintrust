@@ -1,62 +1,46 @@
-# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (dated 2026-05-22 by the file itself), not
-# harvested from the provider. `method: generated` so the economics campaign may replace it with a
-# dated, verbatim transcription; every figure below is unverified until it does.
-method: generated
-generated: '2026-05-22'
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Braintrust
-providerId: braintrust
-created: '2026-05-22'
-modified: '2026-05-22'
-tags:
-- Artificial Intelligence
-- LLM
-- Observability
-- Evaluation
-- Experiments
-- Datasets
-- Prompts
-- Tracing
-- Monitoring
-- Scoring
-- AI Engineering
-- Generative AI
-description: Machine-readable plans scaffold for the Braintrust API surface. Conforms to the API Commons Plans schema. Tier
-  limits and prices are scaffold defaults; replace with provider-published values.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://www.braintrust.dev/pricing
+sources:
+- https://www.braintrust.dev/pricing
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+delivery:
+  delivery: managed+licensed
+  method: page
+  read: '2026-10-07'
+  evidence: Custom data retention and export, RBAC, and premium support with on-prem or hosted deployment
+    for high volume or privacy-sensitive data.
+  managed_tier: Pro
+published: true
+note: Tiered plans with usage overages (GB processed data, scores, model credits). Enterprise offers on-prem
+  or hosted deployment under custom pricing.
+plan_count: 3
+currency: USD
 plans:
-- id: braintrust-free
-  name: Free
-  type: freemium
-  description: Free entry tier for the Braintrust API surface. Intended for evaluation, prototyping, and low-volume integrations.
-    Real limits and pricing must be reconciled with the provider's published plan documentation.
-  entries:
-  - label: API Requests
-    description: Monthly API request quota across all included endpoints
-    name: api_requests
-    type: quota
-    metric: requests
-    limit: 1000
-    timeFrame: month
-    geo: global
-    domains:
-    - https://api.braintrust.dev
-    unit: 1
-    price: '0.00'
-    userMultiplied: false
-  - label: Rate Limit
-    description: Maximum requests per minute on the free tier
-    name: rate_limit
-    type: rate
-    metric: requests_per_minute
-    limit: 10
-    timeFrame: minute
-    geo: global
-    domains:
-    - https://api.braintrust.dev
-    unit: 1
-    price: '0.00'
-references:
-- name: Braintrust API Documentation
-  url: https://raw.githubusercontent.com/api-evangelist/braintrust/refs/heads/main/apis.yml
+- name: Starter
+  price_text: $0 / month
+  price: 0
+  currency: USD
+  period: month
+  unit: platform fee
+  included_quota: $10 credits + tok rates; 1 GB processed data; 10k scores; 14-day retention; unlimited
+    users, projects, datasets, playgrounds, experiments
+  overage: +$4/GB processed data; $2.50 per 1,000 scores
+- name: Pro
+  price_text: $249 / month
+  price: 249
+  currency: USD
+  period: month
+  unit: platform fee
+  included_quota: $100 credits + tok rates; 5 GB processed data; 50k scores; 30-day retention
+  overage: +$3/GB processed data; $1.50 per 1,000 scores; $0.50 per GB per month retention beyond 30 days
+- name: Enterprise
+  price_text: Custom pricing
+  period: none
+  included_quota: Custom data retention and export, RBAC, premium support, on-prem or hosted deployment
