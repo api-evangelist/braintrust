@@ -447,6 +447,8 @@ apis:
   - type: OpenAPI
     url: openapi/braintrust-service-tokens-api-openapi.yml
 common:
+- type: Plans
+  url: plans/braintrust-plans-pricing.yml
 - type: CapabilityMap
   url: capabilities/braintrust-capability-edges.yml
   name: Braintrust Business Capability Map
