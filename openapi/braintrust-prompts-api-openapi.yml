@@ -462,51 +462,449 @@ paths:
                 nullable: true
 components:
   schemas:
-    ChatCompletionContentPartImageWithTitle:
+    ChatCompletionContentPartText:
       type: object
       properties:
-        image_url:
+        text:
+          type: string
+          default: ''
+        type:
+          type: string
+          enum:
+          - text
+        cache_control:
           type: object
           properties:
-            url:
+            type:
               type: string
-            detail:
-              anyOf:
-              - type: string
-                enum:
-                - auto
-                title: auto
-              - type: string
-                enum:
-                - low
-                title: low
-              - type: string
-                enum:
-                - high
-                title: high
+              enum:
+              - ephemeral
           required:
-          - url
-        type:
-          type: string
-          enum:
-          - image_url
+          - type
       required:
-      - image_url
       - type
-      title: image_url
-    ChatCompletionContentPartFileWithTitle:
+    ChatCompletionContentPart:
+      anyOf:
+      - $ref: '#/components/schemas/ChatCompletionContentPartTextWithTitle'
+      - $ref: '#/components/schemas/ChatCompletionContentPartImageWithTitle'
+      - $ref: '#/components/schemas/ChatCompletionContentPartFileWithTitle'
+      title: chat_completion_content_part
+    ResponseFormatNullish:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - json_object
+        required:
+        - type
+        title: json_object
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - json_schema
+          json_schema:
+            $ref: '#/components/schemas/ResponseFormatJsonSchema'
+        required:
+        - type
+        - json_schema
+        title: json_schema
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - text
+        required:
+        - type
+        title: text
+      - type: 'null'
+    CreatePrompt:
       type: object
       properties:
-        file:
-          $ref: '#/components/schemas/ChatCompletionContentPartFileFile'
+        project_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project that the prompt belongs under
+        name:
+          type: string
+          minLength: 1
+          description: Name of the prompt
+        slug:
+          type: string
+          minLength: 1
+          description: Unique identifier for the prompt
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the prompt
+        prompt_data:
+          $ref: '#/components/schemas/PromptDataNullish'
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: A list of tags for the prompt
+        function_type:
+          $ref: '#/components/schemas/FunctionTypeEnumNullish'
+      required:
+      - project_id
+      - name
+      - slug
+    ProjectIdQuery:
+      type: string
+      format: uuid
+      description: Project id
+    ChatCompletionMessageReasoning:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        content:
+          type: string
+          nullable: true
+      description: 'Note: This is not part of the OpenAI API spec, but we added it for interoperability with multiple reasoning models.'
+    ChatCompletionMessageParam:
+      anyOf:
+      - type: object
+        properties:
+          content:
+            anyOf:
+            - type: string
+              default: ''
+              title: text
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPartText'
+              title: array
+          role:
+            type: string
+            enum:
+            - system
+          name:
+            type: string
+        required:
+        - role
+        title: system
+      - type: object
+        properties:
+          content:
+            anyOf:
+            - type: string
+              default: ''
+              title: text
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPart'
+              title: array
+          role:
+            type: string
+            enum:
+            - user
+          name:
+            type: string
+        required:
+        - role
+        title: user
+      - type: object
+        properties:
+          role:
+            type: string
+            enum:
+            - assistant
+          content:
+            anyOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPartText'
+            - type: 'null'
+          function_call:
+            type: object
+            nullable: true
+            properties:
+              arguments:
+                type: string
+              name:
+                type: string
+            required:
+            - arguments
+            - name
+          name:
+            type: string
+            nullable: true
+          tool_calls:
+            type: array
+            nullable: true
+            items:
+              $ref: '#/components/schemas/ChatCompletionMessageToolCall'
+          reasoning:
+            type: array
+            nullable: true
+            items:
+              $ref: '#/components/schemas/ChatCompletionMessageReasoning'
+          reasoning_signature:
+            type: string
+            nullable: true
+        required:
+        - role
+        title: assistant
+      - type: object
+        properties:
+          content:
+            anyOf:
+            - type: string
+              default: ''
+              title: text
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPartText'
+              title: array
+          role:
+            type: string
+            enum:
+            - tool
+          tool_call_id:
+            type: string
+            default: ''
+        required:
+        - role
+        title: tool
+      - type: object
+        properties:
+          content:
+            type: string
+            nullable: true
+          name:
+            type: string
+          role:
+            type: string
+            enum:
+            - function
+        required:
+        - content
+        - name
+        - role
+        title: function
+      - type: object
+        properties:
+          content:
+            anyOf:
+            - type: string
+              default: ''
+              title: text
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPartText'
+              title: array
+          role:
+            type: string
+            enum:
+            - developer
+          name:
+            type: string
+        required:
+        - role
+        title: developer
+      - type: object
+        properties:
+          role:
+            type: string
+            enum:
+            - model
+          content:
+            type: string
+            nullable: true
+        required:
+        - role
+        title: fallback
+    ChatCompletionContentPartTextWithTitle:
+      type: object
+      properties:
+        text:
+          type: string
+          default: ''
         type:
           type: string
           enum:
-          - file
+          - text
+        cache_control:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - ephemeral
+          required:
+          - type
       required:
-      - file
       - type
-      title: file
+      title: text
+    PromptDataNullish:
+      type: object
+      nullable: true
+      properties:
+        prompt:
+          $ref: '#/components/schemas/PromptBlockDataNullish'
+        options:
+          $ref: '#/components/schemas/PromptOptionsNullish'
+        parser:
+          $ref: '#/components/schemas/PromptParserNullish'
+        tool_functions:
+          type: array
+          nullable: true
+          items:
+            allOf:
+            - $ref: '#/components/schemas/SavedFunctionId'
+            - anyOf:
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - function
+                  id:
+                    type: string
+                  version:
+                    type: string
+                    description: The version of the function
+                required:
+                - type
+                - id
+                title: function
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - global
+                  name:
+                    type: string
+                  function_type:
+                    $ref: '#/components/schemas/FunctionTypeEnum'
+                required:
+                - type
+                - name
+                title: global
+        template_format:
+          type: string
+          nullable: true
+          enum:
+          - mustache
+          - nunjucks
+          - none
+          - null
+        mcp:
+          type: object
+          nullable: true
+          additionalProperties:
+            oneOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - id
+                id:
+                  type: string
+                  format: uuid
+                is_disabled:
+                  type: boolean
+                enabled_tools:
+                  type: array
+                  nullable: true
+                  items:
+                    type: string
+                  description: If omitted, all tools are enabled
+              required:
+              - type
+              - id
+              title: MCP server id. This is used for project-level MCP server definitions.
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - url
+                url:
+                  type: string
+                is_disabled:
+                  type: boolean
+                enabled_tools:
+                  type: array
+                  nullable: true
+                  items:
+                    type: string
+                  description: If omitted, all tools are enabled
+              required:
+              - type
+              - url
+              title: MCP server url. This is used for inline definitions of MCP servers.
+        origin:
+          type: object
+          nullable: true
+          properties:
+            prompt_id:
+              type: string
+            project_id:
+              type: string
+            prompt_version:
+              type: string
+      description: The prompt, model, and its parameters
+    PromptOptionsNullish:
+      type: object
+      nullable: true
+      properties:
+        model:
+          type: string
+        params:
+          $ref: '#/components/schemas/ModelParams'
+        position:
+          type: string
+    ChatCompletionContentPartFileFile:
+      type: object
+      properties:
+        file_data:
+          type: string
+        filename:
+          type: string
+        file_id:
+          type: string
+          title: The ID of an uploaded file to use as input.
+    PatchPrompt:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: Name of the prompt
+        slug:
+          type: string
+          nullable: true
+          description: Unique identifier for the prompt
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the prompt
+        prompt_data:
+          $ref: '#/components/schemas/PromptDataNullish'
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: A list of tags for the prompt
+    PromptVersion:
+      type: string
+      description: 'Retrieve prompt at a specific version.
+
+
+        The version id can either be a transaction id (e.g. ''1000192656880881099'') or a version identifier (e.g. ''81cd05ee665fdfb3'').'
     ChatCompletionMessageToolCall:
       type: object
       properties:
@@ -546,221 +944,6 @@ components:
       - parameters
       - sandbox
       - null
-    ChatCompletionContentPartText:
-      type: object
-      properties:
-        text:
-          type: string
-          default: ''
-        type:
-          type: string
-          enum:
-          - text
-        cache_control:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - ephemeral
-          required:
-          - type
-      required:
-      - type
-    FunctionTypeEnum:
-      type: string
-      enum:
-      - llm
-      - scorer
-      - task
-      - tool
-      - custom_view
-      - preprocessor
-      - facet
-      - classifier
-      - tag
-      - parameters
-      - sandbox
-      - null
-      default: scorer
-      description: The type of global function. Defaults to 'scorer'.
-    ResponseFormatNullish:
-      anyOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - json_object
-        required:
-        - type
-        title: json_object
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - json_schema
-          json_schema:
-            $ref: '#/components/schemas/ResponseFormatJsonSchema'
-        required:
-        - type
-        - json_schema
-        title: json_schema
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - text
-        required:
-        - type
-        title: text
-      - type: 'null'
-    ResponseFormatJsonSchema:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        schema:
-          anyOf:
-          - type: object
-            additionalProperties:
-              nullable: true
-            title: object
-            x-stainless-skip:
-            - go
-          - type: string
-            title: string
-        strict:
-          type: boolean
-          nullable: true
-      required:
-      - name
-    ChatCompletionMessageReasoning:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        content:
-          type: string
-          nullable: true
-      description: 'Note: This is not part of the OpenAI API spec, but we added it for interoperability with multiple reasoning models.'
-    Slug:
-      type: string
-      description: Retrieve prompt with a specific slug
-    ChatCompletionContentPartTextWithTitle:
-      type: object
-      properties:
-        text:
-          type: string
-          default: ''
-        type:
-          type: string
-          enum:
-          - text
-        cache_control:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - ephemeral
-          required:
-          - type
-      required:
-      - type
-      title: text
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-    PromptIdParam:
-      type: string
-      format: uuid
-      description: Prompt id
-    CreatePrompt:
-      type: object
-      properties:
-        project_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the project that the prompt belongs under
-        name:
-          type: string
-          minLength: 1
-          description: Name of the prompt
-        slug:
-          type: string
-          minLength: 1
-          description: Unique identifier for the prompt
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the prompt
-        prompt_data:
-          $ref: '#/components/schemas/PromptDataNullish'
-        tags:
-          type: array
-          nullable: true
-          items:
-            type: string
-          description: A list of tags for the prompt
-        function_type:
-          $ref: '#/components/schemas/FunctionTypeEnumNullish'
-      required:
-      - project_id
-      - name
-      - slug
-    PromptName:
-      type: string
-      description: Name of the prompt to search for
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
-    ProjectName:
-      type: string
-      description: Name of the project to search for
-    PromptOptionsNullish:
-      type: object
-      nullable: true
-      properties:
-        model:
-          type: string
-        params:
-          $ref: '#/components/schemas/ModelParams'
-        position:
-          type: string
-    ChatCompletionContentPartFileFile:
-      type: object
-      properties:
-        file_data:
-          type: string
-        filename:
-          type: string
-        file_id:
-          type: string
-          title: The ID of an uploaded file to use as input.
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
     ModelParams:
       anyOf:
       - type: object
@@ -941,143 +1124,58 @@ components:
         title: JsCompletionParams
         x-stainless-skip:
         - go
-    SavedFunctionId:
-      anyOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - function
-          id:
-            type: string
-          version:
-            type: string
-            description: The version of the function
-        required:
-        - type
-        - id
-        title: function
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - global
-          name:
-            type: string
-          function_type:
-            $ref: '#/components/schemas/FunctionTypeEnum'
-        required:
-        - type
-        - name
-        title: global
-      - type: 'null'
-      description: Optional function identifier that produced the classification
-    PatchPrompt:
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+    ChatCompletionContentPartFileWithTitle:
       type: object
       properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the prompt
-        slug:
-          type: string
-          nullable: true
-          description: Unique identifier for the prompt
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the prompt
-        prompt_data:
-          $ref: '#/components/schemas/PromptDataNullish'
-        tags:
-          type: array
-          nullable: true
-          items:
-            type: string
-          description: A list of tags for the prompt
-    ChatCompletionContentPart:
-      anyOf:
-      - $ref: '#/components/schemas/ChatCompletionContentPartTextWithTitle'
-      - $ref: '#/components/schemas/ChatCompletionContentPartImageWithTitle'
-      - $ref: '#/components/schemas/ChatCompletionContentPartFileWithTitle'
-      title: chat_completion_content_part
-    PromptParserNullish:
-      type: object
-      nullable: true
-      properties:
+        file:
+          $ref: '#/components/schemas/ChatCompletionContentPartFileFile'
         type:
           type: string
           enum:
-          - llm_classifier
-        use_cot:
-          type: boolean
-        choice_scores:
-          type: object
-          additionalProperties:
-            type: number
-            minimum: 0
-            maximum: 1
-          description: Map of choices to scores (0-1). Used by scorers.
-        choice:
-          type: array
-          items:
-            type: string
-          description: List of valid choices without score mapping. Used by classifiers that deposit output to tags.
-        allow_no_match:
-          type: boolean
-          description: If true, adds a 'No match' option. When selected, no tag is deposited.
+          - file
       required:
+      - file
       - type
-      - use_cot
-    PromptEnvironment:
+      title: file
+    FunctionTypeEnum:
       type: string
-      description: 'Filter by environment slug. Cannot be used together with `version`.
-
-
-        For `GET /v1/prompt`, environment resolution currently requires the request to match a single prompt. If multiple prompts match, the endpoint returns `400` (for example when `limit=1` is not set). Use `limit=1` or other filters (for example `slug`, `project_id`) to narrow results.'
-    PromptBlockDataNullish:
+      enum:
+      - llm
+      - scorer
+      - task
+      - tool
+      - custom_view
+      - preprocessor
+      - facet
+      - classifier
+      - tag
+      - parameters
+      - sandbox
+      - null
+      default: scorer
+      description: The type of global function. Defaults to 'scorer'.
+    Ids:
       anyOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - chat
-          messages:
-            type: array
-            items:
-              $ref: '#/components/schemas/ChatCompletionMessageParam'
-          tools:
-            type: string
-        required:
-        - type
-        - messages
-        title: chat
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - completion
-          content:
-            type: string
-        required:
-        - type
-        - content
-        title: completion
-      - type: 'null'
-    ProjectIdQuery:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    PromptName:
       type: string
-      format: uuid
-      description: Project id
-    PromptVersion:
+      description: Name of the prompt to search for
+    Slug:
       type: string
-      description: 'Retrieve prompt at a specific version.
-
-
-        The version id can either be a transaction id (e.g. ''1000192656880881099'') or a version identifier (e.g. ''81cd05ee665fdfb3'').'
+      description: Retrieve prompt with a specific slug
     Prompt:
       type: object
       properties:
@@ -1140,336 +1238,181 @@ components:
       - org_id
       - name
       - slug
-    ChatCompletionMessageParam:
-      anyOf:
-      - type: object
-        properties:
-          content:
-            anyOf:
-            - type: string
-              default: ''
-              title: text
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPartText'
-              title: array
-          role:
-            type: string
-            enum:
-            - system
-          name:
-            type: string
-        required:
-        - role
-        title: system
-      - type: object
-        properties:
-          content:
-            anyOf:
-            - type: string
-              default: ''
-              title: text
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPart'
-              title: array
-          role:
-            type: string
-            enum:
-            - user
-          name:
-            type: string
-        required:
-        - role
-        title: user
-      - type: object
-        properties:
-          role:
-            type: string
-            enum:
-            - assistant
-          content:
-            anyOf:
-            - type: string
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPartText'
-            - type: 'null'
-          function_call:
-            type: object
-            nullable: true
-            properties:
-              arguments:
-                type: string
-              name:
-                type: string
-            required:
-            - arguments
-            - name
-          name:
-            type: string
-            nullable: true
-          tool_calls:
-            type: array
-            nullable: true
-            items:
-              $ref: '#/components/schemas/ChatCompletionMessageToolCall'
-          reasoning:
-            type: array
-            nullable: true
-            items:
-              $ref: '#/components/schemas/ChatCompletionMessageReasoning'
-          reasoning_signature:
-            type: string
-            nullable: true
-        required:
-        - role
-        title: assistant
-      - type: object
-        properties:
-          content:
-            anyOf:
-            - type: string
-              default: ''
-              title: text
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPartText'
-              title: array
-          role:
-            type: string
-            enum:
-            - tool
-          tool_call_id:
-            type: string
-            default: ''
-        required:
-        - role
-        title: tool
-      - type: object
-        properties:
-          content:
-            type: string
-            nullable: true
-          name:
-            type: string
-          role:
-            type: string
-            enum:
-            - function
-        required:
-        - content
-        - name
-        - role
-        title: function
-      - type: object
-        properties:
-          content:
-            anyOf:
-            - type: string
-              default: ''
-              title: text
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPartText'
-              title: array
-          role:
-            type: string
-            enum:
-            - developer
-          name:
-            type: string
-        required:
-        - role
-        title: developer
-      - type: object
-        properties:
-          role:
-            type: string
-            enum:
-            - model
-          content:
-            type: string
-            nullable: true
-        required:
-        - role
-        title: fallback
-    PromptDataNullish:
-      type: object
-      nullable: true
-      properties:
-        prompt:
-          $ref: '#/components/schemas/PromptBlockDataNullish'
-        options:
-          $ref: '#/components/schemas/PromptOptionsNullish'
-        parser:
-          $ref: '#/components/schemas/PromptParserNullish'
-        tool_functions:
-          type: array
-          nullable: true
-          items:
-            allOf:
-            - $ref: '#/components/schemas/SavedFunctionId'
-            - anyOf:
-              - type: object
-                properties:
-                  type:
-                    type: string
-                    enum:
-                    - function
-                  id:
-                    type: string
-                  version:
-                    type: string
-                    description: The version of the function
-                required:
-                - type
-                - id
-                title: function
-              - type: object
-                properties:
-                  type:
-                    type: string
-                    enum:
-                    - global
-                  name:
-                    type: string
-                  function_type:
-                    $ref: '#/components/schemas/FunctionTypeEnum'
-                required:
-                - type
-                - name
-                title: global
-        template_format:
-          type: string
-          nullable: true
-          enum:
-          - mustache
-          - nunjucks
-          - none
-          - null
-        mcp:
-          type: object
-          nullable: true
-          additionalProperties:
-            oneOf:
-            - type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                  - id
-                id:
-                  type: string
-                  format: uuid
-                is_disabled:
-                  type: boolean
-                enabled_tools:
-                  type: array
-                  nullable: true
-                  items:
-                    type: string
-                  description: If omitted, all tools are enabled
-              required:
-              - type
-              - id
-              title: MCP server id. This is used for project-level MCP server definitions.
-            - type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                  - url
-                url:
-                  type: string
-                is_disabled:
-                  type: boolean
-                enabled_tools:
-                  type: array
-                  nullable: true
-                  items:
-                    type: string
-                  description: If omitted, all tools are enabled
-              required:
-              - type
-              - url
-              title: MCP server url. This is used for inline definitions of MCP servers.
-        origin:
-          type: object
-          nullable: true
-          properties:
-            prompt_id:
-              type: string
-            project_id:
-              type: string
-            prompt_version:
-              type: string
-      description: The prompt, model, and its parameters
-    StartingAfter:
+    PromptIdParam:
+      type: string
+      format: uuid
+      description: Prompt id
+    EndingBefore:
       type: string
       format: uuid
       description: 'Pagination cursor id.
 
 
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-  parameters:
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
-    ProjectIdQuery:
-      schema:
-        $ref: '#/components/schemas/ProjectIdQuery'
-      required: false
-      description: Project id
-      name: project_id
-      in: query
-    EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
-      description: 'Pagination cursor id.
-
-
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
-    PromptIdParam:
-      schema:
-        $ref: '#/components/schemas/PromptIdParam'
-      required: true
-      description: Prompt id
-      name: prompt_id
-      in: path
-    Slug:
-      schema:
-        $ref: '#/components/schemas/Slug'
-      required: false
-      description: Retrieve prompt with a specific slug
-      name: slug
-      in: query
-      allowReserved: true
+    PromptParserNullish:
+      type: object
+      nullable: true
+      properties:
+        type:
+          type: string
+          enum:
+          - llm_classifier
+        use_cot:
+          type: boolean
+        choice_scores:
+          type: object
+          additionalProperties:
+            type: number
+            minimum: 0
+            maximum: 1
+          description: Map of choices to scores (0-1). Used by scorers.
+        choice:
+          type: array
+          items:
+            type: string
+          description: List of valid choices without score mapping. Used by classifiers that deposit output to tags.
+        allow_no_match:
+          type: boolean
+          description: If true, adds a 'No match' option. When selected, no tag is deposited.
+      required:
+      - type
+      - use_cot
+    ProjectName:
+      type: string
+      description: Name of the project to search for
+    SavedFunctionId:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - function
+          id:
+            type: string
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - type
+        - id
+        title: function
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - global
+          name:
+            type: string
+          function_type:
+            $ref: '#/components/schemas/FunctionTypeEnum'
+        required:
+        - type
+        - name
+        title: global
+      - type: 'null'
+      description: Optional function identifier that produced the classification
+    PromptEnvironment:
+      type: string
+      description: 'Filter by environment slug. Cannot be used together with `version`.
+
+
+        For `GET /v1/prompt`, environment resolution currently requires the request to match a single prompt. If multiple prompts match, the endpoint returns `400` (for example when `limit=1` is not set). Use `limit=1` or other filters (for example `slug`, `project_id`) to narrow results.'
+    ChatCompletionContentPartImageWithTitle:
+      type: object
+      properties:
+        image_url:
+          type: object
+          properties:
+            url:
+              type: string
+            detail:
+              anyOf:
+              - type: string
+                enum:
+                - auto
+                title: auto
+              - type: string
+                enum:
+                - low
+                title: low
+              - type: string
+                enum:
+                - high
+                title: high
+          required:
+          - url
+        type:
+          type: string
+          enum:
+          - image_url
+      required:
+      - image_url
+      - type
+      title: image_url
+    PromptBlockDataNullish:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - chat
+          messages:
+            type: array
+            items:
+              $ref: '#/components/schemas/ChatCompletionMessageParam'
+          tools:
+            type: string
+        required:
+        - type
+        - messages
+        title: chat
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - completion
+          content:
+            type: string
+        required:
+        - type
+        - content
+        title: completion
+      - type: 'null'
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
     OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
+      type: string
       description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
-    PromptVersion:
-      schema:
-        $ref: '#/components/schemas/PromptVersion'
-      required: false
-      description: 'Retrieve prompt at a specific version.
-
-
-        The version id can either be a transaction id (e.g. ''1000192656880881099'') or a version identifier (e.g. ''81cd05ee665fdfb3'').'
-      name: version
-      in: query
+    ResponseFormatJsonSchema:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        schema:
+          anyOf:
+          - type: object
+            additionalProperties:
+              nullable: true
+            title: object
+            x-stainless-skip:
+            - go
+          - type: string
+            title: string
+        strict:
+          type: boolean
+          nullable: true
+      required:
+      - name
+  parameters:
     ProjectName:
       schema:
         $ref: '#/components/schemas/ProjectName'
@@ -1478,23 +1421,19 @@ components:
       name: project_name
       in: query
       allowReserved: true
-    PromptName:
+    PromptIdParam:
       schema:
-        $ref: '#/components/schemas/PromptName'
-      required: false
-      description: Name of the prompt to search for
-      name: prompt_name
-      in: query
-      allowReserved: true
-    StartingAfter:
+        $ref: '#/components/schemas/PromptIdParam'
+      required: true
+      description: Prompt id
+      name: prompt_id
+      in: path
+    Ids:
       schema:
-        $ref: '#/components/schemas/StartingAfter'
+        $ref: '#/components/schemas/Ids'
       required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
       in: query
     PromptEnvironment:
       schema:
@@ -1507,12 +1446,73 @@ components:
       name: environment
       in: query
       allowReserved: true
+    PromptName:
+      schema:
+        $ref: '#/components/schemas/PromptName'
+      required: false
+      description: Name of the prompt to search for
+      name: prompt_name
+      in: query
+      allowReserved: true
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
     AppLimitParam:
       schema:
         $ref: '#/components/schemas/AppLimitParam'
       required: false
       description: Limit the number of objects to return
       name: limit
+      in: query
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    Slug:
+      schema:
+        $ref: '#/components/schemas/Slug'
+      required: false
+      description: Retrieve prompt with a specific slug
+      name: slug
+      in: query
+      allowReserved: true
+    PromptVersion:
+      schema:
+        $ref: '#/components/schemas/PromptVersion'
+      required: false
+      description: 'Retrieve prompt at a specific version.
+
+
+        The version id can either be a transaction id (e.g. ''1000192656880881099'') or a version identifier (e.g. ''81cd05ee665fdfb3'').'
+      name: version
+      in: query
+    ProjectIdQuery:
+      schema:
+        $ref: '#/components/schemas/ProjectIdQuery'
+      required: false
+      description: Project id
+      name: project_id
+      in: query
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
       in: query
   securitySchemes:
     bearerAuth:

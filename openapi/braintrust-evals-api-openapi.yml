@@ -44,188 +44,6 @@ paths:
                 $ref: '#/components/schemas/SummarizeExperimentResponse'
 components:
   schemas:
-    SummarizeExperimentResponse:
-      type: object
-      properties:
-        project_name:
-          type: string
-          description: Name of the project that the experiment belongs to
-        experiment_name:
-          type: string
-          description: Name of the experiment
-        project_url:
-          type: string
-          format: uri
-          description: URL to the project's page in the Braintrust app
-        experiment_url:
-          type: string
-          format: uri
-          description: URL to the experiment's page in the Braintrust app
-        comparison_experiment_name:
-          type: string
-          nullable: true
-          description: The experiment which scores are baselined against
-        scores:
-          type: object
-          nullable: true
-          additionalProperties:
-            $ref: '#/components/schemas/ScoreSummary'
-          description: Summary of the experiment's scores
-        metrics:
-          type: object
-          nullable: true
-          additionalProperties:
-            $ref: '#/components/schemas/MetricSummary'
-          description: Summary of the experiment's metrics
-      required:
-      - project_name
-      - experiment_name
-      - project_url
-      - experiment_url
-      description: Summary of an experiment
-    ChatCompletionContentPartImageWithTitle:
-      type: object
-      properties:
-        image_url:
-          type: object
-          properties:
-            url:
-              type: string
-            detail:
-              anyOf:
-              - type: string
-                enum:
-                - auto
-                title: auto
-              - type: string
-                enum:
-                - low
-                title: low
-              - type: string
-                enum:
-                - high
-                title: high
-          required:
-          - url
-        type:
-          type: string
-          enum:
-          - image_url
-      required:
-      - image_url
-      - type
-      title: image_url
-    MetricSummary:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the metric
-        metric:
-          type: number
-          description: Average metric across all examples
-        unit:
-          type: string
-          description: Unit label for the metric
-        diff:
-          type: number
-          description: Difference in metric between the current and comparison experiment
-        improvements:
-          type: integer
-          minimum: 0
-          description: Number of improvements in the metric
-        regressions:
-          type: integer
-          minimum: 0
-          description: Number of regressions in the metric
-      required:
-      - name
-      - metric
-      - unit
-      - improvements
-      - regressions
-      description: Summary of a metric's performance
-    ChatCompletionContentPartFileWithTitle:
-      type: object
-      properties:
-        file:
-          $ref: '#/components/schemas/ChatCompletionContentPartFileFile'
-        type:
-          type: string
-          enum:
-          - file
-      required:
-      - file
-      - type
-      title: file
-    ChatCompletionMessageToolCall:
-      type: object
-      properties:
-        id:
-          type: string
-        function:
-          type: object
-          properties:
-            arguments:
-              type: string
-            name:
-              type: string
-          required:
-          - arguments
-          - name
-        type:
-          type: string
-          enum:
-          - function
-      required:
-      - id
-      - function
-      - type
-    InvokeParent:
-      anyOf:
-      - type: object
-        properties:
-          object_type:
-            type: string
-            enum:
-            - project_logs
-            - experiment
-            - playground_logs
-          object_id:
-            type: string
-            description: The id of the container object you are logging to
-          row_ids:
-            type: object
-            nullable: true
-            properties:
-              id:
-                type: string
-                description: The id of the row
-              span_id:
-                type: string
-                description: The span_id of the row
-              root_span_id:
-                type: string
-                description: The root_span_id of the row
-            required:
-            - id
-            - span_id
-            - root_span_id
-            description: Identifiers for the row to to log a subspan under
-          propagated_event:
-            type: object
-            nullable: true
-            additionalProperties:
-              nullable: true
-            description: Include these properties in every span created under this parent
-        required:
-        - object_type
-        - object_id
-        description: Span parent properties
-        title: span_parent_struct
-      - type: string
-        description: The parent's span identifier, created by calling `.export()` on a span
-      description: Options for tracing the function call
     ChatCompletionContentPartText:
       type: object
       properties:
@@ -247,23 +65,135 @@ components:
           - type
       required:
       - type
-    FunctionTypeEnum:
-      type: string
-      enum:
-      - llm
-      - scorer
-      - task
-      - tool
-      - custom_view
-      - preprocessor
-      - facet
-      - classifier
-      - tag
-      - parameters
-      - sandbox
-      - null
-      default: scorer
-      description: The type of global function. Defaults to 'scorer'.
+    FunctionId:
+      anyOf:
+      - type: object
+        properties:
+          function_id:
+            type: string
+            description: The ID of the function
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - function_id
+        description: Function id
+        title: function_id
+      - type: object
+        properties:
+          project_name:
+            type: string
+            description: The name of the project containing the function
+          slug:
+            type: string
+            description: The slug of the function
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - project_name
+        - slug
+        description: Project name and slug
+        title: project_slug
+      - type: object
+        properties:
+          global_function:
+            type: string
+            description: The name of the global function. Currently, the global namespace includes the functions in autoevals
+          function_type:
+            $ref: '#/components/schemas/FunctionTypeEnum'
+        required:
+        - global_function
+        description: Global function name
+        title: global_function
+      - type: object
+        properties:
+          prompt_session_id:
+            type: string
+            description: The ID of the prompt session
+          prompt_session_function_id:
+            type: string
+            description: The ID of the function in the prompt session
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - prompt_session_id
+        - prompt_session_function_id
+        description: Prompt session id
+        title: prompt_session_id
+      - type: object
+        properties:
+          inline_context:
+            type: object
+            properties:
+              runtime:
+                type: string
+                enum:
+                - node
+                - python
+                - browser
+                - quickjs
+              version:
+                type: string
+            required:
+            - runtime
+            - version
+          code:
+            type: string
+            description: The inline code to execute
+          function_type:
+            allOf:
+            - $ref: '#/components/schemas/FunctionTypeEnum'
+            - description: The function type for inline code. Required when invoking inline preprocessors.
+          name:
+            type: string
+            nullable: true
+            description: The name of the inline code function
+        required:
+        - inline_context
+        - code
+        description: Inline code function
+        title: inline_code
+      - type: object
+        properties:
+          inline_prompt:
+            $ref: '#/components/schemas/PromptData'
+          inline_function:
+            type: object
+            additionalProperties:
+              nullable: true
+          function_type:
+            $ref: '#/components/schemas/FunctionTypeEnum'
+          name:
+            type: string
+            nullable: true
+            description: The name of the inline function
+        required:
+        - inline_function
+        description: Inline function definition
+        title: inline_function
+      - type: object
+        properties:
+          inline_prompt:
+            $ref: '#/components/schemas/PromptData'
+          function_type:
+            $ref: '#/components/schemas/FunctionTypeEnum'
+          name:
+            type: string
+            nullable: true
+            description: The name of the inline prompt
+        required:
+        - inline_prompt
+        description: Inline prompt definition
+        title: inline_prompt
+      description: The function to evaluate
+    ChatCompletionContentPart:
+      anyOf:
+      - $ref: '#/components/schemas/ChatCompletionContentPartTextWithTitle'
+      - $ref: '#/components/schemas/ChatCompletionContentPartImageWithTitle'
+      - $ref: '#/components/schemas/ChatCompletionContentPartFileWithTitle'
+      title: chat_completion_content_part
     ResponseFormatNullish:
       anyOf:
       - type: object
@@ -297,28 +227,6 @@ components:
         - type
         title: text
       - type: 'null'
-    ResponseFormatJsonSchema:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        schema:
-          anyOf:
-          - type: object
-            additionalProperties:
-              nullable: true
-            title: object
-            x-stainless-skip:
-            - go
-          - type: string
-            title: string
-        strict:
-          type: boolean
-          nullable: true
-      required:
-      - name
     ChatCompletionMessageReasoning:
       type: object
       properties:
@@ -329,47 +237,160 @@ components:
           type: string
           nullable: true
       description: 'Note: This is not part of the OpenAI API spec, but we added it for interoperability with multiple reasoning models.'
-    RepoInfo:
-      type: object
-      nullable: true
-      properties:
-        commit:
-          type: string
-          nullable: true
-          description: SHA of most recent commit
-        branch:
-          type: string
-          nullable: true
-          description: Name of the branch the most recent commit belongs to
-        tag:
-          type: string
-          nullable: true
-          description: Name of the tag on the most recent commit
-        dirty:
-          type: boolean
-          nullable: true
-          description: Whether or not the repo had uncommitted changes when snapshotted
-        author_name:
-          type: string
-          nullable: true
-          description: Name of the author of the most recent commit
-        author_email:
-          type: string
-          nullable: true
-          description: Email of the author of the most recent commit
-        commit_message:
-          type: string
-          nullable: true
-          description: Most recent commit message
-        commit_time:
-          type: string
-          nullable: true
-          description: Time of the most recent commit
-        git_diff:
-          type: string
-          nullable: true
-          description: If the repo was dirty when run, this includes the diff between the current state of the repo and the most recent commit.
-      description: Metadata about the state of the repo when the experiment was created
+    ChatCompletionMessageParam:
+      anyOf:
+      - type: object
+        properties:
+          content:
+            anyOf:
+            - type: string
+              default: ''
+              title: text
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPartText'
+              title: array
+          role:
+            type: string
+            enum:
+            - system
+          name:
+            type: string
+        required:
+        - role
+        title: system
+      - type: object
+        properties:
+          content:
+            anyOf:
+            - type: string
+              default: ''
+              title: text
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPart'
+              title: array
+          role:
+            type: string
+            enum:
+            - user
+          name:
+            type: string
+        required:
+        - role
+        title: user
+      - type: object
+        properties:
+          role:
+            type: string
+            enum:
+            - assistant
+          content:
+            anyOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPartText'
+            - type: 'null'
+          function_call:
+            type: object
+            nullable: true
+            properties:
+              arguments:
+                type: string
+              name:
+                type: string
+            required:
+            - arguments
+            - name
+          name:
+            type: string
+            nullable: true
+          tool_calls:
+            type: array
+            nullable: true
+            items:
+              $ref: '#/components/schemas/ChatCompletionMessageToolCall'
+          reasoning:
+            type: array
+            nullable: true
+            items:
+              $ref: '#/components/schemas/ChatCompletionMessageReasoning'
+          reasoning_signature:
+            type: string
+            nullable: true
+        required:
+        - role
+        title: assistant
+      - type: object
+        properties:
+          content:
+            anyOf:
+            - type: string
+              default: ''
+              title: text
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPartText'
+              title: array
+          role:
+            type: string
+            enum:
+            - tool
+          tool_call_id:
+            type: string
+            default: ''
+        required:
+        - role
+        title: tool
+      - type: object
+        properties:
+          content:
+            type: string
+            nullable: true
+          name:
+            type: string
+          role:
+            type: string
+            enum:
+            - function
+        required:
+        - content
+        - name
+        - role
+        title: function
+      - type: object
+        properties:
+          content:
+            anyOf:
+            - type: string
+              default: ''
+              title: text
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPartText'
+              title: array
+          role:
+            type: string
+            enum:
+            - developer
+          name:
+            type: string
+        required:
+        - role
+        title: developer
+      - type: object
+        properties:
+          role:
+            type: string
+            enum:
+            - model
+          content:
+            type: string
+            nullable: true
+        required:
+        - role
+        title: fallback
     ChatCompletionContentPartTextWithTitle:
       type: object
       properties:
@@ -392,162 +413,6 @@ components:
       required:
       - type
       title: text
-    RunEval:
-      type: object
-      properties:
-        project_id:
-          type: string
-          description: Unique identifier for the project to run the eval in
-        data:
-          anyOf:
-          - type: object
-            properties:
-              dataset_id:
-                type: string
-              dataset_version:
-                type: string
-                nullable: true
-                description: The version of the dataset to evaluate
-              dataset_environment:
-                type: string
-                nullable: true
-                description: The environment tag that resolves to the dataset version to evaluate
-              _internal_btql:
-                type: object
-                nullable: true
-                additionalProperties:
-                  nullable: true
-            required:
-            - dataset_id
-            description: Dataset id
-            title: dataset_id
-          - type: object
-            properties:
-              project_name:
-                type: string
-              dataset_name:
-                type: string
-              dataset_version:
-                type: string
-                nullable: true
-                description: The version of the dataset to evaluate
-              dataset_environment:
-                type: string
-                nullable: true
-                description: The environment tag that resolves to the dataset version to evaluate
-              _internal_btql:
-                type: object
-                nullable: true
-                additionalProperties:
-                  nullable: true
-            required:
-            - project_name
-            - dataset_name
-            description: Project and dataset name
-            title: project_dataset_name
-          - type: object
-            properties:
-              data:
-                type: array
-                items:
-                  nullable: true
-            required:
-            - data
-            description: Dataset rows
-            title: dataset_rows
-          description: The dataset to use
-        name:
-          type: string
-          description: The name of the eval to run when multiple evals available
-        parameters:
-          type: object
-          additionalProperties:
-            nullable: true
-          description: Values for any parameters used in the eval
-        task:
-          $ref: '#/components/schemas/FunctionId'
-        scores:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/FunctionId'
-            - description: Options for identifying a function
-          description: The functions to score the eval on
-        experiment_name:
-          type: string
-          description: An optional name for the experiment created by this eval. If it conflicts with an existing experiment, it will be suffixed with a unique identifier.
-        metadata:
-          type: object
-          additionalProperties:
-            nullable: true
-          description: Optional experiment-level metadata to store about the evaluation. You can later use this to slice & dice across experiments.
-        parent:
-          allOf:
-          - $ref: '#/components/schemas/InvokeParent'
-          - description: Options for tracing the evaluation
-        stream:
-          type: boolean
-          description: 'Whether to stream the results of the eval. If true, the request will return two events: one to indicate the experiment has started, and another upon completion. If false, the request will return the evaluation''s summary upon completion.'
-        trial_count:
-          type: number
-          nullable: true
-          description: The number of times to run the evaluator per input. This is useful for evaluating applications that have non-deterministic behavior and gives you both a stronger aggregate measure and a sense of the variance in the results.
-        is_public:
-          type: boolean
-          nullable: true
-          description: Whether the experiment should be public. Defaults to false.
-        timeout:
-          type: number
-          nullable: true
-          description: The maximum duration, in milliseconds, to run the evaluation. Defaults to undefined, in which case there is no timeout.
-        max_concurrency:
-          type: number
-          nullable: true
-          default: 10
-          description: The maximum number of tasks/scorers that will be run concurrently. Defaults to 10. If null is provided, no max concurrency will be used.
-        base_experiment_name:
-          type: string
-          nullable: true
-          description: An optional experiment name to use as a base. If specified, the new experiment will be summarized and compared to this experiment.
-        base_experiment_id:
-          type: string
-          nullable: true
-          description: An optional experiment id to use as a base. If specified, the new experiment will be summarized and compared to this experiment.
-        git_metadata_settings:
-          $ref: '#/components/schemas/GitMetadataSettings'
-        repo_info:
-          allOf:
-          - $ref: '#/components/schemas/RepoInfo'
-          - description: Optionally explicitly specify the git metadata for this experiment. This takes precedence over `gitMetadataSettings` if specified.
-        strict:
-          type: boolean
-          nullable: true
-          description: If true, throw an error if one of the variables in the prompt is not present in the input
-        stop_token:
-          type: string
-          nullable: true
-          description: The token to stop the run
-        extra_messages:
-          type: string
-          description: A template path of extra messages to append to the conversion. These messages will be appended to the end of the conversation, after the last message.
-        tags:
-          type: array
-          items:
-            type: string
-          description: Optional tags that will be added to the experiment.
-        mcp_auth:
-          type: object
-          additionalProperties:
-            type: object
-            properties:
-              oauth_token:
-                type: string
-                description: The OAuth token to use
-      required:
-      - project_id
-      - data
-      - task
-      - scores
     PromptOptionsNullish:
       type: object
       nullable: true
@@ -568,6 +433,29 @@ components:
         file_id:
           type: string
           title: The ID of an uploaded file to use as input.
+    ChatCompletionMessageToolCall:
+      type: object
+      properties:
+        id:
+          type: string
+        function:
+          type: object
+          properties:
+            arguments:
+              type: string
+            name:
+              type: string
+          required:
+          - arguments
+          - name
+        type:
+          type: string
+          enum:
+          - function
+      required:
+      - id
+      - function
+      - type
     ModelParams:
       anyOf:
       - type: object
@@ -748,6 +636,163 @@ components:
         title: JsCompletionParams
         x-stainless-skip:
         - go
+    MetricSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the metric
+        metric:
+          type: number
+          description: Average metric across all examples
+        unit:
+          type: string
+          description: Unit label for the metric
+        diff:
+          type: number
+          description: Difference in metric between the current and comparison experiment
+        improvements:
+          type: integer
+          minimum: 0
+          description: Number of improvements in the metric
+        regressions:
+          type: integer
+          minimum: 0
+          description: Number of regressions in the metric
+      required:
+      - name
+      - metric
+      - unit
+      - improvements
+      - regressions
+      description: Summary of a metric's performance
+    ChatCompletionContentPartFileWithTitle:
+      type: object
+      properties:
+        file:
+          $ref: '#/components/schemas/ChatCompletionContentPartFileFile'
+        type:
+          type: string
+          enum:
+          - file
+      required:
+      - file
+      - type
+      title: file
+    FunctionTypeEnum:
+      type: string
+      enum:
+      - llm
+      - scorer
+      - task
+      - tool
+      - custom_view
+      - preprocessor
+      - facet
+      - classifier
+      - tag
+      - parameters
+      - sandbox
+      - null
+      default: scorer
+      description: The type of global function. Defaults to 'scorer'.
+    SummarizeExperimentResponse:
+      type: object
+      properties:
+        project_name:
+          type: string
+          description: Name of the project that the experiment belongs to
+        experiment_name:
+          type: string
+          description: Name of the experiment
+        project_url:
+          type: string
+          format: uri
+          description: URL to the project's page in the Braintrust app
+        experiment_url:
+          type: string
+          format: uri
+          description: URL to the experiment's page in the Braintrust app
+        comparison_experiment_name:
+          type: string
+          nullable: true
+          description: The experiment which scores are baselined against
+        scores:
+          type: object
+          nullable: true
+          additionalProperties:
+            $ref: '#/components/schemas/ScoreSummary'
+          description: Summary of the experiment's scores
+        metrics:
+          type: object
+          nullable: true
+          additionalProperties:
+            $ref: '#/components/schemas/MetricSummary'
+          description: Summary of the experiment's metrics
+      required:
+      - project_name
+      - experiment_name
+      - project_url
+      - experiment_url
+      description: Summary of an experiment
+    ScoreSummary:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the score
+        score:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Average score across all examples
+        diff:
+          type: number
+          minimum: -1
+          maximum: 1
+          description: Difference in score between the current and comparison experiment
+        improvements:
+          type: integer
+          minimum: 0
+          description: Number of improvements in the score
+        regressions:
+          type: integer
+          minimum: 0
+          description: Number of regressions in the score
+      required:
+      - name
+      - score
+      - improvements
+      - regressions
+      description: Summary of a score's performance
+    PromptParserNullish:
+      type: object
+      nullable: true
+      properties:
+        type:
+          type: string
+          enum:
+          - llm_classifier
+        use_cot:
+          type: boolean
+        choice_scores:
+          type: object
+          additionalProperties:
+            type: number
+            minimum: 0
+            maximum: 1
+          description: Map of choices to scores (0-1). Used by scorers.
+        choice:
+          type: array
+          items:
+            type: string
+          description: List of valid choices without score mapping. Used by classifiers that deposit output to tags.
+        allow_no_match:
+          type: boolean
+          description: If true, adds a 'No match' option. When selected, no tag is deposited.
+      required:
+      - type
+      - use_cot
     SavedFunctionId:
       anyOf:
       - type: object
@@ -781,406 +826,6 @@ components:
         title: global
       - type: 'null'
       description: Optional function identifier that produced the classification
-    ChatCompletionContentPart:
-      anyOf:
-      - $ref: '#/components/schemas/ChatCompletionContentPartTextWithTitle'
-      - $ref: '#/components/schemas/ChatCompletionContentPartImageWithTitle'
-      - $ref: '#/components/schemas/ChatCompletionContentPartFileWithTitle'
-      title: chat_completion_content_part
-    PromptParserNullish:
-      type: object
-      nullable: true
-      properties:
-        type:
-          type: string
-          enum:
-          - llm_classifier
-        use_cot:
-          type: boolean
-        choice_scores:
-          type: object
-          additionalProperties:
-            type: number
-            minimum: 0
-            maximum: 1
-          description: Map of choices to scores (0-1). Used by scorers.
-        choice:
-          type: array
-          items:
-            type: string
-          description: List of valid choices without score mapping. Used by classifiers that deposit output to tags.
-        allow_no_match:
-          type: boolean
-          description: If true, adds a 'No match' option. When selected, no tag is deposited.
-      required:
-      - type
-      - use_cot
-    GitMetadataSettings:
-      type: object
-      nullable: true
-      properties:
-        collect:
-          type: string
-          enum:
-          - all
-          - none
-          - some
-        fields:
-          type: array
-          items:
-            type: string
-            enum:
-            - commit
-            - branch
-            - tag
-            - dirty
-            - author_name
-            - author_email
-            - commit_message
-            - commit_time
-            - git_diff
-      required:
-      - collect
-      additionalProperties: false
-      description: Optional settings for collecting git metadata. By default, will collect all git metadata fields allowed in org-level settings.
-    FunctionId:
-      anyOf:
-      - type: object
-        properties:
-          function_id:
-            type: string
-            description: The ID of the function
-          version:
-            type: string
-            description: The version of the function
-        required:
-        - function_id
-        description: Function id
-        title: function_id
-      - type: object
-        properties:
-          project_name:
-            type: string
-            description: The name of the project containing the function
-          slug:
-            type: string
-            description: The slug of the function
-          version:
-            type: string
-            description: The version of the function
-        required:
-        - project_name
-        - slug
-        description: Project name and slug
-        title: project_slug
-      - type: object
-        properties:
-          global_function:
-            type: string
-            description: The name of the global function. Currently, the global namespace includes the functions in autoevals
-          function_type:
-            $ref: '#/components/schemas/FunctionTypeEnum'
-        required:
-        - global_function
-        description: Global function name
-        title: global_function
-      - type: object
-        properties:
-          prompt_session_id:
-            type: string
-            description: The ID of the prompt session
-          prompt_session_function_id:
-            type: string
-            description: The ID of the function in the prompt session
-          version:
-            type: string
-            description: The version of the function
-        required:
-        - prompt_session_id
-        - prompt_session_function_id
-        description: Prompt session id
-        title: prompt_session_id
-      - type: object
-        properties:
-          inline_context:
-            type: object
-            properties:
-              runtime:
-                type: string
-                enum:
-                - node
-                - python
-                - browser
-                - quickjs
-              version:
-                type: string
-            required:
-            - runtime
-            - version
-          code:
-            type: string
-            description: The inline code to execute
-          function_type:
-            allOf:
-            - $ref: '#/components/schemas/FunctionTypeEnum'
-            - description: The function type for inline code. Required when invoking inline preprocessors.
-          name:
-            type: string
-            nullable: true
-            description: The name of the inline code function
-        required:
-        - inline_context
-        - code
-        description: Inline code function
-        title: inline_code
-      - type: object
-        properties:
-          inline_prompt:
-            $ref: '#/components/schemas/PromptData'
-          inline_function:
-            type: object
-            additionalProperties:
-              nullable: true
-          function_type:
-            $ref: '#/components/schemas/FunctionTypeEnum'
-          name:
-            type: string
-            nullable: true
-            description: The name of the inline function
-        required:
-        - inline_function
-        description: Inline function definition
-        title: inline_function
-      - type: object
-        properties:
-          inline_prompt:
-            $ref: '#/components/schemas/PromptData'
-          function_type:
-            $ref: '#/components/schemas/FunctionTypeEnum'
-          name:
-            type: string
-            nullable: true
-            description: The name of the inline prompt
-        required:
-        - inline_prompt
-        description: Inline prompt definition
-        title: inline_prompt
-      description: The function to evaluate
-    ScoreSummary:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the score
-        score:
-          type: number
-          minimum: 0
-          maximum: 1
-          description: Average score across all examples
-        diff:
-          type: number
-          minimum: -1
-          maximum: 1
-          description: Difference in score between the current and comparison experiment
-        improvements:
-          type: integer
-          minimum: 0
-          description: Number of improvements in the score
-        regressions:
-          type: integer
-          minimum: 0
-          description: Number of regressions in the score
-      required:
-      - name
-      - score
-      - improvements
-      - regressions
-      description: Summary of a score's performance
-    PromptBlockDataNullish:
-      anyOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - chat
-          messages:
-            type: array
-            items:
-              $ref: '#/components/schemas/ChatCompletionMessageParam'
-          tools:
-            type: string
-        required:
-        - type
-        - messages
-        title: chat
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - completion
-          content:
-            type: string
-        required:
-        - type
-        - content
-        title: completion
-      - type: 'null'
-    ChatCompletionMessageParam:
-      anyOf:
-      - type: object
-        properties:
-          content:
-            anyOf:
-            - type: string
-              default: ''
-              title: text
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPartText'
-              title: array
-          role:
-            type: string
-            enum:
-            - system
-          name:
-            type: string
-        required:
-        - role
-        title: system
-      - type: object
-        properties:
-          content:
-            anyOf:
-            - type: string
-              default: ''
-              title: text
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPart'
-              title: array
-          role:
-            type: string
-            enum:
-            - user
-          name:
-            type: string
-        required:
-        - role
-        title: user
-      - type: object
-        properties:
-          role:
-            type: string
-            enum:
-            - assistant
-          content:
-            anyOf:
-            - type: string
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPartText'
-            - type: 'null'
-          function_call:
-            type: object
-            nullable: true
-            properties:
-              arguments:
-                type: string
-              name:
-                type: string
-            required:
-            - arguments
-            - name
-          name:
-            type: string
-            nullable: true
-          tool_calls:
-            type: array
-            nullable: true
-            items:
-              $ref: '#/components/schemas/ChatCompletionMessageToolCall'
-          reasoning:
-            type: array
-            nullable: true
-            items:
-              $ref: '#/components/schemas/ChatCompletionMessageReasoning'
-          reasoning_signature:
-            type: string
-            nullable: true
-        required:
-        - role
-        title: assistant
-      - type: object
-        properties:
-          content:
-            anyOf:
-            - type: string
-              default: ''
-              title: text
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPartText'
-              title: array
-          role:
-            type: string
-            enum:
-            - tool
-          tool_call_id:
-            type: string
-            default: ''
-        required:
-        - role
-        title: tool
-      - type: object
-        properties:
-          content:
-            type: string
-            nullable: true
-          name:
-            type: string
-          role:
-            type: string
-            enum:
-            - function
-        required:
-        - content
-        - name
-        - role
-        title: function
-      - type: object
-        properties:
-          content:
-            anyOf:
-            - type: string
-              default: ''
-              title: text
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPartText'
-              title: array
-          role:
-            type: string
-            enum:
-            - developer
-          name:
-            type: string
-        required:
-        - role
-        title: developer
-      - type: object
-        properties:
-          role:
-            type: string
-            enum:
-            - model
-          content:
-            type: string
-            nullable: true
-        required:
-        - role
-        title: fallback
     PromptData:
       type: object
       properties:
@@ -1290,6 +935,361 @@ components:
               type: string
             prompt_version:
               type: string
+    ChatCompletionContentPartImageWithTitle:
+      type: object
+      properties:
+        image_url:
+          type: object
+          properties:
+            url:
+              type: string
+            detail:
+              anyOf:
+              - type: string
+                enum:
+                - auto
+                title: auto
+              - type: string
+                enum:
+                - low
+                title: low
+              - type: string
+                enum:
+                - high
+                title: high
+          required:
+          - url
+        type:
+          type: string
+          enum:
+          - image_url
+      required:
+      - image_url
+      - type
+      title: image_url
+    InvokeParent:
+      anyOf:
+      - type: object
+        properties:
+          object_type:
+            type: string
+            enum:
+            - project_logs
+            - experiment
+            - playground_logs
+          object_id:
+            type: string
+            description: The id of the container object you are logging to
+          row_ids:
+            type: object
+            nullable: true
+            properties:
+              id:
+                type: string
+                description: The id of the row
+              span_id:
+                type: string
+                description: The span_id of the row
+              root_span_id:
+                type: string
+                description: The root_span_id of the row
+            required:
+            - id
+            - span_id
+            - root_span_id
+            description: Identifiers for the row to to log a subspan under
+          propagated_event:
+            type: object
+            nullable: true
+            additionalProperties:
+              nullable: true
+            description: Include these properties in every span created under this parent
+        required:
+        - object_type
+        - object_id
+        description: Span parent properties
+        title: span_parent_struct
+      - type: string
+        description: The parent's span identifier, created by calling `.export()` on a span
+      description: Options for tracing the function call
+    PromptBlockDataNullish:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - chat
+          messages:
+            type: array
+            items:
+              $ref: '#/components/schemas/ChatCompletionMessageParam'
+          tools:
+            type: string
+        required:
+        - type
+        - messages
+        title: chat
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - completion
+          content:
+            type: string
+        required:
+        - type
+        - content
+        title: completion
+      - type: 'null'
+    GitMetadataSettings:
+      type: object
+      nullable: true
+      properties:
+        collect:
+          type: string
+          enum:
+          - all
+          - none
+          - some
+        fields:
+          type: array
+          items:
+            type: string
+            enum:
+            - commit
+            - branch
+            - tag
+            - dirty
+            - author_name
+            - author_email
+            - commit_message
+            - commit_time
+            - git_diff
+      required:
+      - collect
+      additionalProperties: false
+      description: Optional settings for collecting git metadata. By default, will collect all git metadata fields allowed in org-level settings.
+    RepoInfo:
+      type: object
+      nullable: true
+      properties:
+        commit:
+          type: string
+          nullable: true
+          description: SHA of most recent commit
+        branch:
+          type: string
+          nullable: true
+          description: Name of the branch the most recent commit belongs to
+        tag:
+          type: string
+          nullable: true
+          description: Name of the tag on the most recent commit
+        dirty:
+          type: boolean
+          nullable: true
+          description: Whether or not the repo had uncommitted changes when snapshotted
+        author_name:
+          type: string
+          nullable: true
+          description: Name of the author of the most recent commit
+        author_email:
+          type: string
+          nullable: true
+          description: Email of the author of the most recent commit
+        commit_message:
+          type: string
+          nullable: true
+          description: Most recent commit message
+        commit_time:
+          type: string
+          nullable: true
+          description: Time of the most recent commit
+        git_diff:
+          type: string
+          nullable: true
+          description: If the repo was dirty when run, this includes the diff between the current state of the repo and the most recent commit.
+      description: Metadata about the state of the repo when the experiment was created
+    RunEval:
+      type: object
+      properties:
+        project_id:
+          type: string
+          description: Unique identifier for the project to run the eval in
+        data:
+          anyOf:
+          - type: object
+            properties:
+              dataset_id:
+                type: string
+              dataset_version:
+                type: string
+                nullable: true
+                description: The version of the dataset to evaluate
+              dataset_environment:
+                type: string
+                nullable: true
+                description: The environment tag that resolves to the dataset version to evaluate
+              _internal_btql:
+                type: object
+                nullable: true
+                additionalProperties:
+                  nullable: true
+            required:
+            - dataset_id
+            description: Dataset id
+            title: dataset_id
+          - type: object
+            properties:
+              project_name:
+                type: string
+              dataset_name:
+                type: string
+              dataset_version:
+                type: string
+                nullable: true
+                description: The version of the dataset to evaluate
+              dataset_environment:
+                type: string
+                nullable: true
+                description: The environment tag that resolves to the dataset version to evaluate
+              _internal_btql:
+                type: object
+                nullable: true
+                additionalProperties:
+                  nullable: true
+            required:
+            - project_name
+            - dataset_name
+            description: Project and dataset name
+            title: project_dataset_name
+          - type: object
+            properties:
+              data:
+                type: array
+                items:
+                  nullable: true
+            required:
+            - data
+            description: Dataset rows
+            title: dataset_rows
+          description: The dataset to use
+        name:
+          type: string
+          description: The name of the eval to run when multiple evals available
+        parameters:
+          type: object
+          additionalProperties:
+            nullable: true
+          description: Values for any parameters used in the eval
+        task:
+          $ref: '#/components/schemas/FunctionId'
+        scores:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/FunctionId'
+            - description: Options for identifying a function
+          description: The functions to score the eval on
+        experiment_name:
+          type: string
+          description: An optional name for the experiment created by this eval. If it conflicts with an existing experiment, it will be suffixed with a unique identifier.
+        metadata:
+          type: object
+          additionalProperties:
+            nullable: true
+          description: Optional experiment-level metadata to store about the evaluation. You can later use this to slice & dice across experiments.
+        parent:
+          allOf:
+          - $ref: '#/components/schemas/InvokeParent'
+          - description: Options for tracing the evaluation
+        stream:
+          type: boolean
+          description: 'Whether to stream the results of the eval. If true, the request will return two events: one to indicate the experiment has started, and another upon completion. If false, the request will return the evaluation''s summary upon completion.'
+        trial_count:
+          type: number
+          nullable: true
+          description: The number of times to run the evaluator per input. This is useful for evaluating applications that have non-deterministic behavior and gives you both a stronger aggregate measure and a sense of the variance in the results.
+        is_public:
+          type: boolean
+          nullable: true
+          description: Whether the experiment should be public. Defaults to false.
+        timeout:
+          type: number
+          nullable: true
+          description: The maximum duration, in milliseconds, to run the evaluation. Defaults to undefined, in which case there is no timeout.
+        max_concurrency:
+          type: number
+          nullable: true
+          default: 10
+          description: The maximum number of tasks/scorers that will be run concurrently. Defaults to 10. If null is provided, no max concurrency will be used.
+        base_experiment_name:
+          type: string
+          nullable: true
+          description: An optional experiment name to use as a base. If specified, the new experiment will be summarized and compared to this experiment.
+        base_experiment_id:
+          type: string
+          nullable: true
+          description: An optional experiment id to use as a base. If specified, the new experiment will be summarized and compared to this experiment.
+        git_metadata_settings:
+          $ref: '#/components/schemas/GitMetadataSettings'
+        repo_info:
+          allOf:
+          - $ref: '#/components/schemas/RepoInfo'
+          - description: Optionally explicitly specify the git metadata for this experiment. This takes precedence over `gitMetadataSettings` if specified.
+        strict:
+          type: boolean
+          nullable: true
+          description: If true, throw an error if one of the variables in the prompt is not present in the input
+        stop_token:
+          type: string
+          nullable: true
+          description: The token to stop the run
+        extra_messages:
+          type: string
+          description: A template path of extra messages to append to the conversion. These messages will be appended to the end of the conversation, after the last message.
+        tags:
+          type: array
+          items:
+            type: string
+          description: Optional tags that will be added to the experiment.
+        mcp_auth:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              oauth_token:
+                type: string
+                description: The OAuth token to use
+      required:
+      - project_id
+      - data
+      - task
+      - scores
+    ResponseFormatJsonSchema:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        schema:
+          anyOf:
+          - type: object
+            additionalProperties:
+              nullable: true
+            title: object
+            x-stainless-skip:
+            - go
+          - type: string
+            title: string
+        strict:
+          type: boolean
+          nullable: true
+      required:
+      - name
   securitySchemes:
     bearerAuth:
       type: http
