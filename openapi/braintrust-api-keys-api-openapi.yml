@@ -26,7 +26,7 @@ paths:
       description: 'List out all API keys. They are sorted by creation date, with the most recently-created keys coming first.
 
 
-        To create new API keys, go to **Settings > API keys** in the Braintrust UI.'
+        To create new API keys, visit **Settings > API keys** in the Braintrust UI.'
       summary: List api_keys
       security:
       - bearerAuth: []
@@ -240,6 +240,28 @@ paths:
                 nullable: true
 components:
   schemas:
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+    ApiKeyName:
+      type: string
+      description: Name of the api_key to search for
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
     ApiKey:
       type: object
       properties:
@@ -279,25 +301,15 @@ components:
           nullable: true
           format: uuid
           description: Unique identifier for the organization
+        expires_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date at which the API key expires. If null, the key never expires.
       required:
       - id
       - name
       - preview_name
-    ApiKeyName:
-      type: string
-      description: Name of the api_key to search for
-    StartingAfter:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
     OrgName:
       type: string
       description: Filter search results to within a particular organization
@@ -314,36 +326,7 @@ components:
       type: string
       format: uuid
       description: ApiKey id
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
   parameters:
-    ApiKeyIdParam:
-      schema:
-        $ref: '#/components/schemas/ApiKeyIdParam'
-      required: true
-      description: ApiKey id
-      name: api_key_id
-      in: path
-    AppLimitParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
-    ApiKeyName:
-      schema:
-        $ref: '#/components/schemas/ApiKeyName'
-      required: false
-      description: Name of the api_key to search for
-      name: api_key_name
-      in: query
-      allowReserved: true
     OrgName:
       schema:
         $ref: '#/components/schemas/OrgName'
@@ -352,16 +335,13 @@ components:
       name: org_name
       in: query
       allowReserved: true
-    EndingBefore:
+    ApiKeyIdParam:
       schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
+        $ref: '#/components/schemas/ApiKeyIdParam'
+      required: true
+      description: ApiKey id
+      name: api_key_id
+      in: path
     Ids:
       schema:
         $ref: '#/components/schemas/Ids'
@@ -379,6 +359,31 @@ components:
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: starting_after
       in: query
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    ApiKeyName:
+      schema:
+        $ref: '#/components/schemas/ApiKeyName'
+      required: false
+      description: Name of the api_key to search for
+      name: api_key_name
+      in: query
+      allowReserved: true
   securitySchemes:
     bearerAuth:
       type: http

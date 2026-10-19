@@ -26,11 +26,11 @@ paths:
       - bearerAuth: []
       - {}
       operationId: postFunction
-      description: Create a new function. If there is an existing function in the project with the same slug as the one specified in the request, will return the existing function unmodified
+      description: Create a new function. If there is an existing function in the project with the same slug as the one specified in the request, a new version of the function will be appended and returned
       summary: Create function
       requestBody:
         description: Any desired information about the new function object
-        required: false
+        required: true
         content:
           application/json:
             schema:
@@ -98,11 +98,11 @@ paths:
       - bearerAuth: []
       - {}
       operationId: putFunction
-      description: Create or replace function. If there is an existing function in the project with the same slug as the one specified in the request, will replace the existing function with the provided fields
+      description: Create or replace function. If there is an existing function in the project with the same slug as the one specified in the request, a new version of the function will be appended and returned
       summary: Create or replace function
       requestBody:
         description: Any desired information about the new function object
-        required: false
+        required: true
         content:
           application/json:
             schema:
@@ -480,618 +480,17 @@ paths:
               $ref: '#/components/schemas/InvokeApi'
       responses:
         '200':
-          description: Function invocation response
+          description: 'Function invocation response. Scorer results follow the ScoreResult schema: a single score defaults to the function name when unnamed; arrays require a unique name for every score.'
           content:
             application/json:
               schema:
                 nullable: true
 components:
   schemas:
-    ChatCompletionContentPartText:
-      type: object
-      properties:
-        text:
-          type: string
-          default: ''
-        type:
-          type: string
-          enum:
-          - text
-        cache_control:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - ephemeral
-          required:
-          - type
-      required:
-      - type
-    ChatCompletionContentPart:
-      anyOf:
-      - $ref: '#/components/schemas/ChatCompletionContentPartTextWithTitle'
-      - $ref: '#/components/schemas/ChatCompletionContentPartImageWithTitle'
-      - $ref: '#/components/schemas/ChatCompletionContentPartFileWithTitle'
-      title: chat_completion_content_part
-    FacetData:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - facet
-        preprocessor:
-          allOf:
-          - $ref: '#/components/schemas/NullableSavedFunctionId'
-          - description: The preprocessor function to use for facet extraction. If not provided, the project default preprocessor will be used, falling back to the global 'thread' preprocessor.
-        prompt:
-          type: string
-          description: The prompt to use for LLM extraction. The preprocessed text will be provided as context.
-        model:
-          type: string
-          description: The model to use for facet extraction
-        embedding_model:
-          type: string
-          description: The embedding model to use for vectorizing facet results.
-        no_match_pattern:
-          type: string
-          description: Regex pattern to identify outputs that do not match the facet. If the output matches, the facet will be saved as 'no_match'
-      required:
-      - type
-      - prompt
-      title: facet
-    ResponseFormatNullish:
-      anyOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - json_object
-        required:
-        - type
-        title: json_object
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - json_schema
-          json_schema:
-            $ref: '#/components/schemas/ResponseFormatJsonSchema'
-        required:
-        - type
-        - json_schema
-        title: json_schema
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - text
-        required:
-        - type
-        title: text
-      - type: 'null'
-    ProjectIdQuery:
+    FunctionIdParam:
       type: string
       format: uuid
-      description: Project id
-    PromptBlockData:
-      anyOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - chat
-          messages:
-            type: array
-            items:
-              $ref: '#/components/schemas/ChatCompletionMessageParam'
-          tools:
-            type: string
-        required:
-        - type
-        - messages
-        title: chat
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - completion
-          content:
-            type: string
-        required:
-        - type
-        - content
-        title: completion
-    ChatCompletionMessageReasoning:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        content:
-          type: string
-          nullable: true
-      description: 'Note: This is not part of the OpenAI API spec, but we added it for interoperability with multiple reasoning models.'
-    ChatCompletionMessageParam:
-      anyOf:
-      - type: object
-        properties:
-          content:
-            anyOf:
-            - type: string
-              default: ''
-              title: text
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPartText'
-              title: array
-          role:
-            type: string
-            enum:
-            - system
-          name:
-            type: string
-        required:
-        - role
-        title: system
-      - type: object
-        properties:
-          content:
-            anyOf:
-            - type: string
-              default: ''
-              title: text
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPart'
-              title: array
-          role:
-            type: string
-            enum:
-            - user
-          name:
-            type: string
-        required:
-        - role
-        title: user
-      - type: object
-        properties:
-          role:
-            type: string
-            enum:
-            - assistant
-          content:
-            anyOf:
-            - type: string
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPartText'
-            - type: 'null'
-          function_call:
-            type: object
-            nullable: true
-            properties:
-              arguments:
-                type: string
-              name:
-                type: string
-            required:
-            - arguments
-            - name
-          name:
-            type: string
-            nullable: true
-          tool_calls:
-            type: array
-            nullable: true
-            items:
-              $ref: '#/components/schemas/ChatCompletionMessageToolCall'
-          reasoning:
-            type: array
-            nullable: true
-            items:
-              $ref: '#/components/schemas/ChatCompletionMessageReasoning'
-          reasoning_signature:
-            type: string
-            nullable: true
-        required:
-        - role
-        title: assistant
-      - type: object
-        properties:
-          content:
-            anyOf:
-            - type: string
-              default: ''
-              title: text
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPartText'
-              title: array
-          role:
-            type: string
-            enum:
-            - tool
-          tool_call_id:
-            type: string
-            default: ''
-        required:
-        - role
-        title: tool
-      - type: object
-        properties:
-          content:
-            type: string
-            nullable: true
-          name:
-            type: string
-          role:
-            type: string
-            enum:
-            - function
-        required:
-        - content
-        - name
-        - role
-        title: function
-      - type: object
-        properties:
-          content:
-            anyOf:
-            - type: string
-              default: ''
-              title: text
-            - type: array
-              items:
-                $ref: '#/components/schemas/ChatCompletionContentPartText'
-              title: array
-          role:
-            type: string
-            enum:
-            - developer
-          name:
-            type: string
-        required:
-        - role
-        title: developer
-      - type: object
-        properties:
-          role:
-            type: string
-            enum:
-            - model
-          content:
-            type: string
-            nullable: true
-        required:
-        - role
-        title: fallback
-    ChatCompletionContentPartTextWithTitle:
-      type: object
-      properties:
-        text:
-          type: string
-          default: ''
-        type:
-          type: string
-          enum:
-          - text
-        cache_control:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - ephemeral
-          required:
-          - type
-      required:
-      - type
-      title: text
-    GraphEdge:
-      type: object
-      properties:
-        source:
-          type: object
-          properties:
-            node:
-              type: string
-              maxLength: 1024
-              description: The id of the node in the graph
-            variable:
-              type: string
-          required:
-          - node
-          - variable
-        target:
-          type: object
-          properties:
-            node:
-              type: string
-              maxLength: 1024
-              description: The id of the node in the graph
-            variable:
-              type: string
-          required:
-          - node
-          - variable
-        purpose:
-          type: string
-          enum:
-          - control
-          - data
-          - messages
-          description: The purpose of the edge
-      required:
-      - source
-      - target
-      - purpose
-    CodeBundle:
-      type: object
-      properties:
-        runtime_context:
-          type: object
-          properties:
-            runtime:
-              type: string
-              enum:
-              - node
-              - python
-              - browser
-              - quickjs
-            version:
-              type: string
-          required:
-          - runtime
-          - version
-        location:
-          anyOf:
-          - type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - experiment
-              eval_name:
-                type: string
-              position:
-                anyOf:
-                - type: object
-                  properties:
-                    type:
-                      type: string
-                      enum:
-                      - task
-                  required:
-                  - type
-                - type: object
-                  properties:
-                    type:
-                      type: string
-                      enum:
-                      - scorer
-                    index:
-                      type: integer
-                      minimum: 0
-                  required:
-                  - type
-                  - index
-                  title: scorer
-                - type: object
-                  properties:
-                    type:
-                      type: string
-                      enum:
-                      - classifier
-                    index:
-                      type: integer
-                      minimum: 0
-                  required:
-                  - type
-                  - index
-                  title: classifier
-            required:
-            - type
-            - eval_name
-            - position
-            title: experiment
-          - type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - function
-              index:
-                type: integer
-                minimum: 0
-            required:
-            - type
-            - index
-            title: function
-          - type: object
-            properties:
-              type:
-                type: string
-                enum:
-                - sandbox
-              sandbox_spec:
-                oneOf:
-                - type: object
-                  properties:
-                    provider:
-                      type: string
-                      enum:
-                      - modal
-                    snapshot_ref:
-                      type: string
-                      description: sandbox snapshot ref
-                  required:
-                  - provider
-                  - snapshot_ref
-                - type: object
-                  properties:
-                    provider:
-                      type: string
-                      enum:
-                      - lambda
-                  required:
-                  - provider
-              entrypoints:
-                type: array
-                items:
-                  type: string
-                description: Which entrypoints to execute in the sandbox
-              eval_name:
-                type: string
-              parameters:
-                type: object
-                additionalProperties:
-                  nullable: true
-                description: Parameter values for sandbox eval execution
-              evaluator_definition:
-                nullable: true
-                description: Definition of current evaluator with parameters
-            required:
-            - type
-            - sandbox_spec
-            - eval_name
-        bundle_id:
-          type: string
-          nullable: true
-        preview:
-          type: string
-          nullable: true
-          description: A preview of the code
-      required:
-      - runtime_context
-      - location
-    PromptDataNullish:
-      type: object
-      nullable: true
-      properties:
-        prompt:
-          $ref: '#/components/schemas/PromptBlockDataNullish'
-        options:
-          $ref: '#/components/schemas/PromptOptionsNullish'
-        parser:
-          $ref: '#/components/schemas/PromptParserNullish'
-        tool_functions:
-          type: array
-          nullable: true
-          items:
-            allOf:
-            - $ref: '#/components/schemas/SavedFunctionId'
-            - anyOf:
-              - type: object
-                properties:
-                  type:
-                    type: string
-                    enum:
-                    - function
-                  id:
-                    type: string
-                  version:
-                    type: string
-                    description: The version of the function
-                required:
-                - type
-                - id
-                title: function
-              - type: object
-                properties:
-                  type:
-                    type: string
-                    enum:
-                    - global
-                  name:
-                    type: string
-                  function_type:
-                    $ref: '#/components/schemas/FunctionTypeEnum'
-                required:
-                - type
-                - name
-                title: global
-        template_format:
-          type: string
-          nullable: true
-          enum:
-          - mustache
-          - nunjucks
-          - none
-          - null
-        mcp:
-          type: object
-          nullable: true
-          additionalProperties:
-            oneOf:
-            - type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                  - id
-                id:
-                  type: string
-                  format: uuid
-                is_disabled:
-                  type: boolean
-                enabled_tools:
-                  type: array
-                  nullable: true
-                  items:
-                    type: string
-                  description: If omitted, all tools are enabled
-              required:
-              - type
-              - id
-              title: MCP server id. This is used for project-level MCP server definitions.
-            - type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                  - url
-                url:
-                  type: string
-                is_disabled:
-                  type: boolean
-                enabled_tools:
-                  type: array
-                  nullable: true
-                  items:
-                    type: string
-                  description: If omitted, all tools are enabled
-              required:
-              - type
-              - url
-              title: MCP server url. This is used for inline definitions of MCP servers.
-        origin:
-          type: object
-          nullable: true
-          properties:
-            prompt_id:
-              type: string
-            project_id:
-              type: string
-            prompt_version:
-              type: string
-      description: The prompt, model, and its parameters
-    ChatCompletionContentPartFileFile:
-      type: object
-      properties:
-        file_data:
-          type: string
-        filename:
-          type: string
-        file_id:
-          type: string
-          title: The ID of an uploaded file to use as input.
+      description: Function id
     GraphNode:
       anyOf:
       - type: object
@@ -1321,17 +720,300 @@ components:
         required:
         - type
         - prompt
-    PromptOptionsNullish:
+    ChatCompletionMessageReasoning:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        content:
+          type: string
+          nullable: true
+      description: 'Note: This is not part of the OpenAI API spec, but we added it for interoperability with multiple reasoning models.'
+    PromptDataNullish:
       type: object
       nullable: true
       properties:
-        model:
+        prompt:
+          $ref: '#/components/schemas/PromptBlockDataNullish'
+        options:
+          $ref: '#/components/schemas/PromptOptionsNullish'
+        parser:
+          $ref: '#/components/schemas/PromptParserNullish'
+        preprocessor:
+          $ref: '#/components/schemas/PreprocessorId'
+        tool_functions:
+          type: array
+          nullable: true
+          items:
+            allOf:
+            - $ref: '#/components/schemas/SavedFunctionId'
+            - anyOf:
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - function
+                  id:
+                    type: string
+                  version:
+                    type: string
+                    description: The version of the function
+                required:
+                - type
+                - id
+                title: function
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    enum:
+                    - global
+                  name:
+                    type: string
+                  function_type:
+                    $ref: '#/components/schemas/FunctionTypeEnum'
+                required:
+                - type
+                - name
+                title: global
+        template_format:
           type: string
-        params:
-          $ref: '#/components/schemas/ModelParams'
-        position:
+          nullable: true
+          enum:
+          - mustache
+          - nunjucks
+          - none
+          - null
+        mcp:
+          type: object
+          nullable: true
+          additionalProperties:
+            oneOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - id
+                id:
+                  type: string
+                  format: uuid
+                is_disabled:
+                  type: boolean
+                enabled_tools:
+                  type: array
+                  nullable: true
+                  items:
+                    type: string
+                  description: If omitted, all tools are enabled
+              required:
+              - type
+              - id
+              title: MCP server id. This is used for project-level MCP server definitions.
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - url
+                url:
+                  type: string
+                is_disabled:
+                  type: boolean
+                enabled_tools:
+                  type: array
+                  nullable: true
+                  items:
+                    type: string
+                  description: If omitted, all tools are enabled
+              required:
+              - type
+              - url
+              title: MCP server url. This is used for inline definitions of MCP servers.
+        origin:
+          type: object
+          nullable: true
+          properties:
+            prompt_id:
+              type: string
+            project_id:
+              type: string
+            prompt_version:
+              type: string
+      description: The prompt, model, and its parameters
+    PromptBlockDataNullish:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - chat
+          messages:
+            type: array
+            items:
+              $ref: '#/components/schemas/ChatCompletionMessageParam'
+          tools:
+            type: string
+        required:
+        - type
+        - messages
+        title: chat
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - completion
+          content:
+            type: string
+        required:
+        - type
+        - content
+        title: completion
+      - type: 'null'
+    PromptEnvironment:
+      type: string
+      description: 'Filter by environment slug. Cannot be used together with `version`.
+
+
+        For `GET /v1/prompt`, environment resolution currently requires the request to match a single prompt. If multiple prompts match, the endpoint returns `400` (for example when `limit=1` is not set). Use `limit=1` or other filters (for example `slug`, `project_id`) to narrow results.'
+    FacetPreprocessorId:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - function
+          id:
+            type: string
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - type
+        - id
+        title: function
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - global
+          name:
+            type: string
+          function_type:
+            $ref: '#/components/schemas/FunctionTypeEnum'
+        required:
+        - type
+        - name
+        title: global
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - inline
+          code:
+            type: string
+            minLength: 1
+            description: The complete JavaScript preprocessor implementation, including its handler.
+        required:
+        - type
+        - code
+        title: preprocessor_inline
+      - type: 'null'
+      description: The saved, global, or inline preprocessor to use for facet extraction. If not provided, the project default preprocessor will be used, falling back to the global 'thread' preprocessor.
+    ChatCompletionContentPartFileWithTitle:
+      type: object
+      properties:
+        file:
+          $ref: '#/components/schemas/ChatCompletionContentPartFileFile'
+        type:
           type: string
-    FunctionDataNullish:
+          enum:
+          - file
+        cache_control:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - ephemeral
+            ttl:
+              type: string
+              enum:
+              - 5m
+              - 1h
+          required:
+          - type
+      required:
+      - file
+      - type
+      title: file
+    ChatCompletionMessageToolCall:
+      type: object
+      properties:
+        id:
+          type: string
+        function:
+          type: object
+          properties:
+            arguments:
+              type: string
+            name:
+              type: string
+          required:
+          - arguments
+          - name
+        type:
+          type: string
+          enum:
+          - function
+      required:
+      - id
+      - function
+      - type
+    Slug:
+      type: string
+      description: Retrieve prompt with a specific slug
+    SavedFunctionId:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - function
+          id:
+            type: string
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - type
+        - id
+        title: function
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - global
+          name:
+            type: string
+          function_type:
+            $ref: '#/components/schemas/FunctionTypeEnum'
+        required:
+        - type
+        - name
+        title: global
+      - type: 'null'
+      description: Optional function identifier that produced the classification
+    FunctionData:
       anyOf:
       - type: object
         properties:
@@ -1486,151 +1168,115 @@ components:
       - allOf:
         - $ref: '#/components/schemas/TopicMapData'
         - title: topic_map
-      - type: 'null'
-    GraphData:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - graph
-        nodes:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/GraphNode'
-        edges:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/GraphEdge'
-      required:
-      - type
-      - nodes
-      - edges
-      description: This feature is preliminary and unsupported.
-      title: graph
-    PatchFunction:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the prompt
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the prompt
-        prompt_data:
-          $ref: '#/components/schemas/PromptDataNullish'
-        function_data:
-          $ref: '#/components/schemas/FunctionDataNullish'
-        tags:
-          type: array
-          nullable: true
-          items:
+    InvokeParent:
+      anyOf:
+      - type: object
+        properties:
+          object_type:
             type: string
-          description: A list of tags for the prompt
-    PromptVersion:
-      type: string
-      description: 'Retrieve prompt at a specific version.
-
-
-        The version id can either be a transaction id (e.g. ''1000192656880881099'') or a version identifier (e.g. ''81cd05ee665fdfb3'').'
-    ChatCompletionMessageToolCall:
-      type: object
-      properties:
-        id:
-          type: string
-        function:
-          type: object
-          properties:
-            arguments:
-              type: string
-            name:
-              type: string
-          required:
-          - arguments
-          - name
-        type:
-          type: string
-          enum:
-          - function
-      required:
-      - id
-      - function
-      - type
-    BatchedFacetData:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - batched_facet
-        preprocessor:
-          allOf:
-          - $ref: '#/components/schemas/NullableSavedFunctionId'
-          - description: The preprocessor function to use for facet extraction. If not provided, the project default preprocessor will be used, falling back to the global 'thread' preprocessor.
-        facets:
-          type: array
-          items:
+            enum:
+            - project_logs
+            - experiment
+            - playground_logs
+          object_id:
+            type: string
+            description: The id of the container object you are logging to
+          row_ids:
             type: object
+            nullable: true
             properties:
-              name:
+              id:
                 type: string
-                description: The name of the facet
-              prompt:
+                description: The id of the row
+              span_id:
                 type: string
-                description: The prompt to use for LLM extraction. The preprocessed text will be provided as context.
-              model:
+                description: The span_id of the row
+              root_span_id:
                 type: string
-                description: The model to use for facet extraction
-              embedding_model:
-                type: string
-                description: The embedding model to use for vectorizing facet results.
-              no_match_pattern:
-                type: string
-                description: Regex pattern to identify outputs that do not match the facet. If the output matches, the facet will be saved as 'no_match'
+                description: The root_span_id of the row
             required:
-            - name
-            - prompt
-        topic_maps:
-          type: object
-          additionalProperties:
+            - id
+            - span_id
+            - root_span_id
+            description: Identifiers for the row to to log a subspan under
+          propagated_event:
+            type: object
+            nullable: true
+            additionalProperties:
+              nullable: true
+            description: Include these properties in every span created under this parent
+        required:
+        - object_type
+        - object_id
+        description: Span parent properties
+        title: span_parent_struct
+      - type: string
+        description: The parent's span identifier, created by calling `.export()` on a span
+      description: Options for tracing the function call
+    PromptBlockData:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - chat
+          messages:
             type: array
             items:
-              type: object
-              properties:
-                function_name:
-                  type: string
-                  description: The name of the topic map function
-                topic_map_id:
-                  type: string
-                  description: The id of the topic map function
-                topic_map_data:
-                  $ref: '#/components/schemas/TopicMapData'
-              required:
-              - function_name
-              - topic_map_data
-          description: Topic maps that depend on facets in this batch, keyed by source facet name. Each source facet can have multiple topic maps.
+              $ref: '#/components/schemas/ChatCompletionMessageParam'
+          tools:
+            type: string
+        required:
+        - type
+        - messages
+        title: chat
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - completion
+          content:
+            type: string
+        required:
+        - type
+        - content
+        title: completion
+    ProjectName:
+      type: string
+      description: Name of the project to search for
+    PromptParserNullish:
+      type: object
+      nullable: true
+      properties:
+        type:
+          type: string
+          enum:
+          - llm_classifier
+        use_cot:
+          type: boolean
+        choice_scores:
+          type: object
+          additionalProperties:
+            type: number
+            minimum: 0
+            maximum: 1
+          description: Map of choices to scores (0-1). Used by scorers.
+        choice:
+          type: array
+          items:
+            type: string
+          description: List of valid choices without score mapping. Used by classifiers that deposit output to tags.
+        allow_no_match:
+          type: boolean
+          description: If true, adds a 'No match' option. When selected, no tag is deposited.
+        allow_skip:
+          type: boolean
+          description: If true, adds a 'Skip' option. When selected, the scorer returns null.
       required:
       - type
-      - facets
-      title: batched_facet
-    FunctionTypeEnumNullish:
-      type: string
-      nullable: true
-      enum:
-      - llm
-      - scorer
-      - task
-      - tool
-      - custom_view
-      - preprocessor
-      - facet
-      - classifier
-      - tag
-      - parameters
-      - sandbox
-      - null
+      - use_cot
     ModelParams:
       anyOf:
       - type: object
@@ -1811,72 +1457,77 @@ components:
         title: JsCompletionParams
         x-stainless-skip:
         - go
-    StartingAfter:
+    PromptVersion:
       type: string
-      format: uuid
-      description: 'Pagination cursor id.
+      description: 'Retrieve prompt at a specific version.
 
 
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    ChatCompletionContentPartFileWithTitle:
+        The version id can either be a transaction id (e.g. ''1000192656880881099'') or a version identifier (e.g. ''81cd05ee665fdfb3'').'
+    AclObjectType:
+      type: string
+      enum:
+      - organization
+      - project
+      - experiment
+      - dataset
+      - prompt
+      - prompt_session
+      - group
+      - role
+      - org_member
+      - project_log
+      - org_project
+      - org_audit_logs
+      - project_group
+      - ai_secret
+      - org_ai_secret
+      description: The object type that the ACL applies to
+    ChatCompletionContentPartImageWithTitle:
       type: object
       properties:
-        file:
-          $ref: '#/components/schemas/ChatCompletionContentPartFileFile'
+        image_url:
+          type: object
+          properties:
+            url:
+              type: string
+            detail:
+              anyOf:
+              - type: string
+                enum:
+                - auto
+                title: auto
+              - type: string
+                enum:
+                - low
+                title: low
+              - type: string
+                enum:
+                - high
+                title: high
+          required:
+          - url
         type:
           type: string
           enum:
-          - file
+          - image_url
+        cache_control:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - ephemeral
+            ttl:
+              type: string
+              enum:
+              - 5m
+              - 1h
+          required:
+          - type
       required:
-      - file
+      - image_url
       - type
-      title: file
-    FunctionTypeEnum:
-      type: string
-      enum:
-      - llm
-      - scorer
-      - task
-      - tool
-      - custom_view
-      - preprocessor
-      - facet
-      - classifier
-      - tag
-      - parameters
-      - sandbox
-      - null
-      default: scorer
-      description: The type of global function. Defaults to 'scorer'.
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    StreamingMode:
-      type: string
-      nullable: true
-      enum:
-      - auto
-      - parallel
-      - json
-      - text
-      - null
-      description: The mode format of the returned value (defaults to 'auto')
-    Slug:
-      type: string
-      description: Retrieve prompt with a specific slug
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      title: image_url
     Function:
       type: object
       properties:
@@ -1968,68 +1619,552 @@ components:
       - name
       - slug
       - function_data
-    CreateFunction:
+    StreamingMode:
+      type: string
+      nullable: true
+      enum:
+      - auto
+      - parallel
+      - json
+      - text
+      - null
+      description: The mode format of the returned value (defaults to 'auto')
+    TopicMapData:
       type: object
       properties:
-        project_id:
+        type:
+          type: string
+          enum:
+          - topic_map
+        source_facet:
+          type: string
+          description: Materialized facet field name used when source_facet_function is absent
+        source_facet_function:
+          allOf:
+          - $ref: '#/components/schemas/SavedFunctionId'
+          - anyOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - function
+                id:
+                  type: string
+                version:
+                  type: string
+                  description: The version of the function
+              required:
+              - type
+              - id
+              title: function
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - global
+                name:
+                  type: string
+                function_type:
+                  $ref: '#/components/schemas/FunctionTypeEnum'
+              required:
+              - type
+              - name
+              title: global
+            description: The stable function reference for the source facet
+        embedding_model:
+          type: string
+          description: The embedding model to use for embedding facet values
+        bundle_key:
+          type: string
+          description: Key of the topic map bundle in code_bundles bucket
+        report_key:
+          type: string
+          description: Key of the clustering report in code_bundles bucket
+        topic_names:
+          type: object
+          additionalProperties:
+            type: string
+          description: Mapping from topic_id to topic name
+        generation_settings:
+          $ref: '#/components/schemas/TopicMapGenerationSettings'
+        disable_reconciliation:
+          type: boolean
+          description: Whether new topic generation should ignore the previously saved report during reconciliation. Defaults to false when omitted.
+        reconcile_mode:
+          type: string
+          enum:
+          - evolve
+          - names_only
+          description: 'How reconciliation carries the previous map forward: "evolve" re-routes new samples into the previous topics before naming; "names_only" keeps the fresh clustering and carries only topic ids/names. Defaults to "names_only" when omitted.'
+        distance_threshold:
+          type: number
+          description: Maximum distance to nearest centroid. If exceeded, returns no_match.
+        btql_filter:
+          type: string
+          description: Per-topic-map BTQL filter that was applied when this version was generated. Absent on versions generated before this was recorded.
+        automation_btql_filter:
+          type: string
+          description: Automation-level BTQL filter that was applied when this version was generated. Absent on versions generated before this was recorded.
+      required:
+      - type
+      - source_facet
+      - embedding_model
+    FacetData:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - facet
+        preprocessor:
+          $ref: '#/components/schemas/FacetPreprocessorId'
+        prompt:
+          type: string
+          description: The prompt to use for LLM extraction. The preprocessed text will be provided as context.
+        model:
+          type: string
+          description: The model to use for facet extraction
+        embedding_model:
+          type: string
+          description: The embedding model to use for vectorizing facet results.
+        no_match_pattern:
+          type: string
+          description: Regex pattern to identify outputs that do not match the facet. If the output matches, the facet will be saved as 'no_match'
+      required:
+      - type
+      - prompt
+      title: facet
+    FunctionTypeEnum:
+      type: string
+      enum:
+      - llm
+      - scorer
+      - task
+      - tool
+      - custom_view
+      - preprocessor
+      - facet
+      - classifier
+      - tag
+      - parameters
+      - sandbox
+      - null
+      default: scorer
+      description: The type of global function. Defaults to 'scorer'.
+    ChatCompletionContentPartText:
+      type: object
+      properties:
+        text:
+          type: string
+          default: ''
+        type:
+          type: string
+          enum:
+          - text
+        cache_control:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - ephemeral
+            ttl:
+              type: string
+              enum:
+              - 5m
+              - 1h
+          required:
+          - type
+      required:
+      - type
+    PreprocessorId:
+      anyOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - function
+          id:
+            type: string
+          version:
+            type: string
+            description: The version of the function
+        required:
+        - type
+        - id
+        title: function
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - global
+          name:
+            type: string
+          function_type:
+            type: string
+            enum:
+            - preprocessor
+            default: preprocessor
+            description: The type of global function. Defaults to 'preprocessor'.
+        required:
+        - type
+        - name
+        title: preprocessor_global
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - inline
+          code:
+            type: string
+            minLength: 1
+            description: The complete JavaScript preprocessor implementation, including its handler.
+        required:
+        - type
+        - code
+        title: preprocessor_inline
+      - type: 'null'
+      description: 'For prompt-backed functions: the saved, global, or inline preprocessor to use for trace template variables. Set to null to disable preprocessing. If omitted, the traced project''s default preprocessor will be used, falling back to the global ''thread'' preprocessor.'
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    TopicMapGenerationSettings:
+      type: object
+      properties:
+        algorithm:
+          type: string
+          enum:
+          - hdbscan
+          - kmeans
+          - community
+        dimension_reduction:
+          type: string
+          enum:
+          - umap
+          - pca
+          - none
+        sample_size:
+          type: integer
+          minimum: 0
+          exclusiveMinimum: true
+        n_clusters:
+          type: integer
+          minimum: 0
+          exclusiveMinimum: true
+        min_cluster_size:
+          type: integer
+          minimum: 0
+          exclusiveMinimum: true
+        min_samples:
+          type: integer
+          minimum: 0
+          exclusiveMinimum: true
+        hierarchy_threshold:
+          type: integer
+          minimum: 0
+          exclusiveMinimum: true
+        naming_model:
+          type: string
+      required:
+      - algorithm
+      - dimension_reduction
+      description: Clustering and naming settings used to generate this topic map
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    BatchedFacetData:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - batched_facet
+        preprocessor:
+          $ref: '#/components/schemas/FacetPreprocessorId'
+        facets:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the facet
+              prompt:
+                type: string
+                description: The prompt to use for LLM extraction. The preprocessed text will be provided as context.
+              model:
+                type: string
+                description: The model to use for facet extraction
+              embedding_model:
+                type: string
+                description: The embedding model to use for vectorizing facet results.
+              no_match_pattern:
+                type: string
+                description: Regex pattern to identify outputs that do not match the facet. If the output matches, the facet will be saved as 'no_match'
+            required:
+            - name
+            - prompt
+        topic_maps:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              properties:
+                function_name:
+                  type: string
+                  description: The name of the topic map function
+                topic_map_id:
+                  type: string
+                  description: The id of the topic map function
+                topic_map_data:
+                  $ref: '#/components/schemas/TopicMapData'
+              required:
+              - function_name
+              - topic_map_data
+          description: Topic maps that depend on facets in this batch, keyed by source facet name. Each source facet can have multiple topic maps.
+      required:
+      - type
+      - facets
+      title: batched_facet
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
           type: string
           format: uuid
-          description: Unique identifier for the project that the prompt belongs under
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    PatchFunction:
+      type: object
+      properties:
         name:
           type: string
-          minLength: 1
+          nullable: true
           description: Name of the prompt
-        slug:
-          type: string
-          minLength: 1
-          description: Unique identifier for the prompt
         description:
           type: string
           nullable: true
           description: Textual description of the prompt
         prompt_data:
           $ref: '#/components/schemas/PromptDataNullish'
+        function_data:
+          $ref: '#/components/schemas/FunctionDataNullish'
         tags:
           type: array
           nullable: true
           items:
             type: string
           description: A list of tags for the prompt
-        function_type:
-          $ref: '#/components/schemas/FunctionTypeEnumNullish'
-        function_data:
-          $ref: '#/components/schemas/FunctionData'
-        origin:
+    ChatCompletionContentPartTextWithTitle:
+      type: object
+      properties:
+        text:
+          type: string
+          default: ''
+        type:
+          type: string
+          enum:
+          - text
+        cache_control:
           type: object
-          nullable: true
           properties:
-            object_type:
-              $ref: '#/components/schemas/AclObjectType'
-            object_id:
+            type:
               type: string
-              format: uuid
-              description: Id of the object the function is originating from
-            internal:
-              type: boolean
-              nullable: true
-              description: The function exists for internal purposes and should not be displayed in the list of functions.
+              enum:
+              - ephemeral
+            ttl:
+              type: string
+              enum:
+              - 5m
+              - 1h
           required:
-          - object_type
-          - object_id
-        function_schema:
-          type: object
-          nullable: true
-          properties:
-            parameters:
-              nullable: true
-            returns:
-              nullable: true
-          description: JSON schema for the function's parameters and return type
+          - type
       required:
-      - project_id
-      - name
-      - slug
-      - function_data
+      - type
+      title: text
+    ChatCompletionMessageParam:
+      anyOf:
+      - type: object
+        properties:
+          content:
+            anyOf:
+            - type: string
+              default: ''
+              title: text
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPartText'
+              title: array
+          role:
+            type: string
+            enum:
+            - system
+          name:
+            type: string
+        required:
+        - role
+        title: system
+      - type: object
+        properties:
+          content:
+            anyOf:
+            - type: string
+              default: ''
+              title: text
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPart'
+              title: array
+          role:
+            type: string
+            enum:
+            - user
+          name:
+            type: string
+        required:
+        - role
+        title: user
+      - type: object
+        properties:
+          role:
+            type: string
+            enum:
+            - assistant
+          content:
+            anyOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPartText'
+            - type: 'null'
+          function_call:
+            type: object
+            nullable: true
+            properties:
+              arguments:
+                type: string
+              name:
+                type: string
+            required:
+            - arguments
+            - name
+          name:
+            type: string
+            nullable: true
+          tool_calls:
+            type: array
+            nullable: true
+            items:
+              $ref: '#/components/schemas/ChatCompletionMessageToolCall'
+          reasoning:
+            type: array
+            nullable: true
+            items:
+              $ref: '#/components/schemas/ChatCompletionMessageReasoning'
+          reasoning_signature:
+            type: string
+            nullable: true
+        required:
+        - role
+        title: assistant
+      - type: object
+        properties:
+          content:
+            anyOf:
+            - type: string
+              default: ''
+              title: text
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPartText'
+              title: array
+          role:
+            type: string
+            enum:
+            - tool
+          tool_call_id:
+            type: string
+            default: ''
+        required:
+        - role
+        title: tool
+      - type: object
+        properties:
+          content:
+            type: string
+            nullable: true
+          name:
+            type: string
+          role:
+            type: string
+            enum:
+            - function
+        required:
+        - content
+        - name
+        - role
+        title: function
+      - type: object
+        properties:
+          content:
+            anyOf:
+            - type: string
+              default: ''
+              title: text
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatCompletionContentPartText'
+              title: array
+          role:
+            type: string
+            enum:
+            - developer
+          name:
+            type: string
+        required:
+        - role
+        title: developer
+      - type: object
+        properties:
+          role:
+            type: string
+            enum:
+            - model
+          content:
+            type: string
+            nullable: true
+        required:
+        - role
+        title: fallback
+    PromptOptionsNullish:
+      type: object
+      nullable: true
+      properties:
+        model:
+          type: string
+        params:
+          $ref: '#/components/schemas/ModelParams'
+        position:
+          type: string
+        endpoint_name:
+          type: string
+          nullable: true
     InvokeApi:
       type: object
       properties:
@@ -2083,45 +2218,240 @@ components:
           additionalProperties:
             nullable: true
           description: 'Partial function definition to merge with the function being invoked. Fields are validated against the function type''s schema at runtime. For facets: { preprocessor?, prompt?, model? }. For prompts: { model?, ... }.'
+        endpoint_name:
+          type: string
+          nullable: true
+          description: Name of the AI provider secret to pin this invocation to.
         version:
           type: string
           description: The version of the function
       description: The request to invoke a function
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    ProjectIdQuery:
+      type: string
+      format: uuid
+      description: Project id
+    GraphData:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - graph
+        nodes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/GraphNode'
+        edges:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/GraphEdge'
+      required:
+      - type
+      - nodes
+      - edges
+      description: This feature is preliminary and unsupported.
+      title: graph
+    CodeBundle:
+      type: object
+      properties:
+        runtime_context:
+          type: object
+          properties:
+            runtime:
+              type: string
+              enum:
+              - node
+              - python
+              - browser
+              - quickjs
+            version:
+              type: string
+          required:
+          - runtime
+          - version
+        location:
+          anyOf:
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - experiment
+              eval_name:
+                type: string
+              position:
+                anyOf:
+                - type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - task
+                  required:
+                  - type
+                - type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - scorer
+                    index:
+                      type: integer
+                      minimum: 0
+                  required:
+                  - type
+                  - index
+                  title: scorer
+                - type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - classifier
+                    index:
+                      type: integer
+                      minimum: 0
+                  required:
+                  - type
+                  - index
+                  title: classifier
+            required:
+            - type
+            - eval_name
+            - position
+            title: experiment
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - function
+              index:
+                type: integer
+                minimum: 0
+            required:
+            - type
+            - index
+            title: function
+          - type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - sandbox
+              sandbox_spec:
+                oneOf:
+                - type: object
+                  properties:
+                    provider:
+                      type: string
+                      enum:
+                      - modal
+                    snapshot_ref:
+                      type: string
+                      description: sandbox snapshot ref
+                  required:
+                  - provider
+                  - snapshot_ref
+                - type: object
+                  properties:
+                    provider:
+                      type: string
+                      enum:
+                      - lambda
+                  required:
+                  - provider
+              entrypoints:
+                type: array
+                items:
+                  type: string
+                description: Which entrypoints to execute in the sandbox
+              eval_name:
+                type: string
+              parameters:
+                type: object
+                additionalProperties:
+                  nullable: true
+                description: Parameter values for sandbox eval execution
+              evaluator_definition:
+                nullable: true
+                description: Definition of current evaluator with parameters
+            required:
+            - type
+            - sandbox_spec
+            - eval_name
+        bundle_id:
+          type: string
+          nullable: true
+        preview:
+          type: string
+          nullable: true
+          description: A preview of the code
+      required:
+      - runtime_context
+      - location
+    GraphEdge:
+      type: object
+      properties:
+        source:
+          type: object
+          properties:
+            node:
+              type: string
+              maxLength: 1024
+              description: The id of the node in the graph
+            variable:
+              type: string
+          required:
+          - node
+          - variable
+        target:
+          type: object
+          properties:
+            node:
+              type: string
+              maxLength: 1024
+              description: The id of the node in the graph
+            variable:
+              type: string
+          required:
+          - node
+          - variable
+        purpose:
+          type: string
+          enum:
+          - control
+          - data
+          - messages
+          description: The purpose of the edge
+      required:
+      - source
+      - target
+      - purpose
+    ChatCompletionContentPartFileFile:
+      type: object
+      properties:
+        file_data:
+          type: string
+        filename:
+          type: string
+        file_id:
+          type: string
+          title: The ID of an uploaded file to use as input.
     FunctionIdRef:
       type: object
       properties: {}
       additionalProperties:
         nullable: true
       description: Options for identifying a function
-    PromptParserNullish:
-      type: object
-      nullable: true
-      properties:
-        type:
-          type: string
-          enum:
-          - llm_classifier
-        use_cot:
-          type: boolean
-        choice_scores:
-          type: object
-          additionalProperties:
-            type: number
-            minimum: 0
-            maximum: 1
-          description: Map of choices to scores (0-1). Used by scorers.
-        choice:
-          type: array
-          items:
-            type: string
-          description: List of valid choices without score mapping. Used by classifiers that deposit output to tags.
-        allow_no_match:
-          type: boolean
-          description: If true, adds a 'No match' option. When selected, no tag is deposited.
-      required:
-      - type
-      - use_cot
-    FunctionData:
+    FunctionDataNullish:
       anyOf:
       - type: object
         properties:
@@ -2276,295 +2606,150 @@ components:
       - allOf:
         - $ref: '#/components/schemas/TopicMapData'
         - title: topic_map
-    ProjectName:
-      type: string
-      description: Name of the project to search for
-    FunctionIdParam:
-      type: string
-      format: uuid
-      description: Function id
-    TopicMapGenerationSettings:
-      type: object
-      properties:
-        algorithm:
-          type: string
-          enum:
-          - hdbscan
-          - kmeans
-        dimension_reduction:
-          type: string
-          enum:
-          - umap
-          - pca
-          - none
-        sample_size:
-          type: integer
-          minimum: 0
-          exclusiveMinimum: true
-        n_clusters:
-          type: integer
-          minimum: 0
-          exclusiveMinimum: true
-        min_cluster_size:
-          type: integer
-          minimum: 0
-          exclusiveMinimum: true
-        min_samples:
-          type: integer
-          minimum: 0
-          exclusiveMinimum: true
-        hierarchy_threshold:
-          type: integer
-          minimum: 0
-          exclusiveMinimum: true
-        naming_model:
-          type: string
-      required:
-      - algorithm
-      - dimension_reduction
-      description: Clustering and naming settings used to generate this topic map
-    SavedFunctionId:
+      - type: 'null'
+    ChatCompletionContentPart:
+      anyOf:
+      - $ref: '#/components/schemas/ChatCompletionContentPartTextWithTitle'
+      - $ref: '#/components/schemas/ChatCompletionContentPartImageWithTitle'
+      - $ref: '#/components/schemas/ChatCompletionContentPartInputAudioWithTitle'
+      - $ref: '#/components/schemas/ChatCompletionContentPartFileWithTitle'
+      title: chat_completion_content_part
+    ResponseFormatNullish:
       anyOf:
       - type: object
         properties:
           type:
             type: string
             enum:
-            - function
-          id:
-            type: string
-          version:
-            type: string
-            description: The version of the function
+            - json_object
         required:
         - type
-        - id
-        title: function
+        title: json_object
       - type: object
         properties:
           type:
             type: string
             enum:
-            - global
-          name:
-            type: string
-          function_type:
-            $ref: '#/components/schemas/FunctionTypeEnum'
+            - json_schema
+          json_schema:
+            $ref: '#/components/schemas/ResponseFormatJsonSchema'
         required:
         - type
-        - name
-        title: global
+        - json_schema
+        title: json_schema
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - text
+        required:
+        - type
+        title: text
       - type: 'null'
-      description: Optional function identifier that produced the classification
+    ChatCompletionContentPartInputAudioWithTitle:
+      type: object
+      properties:
+        input_audio:
+          type: object
+          properties:
+            data:
+              type: string
+            format:
+              type: string
+              enum:
+              - wav
+              - mp3
+          required:
+          - data
+          - format
+        type:
+          type: string
+          enum:
+          - input_audio
+        cache_control:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - ephemeral
+            ttl:
+              type: string
+              enum:
+              - 5m
+              - 1h
+          required:
+          - type
+      required:
+      - input_audio
+      - type
+      title: input_audio
     FunctionName:
       type: string
       description: Name of the function to search for
-    PromptEnvironment:
-      type: string
-      description: 'Filter by environment slug. Cannot be used together with `version`.
-
-
-        For `GET /v1/prompt`, environment resolution currently requires the request to match a single prompt. If multiple prompts match, the endpoint returns `400` (for example when `limit=1` is not set). Use `limit=1` or other filters (for example `slug`, `project_id`) to narrow results.'
-    ChatCompletionContentPartImageWithTitle:
+    CreateFunction:
       type: object
       properties:
-        image_url:
+        project_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project that the prompt belongs under
+        name:
+          type: string
+          minLength: 1
+          description: Name of the prompt
+        slug:
+          type: string
+          minLength: 1
+          description: Unique identifier for the prompt
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the prompt
+        prompt_data:
+          $ref: '#/components/schemas/PromptDataNullish'
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: A list of tags for the prompt
+        function_type:
+          $ref: '#/components/schemas/FunctionTypeEnumNullish'
+        function_data:
+          $ref: '#/components/schemas/FunctionData'
+        origin:
           type: object
+          nullable: true
           properties:
-            url:
+            object_type:
+              $ref: '#/components/schemas/AclObjectType'
+            object_id:
               type: string
-            detail:
-              anyOf:
-              - type: string
-                enum:
-                - auto
-                title: auto
-              - type: string
-                enum:
-                - low
-                title: low
-              - type: string
-                enum:
-                - high
-                title: high
-          required:
-          - url
-        type:
-          type: string
-          enum:
-          - image_url
-      required:
-      - image_url
-      - type
-      title: image_url
-    NullableSavedFunctionId:
-      anyOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - function
-          id:
-            type: string
-          version:
-            type: string
-            description: The version of the function
-        required:
-        - type
-        - id
-        title: function
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - global
-          name:
-            type: string
-          function_type:
-            $ref: '#/components/schemas/FunctionTypeEnum'
-        required:
-        - type
-        - name
-        title: global
-      - type: 'null'
-      description: Default preprocessor for this project. When set, functions that use preprocessors will use this instead of their built-in default.
-    InvokeParent:
-      anyOf:
-      - type: object
-        properties:
-          object_type:
-            type: string
-            enum:
-            - project_logs
-            - experiment
-            - playground_logs
-          object_id:
-            type: string
-            description: The id of the container object you are logging to
-          row_ids:
-            type: object
-            nullable: true
-            properties:
-              id:
-                type: string
-                description: The id of the row
-              span_id:
-                type: string
-                description: The span_id of the row
-              root_span_id:
-                type: string
-                description: The root_span_id of the row
-            required:
-            - id
-            - span_id
-            - root_span_id
-            description: Identifiers for the row to to log a subspan under
-          propagated_event:
-            type: object
-            nullable: true
-            additionalProperties:
+              format: uuid
+              description: Id of the object the function is originating from
+            internal:
+              type: boolean
               nullable: true
-            description: Include these properties in every span created under this parent
-        required:
-        - object_type
-        - object_id
-        description: Span parent properties
-        title: span_parent_struct
-      - type: string
-        description: The parent's span identifier, created by calling `.export()` on a span
-      description: Options for tracing the function call
-    PromptBlockDataNullish:
-      anyOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - chat
-          messages:
-            type: array
-            items:
-              $ref: '#/components/schemas/ChatCompletionMessageParam'
-          tools:
-            type: string
-        required:
-        - type
-        - messages
-        title: chat
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - completion
-          content:
-            type: string
-        required:
-        - type
-        - content
-        title: completion
-      - type: 'null'
-    TopicMapData:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - topic_map
-        source_facet:
-          type: string
-          description: The facet field name to use as input for classification
-        embedding_model:
-          type: string
-          description: The embedding model to use for embedding facet values
-        bundle_key:
-          type: string
-          description: Key of the topic map bundle in code_bundles bucket
-        report_key:
-          type: string
-          description: Key of the clustering report in code_bundles bucket
-        topic_names:
+              description: The function exists for internal purposes and should not be displayed in the list of functions.
+          required:
+          - object_type
+          - object_id
+        function_schema:
           type: object
-          additionalProperties:
-            type: string
-          description: Mapping from topic_id to topic name
-        generation_settings:
-          $ref: '#/components/schemas/TopicMapGenerationSettings'
-        disable_reconciliation:
-          type: boolean
-          description: Whether new topic generation should ignore the previously saved report during reconciliation. Defaults to false when omitted.
-        distance_threshold:
-          type: number
-          description: Maximum distance to nearest centroid. If exceeded, returns no_match.
+          nullable: true
+          properties:
+            parameters:
+              nullable: true
+            returns:
+              nullable: true
+          description: JSON schema for the function's parameters and return type
       required:
-      - type
-      - source_facet
-      - embedding_model
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    AclObjectType:
-      type: string
-      enum:
-      - organization
-      - project
-      - experiment
-      - dataset
-      - prompt
-      - prompt_session
-      - group
-      - role
-      - org_member
-      - project_log
-      - org_project
-      description: The object type that the ACL applies to
+      - project_id
+      - name
+      - slug
+      - function_data
     ResponseFormatJsonSchema:
       type: object
       properties:
@@ -2587,7 +2772,40 @@ components:
           nullable: true
       required:
       - name
+    FunctionTypeEnumNullish:
+      type: string
+      nullable: true
+      enum:
+      - llm
+      - scorer
+      - task
+      - tool
+      - custom_view
+      - preprocessor
+      - facet
+      - classifier
+      - tag
+      - parameters
+      - sandbox
+      - null
   parameters:
+    PromptVersion:
+      schema:
+        $ref: '#/components/schemas/PromptVersion'
+      required: false
+      description: 'Retrieve prompt at a specific version.
+
+
+        The version id can either be a transaction id (e.g. ''1000192656880881099'') or a version identifier (e.g. ''81cd05ee665fdfb3'').'
+      name: version
+      in: query
+    FunctionIdParam:
+      schema:
+        $ref: '#/components/schemas/FunctionIdParam'
+      required: true
+      description: Function id
+      name: function_id
+      in: path
     ProjectName:
       schema:
         $ref: '#/components/schemas/ProjectName'
@@ -2596,20 +2814,6 @@ components:
       name: project_name
       in: query
       allowReserved: true
-    FunctionIdParam:
-      schema:
-        $ref: '#/components/schemas/FunctionIdParam'
-      required: true
-      description: Function id
-      name: function_id
-      in: path
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
     PromptEnvironment:
       schema:
         $ref: '#/components/schemas/PromptEnvironment'
@@ -2619,22 +2823,6 @@ components:
 
         For `GET /v1/prompt`, environment resolution currently requires the request to match a single prompt. If multiple prompts match, the endpoint returns `400` (for example when `limit=1` is not set). Use `limit=1` or other filters (for example `slug`, `project_id`) to narrow results.'
       name: environment
-      in: query
-      allowReserved: true
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
-    FunctionName:
-      schema:
-        $ref: '#/components/schemas/FunctionName'
-      required: false
-      description: Name of the function to search for
-      name: function_name
       in: query
       allowReserved: true
     AppLimitParam:
@@ -2654,6 +2842,21 @@ components:
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: ending_before
       in: query
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
     Slug:
       schema:
         $ref: '#/components/schemas/Slug'
@@ -2662,23 +2865,14 @@ components:
       name: slug
       in: query
       allowReserved: true
-    PromptVersion:
+    FunctionName:
       schema:
-        $ref: '#/components/schemas/PromptVersion'
+        $ref: '#/components/schemas/FunctionName'
       required: false
-      description: 'Retrieve prompt at a specific version.
-
-
-        The version id can either be a transaction id (e.g. ''1000192656880881099'') or a version identifier (e.g. ''81cd05ee665fdfb3'').'
-      name: version
+      description: Name of the function to search for
+      name: function_name
       in: query
-    ProjectIdQuery:
-      schema:
-        $ref: '#/components/schemas/ProjectIdQuery'
-      required: false
-      description: Project id
-      name: project_id
-      in: query
+      allowReserved: true
     StartingAfter:
       schema:
         $ref: '#/components/schemas/StartingAfter'
@@ -2688,6 +2882,13 @@ components:
 
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: starting_after
+      in: query
+    ProjectIdQuery:
+      schema:
+        $ref: '#/components/schemas/ProjectIdQuery'
+      required: false
+      description: Project id
+      name: project_id
       in: query
   securitySchemes:
     bearerAuth:

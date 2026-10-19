@@ -30,7 +30,7 @@ paths:
       summary: Create project_tag
       requestBody:
         description: Any desired information about the new project_tag object
-        required: false
+        required: true
         content:
           application/json:
             schema:
@@ -102,7 +102,7 @@ paths:
       summary: Create or replace project_tag
       requestBody:
         description: Any desired information about the new project_tag object
-        required: false
+        required: true
         content:
           application/json:
             schema:
@@ -457,6 +457,87 @@ paths:
                 nullable: true
 components:
   schemas:
+    ProjectTagIdParam:
+      type: string
+      format: uuid
+      description: ProjectTag id
+    PatchProjectTag:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: Name of the project tag
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the project tag
+        color:
+          type: string
+          nullable: true
+          description: Color of the tag for the UI
+    ProjectName:
+      type: string
+      description: Name of the project to search for
+    ProjectTagName:
+      type: string
+      description: Name of the project_tag to search for
+    CreateProjectTag:
+      type: object
+      properties:
+        project_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the project that the project tag belongs under
+        name:
+          type: string
+          description: Name of the project tag
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the project tag
+        color:
+          type: string
+          nullable: true
+          description: Color of the tag for the UI
+      required:
+      - project_id
+      - name
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    ProjectIdQuery:
+      type: string
+      format: uuid
+      description: Project id
+    EndingBefore:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
     ProjectTag:
       type: object
       properties:
@@ -497,88 +578,14 @@ components:
       - user_id
       - name
       description: A project tag is a user-configured tag for tracking and filtering your experiments, logs, and other data
-    ProjectIdQuery:
-      type: string
-      format: uuid
-      description: Project id
-    CreateProjectTag:
-      type: object
-      properties:
-        project_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the project that the project tag belongs under
-        name:
-          type: string
-          description: Name of the project tag
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the project tag
-        color:
-          type: string
-          nullable: true
-          description: Color of the tag for the UI
-      required:
-      - project_id
-      - name
-    StartingAfter:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-    PatchProjectTag:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the project tag
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the project tag
-        color:
-          type: string
-          nullable: true
-          description: Color of the tag for the UI
-    ProjectTagName:
-      type: string
-      description: Name of the project_tag to search for
-    ProjectName:
-      type: string
-      description: Name of the project to search for
-    ProjectTagIdParam:
-      type: string
-      format: uuid
-      description: ProjectTag id
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
   parameters:
+    ProjectTagIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectTagIdParam'
+      required: true
+      description: ProjectTag id
+      name: project_tag_id
+      in: path
     ProjectName:
       schema:
         $ref: '#/components/schemas/ProjectName'
@@ -587,13 +594,6 @@ components:
       name: project_name
       in: query
       allowReserved: true
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
     ProjectTagName:
       schema:
         $ref: '#/components/schemas/ProjectTagName'
@@ -602,24 +602,6 @@ components:
       name: project_tag_name
       in: query
       allowReserved: true
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
-    StartingAfter:
-      schema:
-        $ref: '#/components/schemas/StartingAfter'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
-      in: query
     AppLimitParam:
       schema:
         $ref: '#/components/schemas/AppLimitParam'
@@ -627,13 +609,6 @@ components:
       description: Limit the number of objects to return
       name: limit
       in: query
-    ProjectTagIdParam:
-      schema:
-        $ref: '#/components/schemas/ProjectTagIdParam'
-      required: true
-      description: ProjectTag id
-      name: project_tag_id
-      in: path
     EndingBefore:
       schema:
         $ref: '#/components/schemas/EndingBefore'
@@ -643,6 +618,31 @@ components:
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: ending_before
+      in: query
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
       in: query
     ProjectIdQuery:
       schema:

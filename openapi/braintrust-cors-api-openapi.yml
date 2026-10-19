@@ -903,6 +903,82 @@ paths:
             application/json:
               schema:
                 nullable: true
+  /v1/project_group:
+    options:
+      operationId: optionsProjectGroup
+      description: Enable CORS
+      summary: Enable CORS (`/v1/project_group`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/project_group/{project_group_id}:
+    options:
+      operationId: optionsProjectGroupId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/project_group/{project_group_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/ProjectGroupIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
   /v1/acl:
     options:
       operationId: optionsAcl
@@ -1129,6 +1205,82 @@ paths:
             application/json:
               schema:
                 nullable: true
+  /v1/agent:
+    options:
+      operationId: optionsAgent
+      description: Enable CORS
+      summary: Enable CORS (`/v1/agent`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/agent/{agent_id}:
+    options:
+      operationId: optionsAgentId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/agent/{agent_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/AgentIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
   /v1/project_automation:
     options:
       operationId: optionsProjectAutomation
@@ -1176,6 +1328,82 @@ paths:
       - CORS
       parameters:
       - $ref: '#/components/parameters/ProjectAutomationIdParam'
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/org_automation:
+    options:
+      operationId: optionsOrgAutomation
+      description: Enable CORS
+      summary: Enable CORS (`/v1/org_automation`)
+      security: []
+      tags:
+      - CORS
+      responses:
+        '200':
+          description: Response for CORS method
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Max-Age:
+              schema:
+                type: string
+          content: {}
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+  /v1/org_automation/{org_automation_id}:
+    options:
+      operationId: optionsOrgAutomationId
+      description: Enable CORS
+      summary: Enable CORS (`/v1/org_automation/{org_automation_id}`)
+      security: []
+      tags:
+      - CORS
+      parameters:
+      - $ref: '#/components/parameters/OrgAutomationIdParam'
       responses:
         '200':
           description: Response for CORS method
@@ -2499,168 +2727,13 @@ paths:
               schema:
                 nullable: true
 components:
-  schemas:
-    ViewIdParam:
-      type: string
-      format: uuid
-      description: View id
-    DatasetIdParam:
-      type: string
-      format: uuid
-      description: Dataset id
-    RoleIdParam:
-      type: string
-      format: uuid
-      description: Role id
-    ProjectAutomationIdParam:
-      type: string
-      format: uuid
-      description: ProjectAutomation id
-    OrganizationIdParam:
-      type: string
-      format: uuid
-      description: Organization id
-    SpanIframeIdParam:
-      type: string
-      format: uuid
-      description: SpanIframe id
-    AclIdParam:
-      type: string
-      format: uuid
-      description: Acl id
-    UserIdParam:
-      type: string
-      format: uuid
-      description: User id
-    ProjectScoreIdParam:
-      type: string
-      format: uuid
-      description: ProjectScore id
-    DatasetSnapshotIdParam:
-      type: string
-      format: uuid
-      description: DatasetSnapshot id
-    PromptIdParam:
-      type: string
-      format: uuid
-      description: Prompt id
-    AiSecretIdParam:
-      type: string
-      format: uuid
-      description: AiSecret id
-    McpServerIdParam:
-      type: string
-      format: uuid
-      description: McpServer id
-    GroupIdParam:
-      type: string
-      format: uuid
-      description: Group id
-    ServiceTokenIdParam:
-      type: string
-      format: uuid
-      description: ServiceToken id
-    ProjectTagIdParam:
-      type: string
-      format: uuid
-      description: ProjectTag id
-    EnvVarIdParam:
-      type: string
-      format: uuid
-      description: EnvVar id
-    FunctionIdParam:
-      type: string
-      format: uuid
-      description: Function id
-    ApiKeyIdParam:
-      type: string
-      format: uuid
-      description: ApiKey id
-    ExperimentIdParam:
-      type: string
-      format: uuid
-      description: Experiment id
-    ProjectIdParam:
-      type: string
-      format: uuid
-      description: Project id
   parameters:
-    RoleIdParam:
-      schema:
-        $ref: '#/components/schemas/RoleIdParam'
-      required: true
-      description: Role id
-      name: role_id
-      in: path
     GroupIdParam:
       schema:
         $ref: '#/components/schemas/GroupIdParam'
       required: true
       description: Group id
       name: group_id
-      in: path
-    PromptIdParam:
-      schema:
-        $ref: '#/components/schemas/PromptIdParam'
-      required: true
-      description: Prompt id
-      name: prompt_id
-      in: path
-    AiSecretIdParam:
-      schema:
-        $ref: '#/components/schemas/AiSecretIdParam'
-      required: true
-      description: AiSecret id
-      name: ai_secret_id
-      in: path
-    FunctionIdParam:
-      schema:
-        $ref: '#/components/schemas/FunctionIdParam'
-      required: true
-      description: Function id
-      name: function_id
-      in: path
-    ExperimentIdParam:
-      schema:
-        $ref: '#/components/schemas/ExperimentIdParam'
-      required: true
-      description: Experiment id
-      name: experiment_id
-      in: path
-    OrganizationIdParam:
-      schema:
-        $ref: '#/components/schemas/OrganizationIdParam'
-      required: true
-      description: Organization id
-      name: organization_id
-      in: path
-    ProjectScoreIdParam:
-      schema:
-        $ref: '#/components/schemas/ProjectScoreIdParam'
-      required: true
-      description: ProjectScore id
-      name: project_score_id
-      in: path
-    AclIdParam:
-      schema:
-        $ref: '#/components/schemas/AclIdParam'
-      required: true
-      description: Acl id
-      name: acl_id
-      in: path
-    DatasetIdParam:
-      schema:
-        $ref: '#/components/schemas/DatasetIdParam'
-      required: true
-      description: Dataset id
-      name: dataset_id
-      in: path
-    ProjectIdParam:
-      schema:
-        $ref: '#/components/schemas/ProjectIdParam'
-      required: true
-      description: Project id
-      name: project_id
       in: path
     DatasetSnapshotIdParam:
       schema:
@@ -2669,6 +2742,27 @@ components:
       description: DatasetSnapshot id
       name: dataset_snapshot_id
       in: path
+    ProjectScoreIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectScoreIdParam'
+      required: true
+      description: ProjectScore id
+      name: project_score_id
+      in: path
+    AiSecretIdParam:
+      schema:
+        $ref: '#/components/schemas/AiSecretIdParam'
+      required: true
+      description: AiSecret id
+      name: ai_secret_id
+      in: path
+    OrgAutomationIdParam:
+      schema:
+        $ref: '#/components/schemas/OrgAutomationIdParam'
+      required: true
+      description: OrgAutomation id
+      name: org_automation_id
+      in: path
     McpServerIdParam:
       schema:
         $ref: '#/components/schemas/McpServerIdParam'
@@ -2676,12 +2770,33 @@ components:
       description: McpServer id
       name: mcp_server_id
       in: path
-    EnvVarIdParam:
+    PromptIdParam:
       schema:
-        $ref: '#/components/schemas/EnvVarIdParam'
+        $ref: '#/components/schemas/PromptIdParam'
       required: true
-      description: EnvVar id
-      name: env_var_id
+      description: Prompt id
+      name: prompt_id
+      in: path
+    AclIdParam:
+      schema:
+        $ref: '#/components/schemas/AclIdParam'
+      required: true
+      description: Acl id
+      name: acl_id
+      in: path
+    ProjectIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectIdParam'
+      required: true
+      description: Project id
+      name: project_id
+      in: path
+    FunctionIdParam:
+      schema:
+        $ref: '#/components/schemas/FunctionIdParam'
+      required: true
+      description: Function id
+      name: function_id
       in: path
     ProjectTagIdParam:
       schema:
@@ -2690,33 +2805,12 @@ components:
       description: ProjectTag id
       name: project_tag_id
       in: path
-    UserIdParam:
+    RoleIdParam:
       schema:
-        $ref: '#/components/schemas/UserIdParam'
+        $ref: '#/components/schemas/RoleIdParam'
       required: true
-      description: User id
-      name: user_id
-      in: path
-    ProjectAutomationIdParam:
-      schema:
-        $ref: '#/components/schemas/ProjectAutomationIdParam'
-      required: true
-      description: ProjectAutomation id
-      name: project_automation_id
-      in: path
-    ApiKeyIdParam:
-      schema:
-        $ref: '#/components/schemas/ApiKeyIdParam'
-      required: true
-      description: ApiKey id
-      name: api_key_id
-      in: path
-    SpanIframeIdParam:
-      schema:
-        $ref: '#/components/schemas/SpanIframeIdParam'
-      required: true
-      description: SpanIframe id
-      name: span_iframe_id
+      description: Role id
+      name: role_id
       in: path
     ServiceTokenIdParam:
       schema:
@@ -2725,6 +2819,55 @@ components:
       description: ServiceToken id
       name: service_token_id
       in: path
+    ProjectGroupIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectGroupIdParam'
+      required: true
+      description: ProjectGroup id
+      name: project_group_id
+      in: path
+    ExperimentIdParam:
+      schema:
+        $ref: '#/components/schemas/ExperimentIdParam'
+      required: true
+      description: Experiment id
+      name: experiment_id
+      in: path
+    UserIdParam:
+      schema:
+        $ref: '#/components/schemas/UserIdParam'
+      required: true
+      description: User id
+      name: user_id
+      in: path
+    AgentIdParam:
+      schema:
+        $ref: '#/components/schemas/AgentIdParam'
+      required: true
+      description: Agent id
+      name: agent_id
+      in: path
+    ProjectAutomationIdParam:
+      schema:
+        $ref: '#/components/schemas/ProjectAutomationIdParam'
+      required: true
+      description: ProjectAutomation id
+      name: project_automation_id
+      in: path
+    OrganizationIdParam:
+      schema:
+        $ref: '#/components/schemas/OrganizationIdParam'
+      required: true
+      description: Organization id
+      name: organization_id
+      in: path
+    DatasetIdParam:
+      schema:
+        $ref: '#/components/schemas/DatasetIdParam'
+      required: true
+      description: Dataset id
+      name: dataset_id
+      in: path
     ViewIdParam:
       schema:
         $ref: '#/components/schemas/ViewIdParam'
@@ -2732,6 +2875,124 @@ components:
       description: View id
       name: view_id
       in: path
+    ApiKeyIdParam:
+      schema:
+        $ref: '#/components/schemas/ApiKeyIdParam'
+      required: true
+      description: ApiKey id
+      name: api_key_id
+      in: path
+    EnvVarIdParam:
+      schema:
+        $ref: '#/components/schemas/EnvVarIdParam'
+      required: true
+      description: EnvVar id
+      name: env_var_id
+      in: path
+    SpanIframeIdParam:
+      schema:
+        $ref: '#/components/schemas/SpanIframeIdParam'
+      required: true
+      description: SpanIframe id
+      name: span_iframe_id
+      in: path
+  schemas:
+    FunctionIdParam:
+      type: string
+      format: uuid
+      description: Function id
+    ViewIdParam:
+      type: string
+      format: uuid
+      description: View id
+    ProjectAutomationIdParam:
+      type: string
+      format: uuid
+      description: ProjectAutomation id
+    PromptIdParam:
+      type: string
+      format: uuid
+      description: Prompt id
+    ProjectIdParam:
+      type: string
+      format: uuid
+      description: Project id
+    ProjectTagIdParam:
+      type: string
+      format: uuid
+      description: ProjectTag id
+    ExperimentIdParam:
+      type: string
+      format: uuid
+      description: Experiment id
+    ApiKeyIdParam:
+      type: string
+      format: uuid
+      description: ApiKey id
+    DatasetSnapshotIdParam:
+      type: string
+      format: uuid
+      description: DatasetSnapshot id
+    McpServerIdParam:
+      type: string
+      format: uuid
+      description: McpServer id
+    DatasetIdParam:
+      type: string
+      format: uuid
+      description: Dataset id
+    UserIdParam:
+      type: string
+      format: uuid
+      description: User id
+    AiSecretIdParam:
+      type: string
+      format: uuid
+      description: AiSecret id
+    ProjectGroupIdParam:
+      type: string
+      format: uuid
+      description: ProjectGroup id
+    EnvVarIdParam:
+      type: string
+      format: uuid
+      description: EnvVar id
+    SpanIframeIdParam:
+      type: string
+      format: uuid
+      description: SpanIframe id
+    GroupIdParam:
+      type: string
+      format: uuid
+      description: Group id
+    ProjectScoreIdParam:
+      type: string
+      format: uuid
+      description: ProjectScore id
+    OrgAutomationIdParam:
+      type: string
+      format: uuid
+      description: OrgAutomation id
+    ServiceTokenIdParam:
+      type: string
+      format: uuid
+      description: ServiceToken id
+    OrganizationIdParam:
+      type: string
+      format: uuid
+      description: Organization id
+    AgentIdParam:
+      type: string
+      format: uuid
+      description: Agent id
+    AclIdParam:
+      type: string
+      format: uuid
+      description: Acl id
+    RoleIdParam:
+      type: string
+      format: uuid
+      description: Role id
   securitySchemes:
     bearerAuth:
       type: http

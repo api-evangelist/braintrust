@@ -30,7 +30,7 @@ paths:
       summary: Create view
       requestBody:
         description: Any desired information about the new view object
-        required: false
+        required: true
         content:
           application/json:
             schema:
@@ -102,7 +102,7 @@ paths:
       summary: Create or replace view
       requestBody:
         description: Any desired information about the new view object
-        required: false
+        required: true
         content:
           application/json:
             schema:
@@ -329,7 +329,7 @@ paths:
       - $ref: '#/components/parameters/ViewIdParam'
       requestBody:
         description: Fields to update
-        required: false
+        required: true
         content:
           application/json:
             schema:
@@ -403,7 +403,7 @@ paths:
       - $ref: '#/components/parameters/ViewIdParam'
       requestBody:
         description: Additional parameters for the delete operation
-        required: false
+        required: true
         content:
           application/json:
             schema:
@@ -470,6 +470,82 @@ components:
       type: string
       format: uuid
       description: View id
+    CreateView:
+      type: object
+      properties:
+        object_type:
+          $ref: '#/components/schemas/AclObjectType'
+        object_id:
+          type: string
+          format: uuid
+          description: The id of the object the view applies to
+        view_type:
+          type: string
+          enum:
+          - projects
+          - experiments
+          - experiment
+          - playgrounds
+          - playground
+          - datasets
+          - dataset
+          - prompts
+          - parameters
+          - tools
+          - scorers
+          - classifiers
+          - logs
+          - monitor
+          - for_review_project_log
+          - for_review_experiments
+          - for_review_datasets
+          - null
+          description: Type of object that the view corresponds to.
+        name:
+          type: string
+          description: Name of the view
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the view
+        view_data:
+          $ref: '#/components/schemas/ViewData'
+        options:
+          $ref: '#/components/schemas/ViewOptions'
+        user_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Identifies the user who created the view
+        deleted_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of role deletion, or null if the role is still active
+      required:
+      - object_type
+      - object_id
+      - view_type
+      - name
+    AclObjectType:
+      type: string
+      enum:
+      - organization
+      - project
+      - experiment
+      - dataset
+      - prompt
+      - prompt_session
+      - group
+      - role
+      - org_member
+      - project_log
+      - org_project
+      - org_audit_logs
+      - project_group
+      - ai_secret
+      - org_ai_secret
+      description: The object type that the ACL applies to
     ViewDataSearch:
       type: object
       nullable: true
@@ -506,6 +582,44 @@ components:
       required:
       - object_type
       - object_id
+    ViewType:
+      type: string
+      enum:
+      - projects
+      - experiments
+      - experiment
+      - playgrounds
+      - playground
+      - datasets
+      - dataset
+      - prompts
+      - parameters
+      - tools
+      - scorers
+      - classifiers
+      - logs
+      - monitor
+      - for_review_project_log
+      - for_review_experiments
+      - for_review_datasets
+      - null
+      description: Type of object that the view corresponds to.
+    ViewData:
+      type: object
+      nullable: true
+      properties:
+        search:
+          $ref: '#/components/schemas/ViewDataSearch'
+        custom_charts:
+          nullable: true
+      description: The view definition
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
     PatchView:
       type: object
       properties:
@@ -542,6 +656,13 @@ components:
           type: string
           nullable: true
           description: Name of the view
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the view
+        starred:
+          type: boolean
+          description: Whether the view is starred in its project
         view_data:
           $ref: '#/components/schemas/ViewData'
         options:
@@ -554,16 +675,106 @@ components:
       required:
       - object_type
       - object_id
-    ViewName:
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    View:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the view
+        object_type:
+          $ref: '#/components/schemas/AclObjectType'
+        object_id:
+          type: string
+          format: uuid
+          description: The id of the object the view applies to
+        view_type:
+          type: string
+          enum:
+          - projects
+          - experiments
+          - experiment
+          - playgrounds
+          - playground
+          - datasets
+          - dataset
+          - prompts
+          - parameters
+          - tools
+          - scorers
+          - classifiers
+          - logs
+          - monitor
+          - for_review_project_log
+          - for_review_experiments
+          - for_review_datasets
+          - null
+          description: Type of object that the view corresponds to.
+        name:
+          type: string
+          description: Name of the view
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the view
+        starred:
+          type: boolean
+          description: Whether the view is starred in its project
+        created:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of view creation
+        updated_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of last view update
+        view_data:
+          $ref: '#/components/schemas/ViewData'
+        options:
+          $ref: '#/components/schemas/ViewOptions'
+        user_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Identifies the user who created the view
+        deleted_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of role deletion, or null if the role is still active
+      required:
+      - id
+      - object_type
+      - object_id
+      - view_type
+      - name
+    AclObjectId:
       type: string
-      description: Name of the view to search for
-    StartingAfter:
+      format: uuid
+      description: The id of the object the ACL applies to
+    EndingBefore:
       type: string
       format: uuid
       description: 'Pagination cursor id.
 
 
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
     ViewOptions:
       anyOf:
       - type: object
@@ -720,6 +931,22 @@ components:
             required:
             - type
             - value
+          pointSizeMetric:
+            type: object
+            nullable: true
+            properties:
+              type:
+                type: string
+                enum:
+                - none
+                - score
+                - metric
+                - metadata
+              value:
+                type: string
+            required:
+            - type
+            - value
           xAxisAggregation:
             type: string
             nullable: true
@@ -767,232 +994,16 @@ components:
         title: TableViewOptions
       - type: 'null'
       description: Options for the view in the app
-    ViewData:
-      type: object
-      nullable: true
-      properties:
-        search:
-          $ref: '#/components/schemas/ViewDataSearch'
-        custom_charts:
-          nullable: true
-      description: The view definition
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    ViewType:
+    ViewName:
       type: string
-      enum:
-      - projects
-      - experiments
-      - experiment
-      - playgrounds
-      - playground
-      - datasets
-      - dataset
-      - prompts
-      - parameters
-      - tools
-      - scorers
-      - classifiers
-      - logs
-      - monitor
-      - for_review_project_log
-      - for_review_experiments
-      - for_review_datasets
-      - null
-      description: Type of object that the view corresponds to.
-    EndingBefore:
-      type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-    AclObjectId:
-      type: string
-      format: uuid
-      description: The id of the object the ACL applies to
-    CreateView:
-      type: object
-      properties:
-        object_type:
-          $ref: '#/components/schemas/AclObjectType'
-        object_id:
-          type: string
-          format: uuid
-          description: The id of the object the view applies to
-        view_type:
-          type: string
-          enum:
-          - projects
-          - experiments
-          - experiment
-          - playgrounds
-          - playground
-          - datasets
-          - dataset
-          - prompts
-          - parameters
-          - tools
-          - scorers
-          - classifiers
-          - logs
-          - monitor
-          - for_review_project_log
-          - for_review_experiments
-          - for_review_datasets
-          - null
-          description: Type of object that the view corresponds to.
-        name:
-          type: string
-          description: Name of the view
-        view_data:
-          $ref: '#/components/schemas/ViewData'
-        options:
-          $ref: '#/components/schemas/ViewOptions'
-        user_id:
-          type: string
-          nullable: true
-          format: uuid
-          description: Identifies the user who created the view
-        deleted_at:
-          type: string
-          nullable: true
-          format: date-time
-          description: Date of role deletion, or null if the role is still active
-      required:
-      - object_type
-      - object_id
-      - view_type
-      - name
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
-    View:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the view
-        object_type:
-          $ref: '#/components/schemas/AclObjectType'
-        object_id:
-          type: string
-          format: uuid
-          description: The id of the object the view applies to
-        view_type:
-          type: string
-          enum:
-          - projects
-          - experiments
-          - experiment
-          - playgrounds
-          - playground
-          - datasets
-          - dataset
-          - prompts
-          - parameters
-          - tools
-          - scorers
-          - classifiers
-          - logs
-          - monitor
-          - for_review_project_log
-          - for_review_experiments
-          - for_review_datasets
-          - null
-          description: Type of object that the view corresponds to.
-        name:
-          type: string
-          description: Name of the view
-        created:
-          type: string
-          nullable: true
-          format: date-time
-          description: Date of view creation
-        view_data:
-          $ref: '#/components/schemas/ViewData'
-        options:
-          $ref: '#/components/schemas/ViewOptions'
-        user_id:
-          type: string
-          nullable: true
-          format: uuid
-          description: Identifies the user who created the view
-        deleted_at:
-          type: string
-          nullable: true
-          format: date-time
-          description: Date of role deletion, or null if the role is still active
-      required:
-      - id
-      - object_type
-      - object_id
-      - view_type
-      - name
-    AclObjectType:
-      type: string
-      enum:
-      - organization
-      - project
-      - experiment
-      - dataset
-      - prompt
-      - prompt_session
-      - group
-      - role
-      - org_member
-      - project_log
-      - org_project
-      description: The object type that the ACL applies to
+      description: Name of the view to search for
   parameters:
-    AclObjectType:
-      schema:
-        $ref: '#/components/schemas/AclObjectType'
-      required: true
-      description: The object type that the ACL applies to
-      name: object_type
-      in: query
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
     AclObjectId:
       schema:
         $ref: '#/components/schemas/AclObjectId'
       required: true
       description: The id of the object the ACL applies to
       name: object_id
-      in: query
-    ViewName:
-      schema:
-        $ref: '#/components/schemas/ViewName'
-      required: false
-      description: Name of the view to search for
-      name: view_name
-      in: query
-      allowReserved: true
-    StartingAfter:
-      schema:
-        $ref: '#/components/schemas/StartingAfter'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
       in: query
     AppLimitParam:
       schema:
@@ -1011,12 +1022,27 @@ components:
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: ending_before
       in: query
-    ViewType:
+    AclObjectType:
       schema:
-        $ref: '#/components/schemas/ViewType'
+        $ref: '#/components/schemas/AclObjectType'
+      required: true
+      description: The object type that the ACL applies to
+      name: object_type
+      in: query
+    ViewName:
+      schema:
+        $ref: '#/components/schemas/ViewName'
       required: false
-      description: Type of object that the view corresponds to.
-      name: view_type
+      description: Name of the view to search for
+      name: view_name
+      in: query
+      allowReserved: true
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
       in: query
     ViewIdParam:
       schema:
@@ -1025,6 +1051,23 @@ components:
       description: View id
       name: view_id
       in: path
+    ViewType:
+      schema:
+        $ref: '#/components/schemas/ViewType'
+      required: false
+      description: Type of object that the view corresponds to.
+      name: view_type
+      in: query
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
   securitySchemes:
     bearerAuth:
       type: http

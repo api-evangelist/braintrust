@@ -30,7 +30,7 @@ paths:
       summary: Create span_iframe
       requestBody:
         description: Any desired information about the new span_iframe object
-        required: false
+        required: true
         content:
           application/json:
             schema:
@@ -102,7 +102,7 @@ paths:
       summary: Create or replace span_iframe
       requestBody:
         description: Any desired information about the new span_iframe object
-        required: false
+        required: true
         content:
           application/json:
             schema:
@@ -455,29 +455,20 @@ paths:
                 nullable: true
 components:
   schemas:
-    PatchSpanIFrame:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-          description: Name of the span iframe
-        url:
-          type: string
-          nullable: true
-          description: URL to embed the project viewer in an iframe
-        post_message:
-          type: boolean
-          nullable: true
-          description: Whether to post messages to the iframe containing the span's data. This is useful when you want to render more data than fits in the URL.
-        description:
-          type: string
-          nullable: true
-          description: Textual description of the span iframe
-    SpanIframeIdParam:
+    EndingBefore:
       type: string
       format: uuid
-      description: SpanIframe id
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+    StartingAfter:
+      type: string
+      format: uuid
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
     SpanIFrame:
       type: object
       properties:
@@ -523,28 +514,29 @@ components:
       - project_id
       - name
       - url
-    StartingAfter:
+    SpanIframeIdParam:
       type: string
       format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
+      description: SpanIframe id
+    PatchSpanIFrame:
+      type: object
+      properties:
+        name:
           type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    SpanIframeName:
-      type: string
-      description: Name of the span_iframe to search for
+          nullable: true
+          description: Name of the span iframe
+        url:
+          type: string
+          nullable: true
+          description: URL to embed the project viewer in an iframe
+        post_message:
+          type: boolean
+          nullable: true
+          description: Whether to post messages to the iframe containing the span's data. This is useful when you want to render more data than fits in the URL.
+        description:
+          type: string
+          nullable: true
+          description: Textual description of the span iframe
     AppLimitParam:
       type: integer
       nullable: true
@@ -575,36 +567,22 @@ components:
       - project_id
       - name
       - url
-    EndingBefore:
+    OrgName:
       type: string
-      format: uuid
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-  parameters:
-    AppLimitParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
-    SpanIframeIdParam:
-      schema:
-        $ref: '#/components/schemas/SpanIframeIdParam'
-      required: true
-      description: SpanIframe id
-      name: span_iframe_id
-      in: path
+      description: Filter search results to within a particular organization
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
     SpanIframeName:
-      schema:
-        $ref: '#/components/schemas/SpanIframeName'
-      required: false
+      type: string
       description: Name of the span_iframe to search for
-      name: span_iframe_name
-      in: query
-      allowReserved: true
+  parameters:
     OrgName:
       schema:
         $ref: '#/components/schemas/OrgName'
@@ -613,16 +591,14 @@ components:
       name: org_name
       in: query
       allowReserved: true
-    EndingBefore:
+    SpanIframeName:
       schema:
-        $ref: '#/components/schemas/EndingBefore'
+        $ref: '#/components/schemas/SpanIframeName'
       required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
+      description: Name of the span_iframe to search for
+      name: span_iframe_name
       in: query
+      allowReserved: true
     Ids:
       schema:
         $ref: '#/components/schemas/Ids'
@@ -640,6 +616,30 @@ components:
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
       name: starting_after
       in: query
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
+    SpanIframeIdParam:
+      schema:
+        $ref: '#/components/schemas/SpanIframeIdParam'
+      required: true
+      description: SpanIframe id
+      name: span_iframe_id
+      in: path
   securitySchemes:
     bearerAuth:
       type: http

@@ -202,6 +202,13 @@ components:
           description: Date of user creation
       required:
       - id
+    UserFamilyName:
+      anyOf:
+      - type: string
+      - type: array
+        items:
+          type: string
+      description: Family name of the user to search for. You may pass the param multiple times to filter for more than one family name
     UserEmail:
       anyOf:
       - type: string
@@ -209,13 +216,10 @@ components:
         items:
           type: string
       description: Email of the user to search for. You may pass the param multiple times to filter for more than one email
-    UserGivenName:
-      anyOf:
-      - type: string
-      - type: array
-        items:
-          type: string
-      description: Given name of the user to search for. You may pass the param multiple times to filter for more than one given name
+    UserIdParam:
+      type: string
+      format: uuid
+      description: User id
     StartingAfter:
       type: string
       format: uuid
@@ -223,10 +227,14 @@ components:
 
 
         For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-    UserIdParam:
+    AppLimitParam:
+      type: integer
+      nullable: true
+      minimum: 0
+      description: Limit the number of objects to return
+    OrgName:
       type: string
-      format: uuid
-      description: User id
+      description: Filter search results to within a particular organization
     Ids:
       anyOf:
       - type: string
@@ -243,22 +251,22 @@ components:
 
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-    UserFamilyName:
+    UserGivenName:
       anyOf:
       - type: string
       - type: array
         items:
           type: string
-      description: Family name of the user to search for. You may pass the param multiple times to filter for more than one family name
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    AppLimitParam:
-      type: integer
-      nullable: true
-      minimum: 0
-      description: Limit the number of objects to return
+      description: Given name of the user to search for. You may pass the param multiple times to filter for more than one given name
   parameters:
+    UserEmail:
+      schema:
+        $ref: '#/components/schemas/UserEmail'
+      required: false
+      description: Email of the user to search for. You may pass the param multiple times to filter for more than one email
+      name: email
+      in: query
+      allowReserved: true
     UserFamilyName:
       schema:
         $ref: '#/components/schemas/UserFamilyName'
@@ -267,30 +275,15 @@ components:
       name: family_name
       in: query
       allowReserved: true
-    Ids:
+    EndingBefore:
       schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
-    StartingAfter:
-      schema:
-        $ref: '#/components/schemas/StartingAfter'
+        $ref: '#/components/schemas/EndingBefore'
       required: false
       description: 'Pagination cursor id.
 
 
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
+        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
       in: query
     AppLimitParam:
       schema:
@@ -306,23 +299,30 @@ components:
       description: User id
       name: user_id
       in: path
-    UserEmail:
+    OrgName:
       schema:
-        $ref: '#/components/schemas/UserEmail'
+        $ref: '#/components/schemas/OrgName'
       required: false
-      description: Email of the user to search for. You may pass the param multiple times to filter for more than one email
-      name: email
+      description: Filter search results to within a particular organization
+      name: org_name
       in: query
       allowReserved: true
-    EndingBefore:
+    Ids:
       schema:
-        $ref: '#/components/schemas/EndingBefore'
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
       required: false
       description: 'Pagination cursor id.
 
 
-        For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
       in: query
     UserGivenName:
       schema:

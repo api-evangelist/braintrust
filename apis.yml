@@ -396,14 +396,42 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/braintrust-acls-api-openapi.yml
+- aid: braintrust:braintrust-agents-api
+  name: Braintrust Agents API
+  description: The Agents API from Braintrust — 2 operation(s) for agents.
+  humanURL: https://www.braintrust.dev/docs
+  baseURL: https://api.braintrust.dev
+  tags:
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-agents-api-openapi.yml
+- aid: braintrust:braintrust-orgautomations-api
+  name: Braintrust Org Automations API
+  description: The OrgAutomations API from Braintrust — 2 operation(s) for orgautomations.
+  humanURL: https://www.braintrust.dev/docs
+  baseURL: https://api.braintrust.dev
+  tags:
+  - OrgAutomations
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-orgautomations-api-openapi.yml
+- aid: braintrust:braintrust-projectgroups-api
+  name: Braintrust Project Groups API
+  description: The ProjectGroups API from Braintrust — 2 operation(s) for projectgroups.
+  humanURL: https://www.braintrust.dev/docs
+  baseURL: https://api.braintrust.dev
+  tags:
+  - ProjectGroups
+  properties:
+  - type: OpenAPI
+    url: openapi/braintrust-projectgroups-api-openapi.yml
 - aid: braintrust:braintrust-api-keys-api
   name: Braintrust API Keys API
   description: The API Keys API from Braintrust — 2 operation(s) for api keys.
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
-  - APIKeys
-  tags_raw:
   - API Keys
   properties:
   - type: OpenAPI
@@ -414,8 +442,6 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
-  - EnvVars
-  tags_raw:
   - Env Vars
   properties:
   - type: OpenAPI
@@ -426,8 +452,6 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
-  - MCP Server
-  tags_raw:
   - MCP Servers
   properties:
   - type: OpenAPI
@@ -438,8 +462,6 @@ apis:
   humanURL: https://www.braintrust.dev/docs
   baseURL: https://api.braintrust.dev
   tags:
-  - ProjectTags
-  tags_raw:
   - Project Tags
   properties:
   - type: OpenAPI

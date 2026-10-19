@@ -19,6 +19,193 @@ tags:
 - name: Service Tokens
 paths:
   /v1/service_token:
+    post:
+      tags:
+      - Service Tokens
+      security:
+      - bearerAuth: []
+      - {}
+      operationId: postServiceToken
+      description: 'Create a new service token.
+
+
+        When calling this endpoint, you must authenticate using a service token that has organization-owner permissions. User API keys cannot be used.'
+      summary: Create service_token
+      requestBody:
+        description: Any desired information about the new service_token object
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the service token. Does not have to be unique
+                org_name:
+                  type: string
+                  nullable: true
+                  description: For nearly all users, this parameter should be unnecessary. But in the rare case that your API key belongs to multiple organizations, you may specify the name of the organization the Service token belongs in.
+                service_account_id:
+                  type: string
+                  description: The ID of the service account to which the token should belong. To create a service account, visit [**Settings > Service tokens**](https://www.braintrust.dev/app/~/configuration/org/service-tokens) in the Braintrust UI or call [`PATCH /v1/organization/members`](https://www.braintrust.dev/docs/api-reference/organizations/modify-organization-membership).
+                expires_in_seconds:
+                  type: integer
+                  nullable: true
+                  minimum: 0
+                  exclusiveMinimum: true
+                  description: Number of seconds from now after which the service token should expire. If omitted, the token never expires.
+              required:
+              - name
+              - service_account_id
+      responses:
+        '200':
+          description: Returns an object containing the raw service token. This is the only time the raw API key will be exposed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateServiceTokenOutput'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+    put:
+      tags:
+      - Service Tokens
+      security:
+      - bearerAuth: []
+      - {}
+      operationId: putServiceToken
+      description: Create or replace service_token. If there is an existing service_token with the same name as the one specified in the request, will replace the existing service_token with the provided fields
+      summary: Create or replace service_token
+      requestBody:
+        description: Any desired information about the new service_token object
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the service token. Does not have to be unique
+                org_name:
+                  type: string
+                  nullable: true
+                  description: For nearly all users, this parameter should be unnecessary. But in the rare case that your API key belongs to multiple organizations, you may specify the name of the organization the Service token belongs in.
+                service_account_id:
+                  type: string
+                  description: The ID of the service account to which the token should belong. To create a service account, visit [**Settings > Service tokens**](https://www.braintrust.dev/app/~/configuration/org/service-tokens) in the Braintrust UI or call [`PATCH /v1/organization/members`](https://www.braintrust.dev/docs/api-reference/organizations/modify-organization-membership).
+                expires_in_seconds:
+                  type: integer
+                  nullable: true
+                  minimum: 0
+                  exclusiveMinimum: true
+                  description: Number of seconds from now after which the service token should expire. If omitted, the token never expires.
+              required:
+              - name
+              - service_account_id
+      responses:
+        '200':
+          description: Returns an object containing the raw service token. This is the only time the raw API key will be exposed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateServiceTokenOutput'
+        '400':
+          description: The request was unacceptable, often due to missing a required parameter
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '401':
+          description: No valid API key provided
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '403':
+          description: The API key doesn’t have permissions to perform the request
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '429':
+          description: Too many requests hit the API too quickly. We recommend an exponential backoff of your requests
+          headers:
+            Retry-After:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
+        '500':
+          description: Something went wrong on Braintrust's end. (These are rare.)
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                nullable: true
     delete:
       operationId: deleteServiceToken
       tags:
@@ -30,7 +217,7 @@ paths:
       - {}
       requestBody:
         description: Parameters which uniquely specify the service_token to delete
-        required: false
+        required: true
         content:
           application/json:
             schema:
@@ -98,7 +285,7 @@ paths:
       description: 'List out all service tokens. They are sorted by creation date, with the most recently-created tokens coming first.
 
 
-        To create service tokens, organization owners can go to **Settings > Service tokens** in the Braintrust UI.'
+        To create a service token, visit **Settings > Service tokens** as an organization owner, or call `POST /v1/service_token` and authenticate with a service token that has organization-owner permissions.'
       summary: List service_tokens
       security:
       - bearerAuth: []
@@ -311,65 +498,14 @@ paths:
               schema:
                 nullable: true
 components:
-  parameters:
-    ServiceTokenName:
-      schema:
-        $ref: '#/components/schemas/ServiceTokenName'
-      required: false
-      description: Name of the service_token to search for
-      name: service_token_name
-      in: query
-      allowReserved: true
-    AppLimitParam:
-      schema:
-        $ref: '#/components/schemas/AppLimitParam'
-      required: false
-      description: Limit the number of objects to return
-      name: limit
-      in: query
-    ServiceTokenIdParam:
-      schema:
-        $ref: '#/components/schemas/ServiceTokenIdParam'
-      required: true
-      description: ServiceToken id
-      name: service_token_id
-      in: path
-    OrgName:
-      schema:
-        $ref: '#/components/schemas/OrgName'
-      required: false
-      description: Filter search results to within a particular organization
-      name: org_name
-      in: query
-      allowReserved: true
+  schemas:
     EndingBefore:
-      schema:
-        $ref: '#/components/schemas/EndingBefore'
-      required: false
+      type: string
+      format: uuid
       description: 'Pagination cursor id.
 
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: ending_before
-      in: query
-    Ids:
-      schema:
-        $ref: '#/components/schemas/Ids'
-      required: false
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-      name: ids
-      in: query
-    StartingAfter:
-      schema:
-        $ref: '#/components/schemas/StartingAfter'
-      required: false
-      description: 'Pagination cursor id.
-
-
-        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
-      name: starting_after
-      in: query
-  schemas:
     ServiceToken:
       type: object
       properties:
@@ -405,13 +541,15 @@ components:
           nullable: true
           format: uuid
           description: Unique identifier for the organization
+        expires_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date and time at which the service token expires. If null, the token never expires.
       required:
       - id
       - name
       - preview_name
-    ServiceTokenName:
-      type: string
-      description: Name of the service_token to search for
     StartingAfter:
       type: string
       format: uuid
@@ -424,22 +562,6 @@ components:
       nullable: true
       minimum: 0
       description: Limit the number of objects to return
-    OrgName:
-      type: string
-      description: Filter search results to within a particular organization
-    Ids:
-      anyOf:
-      - type: string
-        format: uuid
-      - type: array
-        items:
-          type: string
-          format: uuid
-      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
-    ServiceTokenIdParam:
-      type: string
-      format: uuid
-      description: ServiceToken id
     DeleteServiceToken:
       type: object
       properties:
@@ -449,13 +571,131 @@ components:
           description: Unique identifier for the service token.
       required:
       - id
-    EndingBefore:
+    OrgName:
+      type: string
+      description: Filter search results to within a particular organization
+    CreateServiceTokenOutput:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the service token
+        created:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date of service token creation
+        name:
+          type: string
+          description: Name of the service token
+        preview_name:
+          type: string
+        service_account_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Unique identifier for the service token
+        service_account_email:
+          type: string
+          nullable: true
+          description: The service account email (not routable)
+        service_account_name:
+          type: string
+          nullable: true
+          description: The service account name
+        org_id:
+          type: string
+          nullable: true
+          format: uuid
+          description: Unique identifier for the organization
+        expires_at:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date and time at which the service token expires. If null, the token never expires.
+        key:
+          type: string
+          description: The raw service token. It will only be exposed this one time
+      required:
+      - id
+      - name
+      - preview_name
+      - key
+    Ids:
+      anyOf:
+      - type: string
+        format: uuid
+      - type: array
+        items:
+          type: string
+          format: uuid
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+    ServiceTokenName:
+      type: string
+      description: Name of the service_token to search for
+    ServiceTokenIdParam:
       type: string
       format: uuid
+      description: ServiceToken id
+  parameters:
+    OrgName:
+      schema:
+        $ref: '#/components/schemas/OrgName'
+      required: false
+      description: Filter search results to within a particular organization
+      name: org_name
+      in: query
+      allowReserved: true
+    Ids:
+      schema:
+        $ref: '#/components/schemas/Ids'
+      required: false
+      description: Filter search results to a particular set of object IDs. To specify a list of IDs, include the query param multiple times
+      name: ids
+      in: query
+    ServiceTokenIdParam:
+      schema:
+        $ref: '#/components/schemas/ServiceTokenIdParam'
+      required: true
+      description: ServiceToken id
+      name: service_token_id
+      in: path
+    ServiceTokenName:
+      schema:
+        $ref: '#/components/schemas/ServiceTokenName'
+      required: false
+      description: Name of the service_token to search for
+      name: service_token_name
+      in: query
+      allowReserved: true
+    StartingAfter:
+      schema:
+        $ref: '#/components/schemas/StartingAfter'
+      required: false
+      description: 'Pagination cursor id.
+
+
+        For example, if the final item in the last page you fetched had an id of `foo`, pass `starting_after=foo` to fetch the next page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: starting_after
+      in: query
+    AppLimitParam:
+      schema:
+        $ref: '#/components/schemas/AppLimitParam'
+      required: false
+      description: Limit the number of objects to return
+      name: limit
+      in: query
+    EndingBefore:
+      schema:
+        $ref: '#/components/schemas/EndingBefore'
+      required: false
       description: 'Pagination cursor id.
 
 
         For example, if the initial item in the last page you fetched had an id of `foo`, pass `ending_before=foo` to fetch the previous page. Note: you may only pass one of `starting_after` and `ending_before`'
+      name: ending_before
+      in: query
   securitySchemes:
     bearerAuth:
       type: http
