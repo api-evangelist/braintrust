@@ -657,3 +657,9 @@ components:
       scheme: bearer
       bearerFormat: API key or JWT
       description: 'Most Braintrust endpoints are authenticated by providing your API key as a header `Authorization: Bearer [api_key]` to your HTTP request. You can create an API key in the Braintrust [organization settings page](https://www.braintrustdata.com/app/settings?subroute=api-keys).'
+x-provenance:
+  method: harvested
+  publisher: Braintrust
+  source: https://www.braintrust.dev/docs/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
