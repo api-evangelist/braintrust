@@ -1,4 +1,4 @@
-# Braintrust (braintrust)
+# Braintrust
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,82 +66,180 @@
 
 Braintrust is an enterprise-grade AI observability and evaluation platform for teams building LLM applications. It provides experiment tracking, dataset management, production tracing, prompt versioning, online and offline scoring, and human review workflows. Customers include AI-native startups and large enterprises that need to compare models, iterate on prompts, catch regressions, and leverage real user data to continuously improve their AI features. Braintrust offers a SaaS platform, plus self-hosted deployments in AWS, GCP, and Azure, and monetizes through usage-based pricing tied to spans and seats.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/braintrust/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/braintrust/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · LLM · Observability · Evaluation · Experiments · Datasets · Prompts · Tracing · Monitoring · Scoring · AI Engineering · Generative AI
 
-## Scope
+## Braintrust on APIs.io
 
-- **Type:** Index
-- **Position:** Provider
-- **Access:** 3rd-Party
+Everything profiled for Braintrust is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/braintrust/](https://apis.io/providers/braintrust/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (29)
 
-- Artificial Intelligence
-- LLM
-- Observability
-- Evaluation
-- Experiments
-- Datasets
-- Prompts
-- Tracing
-- Monitoring
-- Scoring
-- AI Engineering
-- Generative AI
+- [Braintrust API](https://apis.io/apis/braintrust/braintrust-api/) — The Braintrust REST API provides programmatic access to projects, experiments, datasets, prompts, functions, logs, and organization resources. It supports…
+- [Braintrust AiSecrets API](https://apis.io/apis/braintrust/braintrust-aisecrets-api/) — The AiSecrets API from Braintrust — 2 operation(s) for aisecrets.
+- [Braintrust CORS API](https://apis.io/apis/braintrust/braintrust-cors-api/) — The CORS API from Braintrust — 65 operation(s) for cors.
+- [Braintrust CrossObject API](https://apis.io/apis/braintrust/braintrust-crossobject-api/) — The CrossObject API from Braintrust — 1 operation(s) for crossobject.
+- [Braintrust Datasets API](https://apis.io/apis/braintrust/braintrust-datasets-api/) — The Datasets API from Braintrust — 6 operation(s) for datasets.
+- [Braintrust DatasetSnapshots API](https://apis.io/apis/braintrust/braintrust-datasetsnapshots-api/) — The DatasetSnapshots API from Braintrust — 2 operation(s) for datasetsnapshots.
+- [Braintrust Environments API](https://apis.io/apis/braintrust/braintrust-environments-api/) — The Environments API from Braintrust — 2 operation(s) for environments.
+- [Braintrust Evals API](https://apis.io/apis/braintrust/braintrust-evals-api/) — The Evals API from Braintrust — 1 operation(s) for evals.
+- [Braintrust Experiments API](https://apis.io/apis/braintrust/braintrust-experiments-api/) — The Experiments API from Braintrust — 6 operation(s) for experiments.
+- [Braintrust Functions API](https://apis.io/apis/braintrust/braintrust-functions-api/) — The Functions API from Braintrust — 3 operation(s) for functions.
+- [Braintrust Groups API](https://apis.io/apis/braintrust/braintrust-groups-api/) — The Groups API from Braintrust — 2 operation(s) for groups.
+- [Braintrust Logs API](https://apis.io/apis/braintrust/braintrust-logs-api/) — The Logs API from Braintrust — 3 operation(s) for logs.
+- [Braintrust Organizations API](https://apis.io/apis/braintrust/braintrust-organizations-api/) — The Organizations API from Braintrust — 3 operation(s) for organizations.
+- [Braintrust Other API](https://apis.io/apis/braintrust/braintrust-other-api/) — The Other API from Braintrust — 1 operation(s) for other.
+- [Braintrust ProjectAutomations API](https://apis.io/apis/braintrust/braintrust-projectautomations-api/) — The ProjectAutomations API from Braintrust — 2 operation(s) for projectautomations.
+- [Braintrust Projects API](https://apis.io/apis/braintrust/braintrust-projects-api/) — The Projects API from Braintrust — 2 operation(s) for projects.
+- [Braintrust ProjectScores API](https://apis.io/apis/braintrust/braintrust-projectscores-api/) — The ProjectScores API from Braintrust — 2 operation(s) for projectscores.
+- [Braintrust Prompts API](https://apis.io/apis/braintrust/braintrust-prompts-api/) — The Prompts API from Braintrust — 2 operation(s) for prompts.
+- [Braintrust Proxy API](https://apis.io/apis/braintrust/braintrust-proxy-api/) — The Proxy API from Braintrust — 6 operation(s) for proxy.
+- [Braintrust Roles API](https://apis.io/apis/braintrust/braintrust-roles-api/) — The Roles API from Braintrust — 2 operation(s) for roles.
+- [Braintrust SpanIframes API](https://apis.io/apis/braintrust/braintrust-spaniframes-api/) — The SpanIframes API from Braintrust — 2 operation(s) for spaniframes.
+- [Braintrust Users API](https://apis.io/apis/braintrust/braintrust-users-api/) — The Users API from Braintrust — 2 operation(s) for users.
+- [Braintrust Views API](https://apis.io/apis/braintrust/braintrust-views-api/) — The Views API from Braintrust — 2 operation(s) for views.
+- [Braintrust Acls API](https://apis.io/apis/braintrust/braintrust-acls-api/) — The Acls API from Braintrust — 4 operation(s) for acls.
+- [Braintrust API Keys API](https://apis.io/apis/braintrust/braintrust-api-keys-api/) — The API Keys API from Braintrust — 2 operation(s) for api keys.
+- [Braintrust Env Vars API](https://apis.io/apis/braintrust/braintrust-env-vars-api/) — The Env Vars API from Braintrust — 2 operation(s) for env vars.
+- [Braintrust MCP Servers API](https://apis.io/apis/braintrust/braintrust-mcp-servers-api/) — The MCP Servers API from Braintrust — 2 operation(s) for mcp servers.
+- [Braintrust Project Tags API](https://apis.io/apis/braintrust/braintrust-project-tags-api/) — The Project Tags API from Braintrust — 2 operation(s) for project tags.
+- [Braintrust Service Tokens API](https://apis.io/apis/braintrust/braintrust-service-tokens-api/) — The Service Tokens API from Braintrust — 2 operation(s) for service tokens.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-23
-- **Modified:** 2026-05-23
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### Braintrust API
+Model Context Protocol servers that expose the API to agents.
 
-The Braintrust REST API provides programmatic access to projects, experiments, datasets, prompts, functions, logs, and organization resources. It supports both US (api.braintrust.dev) and EU (api-eu.braintrust.dev) data planes, and is used to log production traces, run evaluations, manage prompt versions, and orchestrate scoring functions.
+- [braintrust](https://apis.io/servers/braintrust/braintrust/)
 
-- **Human URL:** [https://www.braintrust.dev/docs](https://www.braintrust.dev/docs)
-- **Base URL:** `https://api.braintrust.dev`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- LLM
-- Evaluation
-- Observability
-- Experiments
-- Datasets
-- Prompts
-- Tracing
+- [Braintrust Agentic Access](https://apis.io/agentic-access/braintrust/braintrust-agentic-access/)
 
-#### Properties
+#### Collections (29)
 
-- [Documentation](https://www.braintrust.dev/docs)
-- [Getting Started](https://www.braintrust.dev/docs/start)
-- [Sign Up](https://www.braintrust.dev/signup)
-- [A P I](https://www.braintrust.dev/docs/reference/api)
-- [SDK](https://github.com/braintrustdata/braintrust-sdk)
-- [SDK](https://pypi.org/project/braintrust/)
-- [SDK](https://www.npmjs.com/package/braintrust)
-- [GitHub Repository](https://github.com/braintrustdata/autoevals)
-- [Pricing](https://www.braintrust.dev/pricing)
-- [Authentication](https://www.braintrust.dev/docs/reference/api)
-- [Postman Collection](collections/braintrust.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/braintrust.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Postman and Open Collection request collections.
 
-## Common Properties
+- [Braintrust API](https://apis.io/collections/braintrust/open-braintrust/)
+- [Braintrust Acls API](https://apis.io/collections/braintrust/open-braintrust-acls-api/)
+- [Braintrust Acls AiSecrets API](https://apis.io/collections/braintrust/open-braintrust-aisecrets-api/)
+- [Braintrust Acls ApiKeys API](https://apis.io/collections/braintrust/open-braintrust-apikeys-api/)
+- [Braintrust Acls CORS API](https://apis.io/collections/braintrust/open-braintrust-cors-api/)
+- [Braintrust Acls CrossObject API](https://apis.io/collections/braintrust/open-braintrust-crossobject-api/)
+- [Braintrust Acls Datasets API](https://apis.io/collections/braintrust/open-braintrust-datasets-api/)
+- [Braintrust Acls DatasetSnapshots API](https://apis.io/collections/braintrust/open-braintrust-datasetsnapshots-api/)
+- [Braintrust Acls Environments API](https://apis.io/collections/braintrust/open-braintrust-environments-api/)
+- [Braintrust Acls EnvVars API](https://apis.io/collections/braintrust/open-braintrust-envvars-api/)
+- [Braintrust Acls Evals API](https://apis.io/collections/braintrust/open-braintrust-evals-api/)
+- [Braintrust Acls Experiments API](https://apis.io/collections/braintrust/open-braintrust-experiments-api/)
+- [Braintrust Acls Functions API](https://apis.io/collections/braintrust/open-braintrust-functions-api/)
+- [Braintrust Acls Groups API](https://apis.io/collections/braintrust/open-braintrust-groups-api/)
+- [Braintrust Acls Logs API](https://apis.io/collections/braintrust/open-braintrust-logs-api/)
+- [Braintrust Acls McpServers API](https://apis.io/collections/braintrust/open-braintrust-mcpservers-api/)
+- [Braintrust Acls Organizations API](https://apis.io/collections/braintrust/open-braintrust-organizations-api/)
+- [Braintrust Acls Other API](https://apis.io/collections/braintrust/open-braintrust-other-api/)
+- [Braintrust Acls ProjectAutomations API](https://apis.io/collections/braintrust/open-braintrust-projectautomations-api/)
+- [Braintrust Acls Projects API](https://apis.io/collections/braintrust/open-braintrust-projects-api/)
+- [Braintrust Acls ProjectScores API](https://apis.io/collections/braintrust/open-braintrust-projectscores-api/)
+- [Braintrust Acls ProjectTags API](https://apis.io/collections/braintrust/open-braintrust-projecttags-api/)
+- [Braintrust Acls Prompts API](https://apis.io/collections/braintrust/open-braintrust-prompts-api/)
+- [Braintrust Acls Proxy API](https://apis.io/collections/braintrust/open-braintrust-proxy-api/)
+- [Braintrust Acls Roles API](https://apis.io/collections/braintrust/open-braintrust-roles-api/)
+- …and 4 more published on APIs.io
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Braintrust Authentication](https://apis.io/security/braintrust/braintrust-authentication/)
+- [Braintrust Domain Security](https://apis.io/security/braintrust/braintrust-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Braintrust Plans Pricing](https://apis.io/plans/braintrust/braintrust-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Braintrust Rate Limits](https://apis.io/rate-limits/braintrust/braintrust-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Braintrust Finops](https://apis.io/finops/braintrust/braintrust-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.braintrust.dev)
 - [Documentation](https://www.braintrust.dev/docs)
-- [Blog](https://www.braintrust.dev/blog)
-- [GitHub Organization](https://github.com/braintrustdata)
 - [Pricing](https://www.braintrust.dev/pricing)
-- [Terms of Service](https://www.braintrust.dev/legal/terms)
-- [Privacy Policy](https://www.braintrust.dev/legal/privacy)
-- [X (Twitter)](https://x.com/braintrustdata)
-- [LinkedIn](https://www.linkedin.com/company/braintrustdata)
 - [Changelog](https://www.braintrust.dev/changelog)
+- [Blog](https://www.braintrust.dev/blog)
+- [Terms of service](https://www.braintrust.dev/legal/terms)
+- [Privacy policy](https://www.braintrust.dev/legal/privacy)
+- [GitHub](https://github.com/braintrustdata)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 44.5** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 53.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 52.4 |
+| Access clarity | 55.3 |
+
+**Agent readiness 52.4** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | verified |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 10.9** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/braintrust/](https://apis.io/providers/braintrust/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Braintrust: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/braintrust/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
